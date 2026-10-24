@@ -1,0 +1,624 @@
+[
+  {
+    "id": "te-iru",
+    "pattern": "～ている",
+    "level": "N5",
+    "meaning": "is doing ~ / has done ~ (ongoing action or resulting state)",
+    "explanation": "The て-form of a verb plus いる. With action verbs it shows something in progress or a habit; with change verbs such as 結婚する or 来る it shows the state left behind by the change. Casual speech shortens it to てる / でる.",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" }, { "baseForm": "いる", "pos2": "非自立" } ],
+        [ { "baseForm": ["てる", "でる"], "pos": "動詞", "pos2": "非自立" } ],
+        [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" }, { "baseForm": ["ます", "た"], "pos": "助動詞" } ]
+      ] }
+    ],
+    "examples": [
+      "雨が降っている。",
+      "日本語を勉強しています。",
+      "本を読んでいる。",
+      "昨日は一日中寝ていた。",
+      "まだ食べていない。",
+      "宿題をしていて、遅くなった。",
+      "今テレビを見てる。",
+      "何を読んでるの？",
+      "映画を見てた。",
+      "まだ見てない。",
+      "毎日見てます。",
+      "酒を飲んでた。"
+    ],
+    "counterExamples": [
+      "家に猫がいる。",
+      "駅まで歩いていく。",
+      "食べてみた。",
+      "手紙を書いてから寝た。"
+    ]
+  },
+  {
+    "id": "te-kudasai",
+    "pattern": "～てください",
+    "level": "N5",
+    "meaning": "please do ~",
+    "explanation": "The て-form plus ください is the standard polite request. くださいませんか softens it into a question ('would you please ~?').",
+    "subsumes": ["masen-ka", "te-kureru"],
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "anyOf": [
+        [ { "baseForm": "くださる", "conjForm": "命令ｉ" } ],
+        [ { "baseForm": "くださる", "conjForm": "連用形" }, { "baseForm": "ます", "conjForm": "未然形" }, { "surface": "ん" }, { "surface": "か", "pos": "助詞", "optional": true } ]
+      ] }
+    ],
+    "examples": [
+      "名前を書いてください。",
+      "ここで待ってください。",
+      "この本を読んでください。",
+      "ちょっと見てくださいませんか。"
+    ],
+    "counterExamples": [
+      "先生が教えてくださった。",
+      "りんごをください。",
+      "写真を撮らないでください。"
+    ]
+  },
+  {
+    "id": "nai-de-kudasai",
+    "pattern": "～ないでください",
+    "level": "N5",
+    "meaning": "please don't ~",
+    "explanation": "The negative ない-form plus でください asks someone politely not to do something. It is the negative counterpart of てください.",
+    "subsumes": ["te-kudasai", "masen-ka", "te-kureru"],
+    "steps": [
+      { "baseForm": "ない", "conjForm": "連用デ接続" },
+      { "surface": "で", "pos": "助詞" },
+      { "anyOf": [
+        [ { "baseForm": "くださる", "conjForm": "命令ｉ" } ],
+        [ { "baseForm": "くださる", "conjForm": "連用形" }, { "baseForm": "ます", "conjForm": "未然形" }, { "surface": "ん" }, { "surface": "か", "pos": "助詞", "optional": true } ]
+      ] }
+    ],
+    "examples": [
+      "写真を撮らないでください。",
+      "心配しないでくださいね。",
+      "ここに座らないでくださいませんか。"
+    ],
+    "counterExamples": [
+      "何も食べないで寝た。",
+      "何も言わないでくれ。",
+      "写真を撮ってください。"
+    ]
+  },
+  {
+    "id": "tai",
+    "pattern": "～たい",
+    "level": "N5",
+    "meaning": "want to ~",
+    "explanation": "Attached to the stem of a verb, たい says what the speaker wants to do (or asks what the listener wants to do). It conjugates like an い-adjective: たくない, たかった, たくて.",
+    "steps": [
+      { "baseForm": "たい", "pos": "助動詞" }
+    ],
+    "examples": [
+      "日本に行きたい。",
+      "水が飲みたいです。",
+      "今日は何もしたくない。",
+      "子供のころ、医者になりたかった。",
+      "早く帰りたくて、急いだ。"
+    ],
+    "counterExamples": [
+      "冷たい水を飲んだ。",
+      "重たい荷物を持った。"
+    ]
+  },
+  {
+    "id": "mashou",
+    "pattern": "～ましょう",
+    "level": "N5",
+    "meaning": "let's ~ / shall I ~?",
+    "explanation": "The volitional form of ます. On its own it invites someone to do something together; with か it offers help or makes a suggestion.",
+    "steps": [
+      { "surface": "ましょ", "baseForm": "ます" },
+      { "surface": "う" }
+    ],
+    "examples": [
+      "一緒に行きましょう。",
+      "少し休みましょうか。",
+      "寝る前には歯を磨きましょう。"
+    ],
+    "counterExamples": [
+      "一緒に行きませんか。",
+      "明日は雨が降るでしょう。"
+    ]
+  },
+  {
+    "id": "deshou",
+    "pattern": "～でしょう",
+    "level": "N5",
+    "meaning": "probably ~ / ~, right?",
+    "explanation": "Marks a guess that the speaker is fairly sure about, or asks for agreement. でしょうか is a soft question. The casual form is だろう, and both are often shortened to でしょ / だろ.",
+    "steps": [
+      { "surface": ["でしょ", "だろ"], "baseForm": ["です", "だ"] },
+      { "surface": "う", "optional": true }
+    ],
+    "examples": [
+      "明日は雨が降るでしょう。",
+      "彼はもう来ないでしょう。",
+      "これは何でしょうか。",
+      "たぶん大丈夫だろう。",
+      "いいでしょ？"
+    ],
+    "counterExamples": [
+      "明日は雨です。",
+      "一緒に行きましょう。"
+    ]
+  },
+  {
+    "id": "ta-koto-ga-aru",
+    "pattern": "～たことがある",
+    "level": "N5",
+    "meaning": "have done ~ before (experience)",
+    "explanation": "The past form of a verb plus ことがある talks about something the speaker has experienced at least once. ことがない means they never have. In questions and contrasts が often becomes は.",
+    "steps": [
+      { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" },
+      { "surface": ["こと", "事"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": ["が", "は", "も"], "pos": "助詞" },
+      { "baseForm": ["ある", "ない"] }
+    ],
+    "examples": [
+      "日本に行ったことがある。",
+      "富士山に登ったことがあります。",
+      "一度も見たことがありません。",
+      "納豆を食べたことがない。",
+      "寿司を作ったことはありますか。"
+    ],
+    "counterExamples": [
+      "日本に行くことがある。",
+      "行ったことを覚えている。"
+    ]
+  },
+  {
+    "id": "mae-ni",
+    "pattern": "～前に",
+    "level": "N5",
+    "meaning": "before ~",
+    "explanation": "A verb in dictionary form plus 前に places an action before another one. The verb stays in dictionary form even when the sentence is in the past. (Noun + の前に is left out because it also means 'in front of'.)",
+    "steps": [
+      { "pos": "動詞", "conjForm": "基本形" },
+      { "surface": "前", "pos": "名詞" },
+      { "surface": "に", "pos": "助詞" }
+    ],
+    "examples": [
+      "寝る前に歯を磨く。",
+      "出かける前に電話してください。",
+      "日本に来る前に、少し勉強しました。",
+      "寝る前には歯を磨きましょう。"
+    ],
+    "counterExamples": [
+      "駅の前に銀行がある。",
+      "三年前に日本に来た。"
+    ]
+  },
+  {
+    "id": "ato-de",
+    "pattern": "～後で",
+    "level": "N5",
+    "meaning": "after ~",
+    "explanation": "A verb in past form, or a noun with の, plus 後で (or 後に) places an action after another one. Unlike 前に, the verb before 後 is always in past form.",
+    "steps": [
+      { "anyOf": [
+        [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+        [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ]
+      ] },
+      { "surface": ["後", "あと"], "pos": "名詞" },
+      { "surface": ["で", "に"], "pos": "助詞" }
+    ],
+    "examples": [
+      "宿題をした後で、テレビを見る。",
+      "授業の後で先生に聞いた。",
+      "ご飯を食べたあとで散歩しよう。",
+      "映画を見た後に、食事をした。"
+    ],
+    "counterExamples": [
+      "後で電話します。",
+      "三日後に返事が来た。",
+      "その後で寝た。"
+    ]
+  },
+  {
+    "id": "kara-reason",
+    "pattern": "～から (reason)",
+    "level": "N5",
+    "meaning": "because ~ / so ~",
+    "explanation": "After a full clause, から gives the reason for what follows. It is more direct and subjective than ので. When から follows a noun or a て-form it means 'from' or 'after' instead.",
+    "steps": [
+      { "surface": "から", "pos": "助詞", "pos2": "接続助詞" }
+    ],
+    "examples": [
+      "雨が降っているから、出かけない。",
+      "暑いですから、窓を開けましょう。",
+      "時間がないから急いで。",
+      "静かだから好きだ。"
+    ],
+    "counterExamples": [
+      "東京から大阪まで行く。",
+      "九時から始まります。",
+      "宿題をしてから寝る。"
+    ]
+  },
+  {
+    "id": "masen-ka",
+    "pattern": "～ませんか",
+    "level": "N5",
+    "meaning": "won't you ~? / shall we ~? (or a plain negative question)",
+    "explanation": "A polite negative question. With action verbs it is the usual way to invite someone (一緒に見ませんか, 'shall we watch it together?'). The same form can also simply ask whether something is not the case (分かりませんか, 'don't you understand?'), and only context tells the two apart.",
+    "steps": [
+      { "baseForm": "ます", "conjForm": "未然形" },
+      { "surface": "ん" },
+      { "surface": "か", "pos": "助詞" }
+    ],
+    "examples": [
+      "一緒に映画を見ませんか。",
+      "今度、飲みに行きませんか。",
+      "この漢字が分かりませんか。"
+    ],
+    "counterExamples": [
+      "明日は行きません。",
+      "雨は降りませんでした。"
+    ]
+  },
+  {
+    "id": "te-kara",
+    "pattern": "～てから",
+    "level": "N5",
+    "meaning": "after doing ~ / since ~",
+    "explanation": "The て-form plus から orders two actions: the first is finished before the second starts. It can also mark the starting point of a period of time (日本に来てから三年, 'three years since coming to Japan').",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "surface": "から", "pos": "助詞", "pos2": "格助詞" }
+    ],
+    "examples": [
+      "宿題をしてから寝る。",
+      "ご飯を食べてから出かけました。",
+      "日本に来てから三年になる。",
+      "本を読んでから返します。"
+    ],
+    "counterExamples": [
+      "雨が降っているから、出かけない。",
+      "東京から大阪まで行く。"
+    ]
+  },
+  {
+    "id": "ni-iku",
+    "pattern": "～に行く / ～に来る",
+    "level": "N5",
+    "meaning": "go / come (in order) to do ~",
+    "explanation": "A verb stem or a noun naming an activity (散歩, 買い物, 旅行…) plus に, followed by a verb of movement, gives the purpose of going or coming somewhere: 見に行く ('go to see'), 散歩に行く ('go for a walk'). A place plus に is a destination instead.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "連用形" } ],
+        [ { "surface": ["散歩", "買い物", "旅行", "勉強", "仕事", "食事", "見物", "見学", "留学", "出張", "練習", "応援", "遊び", "迎え", "釣り", "見舞い"], "pos": "名詞" } ]
+      ] },
+      { "surface": "に", "pos": "助詞", "pos2": "格助詞" },
+      { "baseForm": ["行く", "来る", "帰る", "戻る", "出かける", "出る", "上がる", "入る", "寄る", "向かう", "降りる"], "pos": "動詞" }
+    ],
+    "examples": [
+      "パンを買いに出かけた。",
+      "映画を見に行く。",
+      "友達が遊びに来た。",
+      "昼ご飯を食べに帰ります。",
+      "散歩に行きましょう。"
+    ],
+    "counterExamples": [
+      "駅に行く。",
+      "学校に来た。",
+      "一緒に行きましょう。"
+    ]
+  },
+  {
+    "id": "ga-hoshii",
+    "pattern": "～がほしい",
+    "level": "N5",
+    "meaning": "want (something)",
+    "explanation": "ほしい is an い-adjective that says the speaker wants a thing; the thing is usually marked with が. To want an action, use the stem + たい instead, and to want someone else to do something, use てほしい.",
+    "steps": [
+      { "surface": ["が", "は", "も"], "pos": "助詞" },
+      { "baseForm": ["ほしい", "欲しい"], "pos": "形容詞" }
+    ],
+    "examples": [
+      "新しいパソコンがほしい。",
+      "時間が欲しいです。",
+      "子供のころ犬がほしかった。",
+      "今は何もほしくない。"
+    ],
+    "counterExamples": [
+      "彼に来てほしい。",
+      "新しいパソコンを買いたい。"
+    ]
+  },
+  {
+    "id": "toki",
+    "pattern": "～とき",
+    "level": "N5",
+    "meaning": "when ~ / at the time of ~",
+    "explanation": "とき (時) turns a clause into a time expression. The tense of the verb before it matters: 日本に行くとき means before or on the way there, while 日本に行ったとき means after arriving. Nouns take の and な-adjectives take な.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ],
+        [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ],
+        [ { "surface": "な", "baseForm": "だ" } ]
+      ] },
+      { "surface": ["とき", "時"], "pos": "名詞", "pos2": "非自立" }
+    ],
+    "examples": [
+      "子供のとき、よく泳いだ。",
+      "日本に行ったとき、富士山を見た。",
+      "暇なときに読みます。",
+      "寒い時は温かいお茶を飲む。"
+    ],
+    "counterExamples": [
+      "時々映画を見る。",
+      "時間がない。",
+      "三時に会いましょう。"
+    ]
+  },
+  {
+    "id": "tari-tari",
+    "pattern": "～たり～たりする",
+    "level": "N5",
+    "meaning": "do things like ~ and ~ / sometimes ~, sometimes ~",
+    "explanation": "Two or more verbs or adjectives in their た-form plus り, closed by する (or だ), list a few typical actions or states without claiming the list is complete: 本を読んだり映画を見たりする means 'I do things like reading and watching films'. Opposite pairs such as 行ったり来たり describe going back and forth between two states.",
+    "steps": [
+      { "surface": ["たり", "だり"] },
+      { "pos2": "読点", "optional": true },
+      { "gap": 6 },
+      { "surface": ["たり", "だり"] },
+      { "anyOf": [
+        [ { "baseForm": "する", "pos": "動詞" } ],
+        [ { "baseForm": ["だ", "です"], "pos": "助動詞" } ],
+        [ { "surface": "の", "pos2": "連体化" } ]
+      ] }
+    ],
+    "examples": [
+      "休みの日は本を読んだり、映画を見たりします。",
+      "歌ったり踊ったりした。",
+      "週末は掃除したり洗濯したりしている。",
+      "行ったり来たりしないでください。",
+      "暑かったり寒かったりです。",
+      "暑かったり寒かったりで大変だ。",
+      "行ったり来たりの毎日だ。",
+      "読んだり書いたり話したりする。"
+    ],
+    "counterExamples": [
+      "そんなことを言ったりしない。",
+      "本を読んだり、友達に会いに行く。"
+    ]
+  },
+  {
+    "id": "shika-nai",
+    "pattern": "しか～ない",
+    "level": "N5",
+    "meaning": "only ~ / nothing but ~",
+    "explanation": "しか picks out the one thing left once everything else is excluded, and the verb after it is always negative: 肉しか食べない is literally 'I don't eat anything except meat', i.e. 'I only eat meat'. Compared with だけ, it stresses that the amount is small or falls short.",
+    "steps": [
+      { "surface": "しか", "pos": "助詞" },
+      { "gap": 5 },
+      { "anyOf": [
+        [ { "baseForm": ["ない", "ぬ", "ん"], "pos": ["助動詞", "形容詞"] } ],
+        [ { "baseForm": "ます", "pos": "助動詞" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "肉しか食べない。",
+      "彼しか来なかった。",
+      "日本語しか話せません。",
+      "これしかありません。",
+      "一つしか残っていない。",
+      "千円しか持っていませんでした。",
+      "あの人の名前しか知らん。"
+    ],
+    "counterExamples": [
+      "しかし、雨が降ってきた。",
+      "鹿が森にいる。",
+      "しかも安い。"
+    ]
+  },
+  {
+    "id": "amari-nai",
+    "pattern": "あまり～ない",
+    "level": "N5",
+    "meaning": "not very ~ / not much",
+    "explanation": "あまり (casually あんまり) turns a following negative into a mild one: あまり高くない is 'not very expensive' and あまり食べない is 'I don't eat much'. Without a negative it means 'too much' or 'excessively', so the ない at the end is what gives the 'not very' sense.",
+    "steps": [
+      { "surface": ["あまり", "余り", "あんまり"], "pos": "副詞" },
+      { "gap": 5 },
+      { "anyOf": [
+        [ { "baseForm": ["ない", "ぬ", "ん"], "pos": ["助動詞", "形容詞"] } ],
+        [ { "baseForm": "ます", "pos": "助動詞" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "あまり食べない。",
+      "あまり高くないです。",
+      "あんまり好きじゃない。",
+      "今日はあまり時間がありません。",
+      "余り分からなかった。",
+      "あまり寝ていませんでした。"
+    ],
+    "counterExamples": [
+      "あまり食べすぎると太る。",
+      "あまりにも高い。",
+      "あまりの暑さに倒れた。",
+      "余りは三です。"
+    ]
+  },
+  {
+    "id": "zenzen-nai",
+    "pattern": "全然～ない",
+    "level": "N5",
+    "meaning": "not at all ~",
+    "explanation": "全然 (ぜんぜん) strengthens the negative that follows it into 'not at all': 全然分からない is 'I don't understand it at all'. In casual speech it also comes before positive words (全然大丈夫, 'totally fine'), but that use is not this pattern.",
+    "steps": [
+      { "surface": ["全然", "ぜんぜん"], "pos": "副詞" },
+      { "gap": 5 },
+      { "anyOf": [
+        [ { "baseForm": ["ない", "ぬ", "ん"], "pos": ["助動詞", "形容詞"] } ],
+        [ { "baseForm": "ます", "pos": "助動詞" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "ぜんぜん分からない。",
+      "全然知りませんでした。",
+      "全然勉強しなかった。",
+      "全然問題ない。",
+      "この映画は全然面白くないです。",
+      "全然お金がありません。"
+    ],
+    "counterExamples": [
+      "全然大丈夫です。",
+      "全然平気だよ。"
+    ]
+  },
+  {
+    "id": "n-desu",
+    "pattern": "～んです / ～のです",
+    "level": "N5",
+    "meaning": "it's that ~ / the thing is ~ (explaining, or asking for an explanation)",
+    "explanation": "Gives a sentence an explanatory tone: the speaker offers a reason or background (頭が痛いんです, 'the thing is, I have a headache') or asks for one (どうしたんですか, 'what happened?'). ん is the spoken form of の; the casual ending is んだ, and after nouns and な-adjectives な comes first (休みなんだ). Casual questions simply end in の (どうしたの？).",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+        [ { "baseForm": ["ない", "たい", "ぬ"], "pos": "助動詞", "conjForm": "基本形" } ],
+        [ { "surface": "な", "baseForm": "だ", "conjForm": "体言接続" } ]
+      ] },
+      { "anyOf": [
+        [ { "surface": ["ん", "の"], "pos": "名詞", "pos2": "非自立" }, { "baseForm": ["だ", "です"], "pos": "助動詞" } ],
+        [ { "surface": "の", "pos": "助詞", "pos2": "終助詞" } ]
+      ] }
+    ],
+    "examples": [
+      "どうして遅れたんですか。",
+      "どうしたの？",
+      "もう帰るの？",
+      "頭が痛いんです。",
+      "明日は休みなんだ。",
+      "実は、彼が好きなのです。",
+      "行きたくないんだよ。",
+      "何をしているんですか。",
+      "雨が降っていたんでしょう。"
+    ],
+    "counterExamples": [
+      "これは私のです。",
+      "これは誰の？",
+      "好きなのは本です。",
+      "この本は面白いです。"
+    ]
+  },
+  {
+    "id": "no-ga-suki",
+    "pattern": "～のが好きだ / ～のが上手だ",
+    "level": "N5",
+    "meaning": "like ~ing / be good (or bad) at ~ing",
+    "explanation": "の turns a verb phrase into a noun so that it can be the thing someone likes or is good at: 本を読むのが好きです is 'I like reading books' and 歌うのが上手だ is 'is good at singing'. The same frame works with 嫌い, 下手, 得意 and 苦手.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["ない", "たい"], "pos": "助動詞", "conjForm": "基本形" } ]
+      ] },
+      { "surface": "の", "pos": "名詞", "pos2": "非自立" },
+      { "surface": "が", "pos": "助詞" },
+      { "surface": ["好き", "大好き", "嫌い", "大嫌い", "上手", "下手", "得意", "苦手"] }
+    ],
+    "examples": [
+      "本を読むのが好きです。",
+      "彼は歌うのが上手だ。",
+      "私は料理するのが下手です。",
+      "朝早く起きるのが嫌いだった。",
+      "泳ぐのが好きじゃない。",
+      "人前で話すのが苦手です。"
+    ],
+    "counterExamples": [
+      "私は猫が好きです。",
+      "私のが好きです。",
+      "好きなのは本です。"
+    ]
+  },
+  {
+    "id": "mada-te-inai",
+    "pattern": "まだ～ていない",
+    "level": "N5",
+    "meaning": "haven't ~ yet",
+    "explanation": "まだ with a negative ている form says that something expected hasn't happened so far: まだ食べていない is 'I haven't eaten yet'. Compare まだ食べている, 'I'm still eating', where the verb is positive and まだ means 'still'.",
+    "steps": [
+      { "surface": ["まだ", "未だ"], "pos": "副詞" },
+      { "gap": 4 },
+      { "anyOf": [
+        [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" }, { "baseForm": "いる", "pos2": "非自立" } ],
+        [ { "baseForm": ["てる", "でる"], "pos": "動詞", "pos2": "非自立" } ],
+        [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" } ]
+      ] },
+      { "anyOf": [
+        [ { "baseForm": "ない", "pos": "助動詞" } ],
+        [ { "baseForm": "ます", "pos": "助動詞" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "まだ食べていない。",
+      "宿題はまだ終わっていません。",
+      "まだ見てない。",
+      "彼はまだ来ていませんでした。",
+      "まだ見てません。"
+    ],
+    "counterExamples": [
+      "まだ食べている。",
+      "まだ時間がない。"
+    ]
+  },
+  {
+    "id": "hou-ga-yori",
+    "pattern": "～より～のほうが",
+    "level": "N5",
+    "meaning": "~ is more ... than ~",
+    "explanation": "Compares two things: the one marked with より is the baseline, and the one before のほうが comes out ahead. 電車よりバスのほうが安い is 'the bus is cheaper than the train'. The two halves can come in either order, and verbs take ほうが directly (読むより見るほうが楽しい).",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": "より", "pos": "助詞" }, { "pos2": "読点", "optional": true }, { "gap": 4 }, { "surface": ["ほう", "方"], "pos": "名詞", "pos2": "非自立" }, { "surface": "が", "pos": "助詞" } ],
+        [ { "surface": ["ほう", "方"], "pos": "名詞", "pos2": "非自立" }, { "surface": "が", "pos": "助詞" }, { "gap": 4 }, { "surface": "より", "pos": "助詞" } ]
+      ] }
+    ],
+    "examples": [
+      "電車よりバスのほうが安い。",
+      "犬より猫の方が好きです。",
+      "夏のほうが冬より好きだ。",
+      "東京の方が大阪より大きいです。",
+      "読むより見るほうが楽しい。",
+      "テレビを見るより、本を読んだほうがいい。"
+    ],
+    "counterExamples": [
+      "駅の方へ歩いた。",
+      "昨日より寒い。",
+      "あなたのほうがいいと思う。"
+    ]
+  },
+  {
+    "id": "naka-de-ichiban",
+    "pattern": "～の中で～が一番",
+    "level": "N5",
+    "meaning": "of all ~, ~ is the most ...",
+    "explanation": "Picks the top item from a group: the group comes before の中で and the winner before が一番. 果物の中でりんごが一番好きです is 'of all fruit, I like apples best'. In questions the winner is a question word such as どれ, 何 or 誰.",
+    "steps": [
+      { "surface": ["中", "なか"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": "で", "pos": "助詞" },
+      { "gap": 4 },
+      { "surface": ["一番", "いちばん"] }
+    ],
+    "examples": [
+      "果物の中でりんごが一番好きです。",
+      "この三つの中でどれがいちばん安いですか。",
+      "クラスの中で一番背が高いのは誰ですか。",
+      "日本料理の中で何が一番おいしいですか。"
+    ],
+    "counterExamples": [
+      "箱の中で猫が寝ている。",
+      "一番好きな色は青です。"
+    ]
+  }
+]

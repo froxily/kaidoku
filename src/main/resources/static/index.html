@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kaidoku (解読): Japanese Grammar Analysis Engine</title>
+  <meta name="description" content="Rule-based Japanese grammar analyzer that detects and explains JLPT N5–N3 grammar patterns in any text.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Kaidoku <span lang="ja">解読</span></h1>
+    <p>Japanese Grammar Analysis Engine. Paste Japanese text to highlight the grammar patterns in it, colour-coded by JLPT level.</p>
+  </header>
+
+  <main>
+    <section class="input" aria-label="Input">
+      <label for="text">Japanese text</label>
+      <textarea id="text" rows="6" lang="ja" placeholder="例：日本に来たばかりの頃は、漢字が読めなくて困っていた。"></textarea>
+      <div class="controls">
+        <button id="analyze" type="button">Analyze</button>
+        <button id="sample" type="button" class="secondary">Load example</button>
+        <span id="count" class="count"></span>
+        <fieldset id="levels">
+          <legend>Show</legend>
+          <label><input type="checkbox" value="N5" checked> <span class="badge N5">N5</span></label>
+          <label><input type="checkbox" value="N4" checked> <span class="badge N4">N4</span></label>
+          <label><input type="checkbox" value="N3" checked> <span class="badge N3">N3</span></label>
+        </fieldset>
+        <label class="toggle"><input type="checkbox" id="outermost"> Hide nested patterns</label>
+      </div>
+      <p id="error" class="error" role="alert" hidden></p>
+    </section>
+
+    <div class="results">
+      <section aria-label="Highlighted text">
+        <div id="output" class="output" lang="ja"><span class="placeholder">Highlighted text appears here. Click a highlight to see what it means.</span></div>
+      </section>
+      <aside>
+        <section id="card" class="card" aria-live="polite" hidden></section>
+        <section class="found">
+          <h2 id="found-title">Patterns found</h2>
+          <ul id="found"></ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <p>JLPT levels are approximate. The JLPT has not published official grammar lists since 2010, so levels follow commonly used N5–N3 study lists.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

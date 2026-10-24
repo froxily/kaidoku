@@ -1,0 +1,1660 @@
+[
+  {
+    "id": "te-shimau",
+    "pattern": "～てしまう",
+    "level": "N4",
+    "meaning": "to end up doing ~ / to do ~ completely",
+    "explanation": "The て-form plus しまう marks an action as finished for good. Depending on context that means 'all done' or an unintended result the speaker regrets. Casual speech contracts てしまう to ちゃう and でしまう to じゃう.",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" }, { "baseForm": "しまう", "pos2": "非自立" } ],
+        [ { "baseForm": ["ちゃう", "じゃう"], "pos": "動詞", "pos2": "非自立" } ],
+        [ { "surface": ["ちゃ", "じゃ"], "pos": "助詞", "pos2": "接続助詞" }, { "surface": "い", "baseForm": "いる" }, { "baseForm": "ます" } ]
+      ] }
+    ],
+    "examples": [
+      "荷物はもう運んじゃいました。",
+      "読んでしまう。",
+      "財布を忘れてしまった。",
+      "電車に乗り遅れてしまいました。",
+      "寝てしまわないように気をつけて。",
+      "すぐ寝てしまいそうだ。",
+      "ケーキを食べちゃった。",
+      "宿題を忘れちゃう。",
+      "全部飲んじゃった。",
+      "間違えちゃいました。",
+      "書いてしまわなければならない。"
+    ],
+    "counterExamples": [
+      "本を棚にしまった。",
+      "食べてみた。",
+      "遊んじゃだめ。",
+      "まだ一度も読んじゃいない。"
+    ]
+  },
+  {
+    "id": "nakereba-naranai",
+    "pattern": "～なければならない",
+    "level": "N4",
+    "meaning": "must ~ / have to ~",
+    "explanation": "A double negative, literally 'if you don't ~, it won't do', used to state an obligation. The first half can be なければ, なくては or the casual なきゃ / なくちゃ; the second half can be ならない, いけない or the more casual だめ, in plain or polite form.",
+    "subsumes": ["ba-conditional", "te-wa-ikenai"],
+    "steps": [
+      { "anyOf": [
+        [ { "baseForm": "ない", "conjForm": "仮定形" }, { "surface": "ば", "pos": "助詞" } ],
+        [ { "baseForm": "ない", "conjForm": "連用テ接続" }, { "surface": "て", "pos": "助詞" }, { "surface": "は", "pos": "助詞" } ],
+        [ { "baseForm": "ない", "conjForm": "連用テ接続" }, { "surface": "ちゃ", "pos": "助詞" } ],
+        [ { "surface": "なきゃ", "baseForm": "ない" } ]
+      ] },
+      { "anyOf": [
+        [ { "baseForm": ["なる", "いける"], "pos": "動詞" }, { "anyOf": [
+          [ { "baseForm": "ない" } ],
+          [ { "baseForm": "ます" }, { "surface": "ん" } ]
+        ] } ],
+        [ { "surface": ["だめ", "ダメ", "駄目"] } ]
+      ] }
+    ],
+    "examples": [
+      "行かなきゃだめだ。",
+      "もっと勉強しなくちゃだめだよ。",
+      "早く寝なければだめです。",
+      "薬を飲まなくてはだめだ。",
+      "明日までに出さなければならない。",
+      "毎日薬を飲まなければなりません。",
+      "早く帰らなければいけない。",
+      "昨日は早く起きなければならなかった。",
+      "行かなくてはならない。",
+      "勉強しなくてはいけません。",
+      "もう行かなきゃならない。",
+      "宿題をしなきゃいけない。",
+      "宿題を出さなきゃなりません。",
+      "行かなくちゃいけない。",
+      "学生でなければならない。",
+      "安くなければならない。",
+      "書いてしまわなければならない。"
+    ],
+    "counterExamples": [
+      "行かなければよかった。",
+      "行かなくてもいい。",
+      "雨が降らなければ行きます。"
+    ]
+  },
+  {
+    "id": "nakya",
+    "pattern": "～なきゃ / ～なくちゃ",
+    "level": "N4",
+    "meaning": "gotta ~ / have to ~ (casual)",
+    "explanation": "Casual speech often drops the second half of なければならない or なくてはいけない, leaving なきゃ or なくちゃ at the end of the sentence to mean 'I've got to ~'. When more of the sentence follows instead, the same forms usually mean 'if (you) don't ~', so only the sentence-final use is marked.",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": "なきゃ", "baseForm": "ない" } ],
+        [ { "baseForm": "ない", "conjForm": "連用テ接続" }, { "surface": "ちゃ", "pos": "助詞" } ]
+      ] }
+    ],
+    "followedBy": [
+      { "pos": "記号", "pos2": ["句点", "一般"] },
+      { "pos": "助詞", "pos2": "終助詞" }
+    ],
+    "examples": [
+      "もう行かなきゃ。",
+      "そろそろ帰らなきゃね。",
+      "頑張らなきゃ！",
+      "明日は早く起きなくちゃ。",
+      "宿題をしなくちゃな。",
+      "もう寝なきゃ"
+    ],
+    "counterExamples": [
+      "早く行かなきゃ、遅れるよ。",
+      "勉強しなきゃわからない。",
+      "もう行かなきゃならない。"
+    ]
+  },
+  {
+    "id": "ba-conditional",
+    "pattern": "～ば",
+    "level": "N4",
+    "meaning": "if ~ / provided that ~",
+    "explanation": "ば attaches to the conditional stem of verbs (行けば), い-adjectives (安ければ), negatives (行かなければ) and だ (ならば). It sets up a condition and the result that follows from it, which makes it a natural fit for general rules and advice.",
+    "subsumes": ["nara"],
+    "steps": [
+      { "conjForm": "仮定形", "pos": ["動詞", "形容詞", "助動詞"] },
+      { "surface": "ば", "pos": "助詞" }
+    ],
+    "examples": [
+      "安ければ買います。",
+      "時間があれば行きます。",
+      "この薬を飲めば治る。",
+      "雨が降らなければ行きます。",
+      "静かならば寝られる。",
+      "よろしければどうぞ。"
+    ],
+    "counterExamples": [
+      "雨なら行かない。",
+      "駅に着いたら電話して。",
+      "パンばかり食べる。",
+      "明日までに出さなければならない。",
+      "練習すればするほど上手になる。"
+    ]
+  },
+  {
+    "id": "you-ni-suru",
+    "pattern": "～ようにする",
+    "level": "N4",
+    "meaning": "to make a point of ~ / to try to make sure ~",
+    "explanation": "After a verb in dictionary form or ない-form, ようにする describes a deliberate effort to make something happen, or not happen. ようにしている usually means a habit the speaker keeps up, and ようにしてください is a polite request to take care to do something.",
+    "subsumes": ["you-ni"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ]
+      ] },
+      { "surface": "よう", "pos": "名詞", "pos2": "非自立" },
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": "する", "pos": "動詞" }
+    ],
+    "examples": [
+      "早く寝るようにした。",
+      "遅れないようにします。",
+      "毎日野菜を食べるようにしている。",
+      "忘れないようにしてください。"
+    ],
+    "counterExamples": [
+      "このようにして作ります。",
+      "日本語が話せるようになった。",
+      "鳥のように空を飛びたい。"
+    ]
+  },
+  {
+    "id": "you-ni-naru",
+    "pattern": "～ようになる",
+    "level": "N4",
+    "meaning": "to come to ~ / to reach the point where ~",
+    "explanation": "After a verb in dictionary form or ない-form, ようになる describes a gradual change in ability, habit or circumstance. It is often used with potential verbs, as in 話せるようになった ('became able to speak').",
+    "subsumes": ["naru-change", "you-ni"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ]
+      ] },
+      { "surface": "よう", "pos": "名詞", "pos2": "非自立" },
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": "なる", "pos": "動詞" }
+    ],
+    "examples": [
+      "一人で行けるようになる。",
+      "日本語が話せるようになった。",
+      "漢字が読めるようになりました。",
+      "最近よく眠れるようになってきた。",
+      "なかなか上手に話せるようにならない。"
+    ],
+    "counterExamples": [
+      "医者になりたい。",
+      "鳥のようになりたい。",
+      "毎日野菜を食べるようにしている。"
+    ]
+  },
+  {
+    "id": "ni-yoru-to",
+    "pattern": "～によると",
+    "level": "N4",
+    "meaning": "according to ~",
+    "explanation": "Names the source of a piece of information, such as a forecast, a report or a person. The sentence usually ends with a hearsay marker like そうだ or らしい. によれば means the same, and news broadcasts use the polite によりますと.",
+    "subsumes": ["ni-yotte", "ba-conditional", "to-conditional"],
+    "steps": [
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": "よる", "pos": "動詞" },
+      { "anyOf": [
+        [ { "surface": ["と", "ば"], "pos": "助詞" } ],
+        [ { "baseForm": "ます" }, { "surface": "と", "pos": "助詞" } ]
+      ] }
+    ],
+    "examples": [
+      "天気予報によると明日は雨だ。",
+      "専門家によると、この方法は危ないらしい。",
+      "新聞によれば、事故があったそうだ。",
+      "気象庁によりますと、台風が近づいています。"
+    ],
+    "counterExamples": [
+      "人によって考え方が違う。",
+      "法律による規制がある。",
+      "それは人によります。"
+    ]
+  },
+  {
+    "id": "nagara",
+    "pattern": "～ながら",
+    "level": "N4",
+    "meaning": "while ~ing",
+    "explanation": "Attached to a verb stem, ながら says that two actions by the same person happen at the same time. The main action comes second: 音楽を聞きながら勉強する is mainly studying.",
+    "steps": [
+      { "pos": "動詞", "conjForm": "連用形" },
+      { "surface": "ながら", "pos": "助詞" }
+    ],
+    "examples": [
+      "音楽を聞きながら勉強する。",
+      "歩きながら話しましょう。",
+      "テレビを見ながらご飯を食べた。"
+    ],
+    "counterExamples": [
+      "残念ながら行けません。",
+      "昔ながらの店だ。"
+    ]
+  },
+  {
+    "id": "te-oku",
+    "pattern": "～ておく",
+    "level": "N4",
+    "meaning": "to do ~ in advance / to leave ~ as it is",
+    "explanation": "The て-form plus おく means doing something now so it is ready for later, or leaving something in a certain state. In speech ておく shrinks to とく and でおく to どく.",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" }, { "baseForm": "おく", "pos2": "非自立" } ],
+        [ { "baseForm": ["とく", "どく"], "pos": "動詞", "pos2": "非自立" } ]
+      ] }
+    ],
+    "examples": [
+      "旅行の前にホテルを予約しておく。",
+      "窓を開けておいてください。",
+      "ビールを冷やしておきました。",
+      "明日までに読んでおきます。",
+      "宿題をやっとく。",
+      "本を読んどいた。"
+    ],
+    "counterExamples": [
+      "机の上に本を置いた。"
+    ]
+  },
+  {
+    "id": "te-miru",
+    "pattern": "～てみる",
+    "level": "N4",
+    "meaning": "to try doing ~ (and see)",
+    "explanation": "The て-form plus みる means doing something to find out what it is like or what happens. It is written in hiragana, unlike 見る ('to look').",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "baseForm": "みる", "pos2": "非自立" }
+    ],
+    "examples": [
+      "一度食べてみる。",
+      "日本料理を作ってみました。",
+      "その本を読んでみたい。",
+      "この服を着てみてもいいですか。"
+    ],
+    "counterExamples": [
+      "映画を見る。",
+      "食べてもおいしくない。"
+    ]
+  },
+  {
+    "id": "te-mo-ii",
+    "pattern": "～てもいい",
+    "level": "N4",
+    "meaning": "may ~ / it's okay to ~",
+    "explanation": "The て-form plus もいい gives or asks for permission: 'even if you do ~, it's fine'. Politer versions use よろしい or かまわない, and なくてもいい means 'you don't have to'.",
+    "subsumes": ["te-mo"],
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "surface": "も", "pos": "助詞" },
+      { "baseForm": ["いい", "よい", "よろしい", "かまう", "構う"] }
+    ],
+    "examples": [
+      "ここで写真を撮ってもいいですか。",
+      "窓を開けてもいい？",
+      "読んでもいいですか。",
+      "先に帰ってもよろしいですか。",
+      "鉛筆で書いてもかまいません。",
+      "明日来なくてもいいです。"
+    ],
+    "counterExamples": [
+      "食べてもおいしくない。",
+      "雨が降っても行きます。",
+      "子供でもいい。"
+    ]
+  },
+  {
+    "id": "te-wa-ikenai",
+    "pattern": "～てはいけない",
+    "level": "N4",
+    "meaning": "must not ~",
+    "explanation": "Literally 'if you do ~, it won't do', so it forbids an action. ては becomes ちゃ / じゃ in casual speech, いけない can be replaced by だめ, and てはならない is the formal written version.",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" }, { "surface": "は", "pos": "助詞" } ],
+        [ { "surface": ["ちゃ", "じゃ"], "pos": "助詞", "pos2": "接続助詞" } ]
+      ] },
+      { "anyOf": [
+        [ { "baseForm": ["いける", "なる"], "pos": "動詞" }, { "anyOf": [
+          [ { "baseForm": "ない" } ],
+          [ { "baseForm": "ます" }, { "surface": "ん" } ]
+        ] } ],
+        [ { "surface": ["だめ", "ダメ", "駄目"] } ]
+      ] }
+    ],
+    "examples": [
+      "ここでタバコを吸ってはいけない。",
+      "廊下を走ってはいけません。",
+      "ここで飲んではいけません。",
+      "遊んじゃいけない。",
+      "嘘をついちゃだめだよ。",
+      "この日を忘れてはならない。"
+    ],
+    "counterExamples": [
+      "見てはいるが、分からない。",
+      "学生じゃだめだ。",
+      "行かなくてはいけない。"
+    ]
+  },
+  {
+    "id": "kamoshirenai",
+    "pattern": "～かもしれない",
+    "level": "N4",
+    "meaning": "might ~ / maybe ~",
+    "explanation": "Marks something as possible but uncertain, weaker than でしょう. It attaches to plain forms of verbs and adjectives and directly to nouns. In casual speech it is often cut to just かも.",
+    "steps": [
+      { "surface": "かも", "pos": "助詞" },
+      { "anyOf": [
+        [ { "baseForm": "しれる" }, { "anyOf": [
+          [ { "baseForm": "ない" } ],
+          [ { "baseForm": "ます" }, { "surface": "ん" } ]
+        ] } ]
+      ], "optional": true }
+    ],
+    "examples": [
+      "明日は雨が降るかもしれない。",
+      "彼は来ないかもしれません。",
+      "それは本当かもしれなかった。",
+      "遅れるかも。",
+      "間に合わないかもね。"
+    ],
+    "counterExamples": [
+      "何か食べたい。",
+      "彼も来るかどうか分からない。"
+    ]
+  },
+  {
+    "id": "sou-da-looks",
+    "pattern": "～そうだ (looks like)",
+    "level": "N4",
+    "meaning": "looks like ~ / seems about to ~",
+    "explanation": "Attached to a verb stem or an adjective stem, そう describes the speaker's impression from what they can see: おいしそう ('looks tasty'), 降りそう ('looks like it will fall'). いい and ない become よさそう and なさそう.",
+    "steps": [
+      { "surface": "そう", "pos": "名詞", "pos2": "接尾" },
+      { "baseForm": ["だ", "です"], "optional": true }
+    ],
+    "examples": [
+      "雨が降りそうだ。",
+      "おいしそうなケーキですね。",
+      "元気そうですね。",
+      "難しそうに見える。",
+      "今にも泣きそうになった。",
+      "この店は高そう。",
+      "天気がよさそうだ。"
+    ],
+    "counterExamples": [
+      "雨が降るそうだ。",
+      "そうですね。"
+    ]
+  },
+  {
+    "id": "sou-da-hearsay",
+    "pattern": "～そうだ (I hear)",
+    "level": "N4",
+    "meaning": "I hear that ~ / apparently ~",
+    "explanation": "After a full plain-form sentence, そうだ reports information the speaker heard or read somewhere. Unlike the 'looks like' そう, it follows the dictionary or past form, and だ stays before it with nouns.",
+    "steps": [
+      { "surface": "そう", "pos": "名詞", "pos2": "特殊" },
+      { "baseForm": ["だ", "です"] }
+    ],
+    "examples": [
+      "雨が降るそうだ。",
+      "彼は来ないそうです。",
+      "明日は休みだそうです。",
+      "あの店は有名だそうだ。",
+      "新聞によれば、事故があったそうだ。"
+    ],
+    "counterExamples": [
+      "雨が降りそうだ。",
+      "そうですね。"
+    ]
+  },
+  {
+    "id": "tara",
+    "pattern": "～たら",
+    "level": "N4",
+    "meaning": "if ~ / when ~ / after ~",
+    "explanation": "Built from the past form plus ら, たら sets up a condition or a moment after which something happens. It is the most versatile conditional in conversation. Suggestions with どう (行ったらどう?) are covered by ～たらどうですか.",
+    "steps": [
+      { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": ["連用タ接続", "連用形"] },
+      { "surface": ["たら", "だら"], "conjForm": "仮定形" }
+    ],
+    "examples": [
+      "雨が降ったら行きません。",
+      "本を読んだら返してください。",
+      "安かったら買う。",
+      "暇だったら来てね。",
+      "家に帰ったら、すぐ寝た。"
+    ],
+    "counterExamples": [
+      "たらこが好きだ。",
+      "雨なら行かない。",
+      "安ければ買います。"
+    ]
+  },
+  {
+    "id": "hou-ga-ii",
+    "pattern": "～ほうがいい",
+    "level": "N4",
+    "meaning": "you had better ~ / it's better to ~",
+    "explanation": "Gives advice. The past form (寝たほうがいい) sounds like firm advice, and the ない-form (しないほうがいい) warns against something. Noun + のほうがいい is a plain comparison and isn't included.",
+    "steps": [
+      { "anyOf": [
+        [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ],
+        [ { "pos": "動詞", "conjForm": "基本形" } ]
+      ] },
+      { "surface": ["ほう", "方"], "pos": "名詞" },
+      { "surface": "が", "pos": "助詞" },
+      { "baseForm": ["いい", "よい", "良い"] }
+    ],
+    "examples": [
+      "早く寝たほうがいい。",
+      "薬を飲んだ方がいいですよ。",
+      "無理しないほうがいい。",
+      "行かないほうがよかった。",
+      "毎日歩くほうがいい。"
+    ],
+    "counterExamples": [
+      "こっちのほうがいい。",
+      "駅の方が近い。"
+    ]
+  },
+  {
+    "id": "tsumori",
+    "pattern": "～つもりだ",
+    "level": "N4",
+    "meaning": "intend to ~ / plan to ~",
+    "explanation": "After a verb in dictionary form or ない-form, つもり states the speaker's intention. つもりはない firmly denies having that intention. After a past form or a noun with の it means 'believing that' instead.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ]
+      ] },
+      { "surface": "つもり", "pos": "名詞" },
+      { "baseForm": ["だ", "です"], "optional": true }
+    ],
+    "examples": [
+      "来年日本に行くつもりだ。",
+      "今日は何も買わないつもりです。",
+      "彼に言うつもりはなかった。"
+    ],
+    "counterExamples": [
+      "冗談のつもりで言った。",
+      "死んだつもりで頑張る。"
+    ]
+  },
+  {
+    "id": "sugiru",
+    "pattern": "～すぎる",
+    "level": "N4",
+    "meaning": "too ~ / to overdo ~",
+    "explanation": "Attached to a verb stem or an adjective stem, すぎる says something goes beyond the right amount: 食べすぎた ('ate too much'), 難しすぎる ('too difficult'). Its stem すぎ can also be used as a noun.",
+    "steps": [
+      { "baseForm": ["すぎる", "過ぎる"], "pos": "動詞", "pos2": "非自立" }
+    ],
+    "examples": [
+      "食べすぎた。",
+      "この問題は難しすぎる。",
+      "働きすぎですよ。",
+      "静かすぎて眠くなる。",
+      "飲み過ぎました。"
+    ],
+    "counterExamples": [
+      "三時を過ぎた。",
+      "駅を通り過ぎる。"
+    ]
+  },
+  {
+    "id": "hazu-da",
+    "pattern": "～はずだ",
+    "level": "N4",
+    "meaning": "should be ~ / is expected to ~",
+    "explanation": "States a conclusion the speaker is confident about because of what they know, not a moral 'should'. はずだった means something was expected but didn't turn out that way, はずなのに expresses surprise or frustration, and はずの describes a noun ('the ~ that should have ~').",
+    "steps": [
+      { "surface": ["はず", "筈"], "pos": "名詞" },
+      { "anyOf": [
+        [ { "baseForm": ["だ", "です"] } ],
+        [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ]
+      ] }
+    ],
+    "examples": [
+      "閉めたはずの窓が開いている。",
+      "彼はもう着いたはずだ。",
+      "彼はもう帰ったはずです。",
+      "明日は休みのはずです。",
+      "鍵はここにあるはずだった。",
+      "知っているはずなのに。"
+    ],
+    "counterExamples": [
+      "そんなはずがない。",
+      "恥ずかしい。"
+    ]
+  },
+  {
+    "id": "koto-ga-dekiru",
+    "pattern": "～ことができる",
+    "level": "N4",
+    "meaning": "can ~ / be able to ~",
+    "explanation": "A verb in dictionary form plus ことができる states an ability or a possibility. It is a little more formal than the potential form (読める) and works with any verb.",
+    "steps": [
+      { "pos": "動詞", "conjForm": "基本形" },
+      { "surface": ["こと", "事"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": ["が", "は", "も"], "pos": "助詞" },
+      { "baseForm": "できる", "pos": "動詞" }
+    ],
+    "examples": [
+      "漢字を読むことができる。",
+      "泳ぐことができます。",
+      "明日は行くことができない。",
+      "昔はピアノを弾くことができた。"
+    ],
+    "counterExamples": [
+      "料理ができる。",
+      "日本に行ったことがある。"
+    ]
+  },
+  {
+    "id": "te-ageru",
+    "pattern": "～てあげる",
+    "level": "N4",
+    "meaning": "do ~ for someone (as a favour)",
+    "explanation": "The て-form plus あげる means doing something for someone else's benefit. てさしあげる is the humble version for superiors, and てやる is the casual one used for people of lower status or animals. Saying it directly to the person can sound condescending.",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "anyOf": [
+        [ { "baseForm": ["あげる", "上げる", "やる"], "pos": "動詞", "pos2": "非自立" } ],
+        [ { "baseForm": ["差し上げる", "さしあげる"], "pos": "動詞" } ]
+      ] }
+    ],
+    "examples": [
+      "妹に本を読んであげた。",
+      "友達に傘を貸してあげます。",
+      "先生に資料を送って差し上げた。"
+    ],
+    "counterExamples": [
+      "プレゼントをあげた。"
+    ]
+  },
+  {
+    "id": "te-kureru",
+    "pattern": "～てくれる",
+    "level": "N4",
+    "meaning": "(someone) does ~ for me / us",
+    "explanation": "The て-form plus くれる says someone does something that benefits the speaker or the speaker's side. てくださる is the respectful version. The request form ください has its own entry.",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "anyOf": [
+        [ { "baseForm": "くれる", "pos": "動詞", "pos2": "非自立" } ],
+        [ { "baseForm": "くださる", "pos": "動詞", "pos2": "非自立", "conjForm": ["連用形", "連用タ接続", "未然形", "基本形"] } ]
+      ] }
+    ],
+    "examples": [
+      "友達が手伝ってくれた。",
+      "誰も助けてくれない。",
+      "ちょっと待ってくれ。",
+      "先生が説明してくださいました。"
+    ],
+    "counterExamples": [
+      "友達が本をくれた。",
+      "ここで待ってください。"
+    ]
+  },
+  {
+    "id": "te-morau",
+    "pattern": "～てもらう",
+    "level": "N4",
+    "meaning": "have someone do ~ (for me)",
+    "explanation": "The て-form plus もらう means the speaker receives the favour of someone doing something; the person who does it is marked with に. ていただく is the humble version, and てもらえる / ていただける ask whether it is possible.",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "baseForm": ["もらう", "いただく", "もらえる", "いただける"], "pos": "動詞", "pos2": "非自立" }
+    ],
+    "examples": [
+      "友達に宿題を手伝ってもらった。",
+      "医者に診てもらいます。",
+      "先生に教えていただきました。",
+      "誰にも読んでもらえない。"
+    ],
+    "counterExamples": [
+      "誕生日にプレゼントをもらった。"
+    ]
+  },
+  {
+    "id": "te-aru",
+    "pattern": "～てある",
+    "level": "N4",
+    "meaning": "has been done (and stays that way)",
+    "explanation": "A transitive verb in て-form plus ある describes a state left behind by someone's deliberate action, without saying who did it: 窓が開けてある ('the window has been left open'). Compare ている, which often describes a state that simply came about.",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "baseForm": "ある", "pos": "動詞", "pos2": "非自立" }
+    ],
+    "examples": [
+      "窓が開けてある。",
+      "机の上に名前が書いてあります。",
+      "部屋はもう掃除してあった。"
+    ],
+    "counterExamples": [
+      "本が机の上にある。",
+      "彼は学生である。"
+    ]
+  },
+  {
+    "id": "te-iku",
+    "pattern": "～ていく",
+    "level": "N4",
+    "meaning": "go on ~ing / ~ and go",
+    "explanation": "The て-form plus いく describes movement or change heading away from the speaker or into the future: 寒くなっていく ('it will keep getting colder'), 持っていく ('take it along').",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "baseForm": ["いく", "行く"], "pos": "動詞", "pos2": "非自立" }
+    ],
+    "notPrecededBy": [
+      [ { "surface": "どう" }, { "baseForm": "やる" } ]
+    ],
+    "examples": [
+      "これから寒くなっていく。",
+      "駅まで歩いていった。",
+      "傘を持っていきます。",
+      "これから一人でやっていきます。"
+    ],
+    "counterExamples": [
+      "学校に行く。",
+      "駅までどうやって行きますか。",
+      "空港までどうやっていくの？"
+    ]
+  },
+  {
+    "id": "te-kuru",
+    "pattern": "～てくる",
+    "level": "N4",
+    "meaning": "come to ~ / start to ~ / ~ and come back",
+    "explanation": "The て-form plus くる describes movement or change coming toward the speaker or up to the present: 雨が降ってきた ('it has started to rain'), 連れてくる ('bring someone along').",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "baseForm": ["くる", "来る"], "pos": "動詞", "pos2": "非自立" }
+    ],
+    "examples": [
+      "雨が降ってきた。",
+      "友達を連れてきます。",
+      "だんだん分かってきた。"
+    ],
+    "counterExamples": [
+      "友達が来る。"
+    ]
+  },
+  {
+    "id": "yasui",
+    "pattern": "～やすい",
+    "level": "N4",
+    "meaning": "easy to ~ / tends to ~",
+    "explanation": "A verb stem plus やすい makes an い-adjective meaning the action is easy to do, or that something readily happens. It is unrelated to 安い ('cheap').",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "連用形" } ],
+        [ { "pos": "名詞", "pos2": "一般" } ]
+      ] },
+      { "baseForm": "やすい", "pos": "形容詞" }
+    ],
+    "examples": [
+      "この本は読みやすい。",
+      "このペンは使いやすくない。",
+      "説明が分かりやすかったです。"
+    ],
+    "counterExamples": [
+      "このパンは安い。"
+    ]
+  },
+  {
+    "id": "nikui",
+    "pattern": "～にくい",
+    "level": "N4",
+    "meaning": "hard to ~",
+    "explanation": "A verb stem plus にくい makes an い-adjective meaning the action is difficult to do. It is the opposite of やすい.",
+    "steps": [
+      { "pos": "動詞", "conjForm": "連用形" },
+      { "baseForm": "にくい", "pos": "形容詞" }
+    ],
+    "examples": [
+      "この字は読みにくい。",
+      "雪の道は歩きにくかった。"
+    ],
+    "counterExamples": [
+      "あの人が憎い。"
+    ]
+  },
+  {
+    "id": "you-to-omou",
+    "pattern": "～ようと思う",
+    "level": "N4",
+    "meaning": "think I'll ~ / plan to ~",
+    "explanation": "The volitional form (行こう, 食べよう) plus と思う states a plan or intention as it forms in the speaker's mind. ようと思っている suggests the plan has been held for a while.",
+    "subsumes": ["volitional"],
+    "steps": [
+      { "pos": "動詞", "conjForm": "未然ウ接続" },
+      { "baseForm": ["う", "よう"], "pos": "助動詞" },
+      { "surface": "と", "pos": "助詞" },
+      { "baseForm": ["思う", "考える"], "pos": "動詞" }
+    ],
+    "examples": [
+      "明日から運動しようと思う。",
+      "日本に行こうと思います。",
+      "彼に電話しようと思っていた。"
+    ],
+    "counterExamples": [
+      "行くと思う。",
+      "雨が降るだろうと思う。"
+    ]
+  },
+  {
+    "id": "nai-to-ikenai",
+    "pattern": "～ないといけない",
+    "level": "N4",
+    "meaning": "must ~ / have to ~",
+    "explanation": "Literally 'if (you) don't ~, it won't do'. It expresses obligation like なければならない but sounds more conversational. だめ can replace いけない in casual speech.",
+    "subsumes": ["to-conditional"],
+    "steps": [
+      { "baseForm": "ない", "conjForm": "基本形" },
+      { "surface": "と", "pos": "助詞", "pos2": "接続助詞" },
+      { "anyOf": [
+        [ { "baseForm": ["いける", "なる"], "pos": "動詞" }, { "anyOf": [
+          [ { "baseForm": "ない" } ],
+          [ { "baseForm": "ます" }, { "surface": "ん" } ]
+        ] } ],
+        [ { "surface": ["だめ", "ダメ", "駄目"] } ]
+      ] }
+    ],
+    "examples": [
+      "早く寝ないといけない。",
+      "薬を飲まないといけません。",
+      "もっと勉強しないとだめだ。"
+    ],
+    "counterExamples": [
+      "行かないと、遅れる。"
+    ]
+  },
+  {
+    "id": "nakute-mo-ii",
+    "pattern": "～なくてもいい",
+    "level": "N4",
+    "meaning": "don't have to ~",
+    "explanation": "The negative て-form (なくて) plus もいい says something is not necessary. かまわない and 大丈夫 are common alternatives to いい. Compare てもいい, which gives permission to do something.",
+    "subsumes": ["te-mo"],
+    "steps": [
+      { "baseForm": "ない", "conjForm": "連用テ接続" },
+      { "surface": "て", "pos": "助詞" },
+      { "surface": "も", "pos": "助詞" },
+      { "baseForm": ["いい", "よい", "かまう", "構う"] }
+    ],
+    "examples": [
+      "明日は来なくてもいい。",
+      "全部食べなくてもいいです。",
+      "無理しなくてもかまいません。"
+    ],
+    "counterExamples": [
+      "窓を開けてもいい？",
+      "行かなくてはいけない。"
+    ]
+  },
+  {
+    "id": "node",
+    "pattern": "～ので",
+    "level": "N4",
+    "meaning": "because ~ / since ~",
+    "explanation": "ので gives a reason in a softer, more objective way than から, which makes it the usual choice for explanations and polite requests. Nouns and な-adjectives take な before it.",
+    "steps": [
+      { "surface": "ので", "pos": "助詞", "pos2": "接続助詞" }
+    ],
+    "examples": [
+      "雨が降っているので、行きません。",
+      "静かなので、よく眠れる。",
+      "学生なので安い。",
+      "疲れたので早く寝た。"
+    ],
+    "counterExamples": [
+      "彼が行くのですか。"
+    ]
+  },
+  {
+    "id": "noni",
+    "pattern": "～のに",
+    "level": "N4",
+    "meaning": "even though ~ / despite ~ / if only ~",
+    "explanation": "のに connects two facts where the second goes against what the first would lead you to expect, often with surprise or frustration. At the end of a sentence (来ればよかったのに) it expresses regret.",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": "のに", "pos": "助詞", "pos2": "接続助詞" } ],
+        [ { "surface": "な", "baseForm": "だ" }, { "surface": "の", "pos": "名詞" }, { "surface": "に", "pos": "助詞" } ]
+      ] }
+    ],
+    "examples": [
+      "一生懸命勉強したのに、落ちた。",
+      "雨なのに出かけた。",
+      "安いのに、誰も買わない。",
+      "来ればよかったのに。"
+    ],
+    "counterExamples": [
+      "これを作るのに三日かかった。"
+    ]
+  },
+  {
+    "id": "to-conditional",
+    "pattern": "～と (conditional)",
+    "level": "N4",
+    "meaning": "when ~ / whenever ~ / if ~",
+    "explanation": "After a plain non-past form, と states that one thing naturally or always follows another, as in rules, directions and habits. When the second half is past (駅に着くと、雨が降っていた), it describes a discovery.",
+    "steps": [
+      { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": "基本形" },
+      { "surface": "と", "pos": "助詞", "pos2": "接続助詞" }
+    ],
+    "examples": [
+      "春になると、桜が咲く。",
+      "このボタンを押すと、ドアが開く。",
+      "安いと、すぐ売れる。",
+      "行かないと、遅れる。"
+    ],
+    "counterExamples": [
+      "友達と映画を見た。",
+      "行くと言った。"
+    ]
+  },
+  {
+    "id": "nara",
+    "pattern": "～なら",
+    "level": "N4",
+    "meaning": "if ~ / if it's ~ (then)",
+    "explanation": "なら picks up a topic or a situation the listener mentioned and gives advice or a reaction about it: 日本に行くなら、京都がいい ('if you're going to Japan, Kyoto is good'). ならば is a more formal version.",
+    "steps": [
+      { "surface": "なら", "baseForm": "だ", "conjForm": "仮定形" }
+    ],
+    "examples": [
+      "日本に行くなら、京都がいい。",
+      "寿司なら、あの店がおいしい。",
+      "雨なら行かない。"
+    ],
+    "counterExamples": [
+      "雨が降ったら行きません。"
+    ]
+  },
+  {
+    "id": "ba-yokatta",
+    "pattern": "～ばよかった",
+    "level": "N4",
+    "meaning": "I should have ~ / it would have been good if ~",
+    "explanation": "A ば-conditional followed by よかった expresses regret about something that did or didn't happen. With なければ it regrets something that was done: 言わなければよかった ('I wish I hadn't said it'). のに at the end adds disappointment.",
+    "steps": [
+      { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": "仮定形" },
+      { "surface": "ば", "pos": "助詞" },
+      { "baseForm": ["よい", "良い"], "conjForm": "連用タ接続" }
+    ],
+    "examples": [
+      "もっと早く来ればよかった。",
+      "言わなければよかった。",
+      "傘を持ってくればよかったです。"
+    ],
+    "counterExamples": [
+      "早く来ればいい。"
+    ]
+  },
+  {
+    "id": "te-hoshii",
+    "pattern": "～てほしい",
+    "level": "N4",
+    "meaning": "want (someone) to ~",
+    "explanation": "The て-form plus ほしい says the speaker wants someone else to do something; that person is marked with に. ないでほしい asks them not to. For the speaker's own wishes, use たい.",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "baseForm": ["ほしい", "欲しい"], "pos": "形容詞" }
+    ],
+    "examples": [
+      "彼に来てほしい。",
+      "もっと話を聞いてほしいです。",
+      "誰にも言わないでほしい。",
+      "早く帰ってほしかった。"
+    ],
+    "counterExamples": [
+      "新しいパソコンがほしい。"
+    ]
+  },
+  {
+    "id": "hajimeru",
+    "pattern": "～始める",
+    "level": "N4",
+    "meaning": "start ~ing",
+    "explanation": "A verb stem plus 始める (はじめる) marks the beginning of an action or a change.",
+    "steps": [
+      { "pos": "動詞", "conjForm": "連用形" },
+      { "baseForm": ["始める", "はじめる"], "pos": "動詞", "pos2": "非自立" }
+    ],
+    "examples": [
+      "雨が降り始めた。",
+      "日本語を勉強し始めました。",
+      "本を読み始める。"
+    ],
+    "counterExamples": [
+      "授業を始める。"
+    ]
+  },
+  {
+    "id": "owaru",
+    "pattern": "～終わる",
+    "level": "N4",
+    "meaning": "finish ~ing",
+    "explanation": "A verb stem plus 終わる (おわる) says an action has been carried through to the end.",
+    "steps": [
+      { "pos": "動詞", "conjForm": "連用形" },
+      { "baseForm": ["終わる", "おわる"], "pos": "動詞", "pos2": "非自立" }
+    ],
+    "examples": [
+      "本を読み終わった。",
+      "晩ご飯を食べ終わりました。"
+    ],
+    "counterExamples": [
+      "授業が終わる。"
+    ]
+  },
+  {
+    "id": "tsuzukeru",
+    "pattern": "～続ける",
+    "level": "N4",
+    "meaning": "keep ~ing / continue to ~",
+    "explanation": "A verb stem plus 続ける (つづける) says an action goes on without stopping.",
+    "steps": [
+      { "pos": "動詞", "conjForm": "連用形" },
+      { "baseForm": ["続ける", "つづける"], "pos": "動詞", "pos2": "非自立" }
+    ],
+    "examples": [
+      "一晩中話し続けた。",
+      "雨が降り続けています。"
+    ],
+    "counterExamples": [
+      "話を続ける。"
+    ]
+  },
+  {
+    "id": "saseru",
+    "pattern": "～させる (causative)",
+    "level": "N4",
+    "meaning": "make / let (someone) do ~",
+    "explanation": "The causative せる / させる, attached to the ない-stem, means making or allowing someone to do something; context decides which. させてください asks for permission to do something yourself.",
+    "steps": [
+      { "pos": "動詞" },
+      { "baseForm": ["せる", "させる"], "pos": "動詞", "pos2": "接尾" }
+    ],
+    "examples": [
+      "子供に野菜を食べさせる。",
+      "弟を買い物に行かせた。",
+      "少し考えさせてください。"
+    ],
+    "counterExamples": [
+      "写真を見せる。"
+    ]
+  },
+  {
+    "id": "rareru",
+    "pattern": "～れる / ～られる",
+    "level": "N4",
+    "meaning": "is ~ed (passive), or can ~ / respectful ~",
+    "explanation": "れる / られる attached to the ない-stem forms the passive (先生に褒められた, 'was praised by the teacher'), including the 'suffering' passive (雨に降られた). The same endings also form the potential of some verbs and a respectful style, and the tokenizer cannot tell these uses apart, so this entry marks the form without choosing.",
+    "steps": [
+      { "pos": "動詞" },
+      { "baseForm": ["れる", "られる"], "pos": "動詞", "pos2": "接尾" }
+    ],
+    "examples": [
+      "先生に褒められた。",
+      "財布を盗まれました。",
+      "雨に降られた。",
+      "この本は多くの人に読まれている。",
+      "刺身が食べられる。"
+    ],
+    "counterExamples": [
+      "雨が晴れる。",
+      "写真を見せる。"
+    ]
+  },
+  {
+    "id": "mitai",
+    "pattern": "～みたいだ",
+    "level": "N4",
+    "meaning": "seems like ~ / like ~",
+    "explanation": "A casual way to say something looks or seems a certain way (雨みたいだ), or to compare (子供みたいに泣いた, 'cried like a child'). It follows nouns and plain forms directly. In writing ようだ is more common.",
+    "steps": [
+      { "pos": ["名詞", "動詞", "形容詞", "助動詞"] },
+      { "surface": "みたい", "pos": "名詞", "pos2": "非自立" },
+      { "anyOf": [
+        [ { "baseForm": ["だ", "です"] } ],
+        [ { "surface": "に", "pos": "助詞" } ]
+      ], "optional": true }
+    ],
+    "examples": [
+      "雨みたいだ。",
+      "子供みたいに泣いた。",
+      "彼は疲れているみたいです。",
+      "夢みたいな話。"
+    ],
+    "counterExamples": [
+      "その映画、みたい！",
+      "映画を見たい。"
+    ]
+  },
+  {
+    "id": "naru-change",
+    "pattern": "～くなる / ～になる",
+    "level": "N4",
+    "meaning": "become ~ / get ~",
+    "explanation": "なる describes a change of state. い-adjectives use their く-form (寒くなる), negatives use なく (分からなくなる), and nouns and な-adjectives take に (医者になる, 上手になる).",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "形容詞", "conjForm": "連用テ接続" } ],
+        [ { "baseForm": "ない", "conjForm": "連用テ接続" } ],
+        [ { "pos": "名詞" }, { "surface": "に", "pos": "助詞" } ]
+      ] },
+      { "baseForm": "なる", "pos": "動詞" }
+    ],
+    "examples": [
+      "寒くなった。",
+      "医者になりたい。",
+      "上手になりました。",
+      "大きくならない。",
+      "分からなくなった。"
+    ],
+    "counterExamples": [
+      "電話が鳴る。"
+    ]
+  },
+  {
+    "id": "hodo-nai",
+    "pattern": "～ほど～ない",
+    "level": "N4",
+    "meaning": "not as ~ as ~",
+    "explanation": "Xほど～ない measures something against X and says it does not reach X's level: 今日は昨日ほど寒くない means 'today isn't as cold as yesterday'. After 思った or 期待した it means 'not as ~ as I expected', and それほど～ない means 'not that ~'.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "名詞", "pos2": ["一般", "固有名詞", "代名詞", "副詞可能", "サ変接続", "形容動詞語幹", "ナイ形容詞語幹"] }, { "surface": "ほど", "pos": "助詞" } ],
+        [ { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": ["連用タ接続", "連用形"] }, { "baseForm": "た", "conjType": "特殊・タ", "conjForm": "基本形" }, { "surface": "ほど", "pos": "助詞" } ],
+        [ { "surface": ["それほど", "さほど"], "pos": "副詞" } ]
+      ] },
+      { "gap": 5 },
+      { "anyOf": [
+        [ { "baseForm": ["ない", "ぬ", "ん"], "pos": ["助動詞", "形容詞"] } ],
+        [ { "baseForm": "ます", "pos": "助動詞" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "今日は昨日ほど寒くない。",
+      "東京は大阪ほど暑くありません。",
+      "テストは思ったほど難しくなかった。",
+      "彼ほど優しい人はいない。",
+      "それほど高くないです。",
+      "この店は前ほど込んでいません。",
+      "予想していたほど高くなかった。"
+    ],
+    "counterExamples": [
+      "三日ほど何も食べなかった。",
+      "山ほど宿題がある。",
+      "考えれば考えるほど分からなくなる。"
+    ]
+  },
+  {
+    "id": "shi",
+    "pattern": "～し",
+    "level": "N4",
+    "meaning": "and what's more ~ (listing reasons)",
+    "explanation": "し after a plain or polite clause gives one reason or point and hints that there are more: この店は安いし、おいしい is 'this place is cheap, and the food is good too'. It often appears twice in a row, and the conclusion it supports may be left unsaid.",
+    "steps": [
+      { "surface": "し", "pos": "助詞", "pos2": "接続助詞" }
+    ],
+    "examples": [
+      "この店は安いし、おいしい。",
+      "雨も降っているし、今日は家にいよう。",
+      "彼は優しいし、頭もいいし、人気がある。",
+      "時間もないし、お金もないです。",
+      "もう遅いですし、帰りましょう。"
+    ],
+    "counterExamples": [
+      "勉強しました。",
+      "しかし、雨が降ってきた。"
+    ]
+  },
+  {
+    "id": "kai-frequency",
+    "pattern": "～に～回",
+    "level": "N4",
+    "meaning": "~ times a (week, day, ...)",
+    "explanation": "A time period, に, and a count with 回 or 度 say how often something happens: 週に三回 is 'three times a week' and 一日に二回 is 'twice a day'.",
+    "steps": [
+      { "surface": ["週", "日", "月", "年", "時間", "週間", "ヶ月", "か月", "カ月", "晩"], "pos": "名詞" },
+      { "surface": "に", "pos": "助詞" },
+      { "pos": "名詞", "pos2": "数" },
+      { "pos": "名詞", "pos2": "数", "optional": true },
+      { "pos": "名詞", "pos2": "数", "optional": true },
+      { "surface": ["回", "度"], "pos": "名詞", "pos2": "接尾" }
+    ],
+    "examples": [
+      "週に三回ジムに行きます。",
+      "薬を一日に二回飲んでください。",
+      "月に一度、家族に電話する。",
+      "一年に一回、旅行に行く。",
+      "一週間に２回テニスをしています。"
+    ],
+    "counterExamples": [
+      "三回行った。",
+      "日曜日に行った。"
+    ]
+  },
+  {
+    "id": "garu",
+    "pattern": "～がる",
+    "level": "N4",
+    "meaning": "(someone else) shows that they feel ~ / wants ~",
+    "explanation": "Describes another person's feelings from the way they act, since Japanese doesn't normally state other people's inner feelings directly: 寒がる is 'acts as if cold, says they're cold'. With たい it becomes たがる ('they want to'), and with ほしい, ほしがる ('they want it').",
+    "subsumes": ["tai"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["形容詞", "助動詞"], "conjForm": "ガル接続" }, { "baseForm": "がる", "pos": "動詞", "pos2": "接尾" } ],
+        [ { "baseForm": ["怖がる", "嫌がる"], "pos": "動詞" } ]
+      ] }
+    ],
+    "examples": [
+      "子供が新しいおもちゃを欲しがっている。",
+      "弟は外に行きたがる。",
+      "妹は犬を怖がります。",
+      "彼は寒がっていた。",
+      "猫は風呂を嫌がらない。",
+      "みんな見たがっています。"
+    ],
+    "counterExamples": [
+      "犬が怖い。",
+      "山に上がる。"
+    ]
+  },
+  {
+    "id": "tara-dou",
+    "pattern": "～たらどうですか",
+    "level": "N4",
+    "meaning": "why don't you ~? / how about ~?",
+    "explanation": "A たら condition followed by どう ('how about') makes a suggestion: 先生に聞いたらどうですか is 'why don't you ask the teacher?'. いかがですか is more polite, and a bare どう? is casual.",
+    "subsumes": ["tara"],
+    "steps": [
+      { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": ["連用タ接続", "連用形"] },
+      { "surface": ["たら", "だら"], "conjForm": "仮定形" },
+      { "surface": ["どう", "いかが"] }
+    ],
+    "examples": [
+      "先生に聞いたらどうですか。",
+      "少し休んだらどう？",
+      "一度行ってみたらいかがですか。",
+      "もっと早く寝たらどうだ。"
+    ],
+    "counterExamples": [
+      "雨が降ったら行かない。",
+      "調子はどうですか。"
+    ]
+  },
+  {
+    "id": "number-mo",
+    "pattern": "(number)も",
+    "level": "N4",
+    "meaning": "as many as ~ / a whole ~",
+    "explanation": "も straight after a number and counter stresses that the amount is bigger than expected: 三時間も待った is 'I waited a whole three hours'. With 何 it means 'many' (何度も, 'again and again'). After 一 with a negative (一度も～ない) it means 'not even one', a different use that this pattern leaves out.",
+    "steps": [
+      { "pos": "名詞", "pos2": "数", "surface": ["二", "三", "四", "五", "六", "七", "八", "九", "十", "百", "千", "万", "何", "２", "３", "４", "５", "６", "７", "８", "９", "2", "3", "4", "5", "6", "7", "8", "9"] },
+      { "pos": "名詞", "pos2": "数", "optional": true },
+      { "pos": "名詞", "pos2": "数", "optional": true },
+      { "pos": "名詞", "pos2": "接尾" },
+      { "surface": "も", "pos": "助詞", "pos2": "係助詞" }
+    ],
+    "examples": [
+      "三時間も待った。",
+      "五回も電話した。",
+      "何度も行った。",
+      "三人もいる。",
+      "２０人も来た。",
+      "この本は千ページもあります。"
+    ],
+    "counterExamples": [
+      "一度も行ったことがない。",
+      "一つもない。"
+    ]
+  },
+  {
+    "id": "volitional",
+    "pattern": "～(よ)う",
+    "level": "N4",
+    "meaning": "let's ~ / I think I'll ~",
+    "explanation": "The plain volitional form, the casual counterpart of ～ましょう: 帰ろう is 'let's go home' or 'I'll go home now'. Godan verbs change their last sound to the お-row and add う (行く→行こう); ichidan verbs add よう (食べよう); する and 来る become しよう and 来よう.",
+    "steps": [
+      { "pos": "動詞", "conjForm": "未然ウ接続" },
+      { "baseForm": "う", "pos": "助動詞" }
+    ],
+    "examples": [
+      "一緒に帰ろう。",
+      "明日は早く起きよう。",
+      "今日は何をしよう。",
+      "週末に映画を見に行こうか。"
+    ],
+    "counterExamples": [
+      "明日は雨だろう。",
+      "行きましょう。",
+      "雨が降るようだ。"
+    ]
+  },
+  {
+    "id": "te-itadakemasen-ka",
+    "pattern": "～ていただけませんか",
+    "level": "N4",
+    "meaning": "could you please ~?",
+    "explanation": "A very polite request built on the potential form of いただく, literally 'could I receive the favour of your ~ing?': 少し待っていただけませんか is 'would you mind waiting a moment?'. ていただけますか is a little less formal, and てもらえませんか is the everyday version.",
+    "subsumes": ["te-morau", "masen-ka", "te-iru"],
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "anyOf": [
+        [ { "baseForm": ["いただける", "もらえる"], "pos": "動詞" } ],
+        [ { "surface": "い", "baseForm": "いる" }, { "surface": "た" }, { "surface": "だけ" } ]
+      ] },
+      { "baseForm": "ます", "pos": "助動詞" },
+      { "surface": "ん", "optional": true },
+      { "surface": "か", "pos": "助詞" }
+    ],
+    "examples": [
+      "少し待っていただけませんか。",
+      "ここに名前を書いていただけますか。",
+      "手伝ってもらえませんか。",
+      "もう一度説明していただけませんか。",
+      "窓を開けてもらえますか。"
+    ],
+    "counterExamples": [
+      "先生に教えていただきました。",
+      "友達に手伝ってもらった。"
+    ]
+  },
+  {
+    "id": "to-ii",
+    "pattern": "～といい",
+    "level": "N4",
+    "meaning": "I hope ~ / it would be good to ~",
+    "explanation": "A plain-form clause plus といい expresses a hope (明日晴れるといいですね, 'I hope it's sunny tomorrow') or, as advice, what would work well (先生に聞くといいよ, 'you should ask the teacher').",
+    "subsumes": ["to-conditional"],
+    "steps": [
+      { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": "基本形" },
+      { "surface": "と", "pos": "助詞" },
+      { "surface": ["いい", "よい", "良い"] }
+    ],
+    "followedBy": [
+      { "pos": "助詞" },
+      { "baseForm": ["です", "だ"] },
+      { "pos": "記号" }
+    ],
+    "examples": [
+      "明日晴れるといいですね。",
+      "先生に聞くといいよ。",
+      "試験に合格するといいな。",
+      "早く元気になるといいですね。",
+      "分からない時は辞書を使うといい。"
+    ],
+    "counterExamples": [
+      "行くといいました。",
+      "春になると暖かくなる。"
+    ]
+  },
+  {
+    "id": "te-sumimasen",
+    "pattern": "～てすみません",
+    "level": "N4",
+    "meaning": "sorry for ~ing",
+    "explanation": "The て-form gives the reason for an apology: 遅くなってすみません is 'sorry I'm late'. Casual speech uses てごめん, and formal speech て申し訳ありません.",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "anyOf": [
+        [ { "surface": ["すみません", "ごめん", "ごめんなさい"] } ],
+        [ { "surface": "申し訳" }, { "anyOf": [
+          [ { "baseForm": "ない" } ],
+          [ { "baseForm": ["ある", "ござる"] }, { "baseForm": "ます" }, { "surface": "ん" } ]
+        ] } ]
+      ] }
+    ],
+    "examples": [
+      "遅くなってすみません。",
+      "待たせてすみませんでした。",
+      "連絡しなくてごめんね。",
+      "ご迷惑をおかけして申し訳ありません。",
+      "返事が遅れてごめんなさい。"
+    ],
+    "counterExamples": [
+      "すみません、駅はどこですか。",
+      "遅れてきた。"
+    ]
+  },
+  {
+    "id": "nasai",
+    "pattern": "～なさい",
+    "level": "N4",
+    "meaning": "do ~ (a firm instruction)",
+    "explanation": "The verb stem plus なさい is a firm instruction from someone with authority, such as a parent or a teacher: 早く寝なさい is 'go to bed now'. It also appears in written test instructions (答えなさい).",
+    "steps": [
+      { "pos": "動詞", "conjForm": "連用形" },
+      { "baseForm": "なさる", "conjForm": "命令ｉ" }
+    ],
+    "examples": [
+      "早く寝なさい。",
+      "静かにしなさい。",
+      "次の質問に答えなさい。",
+      "野菜も食べなさいね。"
+    ],
+    "counterExamples": [
+      "おやすみなさい。",
+      "先生は何をなさいますか。"
+    ]
+  },
+  {
+    "id": "te-mo",
+    "pattern": "～ても",
+    "level": "N4",
+    "meaning": "even if ~ / even though ~",
+    "explanation": "The て-form plus も sets up a condition that doesn't change the outcome: 雨が降っても行きます is 'I'll go even if it rains'. い-adjectives use くても and negatives なくても; with いくら or 何回 it means 'no matter how much'.",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "surface": "も", "pos": "助詞", "pos2": "係助詞" }
+    ],
+    "examples": [
+      "雨が降っても行きます。",
+      "高くても買います。",
+      "いくら読んでも分からない。",
+      "何回聞いても覚えられない。",
+      "失敗しても、またやればいい。",
+      "行かなくても大丈夫です。"
+    ],
+    "counterExamples": [
+      "コーヒーでも飲みませんか。",
+      "友達に手伝ってもらった。"
+    ]
+  },
+  {
+    "id": "te-kurete-arigatou",
+    "pattern": "～てくれてありがとう",
+    "level": "N4",
+    "meaning": "thank you for ~ing",
+    "explanation": "てくれて names what someone did for you, and ありがとう thanks them for it: 手伝ってくれてありがとう is 'thanks for helping me'. The polite version is てくださってありがとうございます.",
+    "subsumes": ["te-kureru"],
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "baseForm": ["くれる", "くださる"], "pos": "動詞", "pos2": "非自立" },
+      { "surface": "て", "pos": "助詞", "pos2": "接続助詞" },
+      { "gap": 1 },
+      { "surface": "ありがとう" }
+    ],
+    "examples": [
+      "手伝ってくれてありがとう。",
+      "教えてくださってありがとうございました。",
+      "助けてくれて本当にありがとう。",
+      "来てくださってありがとうございます。"
+    ],
+    "counterExamples": [
+      "ありがとうございます。",
+      "手伝ってくれた。"
+    ]
+  },
+  {
+    "id": "te-yokatta",
+    "pattern": "～てよかった",
+    "level": "N4",
+    "meaning": "I'm glad that ~",
+    "explanation": "The て-form gives the reason for relief or happiness about something that happened: 日本に来てよかった is 'I'm glad I came to Japan'. With なくて it means 'I'm glad that ~ didn't happen'.",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "baseForm": ["よい", "いい", "良い"], "conjForm": "連用タ接続" }
+    ],
+    "examples": [
+      "日本に来てよかった。",
+      "あなたに会えてよかったです。",
+      "雨が降らなくてよかった。",
+      "間に合ってよかったね。"
+    ],
+    "counterExamples": [
+      "天気がよかった。",
+      "早く来ればよかった。"
+    ]
+  },
+  {
+    "id": "nai-de",
+    "pattern": "～ないで",
+    "level": "N4",
+    "meaning": "without ~ing / instead of ~ing",
+    "explanation": "The ない form plus で describes doing one thing without doing another: 朝ご飯を食べないで学校に行った is 'I went to school without eating breakfast'. ～ずに is a more written equivalent.",
+    "steps": [
+      { "baseForm": "ない", "conjForm": "連用デ接続" },
+      { "surface": "で", "pos": "助詞", "pos2": "接続助詞" }
+    ],
+    "followedBy": [
+      { "pos": ["名詞", "副詞", "記号", "連体詞", "接頭詞", "接続詞", "感動詞"] },
+      { "pos": ["動詞", "形容詞"], "pos2": "自立" }
+    ],
+    "examples": [
+      "朝ご飯を食べないで学校に行った。",
+      "寝ないで勉強しました。",
+      "傘を持たないで出かけた。",
+      "何も言わないで帰った。"
+    ],
+    "counterExamples": [
+      "食べなくて困った。",
+      "ここで泳がないでください。",
+      "誰にも言わないでほしい。",
+      "何も言わないでくれ。"
+    ]
+  },
+  {
+    "id": "ka-dou-ka",
+    "pattern": "～かどうか",
+    "level": "N4",
+    "meaning": "whether or not ~",
+    "explanation": "Embeds a yes-or-no question inside a sentence: 彼が来るかどうか分からない is 'I don't know whether he'll come'. Nouns and な-adjectives attach directly, without だ (本当かどうか).",
+    "steps": [
+      { "surface": "か", "pos": "助詞" },
+      { "surface": "どう" },
+      { "surface": "か", "pos": "助詞" }
+    ],
+    "examples": [
+      "彼が来るかどうか分からない。",
+      "本当かどうか確かめます。",
+      "おいしいかどうか食べてみて。",
+      "間に合うかどうか心配です。"
+    ],
+    "counterExamples": [
+      "どうかよろしくお願いします。",
+      "どうですか。"
+    ]
+  },
+  {
+    "id": "to-iu",
+    "pattern": "～という",
+    "level": "N4",
+    "meaning": "called ~ / the (fact) that ~",
+    "explanation": "という links a name or a whole statement to the noun after it: 田中という人 is 'a person called Tanaka' and 難しいということ is 'the fact that it's difficult'. It is usually written in kana, since it no longer really means 'say'.",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": "という", "pos": "助詞" } ],
+        [ { "surface": "と", "pos": "助詞" }, { "surface": ["言う", "いう"], "conjForm": "基本形" } ]
+      ] }
+    ],
+    "followedBy": [
+      { "pos": "名詞" }
+    ],
+    "examples": [
+      "田中という人から電話があった。",
+      "日本語が難しいということが分かった。",
+      "これは何という花ですか。",
+      "「さくら」という店を知っていますか。",
+      "彼が来ないという話を聞いた。"
+    ],
+    "counterExamples": [
+      "彼は行くと言った。",
+      "明日は雨だという。"
+    ]
+  },
+  {
+    "id": "aida-ni",
+    "pattern": "～間 / ～間に",
+    "level": "N4",
+    "meaning": "while ~ / during the time that ~",
+    "explanation": "間 (あいだ) after a verb or adjective marks a stretch of time. Without に, the other action fills the whole stretch (待っている間、本を読んでいた); with に, it happens at some point inside it (母が寝ている間に料理を作った).",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ]
+      ] },
+      { "surface": ["間", "あいだ"], "pos": "名詞" },
+      { "surface": "に", "pos": "助詞", "optional": true }
+    ],
+    "examples": [
+      "母が寝ている間に、料理を作った。",
+      "待っている間、本を読んでいました。",
+      "日本にいる間に富士山に登りたい。",
+      "子供が小さい間は、家で仕事をした。"
+    ],
+    "counterExamples": [
+      "駅と家の間に公園がある。",
+      "間違えました。"
+    ]
+  },
+  {
+    "id": "suru-change",
+    "pattern": "～くする / ～にする",
+    "level": "N4",
+    "meaning": "make ~ (more) ...",
+    "explanation": "An い-adjective in its く form, or a な-adjective with に, followed by する describes deliberately changing something: 音を小さくする is 'turn the volume down' and 部屋をきれいにする is 'tidy the room'. It is the active counterpart of ～くなる / ～になる.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "形容詞", "conjForm": "連用テ接続" }, { "baseForm": "する", "pos": "動詞" } ],
+        [ { "pos": "名詞", "pos2": "形容動詞語幹" }, { "surface": "に", "pos": "助詞" }, { "baseForm": "する", "pos": "動詞" } ]
+      ] }
+    ],
+    "examples": [
+      "部屋をきれいにしてください。",
+      "音を小さくしてくれませんか。",
+      "静かにしなさい。",
+      "値段を安くしました。",
+      "もう少し短くしましょう。"
+    ],
+    "counterExamples": [
+      "コーヒーにします。",
+      "大きくなった。",
+      "早く起きるようにする。"
+    ]
+  },
+  {
+    "id": "no-you-na",
+    "pattern": "～のような / ～のように",
+    "level": "N4",
+    "meaning": "like ~ / similar to ~",
+    "explanation": "Compares something to a noun: 猫のような目 is 'eyes like a cat's' and 雪のように白い is 'as white as snow'. ような comes before a noun, ように before a verb or adjective.",
+    "subsumes": ["you-da"],
+    "steps": [
+      { "surface": "の", "pos": "助詞", "pos2": "連体化" },
+      { "surface": ["よう", "様"], "pos": "名詞", "pos2": "非自立" },
+      { "anyOf": [
+        [ { "surface": "な", "baseForm": "だ" } ],
+        [ { "surface": "に", "pos": "助詞" } ]
+      ] }
+    ],
+    "examples": [
+      "猫のような目をしている。",
+      "子供のように泣いた。",
+      "夢のような話だ。",
+      "雪のように白い。",
+      "母のような人になりたいです。"
+    ],
+    "counterExamples": [
+      "雨のようだ。",
+      "日本語が話せるようになった。"
+    ]
+  },
+  {
+    "id": "saserareru",
+    "pattern": "～させられる",
+    "level": "N4",
+    "meaning": "be made to ~ (against one's will)",
+    "explanation": "The causative combined with the passive: the subject is made to do something, usually unwillingly. 母に野菜を食べさせられた is 'my mother made me eat vegetables'. Godan verbs have a common short form, 飲まされる for 飲ませられる.",
+    "subsumes": ["saseru", "rareru"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞" }, { "baseForm": ["させる", "せる"], "pos": "動詞", "pos2": "接尾" }, { "baseForm": ["られる", "れる"], "pos": "動詞", "pos2": "接尾" } ],
+        [ { "pos": "動詞", "conjForm": "未然形" }, { "surface": "さ", "baseForm": ["す", "する"] }, { "baseForm": "れる", "pos": "動詞", "pos2": "接尾" } ],
+        [ { "baseForm": ["飲ます", "待たす", "行かす", "歌わす", "買わす", "言わす", "立たす", "働かす", "習わす", "払わす", "持たす"], "conjForm": "未然形" }, { "baseForm": "れる", "pos": "動詞", "pos2": "接尾" } ]
+      ] }
+    ],
+    "examples": [
+      "母に野菜を食べさせられた。",
+      "先輩に酒を飲まされた。",
+      "一時間も待たされた。",
+      "子供の頃、ピアノを習わされました。",
+      "毎日漢字を書かされる。",
+      "勉強させられた。",
+      "行かせられた。"
+    ],
+    "counterExamples": [
+      "子供に野菜を食べさせた。",
+      "先生に褒められた。",
+      "先生に話された。"
+    ]
+  },
+  {
+    "id": "kata",
+    "pattern": "～方 (way of ~ing)",
+    "level": "N4",
+    "meaning": "how to ~ / the way of ~ing",
+    "explanation": "A verb stem plus 方 (かた) turns an action into 'the way of doing it': 読み方 is 'how to read' and 使い方 'how to use'. The object takes の instead of を (漢字の読み方). Many common ones are listed in the dictionary as single words.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "連用形" }, { "surface": "方", "pos": "名詞", "pos2": "接尾" } ],
+        [ { "surface": ["読み方", "書き方", "使い方", "作り方", "言い方", "考え方", "話し方", "生き方", "見方", "やり方", "選び方", "泳ぎ方", "遊び方", "進め方", "決め方", "結び方", "買い方"], "pos": "名詞" } ]
+      ] }
+    ],
+    "examples": [
+      "この漢字の読み方を教えてください。",
+      "箸の使い方が上手ですね。",
+      "駅への行き方を教えてください。",
+      "ケーキの作り方を習いました。",
+      "お金の数え方を教えてください。"
+    ],
+    "counterExamples": [
+      "あの方は先生です。",
+      "右の方に曲がる。",
+      "仕方がない。"
+    ]
+  },
+  {
+    "id": "ba-ii",
+    "pattern": "～ばいい / ～たらいい",
+    "level": "N4",
+    "meaning": "should ~ / all you need to do is ~",
+    "explanation": "A condition followed by いい says what would be enough, or what the right move is: どうすればいいですか is 'what should I do?' and 先生に聞けばいい is 'just ask the teacher'. ～たらいい works the same way with たら.",
+    "subsumes": ["ba-conditional", "tara"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": "仮定形" }, { "surface": "ば", "pos": "助詞" } ],
+        [ { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": ["連用タ接続", "連用形"] }, { "surface": ["たら", "だら"], "conjForm": "仮定形" } ]
+      ] },
+      { "surface": ["いい", "よい", "良い"] }
+    ],
+    "examples": [
+      "どうすればいいですか。",
+      "分からなければ、先生に聞けばいい。",
+      "駅までどう行けばいいでしょうか。",
+      "どうしたらいいですか。",
+      "何を持っていったらいいか分からない。"
+    ],
+    "counterExamples": [
+      "早く来ればよかった。",
+      "安ければ買います。"
+    ]
+  }
+]

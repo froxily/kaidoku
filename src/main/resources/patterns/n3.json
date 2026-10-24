@@ -1,0 +1,2465 @@
+[
+  {
+    "id": "wake-dewa-nai",
+    "pattern": "～わけではない",
+    "level": "N3",
+    "meaning": "it's not that ~ / it doesn't necessarily mean ~",
+    "explanation": "Denies a conclusion the listener might reasonably draw, without denying everything. 嫌いなわけではない means 'it's not that I dislike it', which leaves room for some other reason. The casual form is わけじゃない.",
+    "steps": [
+      { "surface": ["わけ", "訳"], "pos": "名詞", "pos2": "非自立" },
+      { "anyOf": [
+        [ { "surface": "で", "baseForm": "だ" }, { "surface": "は", "pos": "助詞" } ],
+        [ { "surface": "じゃ" } ]
+      ] },
+      { "gap": 1 },
+      { "anyOf": [
+        [ { "baseForm": "ない" } ],
+        [ { "baseForm": "ある" }, { "baseForm": "ます" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "高いわけではない。",
+      "彼が悪いわけでは決してない。",
+      "嫌いなわけじゃ全然ないよ。",
+      "高い訳ではない。",
+      "高いわけではないです。",
+      "嫌いなわけじゃないよ。",
+      "行きたくないわけではありません。",
+      "彼が悪いわけじゃありません。",
+      "全部読んだわけではなかった。",
+      "好きなわけではありませんでした。",
+      "美味しくなかったわけじゃない。"
+    ],
+    "counterExamples": [
+      "そんなわけがない。",
+      "わけを教えてください。",
+      "だから遅れたわけです。"
+    ]
+  },
+  {
+    "id": "koto-ni-naru",
+    "pattern": "～ことになる",
+    "level": "N3",
+    "meaning": "it has been decided that ~ / it turns out that ~",
+    "explanation": "Reports an outcome that was settled by circumstances or by other people rather than by the speaker, such as a transfer, a schedule or a rule. ことになっている describes an established arrangement or custom. Compare ことにする, which is the speaker's own decision.",
+    "subsumes": ["naru-change"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ]
+      ] },
+      { "surface": ["こと", "事"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": "なる", "pos": "動詞" }
+    ],
+    "examples": [
+      "来年結婚することになる。",
+      "来月から大阪で働くことになった。",
+      "転勤する事になった。",
+      "会議は中止することになりました。",
+      "今年は旅行に行かないことになった。",
+      "ここでは靴を脱ぐことになっている。"
+    ],
+    "counterExamples": [
+      "毎朝走ることにした。",
+      "日本に行ったことがある。",
+      "大変なことになった。"
+    ]
+  },
+  {
+    "id": "ta-bakari",
+    "pattern": "～たばかり",
+    "level": "N3",
+    "meaning": "just did ~ / only a short time ago",
+    "explanation": "The past form of a verb plus ばかり says the action happened very recently, at least in the speaker's mind; the actual time can be weeks if it still feels new. It behaves like a noun, so it takes だ / です, な before のに / ので, and の before another noun.",
+    "steps": [
+      { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" },
+      { "surface": "ばかり", "pos": "助詞" }
+    ],
+    "examples": [
+      "今起きたばかりだ。",
+      "日本に来たばかりです。",
+      "その時は日本に来たばかりだった。",
+      "まだ来たばかりじゃない。",
+      "本を読んだばかりで、まだ感想が書けない。",
+      "さっきご飯を食べたばかりなのに、もうお腹が空いた。",
+      "起きたばかりなので眠い。",
+      "始めたばかりの仕事は大変だ。"
+    ],
+    "counterExamples": [
+      "肉ばかり食べている。",
+      "遊んでばかりいる。",
+      "一時間ばかり待った。"
+    ]
+  },
+  {
+    "id": "ba-hodo",
+    "pattern": "～ば～ほど",
+    "level": "N3",
+    "meaning": "the more ~, the more ~",
+    "explanation": "Repeats the same word, first in its ば-conditional form and then in its plain form before ほど, to say that as one thing increases so does another. な-adjectives use なら in the first half and な before ほど.",
+    "subsumes": ["ba-conditional", "nara", "hodo-extent"],
+    "steps": [
+      { "anyOf": [
+        [ { "conjForm": "仮定形", "pos": ["動詞", "形容詞", "助動詞"] }, { "surface": "ば", "pos": "助詞" } ],
+        [ { "surface": "なら", "baseForm": "だ" } ]
+      ] },
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "pos2": "形容動詞語幹" }, { "surface": "な", "baseForm": "だ" } ]
+      ] },
+      { "surface": "ほど", "pos": "助詞" }
+    ],
+    "examples": [
+      "練習すればするほど上手になる。",
+      "考えれば考えるほど分からなくなる。",
+      "安ければ安いほどいい。",
+      "早ければ早いほどいいです。",
+      "静かなら静かなほどいい。",
+      "静かであればあるほどいい。"
+    ],
+    "counterExamples": [
+      "練習すれば上手になる。",
+      "山ほど宿題がある。",
+      "死ぬほど疲れた。"
+    ]
+  },
+  {
+    "id": "ni-yotte",
+    "pattern": "～によって",
+    "level": "N3",
+    "meaning": "depending on ~ / by (means of) ~ / due to ~",
+    "explanation": "Names what something depends on, is caused by, or is done by. It marks the agent of a passive sentence (ピカソによって描かれた) and variation (人によって違う). により is the more formal version, による modifies a noun, and によります ends a sentence ('it depends on ~').",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": ["によって", "により", "による"], "pos": "助詞" } ],
+        [ { "surface": "に", "pos": "助詞" }, { "baseForm": "よる", "pos": "動詞", "conjForm": "連用形" }, { "baseForm": "ます" } ]
+      ] }
+    ],
+    "examples": [
+      "人によって考え方が違う。",
+      "国によって習慣が違います。",
+      "値段は品質によって違う。",
+      "この絵はピカソによって描かれた。",
+      "場合によってはキャンセルします。",
+      "地震により多くの家が倒れた。",
+      "法律による規制がある。",
+      "それは人によります。"
+    ],
+    "counterExamples": [
+      "天気予報によると明日は雨だ。",
+      "気象庁によりますと、台風が近づいています。",
+      "帰りにスーパーに寄った。",
+      "夜になって寒くなった。"
+    ]
+  },
+  {
+    "id": "wake-ga-nai",
+    "pattern": "～わけがない",
+    "level": "N3",
+    "meaning": "there's no way ~ / it can't be that ~",
+    "explanation": "Rejects an idea outright as impossible, based on the speaker's reasoning. It is stronger and more emotional than はずがない. In speech が is often dropped (わけない).",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": ["わけ", "訳"], "pos": "名詞", "pos2": "非自立" }, { "surface": ["が", "は"], "pos": "助詞", "optional": true } ],
+        [ { "surface": "わけ", "baseForm": "わける", "conjForm": "未然形" } ]
+      ] },
+      { "anyOf": [
+        [ { "baseForm": "ない" } ],
+        [ { "baseForm": "ある" }, { "baseForm": "ます" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "そんなわけがない。",
+      "そんなわけはない。",
+      "彼が知っているわけがありません。",
+      "こんな問題、できるわけない。",
+      "彼が素直に謝るわけないよ。"
+    ],
+    "counterExamples": [
+      "わけが分からない。",
+      "申し訳ない。",
+      "高いわけではない。",
+      "ケーキを三人で分けない。"
+    ]
+  },
+  {
+    "id": "hazu-ga-nai",
+    "pattern": "～はずがない",
+    "level": "N3",
+    "meaning": "can't possibly be ~",
+    "explanation": "The negative counterpart of はずだ: from what the speaker knows, something cannot be true. It sounds more reasoned and less emotional than わけがない.",
+    "steps": [
+      { "surface": ["はず", "筈"], "pos": "名詞" },
+      { "surface": ["が", "は"], "pos": "助詞" },
+      { "anyOf": [
+        [ { "baseForm": "ない" } ],
+        [ { "baseForm": "ある" }, { "baseForm": "ます" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "そんなはずがない。",
+      "彼が嘘をつくはずはありません。",
+      "鍵がないはずがない。"
+    ],
+    "counterExamples": [
+      "彼はもう着いたはずだ。",
+      "恥ずかしい。"
+    ]
+  },
+  {
+    "id": "koto-ni-suru",
+    "pattern": "～ことにする",
+    "level": "N3",
+    "meaning": "to decide to ~",
+    "explanation": "After a verb in dictionary form or ない-form, ことにする reports a decision the speaker made themselves. ことにしている describes a personal rule they keep. Compare ことになる, where the decision comes from outside.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ]
+      ] },
+      { "surface": ["こと", "事"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": "する", "pos": "動詞" }
+    ],
+    "examples": [
+      "明日から毎朝走ることにする。",
+      "会社を辞めることにした。",
+      "今年は旅行に行かないことにしました。",
+      "夜はコーヒーを飲まないことにしている。"
+    ],
+    "counterExamples": [
+      "来月から大阪で働くことになった。",
+      "日本に行ったことがある。"
+    ]
+  },
+  {
+    "id": "bakari",
+    "pattern": "～ばかり",
+    "level": "N3",
+    "meaning": "nothing but ~ / only ~",
+    "explanation": "After a noun, ばかり says that one thing is done or found over and over, often with a critical tone. てばかりいる criticises someone for doing nothing but one activity. After a number it means 'about' instead.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "名詞", "pos2": ["一般", "固有名詞", "代名詞", "サ変接続"] } ],
+        [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" } ],
+        [ { "pos": "動詞", "conjForm": "基本形" } ]
+      ] },
+      { "surface": "ばかり", "pos": "助詞" }
+    ],
+    "examples": [
+      "肉ばかり食べている。",
+      "弟はゲームばかりしています。",
+      "遊んでばかりいないで勉強しなさい。",
+      "文句ばかり言う。",
+      "泣くばかりだった。"
+    ],
+    "counterExamples": [
+      "一時間ばかり待った。",
+      "日本に来たばかりです。",
+      "十分ばかり休憩した。"
+    ]
+  },
+  {
+    "id": "tokoro-da",
+    "pattern": "～ところだ",
+    "level": "N3",
+    "meaning": "about to ~ / in the middle of ~ / just did ~",
+    "explanation": "ところ points to a moment in time, and the verb form decides which one: dictionary form means about to start, ている means in the middle of it, and the past form means it has just finished.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ]
+      ] },
+      { "surface": ["ところ", "所"], "pos": "名詞" },
+      { "baseForm": ["だ", "です"] }
+    ],
+    "examples": [
+      "これから出かけるところだ。",
+      "今ご飯を食べているところです。",
+      "ちょうど今帰ってきたところだ。",
+      "電話しようと思っていたところだった。"
+    ],
+    "counterExamples": [
+      "静かなところに住みたい。",
+      "今のところ大丈夫だ。",
+      "ところで、明日は暇？"
+    ]
+  },
+  {
+    "id": "ni-totte",
+    "pattern": "～にとって",
+    "level": "N3",
+    "meaning": "for ~ / from the standpoint of ~",
+    "explanation": "Marks the person or group from whose point of view a judgement is made, such as important, difficult or valuable. It is usually followed by an evaluation rather than an action.",
+    "steps": [
+      { "surface": "にとって", "pos": "助詞" }
+    ],
+    "examples": [
+      "私にとって家族は一番大切だ。",
+      "学生にとっては高すぎる。",
+      "子供にとっての幸せは何だろう。"
+    ],
+    "counterExamples": [
+      "本を手に取って読んだ。"
+    ]
+  },
+  {
+    "id": "okage-de",
+    "pattern": "～おかげで",
+    "level": "N3",
+    "meaning": "thanks to ~",
+    "explanation": "Credits a cause for a good result, often with gratitude. It follows a noun with の or a plain-form clause. Compare せいで, which blames a cause for a bad result.",
+    "steps": [
+      { "surface": ["おかげ", "お陰"], "pos": "名詞" },
+      { "anyOf": [
+        [ { "surface": "で" } ],
+        [ { "baseForm": ["だ", "です"] } ]
+      ] }
+    ],
+    "examples": [
+      "先生のおかげで合格できた。",
+      "薬を飲んだおかげで、よくなった。",
+      "成功したのはみんなのおかげです。"
+    ],
+    "counterExamples": [
+      "雨のせいで遅れた。"
+    ]
+  },
+  {
+    "id": "sei-de",
+    "pattern": "～せいで",
+    "level": "N3",
+    "meaning": "because of ~ (blame)",
+    "explanation": "Blames a cause for a bad result. せいか hedges: 'maybe because of ~'. It follows a noun with の or a plain-form clause. Compare おかげで for good results.",
+    "steps": [
+      { "surface": "せい", "pos": "名詞", "pos2": "非自立" },
+      { "anyOf": [
+        [ { "surface": "で" } ],
+        [ { "baseForm": ["だ", "です"] } ],
+        [ { "surface": "か", "pos": "助詞" } ]
+      ] }
+    ],
+    "examples": [
+      "雨のせいで試合が中止になった。",
+      "寝不足のせいか、頭が痛い。",
+      "私が遅れたのは電車のせいだ。",
+      "全部彼のせいです。"
+    ],
+    "counterExamples": [
+      "先生のおかげで合格できた。",
+      "先生に聞いた。"
+    ]
+  },
+  {
+    "id": "tame-ni",
+    "pattern": "～ために",
+    "level": "N3",
+    "meaning": "in order to ~ / for the sake of ~ / because of ~",
+    "explanation": "After a dictionary-form verb or noun + の, ために gives a purpose or beneficiary. In formal writing, especially news, ~のため often gives a reason instead: 事故のため ('due to an accident').",
+    "steps": [
+      { "surface": ["ため", "為"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": ["に", "の"], "pos": "助詞", "optional": true }
+    ],
+    "examples": [
+      "日本で働くために日本語を勉強している。",
+      "健康のために毎日歩く。",
+      "事故のため、電車が遅れています。",
+      "家族のための家を建てた。"
+    ],
+    "counterExamples": [
+      "ためになる話だった。",
+      "少しためらった。"
+    ]
+  },
+  {
+    "id": "tame-ni-naru",
+    "pattern": "～ためになる",
+    "level": "N3",
+    "meaning": "to be useful / to do someone good",
+    "explanation": "ためになる means something is beneficial or worth one's while, as in ためになる話 ('an instructive talk'). ～のためになる names who benefits. It looks like ために but expresses benefit, not purpose.",
+    "subsumes": ["tame-ni", "naru-change"],
+    "steps": [
+      { "surface": ["ため", "為"], "pos": "名詞" },
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": "なる", "pos": "動詞" }
+    ],
+    "examples": [
+      "ためになる話だった。",
+      "この本は学生のためになる。",
+      "それは君のためにならない。",
+      "先生の話はとてもためになりました。"
+    ],
+    "counterExamples": [
+      "日本で働くために日本語を勉強している。",
+      "勉強になる本だ。"
+    ]
+  },
+  {
+    "id": "rashii",
+    "pattern": "～らしい",
+    "level": "N3",
+    "meaning": "it seems ~ / I hear ~",
+    "explanation": "After a verb, an い-adjective, a past or negative form, or a な-adjective stem, らしい marks a conclusion drawn from something the speaker heard or noticed, so they aren't stating it as firsthand knowledge. It conjugates like an い-adjective. After a plain noun it can also mean 'typical of'; that case has its own entry.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞", "助動詞"] } ],
+        [ { "pos": "名詞", "pos2": "形容動詞語幹" } ]
+      ] },
+      { "baseForm": "らしい", "pos": "助動詞" }
+    ],
+    "examples": [
+      "明日は雨が降るらしい。",
+      "彼は結婚したらしいです。",
+      "あの店は有名らしいね。",
+      "田中さんは来ないらしかった。",
+      "今日は寒いらしい。",
+      "学生だったらしい。"
+    ],
+    "counterExamples": [
+      "男らしい人だ。",
+      "素晴らしい景色だ。",
+      "春らしい天気ですね。"
+    ]
+  },
+  {
+    "id": "rashii-noun",
+    "pattern": "～らしい (after a noun)",
+    "level": "N3",
+    "meaning": "seems to be ~, or typical of ~ (context decides)",
+    "explanation": "After a plain noun, らしい has two readings that look identical: 'it seems to be ~' (雨らしい, 'apparently it's rain') and 'typical of ~, befitting ~' (春らしい天気, 'weather typical of spring'). A noun right after it often points to the second reading, but only the context settles it, so this entry marks the form without choosing a meaning.",
+    "steps": [
+      { "pos": "名詞", "pos2": ["一般", "固有名詞", "代名詞", "サ変接続", "副詞可能"] },
+      { "baseForm": "らしい", "pos": "助動詞" }
+    ],
+    "examples": [
+      "春らしい天気ですね。",
+      "子供らしい笑顔だ。",
+      "あの人は学生らしい。",
+      "彼は医者らしいです。",
+      "どうやら風邪らしい。"
+    ],
+    "counterExamples": [
+      "明日は雨が降るらしい。",
+      "あの店は有名らしいね。",
+      "男らしい人だ。"
+    ]
+  },
+  {
+    "id": "ppoi",
+    "pattern": "～っぽい",
+    "level": "N3",
+    "meaning": "-ish / tends to ~ / looks like ~",
+    "explanation": "A casual suffix that turns a noun or verb stem into an い-adjective meaning 'having the feel of' (子供っぽい, 'childish') or 'tending to' (忘れっぽい, 'forgetful'). Some common words like 白っぽい are stored in the dictionary as single words.",
+    "steps": [
+      { "baseForm": ["っぽい", "忘れっぽい", "安っぽい", "黒っぽい", "白っぽい", "水っぽい", "熱っぽい"] }
+    ],
+    "examples": [
+      "彼は子供っぽい。",
+      "彼は怒りっぽい。",
+      "最近忘れっぽくなった。",
+      "この服は安っぽく見える。",
+      "黒っぽいかばんを買った。"
+    ],
+    "counterExamples": [
+      "箱は空っぽだ。"
+    ]
+  },
+  {
+    "id": "wari-ni",
+    "pattern": "～わりに",
+    "level": "N3",
+    "meaning": "considering ~ / for ~",
+    "explanation": "Says that a result is better or worse than you would expect given something. 値段のわりにおいしい means 'tasty for the price'. わりには adds emphasis.",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": "の", "pos": "助詞" } ],
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+        [ { "surface": "な", "baseForm": "だ" } ]
+      ] },
+      { "surface": ["わり", "割"], "pos": "名詞" },
+      { "surface": "に", "pos": "助詞" },
+      { "surface": "は", "pos": "助詞", "optional": true }
+    ],
+    "examples": [
+      "値段のわりにおいしい。",
+      "彼は年のわりには若く見える。",
+      "よく勉強したわりに点数が悪かった。",
+      "安い割に質がいい。"
+    ],
+    "counterExamples": [
+      "この仕事は割に合わない。"
+    ]
+  },
+  {
+    "id": "saichuu-ni",
+    "pattern": "～最中に",
+    "level": "N3",
+    "meaning": "right in the middle of ~",
+    "explanation": "Stresses that something happened at the peak of another activity, usually as an interruption. It follows a noun with の or a ている-form verb.",
+    "steps": [
+      { "surface": "最中", "pos": "名詞" },
+      { "anyOf": [
+        [ { "surface": "に", "pos": "助詞" } ],
+        [ { "baseForm": ["だ", "です"] } ]
+      ] }
+    ],
+    "examples": [
+      "食事の最中に電話が鳴った。",
+      "会議の最中です。",
+      "話している最中に寝てしまった。"
+    ],
+    "counterExamples": [
+      "最後に一つ質問がある。"
+    ]
+  },
+  {
+    "id": "you-da",
+    "pattern": "～ようだ",
+    "level": "N3",
+    "meaning": "it seems ~ / it looks like ~ / like ~",
+    "explanation": "ようだ gives the speaker's impression based on what they observe (疲れているようだ, 'he seems tired'). It is more formal than みたいだ. Before a noun it becomes ような. Comparisons with a noun and の (夢のような話) are covered by ～のような.",
+    "steps": [
+      { "surface": ["よう", "様"], "pos": "名詞", "pos2": "非自立" },
+      { "baseForm": ["だ", "です"] }
+    ],
+    "examples": [
+      "彼は疲れているようだ。",
+      "誰もいないようです。",
+      "外は寒いようです。",
+      "雨が降ったようだった。"
+    ],
+    "counterExamples": [
+      "鳥のように空を飛びたい。",
+      "日本語が話せるようになった。"
+    ]
+  },
+  {
+    "id": "ni-chigainai",
+    "pattern": "～に違いない",
+    "level": "N3",
+    "meaning": "must be ~ / no doubt ~",
+    "explanation": "Expresses a strong conviction reached by the speaker's own reasoning: 犯人に違いない ('he must be the culprit'). It is more certain than だろう and a little more formal than はずだ.",
+    "steps": [
+      { "surface": "に", "pos": "助詞" },
+      { "surface": ["違い", "ちがい"], "pos": "名詞" },
+      { "anyOf": [
+        [ { "baseForm": "ない" } ],
+        [ { "baseForm": "ある" }, { "baseForm": "ます" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "彼は犯人に違いない。",
+      "明日は雨が降るに違いありません。",
+      "あの店は高かったに違いない。"
+    ],
+    "counterExamples": [
+      "二人の意見には違いがある。"
+    ]
+  },
+  {
+    "id": "ni-kimatteiru",
+    "pattern": "～に決まっている",
+    "level": "N3",
+    "meaning": "it's bound to be ~ / of course ~",
+    "explanation": "States something the speaker is completely sure of, often with a dismissive or emotional tone: 嘘に決まっている ('that's obviously a lie'). In speech it shortens to に決まってる.",
+    "steps": [
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": ["決まる", "きまる"], "pos": "動詞" },
+      { "anyOf": [
+        [ { "surface": "て", "pos": "助詞" }, { "baseForm": ["いる", "ます", "た"] } ],
+        [ { "baseForm": "てる" } ]
+      ] }
+    ],
+    "examples": [
+      "それは嘘に決まっている。",
+      "彼が勝つに決まってます。",
+      "そんなの無理に決まってる。"
+    ],
+    "counterExamples": [
+      "会議の日はもう決まっている。"
+    ]
+  },
+  {
+    "id": "ni-tsuite",
+    "pattern": "～について",
+    "level": "N3",
+    "meaning": "about ~ / concerning ~",
+    "explanation": "Marks the topic that is being talked about, thought about or researched. についての modifies a noun (この問題についての意見).",
+    "steps": [
+      { "surface": ["について", "につき"], "pos": "助詞" }
+    ],
+    "examples": [
+      "日本の文化について話した。",
+      "この問題についての意見を聞きたい。",
+      "その件については後で説明します。"
+    ],
+    "counterExamples": [
+      "駅に着いて電話した。"
+    ]
+  },
+  {
+    "id": "ni-taishite",
+    "pattern": "～に対して",
+    "level": "N3",
+    "meaning": "toward ~ / in response to ~ / in contrast to ~",
+    "explanation": "Marks the person or thing an action or attitude is directed at (親に対する態度, 'attitude toward one's parents'), or sets up a contrast between two things. に対する modifies a noun.",
+    "steps": [
+      { "surface": ["に対して", "に対する", "に対し"], "pos": "助詞" }
+    ],
+    "examples": [
+      "質問に対して答えた。",
+      "親に対する態度が悪い。",
+      "兄が背が高いのに対して、弟は低い。"
+    ],
+    "counterExamples": [
+      "質問に答えた。"
+    ]
+  },
+  {
+    "id": "to-shite",
+    "pattern": "～として",
+    "level": "N3",
+    "meaning": "as ~ / in the role of ~",
+    "explanation": "After a noun, として names the role, status or capacity in which someone acts or something is treated: 留学生として ('as an exchange student'). としての modifies a noun.",
+    "steps": [
+      { "pos": "名詞" },
+      { "surface": "として", "pos": "助詞" }
+    ],
+    "examples": [
+      "留学生として日本に来た。",
+      "教師としての経験がある。",
+      "趣味として絵を描いています。"
+    ],
+    "counterExamples": [
+      "寝ようとしても眠れない。"
+    ]
+  },
+  {
+    "id": "ni-kanshite",
+    "pattern": "～に関して",
+    "level": "N3",
+    "meaning": "regarding ~ / in relation to ~",
+    "explanation": "A more formal and businesslike version of について, common in reports and announcements. に関する modifies a noun.",
+    "steps": [
+      { "surface": ["に関して", "に関する", "に関し"], "pos": "助詞" }
+    ],
+    "examples": [
+      "環境に関して調べています。",
+      "この件に関する質問はありますか。"
+    ],
+    "counterExamples": [
+      "日本の文化について話した。"
+    ]
+  },
+  {
+    "id": "ni-kurabete",
+    "pattern": "～に比べて",
+    "level": "N3",
+    "meaning": "compared to ~",
+    "explanation": "Sets up a comparison with the noun before it: 去年に比べて暑い ('hot compared to last year'). に比べると and the more formal に比べ are common variants.",
+    "subsumes": ["to-conditional"],
+    "steps": [
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": ["比べる", "くらべる"], "pos": "動詞" },
+      { "anyOf": [
+        [ { "surface": "て", "pos": "助詞" } ],
+        [ { "surface": "と", "pos": "助詞", "pos2": "接続助詞" } ]
+      ], "optional": true }
+    ],
+    "examples": [
+      "去年に比べて暑い。",
+      "東京に比べると静かだ。",
+      "兄に比べ、弟はよく話す。"
+    ],
+    "counterExamples": [
+      "二つの答えを比べてみた。"
+    ]
+  },
+  {
+    "id": "ni-shite-wa",
+    "pattern": "～にしては",
+    "level": "N3",
+    "meaning": "for ~ / considering it's ~",
+    "explanation": "Says that something is surprising given a known fact about it: 子供にしては上手だ ('good, for a child'). Unlike わりに, it usually follows a specific noun or situation.",
+    "steps": [
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": "する", "conjForm": "連用形" },
+      { "surface": "て", "pos": "助詞" },
+      { "surface": "は", "pos": "助詞" }
+    ],
+    "examples": [
+      "子供にしては上手だ。",
+      "初めてにしてはよくできました。"
+    ],
+    "counterExamples": [
+      "子供にしてあげた。"
+    ]
+  },
+  {
+    "id": "tabi-ni",
+    "pattern": "～たびに",
+    "level": "N3",
+    "meaning": "every time ~ / whenever ~",
+    "explanation": "After a dictionary-form verb or a noun with の, たびに says that the same result follows each time the action happens: 見るたびに思い出す ('it reminds me every time I see it').",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ]
+      ] },
+      { "surface": ["たび", "度"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": "に", "pos": "助詞", "optional": true }
+    ],
+    "examples": [
+      "この写真を見るたびに思い出す。",
+      "旅行のたびにお土産を買う。"
+    ],
+    "counterExamples": [
+      "一度会ったことがある。"
+    ]
+  },
+  {
+    "id": "uchi-ni",
+    "pattern": "～うちに",
+    "level": "N3",
+    "meaning": "while ~ / before ~ (changes)",
+    "explanation": "Marks a window of time in which to act before the situation changes: 若いうちに ('while you are young'), 暗くならないうちに ('before it gets dark'). After an ongoing action it can also mean that something happened unnoticed during it. A time word takes の (今日のうちに, 'by the end of today').",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ],
+        [ { "surface": "な", "baseForm": "だ" } ],
+        [ { "pos": "名詞", "pos2": "副詞可能" }, { "surface": "の", "pos": "助詞", "pos2": "連体化" } ],
+        [ { "surface": "日", "pos": "名詞" }, { "surface": "の", "pos": "助詞", "pos2": "連体化" } ]
+      ] },
+      { "surface": ["うち", "内"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": "に", "pos": "助詞" }
+    ],
+    "examples": [
+      "若いうちに勉強しなさい。",
+      "暗くならないうちに帰ろう。",
+      "熱いうちに食べてください。",
+      "元気なうちに旅行したい。",
+      "今日のうちに宿題を終わらせたい。"
+    ],
+    "counterExamples": [
+      "家のうちに入る。",
+      "私のうちに遊びに来てください。"
+    ]
+  },
+  {
+    "id": "zuni",
+    "pattern": "～ずに",
+    "level": "N3",
+    "meaning": "without ~ing",
+    "explanation": "The classical negative ず plus に means doing one thing without doing another: 食べずに出かけた ('went out without eating'). It is a slightly more formal way to say ないで. する becomes せずに.",
+    "subsumes": ["zu"],
+    "steps": [
+      { "baseForm": "ぬ", "conjForm": "連用ニ接続" },
+      { "surface": "に", "pos": "助詞" }
+    ],
+    "examples": [
+      "朝ご飯を食べずに出かけた。",
+      "何も言わずに帰った。",
+      "勉強せずに試験を受けた。"
+    ],
+    "counterExamples": [
+      "何も食べないで寝た。"
+    ]
+  },
+  {
+    "id": "totan",
+    "pattern": "～たとたん",
+    "level": "N3",
+    "meaning": "just as ~ / the moment ~",
+    "explanation": "After a past-form verb, とたん(に) says that something unexpected happened immediately after the first action: ドアを開けたとたん ('the moment I opened the door').",
+    "steps": [
+      { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" },
+      { "surface": ["とたん", "途端"], "pos": "名詞" },
+      { "surface": "に", "pos": "助詞", "optional": true }
+    ],
+    "examples": [
+      "ドアを開けたとたん、猫が飛び出した。",
+      "家に着いたとたんに雨が降り出した。"
+    ],
+    "counterExamples": [
+      "ドアを開けると、猫がいた。"
+    ]
+  },
+  {
+    "id": "beki",
+    "pattern": "～べきだ",
+    "level": "N3",
+    "meaning": "should ~ / ought to ~",
+    "explanation": "After a dictionary-form verb, べき states what is right or necessary as a general principle or strong advice. べきではない says something should not be done. する often becomes すべき.",
+    "steps": [
+      { "pos": "動詞" },
+      { "baseForm": "べし", "pos": "助動詞" }
+    ],
+    "examples": [
+      "もっと早く行くべきだ。",
+      "そんなことは言うべきではない。",
+      "約束は守るべきです。"
+    ],
+    "counterExamples": [
+      "もっと早く行ったほうがいい。"
+    ]
+  },
+  {
+    "id": "kke",
+    "pattern": "～っけ",
+    "level": "N3",
+    "meaning": "was it ~? (trying to recall)",
+    "explanation": "A casual sentence-final particle used when the speaker is trying to remember something, or checking something they think they once knew: 何だっけ ('what was it again?'). It usually follows だった, でした or だ.",
+    "steps": [
+      { "surface": "っけ", "pos": "助詞" }
+    ],
+    "examples": [
+      "あの人の名前は何だっけ。",
+      "明日は休みだったっけ？",
+      "試験は来週でしたっけ。"
+    ],
+    "counterExamples": [
+      "あの人の名前は何ですか。"
+    ]
+  },
+  {
+    "id": "nante",
+    "pattern": "～なんて",
+    "level": "N3",
+    "meaning": "things like ~ / to think that ~",
+    "explanation": "A casual particle that shows the speaker's feelings about something: dismissal (勉強なんて嫌いだ, 'I hate stuff like studying') or surprise (彼が来るなんて, 'to think he'd come').",
+    "steps": [
+      { "surface": "なんて", "pos": "助詞" }
+    ],
+    "examples": [
+      "勉強なんて嫌いだ。",
+      "彼が来るなんて思わなかった。"
+    ],
+    "counterExamples": [
+      "何と言いましたか。"
+    ]
+  },
+  {
+    "id": "gachi",
+    "pattern": "～がち",
+    "level": "N3",
+    "meaning": "tends to ~ / prone to ~",
+    "explanation": "Attached to a verb stem or a noun, がち says something happens often, usually something undesirable: 風邪をひきがち ('prone to catching colds'), 雨がちの天気 ('rainy weather').",
+    "steps": [
+      { "pos": ["動詞", "名詞"] },
+      { "surface": "がち", "pos": "名詞", "pos2": "接尾" }
+    ],
+    "examples": [
+      "冬は風邪をひきがちだ。",
+      "最近、雨がちの天気が続く。"
+    ],
+    "counterExamples": [
+      "雨が降りそうだ。"
+    ]
+  },
+  {
+    "id": "darake",
+    "pattern": "～だらけ",
+    "level": "N3",
+    "meaning": "full of ~ / covered in ~",
+    "explanation": "Attached to a noun, だらけ says something is covered in or full of it, almost always something unwelcome: ゴミだらけ ('full of rubbish'), 間違いだらけ ('riddled with mistakes').",
+    "steps": [
+      { "pos": "名詞" },
+      { "surface": "だらけ", "pos": "名詞", "pos2": "接尾" }
+    ],
+    "examples": [
+      "部屋はゴミだらけだ。",
+      "間違いだらけの答案。"
+    ],
+    "counterExamples": [
+      "部屋はきれいだ。"
+    ]
+  },
+  {
+    "id": "dasu",
+    "pattern": "～出す",
+    "level": "N3",
+    "meaning": "suddenly start ~ing",
+    "explanation": "A verb stem plus 出す (だす) says an action or a change starts suddenly: 泣き出す ('burst into tears'). Some common combinations, like 降り出す, are single words in the dictionary.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "連用形" }, { "baseForm": ["出す", "だす"], "pos": "動詞", "pos2": "非自立" } ],
+        [ { "baseForm": ["降り出す", "泣き出す", "笑い出す", "歩き出す", "走り出す"] } ]
+      ] }
+    ],
+    "examples": [
+      "急に雨が降り出した。",
+      "子供が泣き出しました。"
+    ],
+    "counterExamples": [
+      "手紙を出した。",
+      "猫が飛び出した。"
+    ]
+  },
+  {
+    "id": "you-to-suru",
+    "pattern": "～ようとする",
+    "level": "N3",
+    "meaning": "try to ~ / be about to ~",
+    "explanation": "The volitional form plus とする describes an attempt, often one that fails or is interrupted (寝ようとしても眠れない), or the moment just before an action (出ようとした時, 'just as I was about to leave').",
+    "subsumes": ["volitional"],
+    "steps": [
+      { "pos": "動詞", "conjForm": "未然ウ接続" },
+      { "baseForm": ["う", "よう"], "pos": "助動詞" },
+      { "anyOf": [
+        [ { "surface": "と", "pos": "助詞" }, { "baseForm": "する", "pos": "動詞" } ],
+        [ { "surface": "として", "pos": "助詞" } ]
+      ] }
+    ],
+    "examples": [
+      "家を出ようとした時、電話が鳴った。",
+      "寝ようとしても眠れない。"
+    ],
+    "counterExamples": [
+      "日本に行こうと思います。"
+    ]
+  },
+  {
+    "id": "koto-wa-nai",
+    "pattern": "～ことはない",
+    "level": "N3",
+    "meaning": "there's no need to ~",
+    "explanation": "After a dictionary-form verb, ことはない reassures someone that an action is unnecessary: 心配することはない ('there's no need to worry').",
+    "steps": [
+      { "pos": "動詞", "conjForm": "基本形" },
+      { "surface": ["こと", "事"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": "は", "pos": "助詞" },
+      { "anyOf": [
+        [ { "baseForm": "ない" } ],
+        [ { "baseForm": "ある" }, { "baseForm": "ます" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "心配することはない。",
+      "急ぐことはありません。"
+    ],
+    "counterExamples": [
+      "日本に行ったことはない。"
+    ]
+  },
+  {
+    "id": "tsuide-ni",
+    "pattern": "～ついでに",
+    "level": "N3",
+    "meaning": "while (doing ~ anyway)",
+    "explanation": "Says that a second action is done because the opportunity arises during the first: 買い物のついでに ('while I was out shopping anyway').",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+        [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ]
+      ] },
+      { "surface": "ついで", "pos": "名詞" },
+      { "surface": "に", "pos": "助詞" }
+    ],
+    "examples": [
+      "買い物のついでに銀行に寄った。",
+      "散歩するついでに手紙を出した。"
+    ],
+    "counterExamples": [
+      "ついでがあれば寄ってください。"
+    ]
+  },
+  {
+    "id": "kawari-ni",
+    "pattern": "～かわりに",
+    "level": "N3",
+    "meaning": "instead of ~ / in exchange for ~",
+    "explanation": "After a noun with の or a verb, かわりに (代わりに) says one thing replaces another (肉の代わりに魚, 'fish instead of meat'), or that one thing is given in return for another.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ]
+      ] },
+      { "surface": ["代わり", "かわり", "替わり"], "pos": "名詞" },
+      { "surface": "に", "pos": "助詞" }
+    ],
+    "examples": [
+      "父の代わりに会議に出た。",
+      "肉の代わりに魚を食べる。",
+      "手伝うかわりに、ご飯をおごってね。"
+    ],
+    "counterExamples": [
+      "ご飯のお代わりをください。"
+    ]
+  },
+  {
+    "id": "kesshite-nai",
+    "pattern": "決して～ない",
+    "level": "N3",
+    "meaning": "never ~ / by no means ~",
+    "explanation": "決して gives a negative statement or a prohibition strong, rather formal emphasis: 決して忘れない is 'I will never forget' and 決して触るな is 'never touch it'. It only goes with negatives, never with a plain positive statement.",
+    "steps": [
+      { "surface": ["決して", "けっして"], "pos": "副詞" },
+      { "gap": 6 },
+      { "anyOf": [
+        [ { "baseForm": ["ない", "ぬ", "ん"], "pos": ["助動詞", "形容詞"] } ],
+        [ { "baseForm": "ます", "pos": "助動詞" }, { "surface": "ん" } ],
+        [ { "pos": "動詞", "conjForm": "基本形" }, { "surface": "な", "pos2": "終助詞" } ]
+      ] }
+    ],
+    "examples": [
+      "決して忘れない。",
+      "決してあきらめません。",
+      "決してそんなことはありません。",
+      "彼は決して嘘をつかなかった。",
+      "このことは決して誰にも言うな。",
+      "決して忘れず、毎日練習した。"
+    ],
+    "counterExamples": [
+      "意を決して話した。",
+      "決して、と彼は言った。"
+    ]
+  },
+  {
+    "id": "mo-ba-mo",
+    "pattern": "～も～ば～も",
+    "level": "N3",
+    "meaning": "both ~ and ~ / ~, and ~ as well",
+    "explanation": "Sets two similar points side by side, the first ending in a ば conditional form: 味もよければ値段も安い means 'the food is good, and it's cheap as well'. The two points usually push in the same direction, both good or both bad.",
+    "subsumes": ["ba-conditional"],
+    "steps": [
+      { "surface": "も", "pos": "助詞", "pos2": "係助詞" },
+      { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": "仮定形" },
+      { "surface": "ば", "pos": "助詞" },
+      { "pos2": "読点", "optional": true },
+      { "gap": 2 },
+      { "pos": "名詞" },
+      { "surface": "も", "pos": "助詞", "pos2": "係助詞" }
+    ],
+    "examples": [
+      "お金もあれば時間もある。",
+      "彼は頭もよければ顔もいい。",
+      "歌も歌えば、踊りも踊る。",
+      "雨も降れば風も吹く。",
+      "お金もなければ時間もない。",
+      "このレストランは味もよければ値段も安いです。"
+    ],
+    "counterExamples": [
+      "雨が降れば、試合も中止になる。",
+      "私もお金があれば旅行したい。",
+      "お金もあれば行ってもいい。"
+    ]
+  },
+  {
+    "id": "sae-ba",
+    "pattern": "～さえ～ば",
+    "level": "N3",
+    "meaning": "as long as ~ / if only ~",
+    "explanation": "さえ followed by a ば or たら condition says that this single condition is all it takes: お金さえあれば means 'as long as I have money'. After a verb stem the form is 飲みさえすれば. Without a condition after it, さえ means 'even' (子供でさえ分かる), which is a different use.",
+    "subsumes": ["ba-conditional", "tara", "sae"],
+    "steps": [
+      { "surface": "さえ", "pos": "助詞" },
+      { "gap": 3 },
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": "仮定形" }, { "surface": "ば", "pos": "助詞" } ],
+        [ { "baseForm": "た", "conjType": "特殊・タ", "conjForm": "仮定形" } ]
+      ] }
+    ],
+    "examples": [
+      "お金さえあれば、何でもできる。",
+      "薬を飲みさえすれば治る。",
+      "あなたさえよければ、一緒に行きましょう。",
+      "これさえ覚えておけば大丈夫だ。",
+      "天気さえよかったら、出かけたのに。",
+      "雨さえ降らなければ、試合はできる。"
+    ],
+    "counterExamples": [
+      "子供でさえ分かる。",
+      "彼は漢字さえ書けない。",
+      "水さえ飲めなかったので、休めば治ると思った。"
+    ]
+  },
+  {
+    "id": "totemo-nai",
+    "pattern": "とても～ない",
+    "level": "N3",
+    "meaning": "can't possibly ~",
+    "explanation": "With a negative potential verb, とても (or the more formal 到底) means 'no matter how you try': こんなにたくさんはとても食べられない is 'there's no way I can eat this much'. With an ordinary positive word, とても just means 'very'.",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": "とても", "pos": "副詞" }, { "gap": 4 }, { "anyOf": [
+          [ { "baseForm": ["られる", "れる"], "pos": "動詞", "pos2": "接尾" } ],
+          [ { "baseForm": ["できる", "出来る"], "pos": "動詞" } ],
+          [ { "pos": "動詞", "conjType": "一段" } ]
+        ] }, { "anyOf": [
+          [ { "baseForm": "ない", "pos": "助動詞" } ],
+          [ { "baseForm": "ます", "pos": "助動詞" }, { "surface": "ん" } ]
+        ] } ],
+        [ { "surface": ["とうてい", "到底"], "pos": "副詞" }, { "gap": 4 }, { "anyOf": [
+          [ { "baseForm": ["ない", "ぬ", "ん"], "pos": ["助動詞", "形容詞"] } ],
+          [ { "baseForm": "ます", "pos": "助動詞" }, { "surface": "ん" } ]
+        ] } ]
+      ] }
+    ],
+    "examples": [
+      "こんなにたくさんはとても食べられない。",
+      "一人ではとても持てない。",
+      "そんなことはとても言えません。",
+      "とても信じられなかった。",
+      "とうてい間に合わない。"
+    ],
+    "counterExamples": [
+      "とても行きたくない。",
+      "とても楽しかった。"
+    ]
+  },
+  {
+    "id": "te-hajimete",
+    "pattern": "～て初めて",
+    "level": "N3",
+    "meaning": "only after ~ (did I finally ...)",
+    "explanation": "The て-form plus 初めて says that a realisation or change only came once something had happened: 病気になって初めて健康の大切さが分かった is 'it was only when I got ill that I understood how important health is'.",
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "surface": ["初めて", "はじめて"] }
+    ],
+    "examples": [
+      "病気になって初めて健康の大切さが分かった。",
+      "親になって初めて親の気持ちが分かる。",
+      "実際に使ってみて初めて便利さに気づいた。"
+    ],
+    "counterExamples": [
+      "初めて日本に来た。",
+      "これを見るのは初めてです。"
+    ]
+  },
+  {
+    "id": "de-yuumei",
+    "pattern": "～で有名",
+    "level": "N3",
+    "meaning": "famous for ~",
+    "explanation": "で marks what something is known for: 京都はお寺で有名だ is 'Kyoto is famous for its temples'. A whole clause can come before it with こと (歌がうまいことで有名).",
+    "steps": [
+      { "surface": "で", "pos": "助詞", "pos2": "格助詞" },
+      { "surface": "有名" }
+    ],
+    "examples": [
+      "京都はお寺で有名だ。",
+      "この町は温泉で有名です。",
+      "彼女は歌がうまいことで有名だった。"
+    ],
+    "counterExamples": [
+      "有名な歌手に会った。",
+      "東京はとても有名です。"
+    ]
+  },
+  {
+    "id": "wo-hajime",
+    "pattern": "～をはじめ",
+    "level": "N3",
+    "meaning": "starting with ~ / including ~",
+    "explanation": "Names the leading example of a group before mentioning the rest: 東京をはじめ、大阪や京都にも店がある is 'there are shops in Tokyo, and in Osaka and Kyoto too'. をはじめとして is a more formal version.",
+    "subsumes": ["to-shite"],
+    "steps": [
+      { "surface": "を", "pos": "助詞" },
+      { "anyOf": [
+        [ { "surface": ["はじめ", "始め"], "pos": "名詞" }, { "surface": "として", "optional": true } ],
+        [ { "surface": "始め", "pos": "動詞" }, { "surface": "として" } ]
+      ] }
+    ],
+    "examples": [
+      "東京をはじめ、大阪や京都にも店がある。",
+      "社長をはじめとして、社員全員が参加した。",
+      "日本をはじめ多くの国で人気がある。",
+      "校長先生を始めとして、先生たちが集まった。"
+    ],
+    "counterExamples": [
+      "来月から日本語の勉強を始めます。",
+      "仕事を始めた。"
+    ]
+  },
+  {
+    "id": "teki",
+    "pattern": "～的",
+    "level": "N3",
+    "meaning": "-ic / -al / in a ~ way",
+    "explanation": "The suffix 的 turns a noun into a な-adjective, much like English -ic or -al: 経済的 is 'economic' and 個人的に is 'personally'. It takes な before a noun and に before a verb.",
+    "steps": [
+      { "pos": "名詞" },
+      { "surface": "的", "pos": "名詞", "pos2": "接尾" },
+      { "anyOf": [
+        [ { "surface": "な", "baseForm": "だ" } ],
+        [ { "surface": "に", "pos": "助詞" } ]
+      ], "optional": true }
+    ],
+    "examples": [
+      "経済的な理由で諦めた。",
+      "これは日本的な考え方だ。",
+      "科学的に説明できる。",
+      "個人的には賛成です。"
+    ],
+    "counterExamples": [
+      "矢が的に当たった。",
+      "旅行の目的は何ですか。"
+    ]
+  },
+  {
+    "id": "kurai",
+    "pattern": "～くらい / ～ぐらい (extent)",
+    "level": "N3",
+    "meaning": "so ~ that ... / to the extent of ~ / as ~ as",
+    "explanation": "くらい (or ぐらい) after a verb or adjective shows how far something goes by comparing it with an extreme: 泣きたいくらい痛かった is 'it hurt so much I wanted to cry'. After a noun it means 'as ~ as' (彼くらい背が高い人) or 'at least this much' (これくらい). After a number it only means 'about', which this pattern leaves out.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["ない", "たい", "ぬ"], "pos": "助動詞", "conjForm": "基本形" } ],
+        [ { "pos": "名詞", "pos2": ["一般", "固有名詞", "代名詞"] } ]
+      ] },
+      { "surface": ["くらい", "ぐらい"], "pos": "助詞" }
+    ],
+    "examples": [
+      "泣きたいくらい痛かった。",
+      "信じられないくらいおいしい。",
+      "彼くらい背が高い人はいない。",
+      "これくらいなら自分でできる。",
+      "死ぬぐらい疲れた。"
+    ],
+    "counterExamples": [
+      "十分ぐらい待ってください。",
+      "三時間くらいかかります。"
+    ]
+  },
+  {
+    "id": "hodo-extent",
+    "pattern": "～ほど (extent)",
+    "level": "N3",
+    "meaning": "so ~ that ... / to the point of ~",
+    "explanation": "ほど after a verb or adjective measures a degree by comparing it with an extreme result: 死ぬほど疲れた is 'I was tired enough to die', i.e. 'dead tired'. It is a little more formal than くらい.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["ない", "たい", "ぬ"], "pos": "助動詞", "conjForm": "基本形" } ]
+      ] },
+      { "surface": "ほど", "pos": "助詞" }
+    ],
+    "examples": [
+      "死ぬほど疲れた。",
+      "泣きたいほど嬉しかった。",
+      "驚くほど安い。",
+      "歩けないほど足が痛い。"
+    ],
+    "counterExamples": [
+      "山ほど宿題がある。",
+      "三日ほど休んだ。",
+      "考えれば考えるほど分からなくなる。"
+    ]
+  },
+  {
+    "id": "mama",
+    "pattern": "～まま",
+    "level": "N3",
+    "meaning": "as it is / leaving ~ unchanged",
+    "explanation": "まま describes a state that stays the same while something else happens: 電気をつけたまま寝た is 'I slept with the light left on'. It follows the た-form, the ない-form, a noun with の, or a な-adjective with な; そのまま means 'as it is'.",
+    "steps": [
+      { "anyOf": [
+        [ { "anyOf": [
+          [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+          [ { "baseForm": "ない", "conjForm": "基本形" } ],
+          [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ],
+          [ { "surface": "な", "baseForm": "だ", "conjForm": "体言接続" } ]
+        ] }, { "surface": ["まま", "儘"], "pos": "名詞", "pos2": "非自立" } ],
+        [ { "surface": ["そのまま", "このまま", "あのまま"] } ]
+      ] }
+    ],
+    "examples": [
+      "電気をつけたまま寝てしまった。",
+      "靴のまま部屋に入らないでください。",
+      "そのままにしておいてください。",
+      "この町は昔のままだ。",
+      "窓を開けないままで出かけた。"
+    ],
+    "counterExamples": [
+      "彼はわがままだ。",
+      "ママと買い物に行った。"
+    ]
+  },
+  {
+    "id": "to-shitara",
+    "pattern": "～としたら / ～とすれば",
+    "level": "N3",
+    "meaning": "supposing that ~ / if we assume ~",
+    "explanation": "と plus a conditional form of する ('if we take it that ~') sets up a hypothesis to reason from: 宝くじが当たったとしたら、何をしますか is 'supposing you won the lottery, what would you do?'. とすれば and とすると work the same way.",
+    "subsumes": ["tara", "ba-conditional", "to-conditional"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["た", "だ"], "conjType": ["特殊・タ", "特殊・ダ"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["ない", "たい"], "pos": "助動詞", "conjForm": "基本形" } ]
+      ] },
+      { "surface": "と", "pos": "助詞" },
+      { "anyOf": [
+        [ { "baseForm": "する", "conjForm": "連用形" }, { "surface": "たら" } ],
+        [ { "baseForm": "する", "conjForm": "仮定形" }, { "surface": "ば" } ],
+        [ { "baseForm": "する", "conjForm": "基本形" }, { "surface": "と", "pos2": "接続助詞" } ]
+      ] }
+    ],
+    "examples": [
+      "もし宝くじが当たったとしたら、何をしますか。",
+      "日本に住むとしたら、どこがいいですか。",
+      "それが本当だとすれば、大変なことだ。",
+      "行けないとすると、誰が行くのか。"
+    ],
+    "counterExamples": [
+      "勉強しようとしたら、電話が鳴った。",
+      "家に着いたら電話する。"
+    ]
+  },
+  {
+    "id": "tate",
+    "pattern": "～たて",
+    "level": "N3",
+    "meaning": "freshly ~ / just ~",
+    "explanation": "The verb stem plus たて describes something that has only just been made or done: 焼きたてのパン is 'freshly baked bread'. Many common combinations are listed in the dictionary as single words (洗いたて, 生まれたて).",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "名詞"] }, { "surface": "たて", "pos": "名詞", "pos2": "接尾" } ],
+        [ { "surface": ["洗いたて", "生まれたて", "炊きたて", "揚げたて", "作りたて", "塗りたて"] } ]
+      ] }
+    ],
+    "examples": [
+      "焼きたてのパンはおいしい。",
+      "このシャツは洗いたてです。",
+      "生まれたての赤ちゃんを見た。",
+      "炊きたてのご飯が好きだ。"
+    ],
+    "counterExamples": [
+      "紙をたてに切る。",
+      "古い建物を見た。"
+    ]
+  },
+  {
+    "id": "kiri",
+    "pattern": "～きり / ～っきり",
+    "level": "N3",
+    "meaning": "only ~ / since ~ (and nothing after)",
+    "explanation": "After a number, きり means 'only' (二人きり, 'just the two of us'). After a た-form or それ it means that something happened and then nothing more followed: 出かけたきり帰ってこない is 'he went out and never came back'. Casual speech says っきり.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "名詞", "pos2": "接尾" } ],
+        [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+        [ { "pos": "名詞", "pos2": "代名詞" } ]
+      ] },
+      { "surface": ["きり", "っきり", "切り"], "pos": "名詞", "pos2": "非自立" }
+    ],
+    "examples": [
+      "二人きりで話したい。",
+      "彼は朝出かけたきり、まだ帰ってこない。",
+      "それっきり会っていない。",
+      "チャンスは一度きりだ。"
+    ],
+    "counterExamples": [
+      "話し出したらきりがない。",
+      "霧で何も見えない。"
+    ]
+  },
+  {
+    "id": "furi",
+    "pattern": "～ふりをする",
+    "level": "N3",
+    "meaning": "pretend to ~ / act as if ~",
+    "explanation": "ふり is an outward show, so ふりをする means pretending: 知らないふりをした is 'he pretended not to know'. It follows verbs and adjectives directly, nouns with の and な-adjectives with な.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ],
+        [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ],
+        [ { "surface": "な", "baseForm": "だ", "conjForm": "体言接続" } ]
+      ] },
+      { "surface": ["ふり", "振り"], "pos": "名詞" },
+      { "surface": "を", "pos": "助詞" },
+      { "baseForm": "する", "pos": "動詞" }
+    ],
+    "examples": [
+      "彼は知らないふりをした。",
+      "寝たふりをしていた。",
+      "学生のふりをして入った。",
+      "元気なふりをしています。"
+    ],
+    "counterExamples": [
+      "手を振りながら別れた。",
+      "久しぶりに友達に会った。"
+    ]
+  },
+  {
+    "id": "mai",
+    "pattern": "～まい",
+    "level": "N3",
+    "meaning": "will not ~ / probably won't ~",
+    "explanation": "まい is a written-style negative volitional: after a dictionary-form verb it expresses a firm resolve not to do something (二度と行くまい, 'I'll never go again') or a guess that something won't happen (彼はもう来るまい).",
+    "steps": [
+      { "pos": "動詞" },
+      { "baseForm": "まい", "pos": "助動詞" }
+    ],
+    "examples": [
+      "もう二度とあの店には行くまい。",
+      "彼はもう来るまい。",
+      "失敗はするまいと決めた。"
+    ],
+    "counterExamples": [
+      "あいまいな答えだ。",
+      "住まいを探している。"
+    ]
+  },
+  {
+    "id": "sae",
+    "pattern": "～さえ",
+    "level": "N3",
+    "meaning": "even ~",
+    "explanation": "さえ marks an extreme case to show how far something goes: 子供でさえ分かる is 'even a child understands it'. It often comes with a negative (寝る時間さえない, 'I don't even have time to sleep'). With a ば condition after it, see ～さえ～ば.",
+    "steps": [
+      { "surface": "さえ", "pos": "助詞" }
+    ],
+    "examples": [
+      "子供でさえ分かる。",
+      "忙しくて、寝る時間さえない。",
+      "名前さえ知らなかった。",
+      "彼は漢字さえ書けない。"
+    ],
+    "counterExamples": [
+      "冴えない顔をしている。",
+      "さえない顔をしている。"
+    ]
+  },
+  {
+    "id": "nakanaka-nai",
+    "pattern": "なかなか～ない",
+    "level": "N3",
+    "meaning": "not easily ~ / just won't ~",
+    "explanation": "なかなか with a negative says that something takes a long time or won't happen despite effort: バスがなかなか来ない is 'the bus just isn't coming'. With a positive word, なかなか means 'quite' (なかなかおいしい).",
+    "steps": [
+      { "surface": ["なかなか", "中々"], "pos": "副詞" },
+      { "gap": 5 },
+      { "anyOf": [
+        [ { "baseForm": ["ない", "ぬ", "ん"], "pos": ["助動詞", "形容詞"] } ],
+        [ { "baseForm": "ます", "pos": "助動詞" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "バスがなかなか来ない。",
+      "漢字がなかなか覚えられません。",
+      "この問題はなかなか解けなかった。",
+      "なかなか寝られない。"
+    ],
+    "counterExamples": [
+      "この料理はなかなかおいしい。",
+      "彼はなかなかの人物だ。"
+    ]
+  },
+  {
+    "id": "zu",
+    "pattern": "～ず",
+    "level": "N3",
+    "meaning": "without ~ / not ~ (and)",
+    "explanation": "ず is the written negative that links clauses: 何も言わず、部屋を出た is 'he left the room without saying anything'. It attaches to the ない-stem (行かず), and する becomes せず.",
+    "steps": [
+      { "baseForm": "ぬ", "conjForm": "連用ニ接続" }
+    ],
+    "examples": [
+      "何も言わず、部屋を出た。",
+      "電話もせず遊びに行った。",
+      "答えが分からず困っている。"
+    ],
+    "counterExamples": [
+      "必ず来てください。",
+      "思わず笑ってしまった。"
+    ]
+  },
+  {
+    "id": "you-ni",
+    "pattern": "～ように",
+    "level": "N3",
+    "meaning": "so that ~ / in order that ~",
+    "explanation": "ように after a plain verb (often a potential or negative one) states the goal an action aims at: 聞こえるように大きな声で話す is 'speak loudly so that people can hear'. With 言う or 頼む it reports a request (やめるように言われた, 'I was told to stop').",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ]
+      ] },
+      { "surface": "よう", "pos": "名詞", "pos2": "非自立" },
+      { "surface": "に", "pos": "助詞" }
+    ],
+    "examples": [
+      "後ろの人にも聞こえるように、大きな声で話してください。",
+      "風邪をひかないように、気をつけて。",
+      "医者にたばこをやめるように言われた。",
+      "忘れないようにメモしておく。"
+    ],
+    "counterExamples": [
+      "鳥のように飛びたい。",
+      "毎日運動するようにしている。"
+    ]
+  },
+  {
+    "id": "koso",
+    "pattern": "～こそ",
+    "level": "N3",
+    "meaning": "~ is precisely the one / especially ~",
+    "explanation": "こそ puts strong emphasis on the word before it, singling it out: 今度こそ合格したい is 'this time, for sure, I want to pass'. こちらこそ answers a thank-you or greeting ('no, I'm the one who should say that'), and からこそ means 'precisely because'.",
+    "steps": [
+      { "surface": "こそ", "pos": "助詞" }
+    ],
+    "examples": [
+      "こちらこそ、よろしくお願いします。",
+      "今度こそ合格したい。",
+      "忙しいからこそ、休みが大切だ。",
+      "これこそ私が探していた本だ。"
+    ],
+    "counterExamples": [
+      "こっそり部屋を出た。"
+    ]
+  },
+  {
+    "id": "ni-kagiru",
+    "pattern": "～に限る",
+    "level": "N3",
+    "meaning": "~ is the best (thing to do)",
+    "explanation": "に限る after a noun or a dictionary-form verb states the speaker's view that something is the best choice in a situation: 暑い日は冷たいビールに限る is 'on a hot day, nothing beats a cold beer'.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "pos": "名詞", "pos2": ["一般", "固有名詞", "代名詞", "サ変接続"] } ]
+      ] },
+      { "surface": "に", "pos": "助詞" },
+      { "anyOf": [
+        [ { "baseForm": "限る", "conjForm": "基本形" } ],
+        [ { "baseForm": "限る", "conjForm": "連用形" }, { "baseForm": "ます", "conjForm": "基本形" } ]
+      ] }
+    ],
+    "examples": [
+      "暑い日は冷たいビールに限る。",
+      "疲れた時は寝るに限ります。",
+      "風邪の時は休むに限る。"
+    ],
+    "counterExamples": [
+      "この店は日本人に限らず、外国人にも人気がある。",
+      "急いでいる時に限って、電車が遅れる。",
+      "定員は二十人に限る。"
+    ]
+  },
+  {
+    "id": "to-tomo-ni",
+    "pattern": "～とともに",
+    "level": "N3",
+    "meaning": "together with ~ / as ~ (so too ...)",
+    "explanation": "After a noun, とともに means 'together with' (家族とともに, 'with my family'). After a verb it says that one change goes along with another (年をとるとともに体力が落ちる, 'as you get older, your strength declines').",
+    "steps": [
+      { "surface": ["とともに", "と共に"], "pos": "助詞" }
+    ],
+    "examples": [
+      "家族とともに日本に来た。",
+      "年をとるとともに、体力が落ちる。",
+      "友人と共に会社を作った。"
+    ],
+    "counterExamples": [
+      "私たちは共に働いている。"
+    ]
+  },
+  {
+    "id": "ni-suginai",
+    "pattern": "～にすぎない",
+    "level": "N3",
+    "meaning": "is nothing more than ~ / merely ~",
+    "explanation": "にすぎない plays something down to 'only that much': それは言い訳にすぎない is 'that's nothing but an excuse'. The polite form is にすぎません.",
+    "steps": [
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": ["すぎる", "過ぎる"], "pos": "動詞", "pos2": "自立" },
+      { "anyOf": [
+        [ { "baseForm": "ない", "pos": "助動詞" } ],
+        [ { "baseForm": "ます", "pos": "助動詞" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "それは言い訳にすぎない。",
+      "私はただの学生に過ぎません。",
+      "これは一つの例にすぎなかった。"
+    ],
+    "counterExamples": [
+      "食べすぎないでください。",
+      "時間が過ぎた。"
+    ]
+  },
+  {
+    "id": "ni-oite",
+    "pattern": "～において / ～における",
+    "level": "N3",
+    "meaning": "in ~ / at ~ (formal)",
+    "explanation": "A formal way to mark the place, time or field where something happens, used in writing and speeches: 会議は東京において行われる is 'the meeting will be held in Tokyo'. における comes before a noun (日本における教育, 'education in Japan').",
+    "steps": [
+      { "surface": ["において", "における", "に於いて", "に於ける"], "pos": "助詞" }
+    ],
+    "examples": [
+      "会議は東京において行われる。",
+      "この分野においては、彼が一番だ。",
+      "日本における教育について調べた。"
+    ],
+    "counterExamples": [
+      "ここにおいておいて。",
+      "机の上に本を置いてください。"
+    ]
+  },
+  {
+    "id": "ge",
+    "pattern": "～げ",
+    "level": "N3",
+    "meaning": "looking ~ / with an air of ~",
+    "explanation": "げ attaches to the stem of a feeling adjective or noun to describe how someone appears from the outside: 寂しげな顔 is 'a lonely-looking face' and 楽しげに遊ぶ is 'play happily'. It behaves like a な-adjective.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["形容詞", "名詞", "動詞"] }, { "surface": "げ", "pos": "名詞", "pos2": "接尾" } ],
+        [ { "surface": ["寂しげ", "得意げ", "自慢げ"] } ],
+        [ { "pos": "動詞", "conjForm": "連用形" }, { "surface": "たげ" } ]
+      ] }
+    ],
+    "followedBy": [
+      { "baseForm": ["だ", "です"] },
+      { "surface": "に", "pos": "助詞" }
+    ],
+    "examples": [
+      "彼女は寂しげな顔をしていた。",
+      "子供たちが楽しげに遊んでいる。",
+      "彼は何か言いたげだった。",
+      "彼は得意げに話した。"
+    ],
+    "counterExamples": [
+      "教えたげるよ。",
+      "手を上げてください。"
+    ]
+  },
+  {
+    "id": "shika-nai-choice",
+    "pattern": "～しかない",
+    "level": "N3",
+    "meaning": "have no choice but to ~",
+    "explanation": "A dictionary-form verb plus しかない says that this is the only option left: 歩くしかない is 'there's nothing for it but to walk'. The polite form is しかありません.",
+    "subsumes": ["shika-nai"],
+    "steps": [
+      { "pos": "動詞", "conjForm": "基本形" },
+      { "surface": "しか", "pos": "助詞" },
+      { "anyOf": [
+        [ { "baseForm": "ない" } ],
+        [ { "baseForm": "ある" }, { "baseForm": "ます" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "電車がないから、歩くしかない。",
+      "ここまで来たら、やるしかない。",
+      "待つしかありません。",
+      "諦めるしかなかった。"
+    ],
+    "counterExamples": [
+      "肉しか食べない。",
+      "これしかない。"
+    ]
+  },
+  {
+    "id": "ni-tsurete",
+    "pattern": "～につれて",
+    "level": "N3",
+    "meaning": "as ~ (gradually changes), ...",
+    "explanation": "につれて links two gradual changes, the second following from the first: 時間がたつにつれて、痛みが消えた is 'as time went by, the pain went away'. につれ is a more written version.",
+    "steps": [
+      { "surface": ["につれて", "につれ"], "pos": "助詞" }
+    ],
+    "examples": [
+      "時間がたつにつれて、痛みが消えた。",
+      "年をとるにつれ、体が弱くなる。",
+      "日本語が上手になるにつれて、仕事が楽しくなった。"
+    ],
+    "counterExamples": [
+      "子供をつれていく。",
+      "犬を連れて散歩した。"
+    ]
+  },
+  {
+    "id": "ni-shitagatte",
+    "pattern": "～にしたがって",
+    "level": "N3",
+    "meaning": "as ~ / in accordance with ~",
+    "explanation": "After a verb, にしたがって (に従って) says that one change follows another (時代が変わるにしたがって, 'as the times change'). After a noun it means 'following, in line with' (説明書に従って, 'following the instructions').",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": ["に従って", "に従い", "にしたがって"], "pos": "助詞" } ],
+        [ { "surface": "に", "pos": "助詞" }, { "baseForm": ["従う", "したがう"], "conjForm": "連用タ接続" }, { "surface": "て" } ],
+        [ { "surface": "に", "pos": "助詞" }, { "baseForm": ["従う", "したがう"], "conjForm": "連用形" } ]
+      ] }
+    ],
+    "examples": [
+      "時代が変わるにしたがって、言葉も変わる。",
+      "説明書に従って組み立てた。",
+      "上に行くに従い、寒くなる。"
+    ],
+    "counterExamples": [
+      "彼は親の意見に従わなかった。",
+      "命令に従った。"
+    ]
+  },
+  {
+    "id": "wake-ni-wa-ikanai",
+    "pattern": "～わけにはいかない",
+    "level": "N3",
+    "meaning": "can't very well ~ / mustn't ~",
+    "explanation": "Says that something is impossible not physically but because of duty, circumstances or what others would think: 明日は試験だから、休むわけにはいかない is 'I have an exam tomorrow, so I can't afford to take the day off'. After a negative (行かないわけにはいかない) it means 'have to'.",
+    "steps": [
+      { "surface": ["わけ", "訳"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": "に", "pos": "助詞" },
+      { "surface": "は", "pos": "助詞" },
+      { "baseForm": ["いく", "行く"], "pos": "動詞" },
+      { "anyOf": [
+        [ { "baseForm": "ない", "pos": "助動詞" } ],
+        [ { "baseForm": "ます", "pos": "助動詞" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "明日は試験だから、休むわけにはいかない。",
+      "約束したので、行かないわけにはいきません。",
+      "高すぎて、買うわけにはいかなかった。"
+    ],
+    "counterExamples": [
+      "そんなわけがない。",
+      "わけを聞いてもいいですか。"
+    ]
+  },
+  {
+    "id": "te-tamaranai",
+    "pattern": "～てたまらない / ～てしかたがない",
+    "level": "N3",
+    "meaning": "unbearably ~ / so ~ I can't stand it",
+    "explanation": "The て-form of a feeling or sensation followed by たまらない, しかたがない or しょうがない says the feeling is too strong to hold back: 嬉しくてたまらない is 'I'm so happy I can hardly contain it' and 眠くてしょうがない is 'I'm terribly sleepy'.",
+    "subsumes": ["deshou"],
+    "steps": [
+      { "anyOf": [
+        [ { "surface": ["て", "で"], "pos": ["助詞", "助動詞"] }, { "anyOf": [
+          [ { "baseForm": "たまらない" } ],
+          [ { "baseForm": "たまる" }, { "baseForm": "ます" }, { "surface": "ん" } ],
+          [ { "surface": ["仕方", "しかた", "しよう"] }, { "surface": "が" }, { "baseForm": "ない" } ],
+          [ { "surface": ["仕方", "しかた"] }, { "surface": "が" }, { "baseForm": "ある" }, { "baseForm": "ます" }, { "surface": "ん" } ],
+          [ { "surface": "しょうが" }, { "baseForm": "ない" } ]
+        ] } ],
+        [ { "surface": "でしょ" }, { "surface": "う" }, { "surface": "が" }, { "baseForm": "ない" } ]
+      ] }
+    ],
+    "examples": [
+      "試験に合格して、嬉しくてたまらない。",
+      "暑くてたまりません。",
+      "眠くて仕方がない。",
+      "毎日暇でしょうがない。",
+      "眠くてしょうがない。",
+      "暇で仕方がない。"
+    ],
+    "counterExamples": [
+      "仕方がないね。",
+      "雨でしょうが、行きます。"
+    ]
+  },
+  {
+    "id": "kuse-ni",
+    "pattern": "～くせに",
+    "level": "N3",
+    "meaning": "even though ~ (with criticism)",
+    "explanation": "Like のに, but with a clear note of blame or contempt toward the person: 知っているくせに教えてくれない is 'he knows, yet he won't tell me'. Nouns take の (子供のくせに) and な-adjectives take な.",
+    "steps": [
+      { "surface": ["くせ", "癖"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": "に", "pos": "助詞" }
+    ],
+    "examples": [
+      "知っているくせに、教えてくれない。",
+      "子供のくせに生意気だ。",
+      "下手なくせに、よく歌う。"
+    ],
+    "counterExamples": [
+      "爪をかむ癖がある。",
+      "変なくせがついた。"
+    ]
+  },
+  {
+    "id": "tatoe-temo",
+    "pattern": "たとえ～ても",
+    "level": "N3",
+    "meaning": "even if ~",
+    "explanation": "たとえ announces a hypothetical concession that is completed by ても or でも: たとえ雨が降っても、試合は行われる is 'even if it rains, the match will go ahead'. It stresses that the outcome holds no matter what.",
+    "subsumes": ["te-mo", "to-shite-mo"],
+    "steps": [
+      { "surface": ["たとえ", "例え"], "pos": "副詞" },
+      { "gap": 5 },
+      { "anyOf": [
+        [ { "surface": ["て", "で"], "pos": "助詞" }, { "surface": "も", "pos": "助詞" } ],
+        [ { "surface": "でも", "pos": "助詞" } ],
+        [ { "surface": "として", "pos": "助詞" }, { "surface": "も", "pos": "助詞" } ]
+      ] }
+    ],
+    "examples": [
+      "たとえ雨が降っても、試合は行われる。",
+      "たとえ高くても、買いたい。",
+      "たとえ子供でも、ルールは守るべきだ。",
+      "たとえ失敗したとしても、後悔しない。"
+    ],
+    "counterExamples": [
+      "たとえば、りんごが好きです。",
+      "雨が降っても行きます。"
+    ]
+  },
+  {
+    "id": "okini",
+    "pattern": "～おきに",
+    "level": "N3",
+    "meaning": "every other ~ / at intervals of ~",
+    "explanation": "After a number and counter, おきに gives the interval between repeated events: 一日おきに is 'every other day' and 十分おきに is 'every ten minutes'.",
+    "steps": [
+      { "surface": "おき", "pos": "名詞", "pos2": "接尾" },
+      { "surface": "に", "pos": "助詞" }
+    ],
+    "examples": [
+      "薬は一日おきに飲んでください。",
+      "バスは十分おきに来ます。",
+      "二週間おきに会議がある。"
+    ],
+    "counterExamples": [
+      "荷物を置きに来た。",
+      "本をおきに行く。"
+    ]
+  },
+  {
+    "id": "wake-da",
+    "pattern": "～わけだ",
+    "level": "N3",
+    "meaning": "that's why ~ / no wonder ~ / so it means ~",
+    "explanation": "わけだ draws a conclusion that follows naturally from what is known: 道理で寒いわけだ is 'no wonder it's cold'. With だから or つまり it explains or sums up (だから遅れたわけです, 'so that's why I was late').",
+    "steps": [
+      { "surface": ["わけ", "訳"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": ["だ", "です", "だっ", "でし", "だろ", "でしょ"] }
+    ],
+    "examples": [
+      "だから遅れたわけです。",
+      "道理で寒いわけだ。",
+      "つまり、明日は休みというわけですね。",
+      "それで彼は怒っていたわけだ。"
+    ],
+    "counterExamples": [
+      "わけが分からない。",
+      "そんなわけがない。",
+      "高いわけではない。"
+    ]
+  },
+  {
+    "id": "toori-ni",
+    "pattern": "～とおりに",
+    "level": "N3",
+    "meaning": "just as ~ / in the way ~",
+    "explanation": "とおり (通り) means 'in the same way as': 先生が言ったとおりにやった is 'I did it exactly as the teacher said'. It follows verbs and nouns with の; directly after a noun it is read どおり (予想通り, 'as expected').",
+    "steps": [
+      { "anyOf": [
+        [ { "anyOf": [
+          [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+          [ { "pos": "動詞", "conjForm": "基本形" } ],
+          [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ]
+        ] }, { "surface": ["とおり", "通り"], "pos": "名詞", "pos2": "非自立" } ],
+        [ { "pos": "名詞" }, { "surface": ["通り", "どおり"], "pos": "名詞", "pos2": "接尾" } ]
+      ] },
+      { "surface": "に", "pos": "助詞", "optional": true }
+    ],
+    "examples": [
+      "先生が言ったとおりにやってみた。",
+      "説明書のとおりに組み立ててください。",
+      "思ったとおり、雨が降ってきた。",
+      "予想通りの結果だった。"
+    ],
+    "counterExamples": [
+      "この通りはいつも静かだ。",
+      "大通りを渡った。"
+    ]
+  },
+  {
+    "id": "wo-komete",
+    "pattern": "～をこめて",
+    "level": "N3",
+    "meaning": "full of ~ / with (feeling) ~",
+    "explanation": "をこめて (を込めて) says that an action is filled with a feeling or wish: 心をこめて手紙を書いた is 'I wrote the letter with all my heart'.",
+    "steps": [
+      { "surface": "を", "pos": "助詞" },
+      { "baseForm": ["こめる", "込める"], "conjForm": "連用形" },
+      { "surface": "て", "pos": "助詞" }
+    ],
+    "examples": [
+      "心をこめて手紙を書いた。",
+      "感謝の気持ちを込めて、プレゼントを贈ります。",
+      "愛を込めて料理を作る。"
+    ],
+    "counterExamples": [
+      "銃に弾を込めた。"
+    ]
+  },
+  {
+    "id": "wo-tsuujite",
+    "pattern": "～を通じて / ～を通して",
+    "level": "N3",
+    "meaning": "through ~ / throughout ~",
+    "explanation": "Marks the means or go-between for something (友人を通じて知り合った, 'we met through a friend') or a whole period (一年を通して暖かい, 'warm all year round').",
+    "steps": [
+      { "surface": ["を通じて", "を通して", "をとおして", "をつうじて", "を通じ", "を通し"], "pos": "助詞" }
+    ],
+    "examples": [
+      "友人を通じて彼女と知り合った。",
+      "この島は一年を通して暖かい。",
+      "インターネットを通して情報を集める。"
+    ],
+    "counterExamples": [
+      "電話が通じない。",
+      "針に糸を通した。"
+    ]
+  },
+  {
+    "id": "dake-de-naku",
+    "pattern": "～だけでなく",
+    "level": "N3",
+    "meaning": "not only ~ (but also ...)",
+    "explanation": "だけでなく adds a second point on top of the first, which usually takes も: 英語だけでなく、中国語も話せる is 'he speaks not only English but also Chinese'. Casual speech says だけじゃなく.",
+    "steps": [
+      { "surface": "だけ", "pos": "助詞" },
+      { "anyOf": [
+        [ { "surface": "で", "baseForm": "だ" }, { "surface": "は", "pos": "助詞", "optional": true } ],
+        [ { "surface": "じゃ" } ]
+      ] },
+      { "baseForm": "ない", "conjForm": "連用テ接続" }
+    ],
+    "examples": [
+      "彼は英語だけでなく、中国語も話せる。",
+      "この店は安いだけでなく、おいしい。",
+      "子供だけじゃなく大人も楽しめる。",
+      "見るだけではなく、やってみよう。"
+    ],
+    "counterExamples": [
+      "一つだけください。",
+      "これだけで十分です。"
+    ]
+  },
+  {
+    "id": "wazawaza",
+    "pattern": "わざわざ",
+    "level": "N3",
+    "meaning": "going out of one's way to ~ / taking the trouble to ~",
+    "explanation": "わざわざ says that someone made a special effort that wasn't strictly necessary. It often expresses gratitude (わざわざ来てくれてありがとう, 'thanks for coming all this way') or mild criticism of wasted effort.",
+    "steps": [
+      { "surface": ["わざわざ", "態々"], "pos": "副詞" }
+    ],
+    "examples": [
+      "わざわざ駅まで迎えに来てくれた。",
+      "わざわざ電話してくれなくてもよかったのに。"
+    ],
+    "counterExamples": [
+      "わざと間違えた。"
+    ]
+  },
+  {
+    "id": "masaka",
+    "pattern": "まさか",
+    "level": "N3",
+    "meaning": "surely not / no way / never thought that ~",
+    "explanation": "まさか expresses disbelief that something could happen or be true: まさか彼が来るとは思わなかった is 'I never imagined he would come'. On its own it is an exclamation, 'No way!'.",
+    "steps": [
+      { "surface": ["まさか"], "pos": "副詞" }
+    ],
+    "examples": [
+      "まさか彼が犯人だとは思わなかった。",
+      "まさか、そんなことはないでしょう。"
+    ],
+    "counterExamples": [
+      "まさに今始まるところだ。"
+    ]
+  },
+  {
+    "id": "ittai",
+    "pattern": "いったい",
+    "level": "N3",
+    "meaning": "what on earth / just what",
+    "explanation": "いったい (一体) strengthens a question, usually with a note of surprise or irritation: いったい何があったの？ is 'what on earth happened?'. Written as 一体, it is only matched right before a question word, because 一体 is also the counter for statues and means 'one body' in 一体となって.",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": "いったい", "pos": "副詞" } ],
+        [ { "surface": "一体", "pos": "副詞" }, { "surface": ["何", "誰", "どう", "どこ", "いつ", "なぜ", "どうして", "どんな", "どれ", "どちら", "いくら", "何で"] } ]
+      ] }
+    ],
+    "examples": [
+      "いったい何があったの？",
+      "一体どうしたんですか。"
+    ],
+    "counterExamples": [
+      "一台の車が止まっている。",
+      "公園に石像が一体ある。"
+    ]
+  },
+  {
+    "id": "douyara",
+    "pattern": "どうやら",
+    "level": "N3",
+    "meaning": "it seems / apparently",
+    "explanation": "どうやら introduces a conclusion the speaker has reached from the evidence, and is usually followed by らしい, ようだ or みたいだ: どうやら雨が降りそうだ is 'it looks like it's going to rain'.",
+    "steps": [
+      { "surface": ["どうやら"], "pos": "副詞" }
+    ],
+    "examples": [
+      "どうやら雨が降りそうだ。",
+      "どうやら道に迷ったらしい。"
+    ],
+    "counterExamples": [
+      "どうやって作るの？"
+    ]
+  },
+  {
+    "id": "sarani",
+    "pattern": "さらに",
+    "level": "N3",
+    "meaning": "furthermore / even more",
+    "explanation": "さらに (更に) adds to something that is already the case, either 'in addition' or 'to an even greater degree': 問題はさらに難しくなった is 'the problem became even harder'.",
+    "steps": [
+      { "surface": ["さらに", "更に"], "pos": "副詞" }
+    ],
+    "examples": [
+      "問題はさらに難しくなった。",
+      "更に詳しく説明します。"
+    ],
+    "counterExamples": [
+      "皿に料理を盛った。"
+    ]
+  },
+  {
+    "id": "sudeni",
+    "pattern": "すでに",
+    "level": "N3",
+    "meaning": "already",
+    "explanation": "すでに (既に) is a more formal もう: it says that something has happened before now or before a certain point: 会議はすでに始まっていた is 'the meeting had already started'.",
+    "steps": [
+      { "surface": ["すでに", "既に"], "pos": "副詞" }
+    ],
+    "examples": [
+      "会議はすでに始まっていた。",
+      "既に申し込みは終わりました。"
+    ],
+    "counterExamples": [
+      "まだ始まっていない。"
+    ]
+  },
+  {
+    "id": "tsui",
+    "pattern": "つい",
+    "level": "N3",
+    "meaning": "unintentionally / without meaning to / just (a moment ago)",
+    "explanation": "つい describes doing something you didn't mean to do, often with てしまう: つい食べすぎてしまった is 'I ended up eating too much without meaning to'. Before a time word it means 'just' (つい先ほど, 'just a moment ago').",
+    "steps": [
+      { "surface": "つい", "pos": "副詞" }
+    ],
+    "examples": [
+      "つい食べすぎてしまった。",
+      "つい先ほど彼から電話があった。"
+    ],
+    "counterExamples": [
+      "ついに完成した。",
+      "この件について話そう。"
+    ]
+  },
+  {
+    "id": "mushiro",
+    "pattern": "むしろ",
+    "level": "N3",
+    "meaning": "rather / if anything",
+    "explanation": "むしろ picks the second of two options as the more accurate or preferable one, often against expectations: 失敗はむしろいい経験になった is 'if anything, the failure turned into a good experience'.",
+    "steps": [
+      { "surface": ["むしろ", "寧ろ"], "pos": "副詞" }
+    ],
+    "examples": [
+      "休むより、むしろ働きたい。",
+      "失敗はむしろいい経験になった。"
+    ],
+    "counterExamples": [
+      "虫が多い。"
+    ]
+  },
+  {
+    "id": "doushitemo",
+    "pattern": "どうしても",
+    "level": "N3",
+    "meaning": "no matter what / just can't ~",
+    "explanation": "どうしても expresses a strong wish that nothing will change (どうしても行きたい, 'I want to go no matter what'), or with a negative, an inability that persists despite every effort (どうしても思い出せない, 'I just can't remember').",
+    "steps": [
+      { "surface": "どうしても", "pos": "副詞" }
+    ],
+    "examples": [
+      "どうしても行きたい。",
+      "どうしても思い出せない。"
+    ],
+    "counterExamples": [
+      "どうしてもう帰るの？"
+    ]
+  },
+  {
+    "id": "seizei",
+    "pattern": "せいぜい",
+    "level": "N3",
+    "meaning": "at most / at best / as much as one can",
+    "explanation": "せいぜい sets an upper limit that is fairly low: 参加者はせいぜい十人だろう is 'there'll be ten people at most'. In せいぜい頑張って it means 'do the best you can', sometimes with a touch of irony.",
+    "steps": [
+      { "surface": ["せいぜい", "精々"], "pos": "副詞" }
+    ],
+    "examples": [
+      "参加者はせいぜい十人だろう。",
+      "せいぜい頑張ってください。"
+    ],
+    "counterExamples": [
+      "雨のせいで中止になった。"
+    ]
+  },
+  {
+    "id": "to-wa-kagiranai",
+    "pattern": "～とは限らない",
+    "level": "N3",
+    "meaning": "not necessarily ~ / ~ isn't always the case",
+    "explanation": "Denies that something is always true: 高いものがいいとは限らない is 'expensive things aren't necessarily good'. It is often paired with 必ずしも. とも限らない means 'it might just happen that ~'.",
+    "steps": [
+      { "surface": "と", "pos": "助詞" },
+      { "surface": ["は", "も"], "pos": "助詞" },
+      { "anyOf": [
+        [ { "baseForm": "限る", "conjForm": "未然形" }, { "baseForm": "ない" } ],
+        [ { "baseForm": "限る", "conjForm": "連用形" }, { "baseForm": "ます" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "高いものがいいとは限らない。",
+      "日本人がみんな寿司を好きだとは限りません。",
+      "雨が降らないとも限らない。"
+    ],
+    "counterExamples": [
+      "暑い日は冷たいビールに限る。",
+      "この店は日本人に限らず、外国人にも人気がある。"
+    ]
+  },
+  {
+    "id": "nai-koto-wa-nai",
+    "pattern": "～ないことはない",
+    "level": "N3",
+    "meaning": "it's not that ~ can't / it's possible to ~ (but ...)",
+    "explanation": "A double negative that grants a possibility half-heartedly: 行けないことはない is 'it's not as if I can't go', implying some reluctance or difficulty. ないこともない is a softer version.",
+    "steps": [
+      { "baseForm": "ない", "pos": "助動詞", "conjForm": "基本形" },
+      { "surface": ["こと", "事"], "pos": "名詞", "pos2": "非自立" },
+      { "surface": ["は", "も"], "pos": "助詞" },
+      { "anyOf": [
+        [ { "baseForm": "ない" } ],
+        [ { "baseForm": "ある" }, { "baseForm": "ます" }, { "surface": "ん" } ]
+      ] }
+    ],
+    "examples": [
+      "行けないことはない。",
+      "食べられないこともない。",
+      "できないことはありません。"
+    ],
+    "counterExamples": [
+      "心配することはない。",
+      "日本に行ったことはない。"
+    ]
+  },
+  {
+    "id": "kara-ni-kakete",
+    "pattern": "～から～にかけて",
+    "level": "N3",
+    "meaning": "from ~ through ~ (a span of time or area)",
+    "explanation": "Marks a rough span of time or space without sharp edges: 東京から大阪にかけて雨が降る is 'it will rain across the area from Tokyo to Osaka'. Compared with から～まで, the boundaries are looser.",
+    "steps": [
+      { "surface": "から", "pos": "助詞", "pos2": "格助詞" },
+      { "gap": 3 },
+      { "surface": ["にかけて", "にかけ"], "pos": "助詞" }
+    ],
+    "examples": [
+      "東京から大阪にかけて雨が降る。",
+      "月曜日から水曜日にかけて休みます。",
+      "夜から朝にかけて雪が降った。"
+    ],
+    "counterExamples": [
+      "東京から大阪まで新幹線で行った。",
+      "壁に絵をかけて飾った。"
+    ]
+  },
+  {
+    "id": "kimi",
+    "pattern": "～気味",
+    "level": "N3",
+    "meaning": "slightly ~ / a touch of ~",
+    "explanation": "気味 (ぎみ) after a noun or verb stem says that something shows a slight tendency, usually an unwelcome one: 風邪気味 is 'coming down with a cold' and 疲れ気味 is 'a bit tired'.",
+    "steps": [
+      { "pos": ["名詞", "動詞"] },
+      { "surface": "気味", "pos": "名詞", "pos2": "接尾" }
+    ],
+    "examples": [
+      "風邪気味です。",
+      "最近疲れ気味だ。",
+      "少し太り気味なので、運動している。"
+    ],
+    "counterExamples": [
+      "気味が悪い。"
+    ]
+  },
+  {
+    "id": "muke",
+    "pattern": "～向け",
+    "level": "N3",
+    "meaning": "intended for ~ / aimed at ~",
+    "explanation": "向け after a noun says who or what something was made for: 子供向けの本 is 'a book for children'. It takes の before a noun and に before a verb.",
+    "steps": [
+      { "pos": "名詞" },
+      { "surface": "向け", "pos": "名詞", "pos2": "接尾" }
+    ],
+    "examples": [
+      "子供向けの本を探している。",
+      "これは外国人向けのガイドです。",
+      "初心者向けに書かれた本だ。"
+    ],
+    "counterExamples": [
+      "北向きの部屋に住んでいる。",
+      "顔をこちらに向けてください。"
+    ]
+  },
+  {
+    "id": "wo-moto-ni",
+    "pattern": "～をもとに",
+    "level": "N3",
+    "meaning": "based on ~",
+    "explanation": "をもとに (を元に) names the material or source something is built from: この映画は事実をもとにしている is 'this film is based on real events'. をもとにして is the full form.",
+    "steps": [
+      { "surface": "を", "pos": "助詞" },
+      { "surface": ["もと", "元", "基"], "pos": "名詞" },
+      { "surface": "に", "pos": "助詞" }
+    ],
+    "followedBy": [
+      { "baseForm": "する" },
+      { "pos": ["名詞", "記号", "副詞", "連体詞"] }
+    ],
+    "examples": [
+      "この映画は事実をもとにしている。",
+      "データを元に計算した。",
+      "アンケートの結果をもとに、新しい商品を作った。"
+    ],
+    "counterExamples": [
+      "データを元に戻した。"
+    ]
+  },
+  {
+    "id": "ni-hanshite",
+    "pattern": "～に反して",
+    "level": "N3",
+    "meaning": "contrary to ~ / against ~",
+    "explanation": "に反して says that the outcome went against an expectation, a wish or a rule: 予想に反して、試合に負けた is 'contrary to expectations, we lost the match'. Before a noun it is に反する.",
+    "steps": [
+      { "surface": "に", "pos": "助詞" },
+      { "anyOf": [
+        [ { "baseForm": ["反す", "反する"], "conjForm": "連用形" }, { "surface": "て" } ],
+        [ { "baseForm": "反する", "conjForm": "基本形" } ]
+      ] }
+    ],
+    "examples": [
+      "予想に反して、試合に負けた。",
+      "期待に反する結果になった。",
+      "親の意見に反して、留学を決めた。"
+    ],
+    "counterExamples": [
+      "その意見には反対です。"
+    ]
+  },
+  {
+    "id": "to-shite-mo",
+    "pattern": "～としても",
+    "level": "N3",
+    "meaning": "even if ~ / even supposing ~",
+    "explanation": "としても concedes a hypothetical and says it won't change the conclusion: 行くとしても、明日だ is 'even if I do go, it'll be tomorrow'. It is often used with たとえ.",
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["た", "だ"], "conjType": ["特殊・タ", "特殊・ダ"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["ない", "たい"], "pos": "助動詞", "conjForm": "基本形" } ]
+      ] },
+      { "surface": "として", "pos": "助詞" },
+      { "surface": "も", "pos": "助詞" }
+    ],
+    "examples": [
+      "行くとしても、明日だ。",
+      "失敗したとしても後悔しない。",
+      "それが本当だとしても、信じられない。"
+    ],
+    "counterExamples": [
+      "代表として参加した。",
+      "先生としても尊敬している。"
+    ]
+  },
+  {
+    "id": "bakari-ka",
+    "pattern": "～ばかりか",
+    "level": "N3",
+    "meaning": "not only ~ but also ...",
+    "explanation": "ばかりか adds a second, often more surprising point to the first: 彼は英語ばかりか中国語も話せる is 'he speaks not only English but Chinese too'. The second part usually has も or まで.",
+    "subsumes": ["bakari"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "名詞" } ],
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ]
+      ] },
+      { "surface": "ばかり", "pos": "助詞" },
+      { "surface": "か", "pos": "助詞" }
+    ],
+    "examples": [
+      "彼は英語ばかりか中国語も話せる。",
+      "雨ばかりか風も強くなってきた。",
+      "彼女は勉強ができるばかりか、スポーツも得意だ。"
+    ],
+    "counterExamples": [
+      "テレビばかり見ている。"
+    ]
+  },
+  {
+    "id": "to-iu-koto-da",
+    "pattern": "～ということだ",
+    "level": "N3",
+    "meaning": "I hear that ~ / that means ~",
+    "explanation": "At the end of a sentence, ということだ reports something heard from others (明日は休みだということだ, 'apparently tomorrow is a holiday') or sums up what something amounts to (つまり中止ということですね, 'so that means it's cancelled').",
+    "subsumes": ["to-iu"],
+    "steps": [
+      { "surface": "という", "pos": "助詞" },
+      { "surface": ["こと", "事"], "pos": "名詞", "pos2": "非自立" },
+      { "baseForm": ["だ", "です"], "pos": "助動詞" }
+    ],
+    "examples": [
+      "明日は休みだということだ。",
+      "つまり、中止ということですね。",
+      "彼は来月結婚するということです。"
+    ],
+    "counterExamples": [
+      "日本語が難しいということが分かった。"
+    ]
+  },
+  {
+    "id": "to-iu-yori",
+    "pattern": "～というより",
+    "level": "N3",
+    "meaning": "rather than ~ / more ~ than ...",
+    "explanation": "というより corrects or refines a description: 彼は先生というより友達だ is 'he's more of a friend than a teacher'.",
+    "steps": [
+      { "anyOf": [
+        [ { "surface": "という", "pos": "助詞" } ],
+        [ { "surface": "と", "pos": "助詞" }, { "surface": ["言う", "いう"], "conjForm": "基本形" } ]
+      ] },
+      { "surface": "より", "pos": "助詞" }
+    ],
+    "examples": [
+      "彼は先生というより友達だ。",
+      "この料理は辛いというより痛い。",
+      "寒いと言うより冷たい。"
+    ],
+    "counterExamples": [
+      "田中という人に会った。",
+      "東京より大阪のほうが好きだ。"
+    ]
+  },
+  {
+    "id": "ni-kawatte",
+    "pattern": "～に代わって",
+    "level": "N3",
+    "meaning": "in place of ~ / on behalf of ~",
+    "explanation": "に代わって says that one person or thing takes the place of another: 社長に代わって挨拶します is 'I'll give the speech on behalf of the president'.",
+    "steps": [
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": ["代わる", "かわる", "替わる", "代る"], "conjForm": "連用タ接続" },
+      { "surface": "て" }
+    ],
+    "examples": [
+      "社長に代わって挨拶します。",
+      "父にかわって私が行きます。",
+      "最近は手紙に代わってメールが使われる。"
+    ],
+    "counterExamples": [
+      "席を代わってください。",
+      "母の代わりに来た。"
+    ]
+  },
+  {
+    "id": "ni-shite-mo",
+    "pattern": "～にしても",
+    "level": "N3",
+    "meaning": "even if ~ / even granting ~",
+    "explanation": "にしても grants a point but adds a reservation: 冗談にしても、ひどすぎる is 'even as a joke, that's going too far'. どちらにしても means 'either way'.",
+    "subsumes": ["te-mo"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "pos": "助動詞", "conjForm": "基本形" } ],
+        [ { "pos": "名詞", "pos2": ["一般", "代名詞", "固有名詞", "サ変接続"] } ]
+      ] },
+      { "surface": "に", "pos": "助詞" },
+      { "baseForm": "する", "conjForm": "連用形" },
+      { "surface": "て", "pos": "助詞" },
+      { "surface": "も", "pos": "助詞" }
+    ],
+    "examples": [
+      "冗談にしても、ひどすぎる。",
+      "行くにしても、準備が必要だ。",
+      "どちらにしても、明日決めます。",
+      "高いにしても、一度は行ってみたい。"
+    ],
+    "counterExamples": [
+      "部屋をきれいにしてもらった。",
+      "静かにしても誰も聞かない。"
+    ]
+  },
+  {
+    "id": "ki-ga-suru",
+    "pattern": "～気がする",
+    "level": "N3",
+    "meaning": "I have a feeling that ~",
+    "explanation": "気がする reports a vague impression or hunch rather than a firm belief: 雨が降りそうな気がする is 'I have a feeling it's going to rain'.",
+    "steps": [
+      { "surface": "気", "pos": "名詞" },
+      { "surface": "が", "pos": "助詞" },
+      { "baseForm": "する", "pos": "動詞" }
+    ],
+    "examples": [
+      "雨が降りそうな気がする。",
+      "前にどこかで会ったような気がします。",
+      "今日は何かいいことがある気がした。"
+    ],
+    "counterExamples": [
+      "やっと間違いに気がついた。",
+      "彼は気が強い。"
+    ]
+  },
+  {
+    "id": "te-kara-de-nai-to",
+    "pattern": "～てからでないと",
+    "level": "N3",
+    "meaning": "not until ~ / only after ~",
+    "explanation": "てからでないと says that one thing must happen first before another can: 宿題をしてからでないと遊びに行けない is 'I can't go out to play until I've done my homework'. The casual form is てからじゃないと.",
+    "subsumes": ["te-kara", "to-conditional"],
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "surface": "から", "pos": "助詞" },
+      { "anyOf": [
+        [ { "surface": "で" } ],
+        [ { "surface": "じゃ" } ]
+      ] },
+      { "baseForm": "ない" },
+      { "surface": ["と", "ば"], "pos": "助詞" }
+    ],
+    "examples": [
+      "宿題をしてからでないと、遊びに行けない。",
+      "よく考えてからでないと決められません。",
+      "手を洗ってからじゃないと食べちゃだめ。"
+    ],
+    "counterExamples": [
+      "宿題をしてから遊びに行く。"
+    ]
+  }
+]

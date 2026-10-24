@@ -1,0 +1,3995 @@
+{
+  "evaluatedRules": [
+    "aida-ni",
+    "amari-nai",
+    "ato-de",
+    "ba-conditional",
+    "ba-hodo",
+    "ba-ii",
+    "ba-yokatta",
+    "bakari",
+    "bakari-ka",
+    "beki",
+    "dake-de-naku",
+    "darake",
+    "dasu",
+    "de-yuumei",
+    "deshou",
+    "doushitemo",
+    "douyara",
+    "furi",
+    "ga-hoshii",
+    "gachi",
+    "garu",
+    "ge",
+    "hajimeru",
+    "hazu-da",
+    "hazu-ga-nai",
+    "hodo-extent",
+    "hodo-nai",
+    "hou-ga-ii",
+    "hou-ga-yori",
+    "ittai",
+    "ka-dou-ka",
+    "kai-frequency",
+    "kamoshirenai",
+    "kara-ni-kakete",
+    "kara-reason",
+    "kata",
+    "kawari-ni",
+    "kesshite-nai",
+    "ki-ga-suru",
+    "kimi",
+    "kiri",
+    "kke",
+    "koso",
+    "koto-ga-dekiru",
+    "koto-ni-naru",
+    "koto-ni-suru",
+    "koto-wa-nai",
+    "kurai",
+    "kuse-ni",
+    "mada-te-inai",
+    "mae-ni",
+    "mai",
+    "mama",
+    "masaka",
+    "masen-ka",
+    "mashou",
+    "mitai",
+    "mo-ba-mo",
+    "muke",
+    "mushiro",
+    "n-desu",
+    "nagara",
+    "nai-de",
+    "nai-de-kudasai",
+    "nai-koto-wa-nai",
+    "nai-to-ikenai",
+    "naka-de-ichiban",
+    "nakanaka-nai",
+    "nakereba-naranai",
+    "nakute-mo-ii",
+    "nakya",
+    "nante",
+    "nara",
+    "naru-change",
+    "nasai",
+    "ni-chigainai",
+    "ni-hanshite",
+    "ni-iku",
+    "ni-kagiru",
+    "ni-kanshite",
+    "ni-kawatte",
+    "ni-kimatteiru",
+    "ni-kurabete",
+    "ni-oite",
+    "ni-shitagatte",
+    "ni-shite-mo",
+    "ni-shite-wa",
+    "ni-suginai",
+    "ni-taishite",
+    "ni-totte",
+    "ni-tsuite",
+    "ni-tsurete",
+    "ni-yoru-to",
+    "ni-yotte",
+    "nikui",
+    "no-ga-suki",
+    "no-you-na",
+    "node",
+    "noni",
+    "number-mo",
+    "okage-de",
+    "okini",
+    "owaru",
+    "ppoi",
+    "rareru",
+    "rashii",
+    "rashii-noun",
+    "sae",
+    "sae-ba",
+    "saichuu-ni",
+    "sarani",
+    "saserareru",
+    "saseru",
+    "sei-de",
+    "seizei",
+    "shi",
+    "shika-nai",
+    "shika-nai-choice",
+    "sou-da-hearsay",
+    "sou-da-looks",
+    "sudeni",
+    "sugiru",
+    "suru-change",
+    "ta-bakari",
+    "ta-koto-ga-aru",
+    "tabi-ni",
+    "tai",
+    "tame-ni",
+    "tame-ni-naru",
+    "tara",
+    "tara-dou",
+    "tari-tari",
+    "tate",
+    "tatoe-temo",
+    "te-ageru",
+    "te-aru",
+    "te-hajimete",
+    "te-hoshii",
+    "te-iku",
+    "te-iru",
+    "te-itadakemasen-ka",
+    "te-kara",
+    "te-kara-de-nai-to",
+    "te-kudasai",
+    "te-kureru",
+    "te-kurete-arigatou",
+    "te-kuru",
+    "te-miru",
+    "te-mo",
+    "te-mo-ii",
+    "te-morau",
+    "te-oku",
+    "te-shimau",
+    "te-sumimasen",
+    "te-tamaranai",
+    "te-wa-ikenai",
+    "te-yokatta",
+    "teki",
+    "to-conditional",
+    "to-ii",
+    "to-iu",
+    "to-iu-koto-da",
+    "to-iu-yori",
+    "to-shitara",
+    "to-shite",
+    "to-shite-mo",
+    "to-tomo-ni",
+    "to-wa-kagiranai",
+    "toki",
+    "tokoro-da",
+    "toori-ni",
+    "totan",
+    "totemo-nai",
+    "tsui",
+    "tsuide-ni",
+    "tsumori",
+    "tsuzukeru",
+    "uchi-ni",
+    "volitional",
+    "wake-da",
+    "wake-dewa-nai",
+    "wake-ga-nai",
+    "wake-ni-wa-ikanai",
+    "wari-ni",
+    "wazawaza",
+    "wo-hajime",
+    "wo-komete",
+    "wo-moto-ni",
+    "wo-tsuujite",
+    "yasui",
+    "you-da",
+    "you-ni",
+    "you-ni-naru",
+    "you-ni-suru",
+    "you-to-omou",
+    "you-to-suru",
+    "zenzen-nai",
+    "zu",
+    "zuni"
+  ],
+  "cases": [
+    {
+      "text": "屋上で作業員が旗を振っている。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "その通知なら、まだ届いてません。",
+      "expected": [
+        "mada-te-inai",
+        "nara",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "さっきまで裏庭で犬と遊んでた。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "申込書の裏面も確認してください。",
+      "expected": [
+        "te-kudasai"
+      ]
+    },
+    {
+      "text": "この結び目をほどいてくださいませんか？",
+      "expected": [
+        "te-kudasai"
+      ]
+    },
+    {
+      "text": "足元の黄色い線まで下がってください。",
+      "expected": [
+        "te-kudasai"
+      ]
+    },
+    {
+      "text": "展示用のハンドルは回さないでください。",
+      "expected": [
+        "nai-de-kudasai"
+      ]
+    },
+    {
+      "text": "返信に個人情報を載せないでくださいね。",
+      "expected": [
+        "nai-de-kudasai"
+      ]
+    },
+    {
+      "text": "通路に段ボールを積まないでください。",
+      "expected": [
+        "nai-de-kudasai"
+      ]
+    },
+    {
+      "text": "いつか自分の畑で綿を育てたい。",
+      "expected": [
+        "tai"
+      ]
+    },
+    {
+      "text": "あの時は舞台の照明を担当したかった。",
+      "expected": [
+        "tai"
+      ]
+    },
+    {
+      "text": "せっかくの休日に争いたくないです。",
+      "expected": [
+        "tai"
+      ]
+    },
+    {
+      "text": "まずは全員で避難経路を確かめましょう。",
+      "expected": [
+        "mashou"
+      ]
+    },
+    {
+      "text": "重い扉は私が押さえましょうか？",
+      "expected": [
+        "mashou"
+      ]
+    },
+    {
+      "text": "残りの予算についても話し合いましょう。",
+      "expected": [
+        "mashou",
+        "ni-tsuite"
+      ]
+    },
+    {
+      "text": "この霧では船も出せないでしょう。",
+      "expected": [
+        "deshou"
+      ]
+    },
+    {
+      "text": "あいつなら最後まで諦めないだろう。",
+      "expected": [
+        "deshou",
+        "nara"
+      ]
+    },
+    {
+      "text": "ほら、この柄なら君にも似合うでしょ？",
+      "expected": [
+        "deshou",
+        "nara"
+      ]
+    },
+    {
+      "text": "学生時代にラジオへ投稿したことがある。",
+      "expected": [
+        "ta-koto-ga-aru"
+      ]
+    },
+    {
+      "text": "私は夜行船で海を渡ったことはありません。",
+      "expected": [
+        "ta-koto-ga-aru"
+      ]
+    },
+    {
+      "text": "屋外で陶器を焼いたことはありますか？",
+      "expected": [
+        "ta-koto-ga-aru"
+      ]
+    },
+    {
+      "text": "生地を切る前に寸法を測った。",
+      "expected": [
+        "mae-ni"
+      ]
+    },
+    {
+      "text": "送信する前に宛先を確かめます。",
+      "expected": [
+        "mae-ni"
+      ]
+    },
+    {
+      "text": "競技が始まる前には深呼吸をする。",
+      "expected": [
+        "mae-ni"
+      ]
+    },
+    {
+      "text": "投票を済ませた後で喫茶店に寄った。",
+      "expected": [
+        "ato-de"
+      ]
+    },
+    {
+      "text": "閉会式の後に記念品を配ります。",
+      "expected": [
+        "ato-de"
+      ]
+    },
+    {
+      "text": "模型が乾いたあとで色を塗ろう。",
+      "expected": [
+        "ato-de",
+        "volitional"
+      ]
+    },
+    {
+      "text": "床が滑るから、今日は靴を替えよう。",
+      "expected": [
+        "kara-reason",
+        "volitional"
+      ]
+    },
+    {
+      "text": "予備が二つあるから一つあげるよ。",
+      "expected": [
+        "kara-reason"
+      ]
+    },
+    {
+      "text": "受付は無人ですから、ベルでお呼びを。",
+      "expected": [
+        "kara-reason"
+      ]
+    },
+    {
+      "text": "うっかり録音を消してしまいました。",
+      "expected": [
+        "te-shimau"
+      ]
+    },
+    {
+      "text": "猫が毛糸をほどいちゃった！",
+      "expected": [
+        "te-shimau"
+      ]
+    },
+    {
+      "text": "また人の名前を呼び間違えちゃうよ。",
+      "expected": [
+        "te-shimau"
+      ]
+    },
+    {
+      "text": "代表者は印鑑を持参しなければなりません。",
+      "expected": [
+        "nakereba-naranai"
+      ]
+    },
+    {
+      "text": "期限までに古い端末を返さなくてはいけない。",
+      "expected": [
+        "nakereba-naranai"
+      ]
+    },
+    {
+      "text": "この秘密だけは守らなきゃだめだよ。",
+      "expected": [
+        "nakereba-naranai"
+      ]
+    },
+    {
+      "text": "やばい、植木に水をやらなきゃ！",
+      "expected": [
+        "nakya"
+      ]
+    },
+    {
+      "text": "そろそろ会費を集めなくちゃね。",
+      "expected": [
+        "nakya"
+      ]
+    },
+    {
+      "text": "次の面接では笑顔で答えなきゃ。",
+      "expected": [
+        "nakya"
+      ]
+    },
+    {
+      "text": "糸を緩めれば結び目がほどける。",
+      "expected": [
+        "ba-conditional"
+      ]
+    },
+    {
+      "text": "眩しければブラインドを下ろそう。",
+      "expected": [
+        "ba-conditional",
+        "volitional"
+      ]
+    },
+    {
+      "text": "異論がなければ、この案で進めます。",
+      "expected": [
+        "ba-conditional"
+      ]
+    },
+    {
+      "text": "階段では手すりを使うようにした。",
+      "expected": [
+        "you-ni-suru"
+      ]
+    },
+    {
+      "text": "毎回、送信前に添付漏れを確認するようにします。",
+      "expected": [
+        "you-ni-suru"
+      ]
+    },
+    {
+      "text": "夜間は大声を出さないようにしている。",
+      "expected": [
+        "te-iru",
+        "you-ni-suru"
+      ]
+    },
+    {
+      "text": "祖父も動画を送れるようになりました。",
+      "expected": [
+        "you-ni-naru"
+      ]
+    },
+    {
+      "text": "最近は目覚ましなしで起きるようになった。",
+      "expected": [
+        "you-ni-naru"
+      ]
+    },
+    {
+      "text": "修理後は変な音がしないようになった。",
+      "expected": [
+        "you-ni-naru"
+      ]
+    },
+    {
+      "text": "案内板によると、入場は正午までだ。",
+      "expected": [
+        "ni-yoru-to"
+      ]
+    },
+    {
+      "text": "広報誌によれば、来春ここに保育園ができる。",
+      "expected": [
+        "ni-yoru-to"
+      ]
+    },
+    {
+      "text": "運営側によりますと、応募は千件を超えました。",
+      "expected": [
+        "ni-yoru-to"
+      ]
+    },
+    {
+      "text": "鼻歌を歌いながら自転車を直した。",
+      "expected": [
+        "nagara"
+      ]
+    },
+    {
+      "text": "係員はうなずきながらメモを取った。",
+      "expected": [
+        "nagara"
+      ]
+    },
+    {
+      "text": "地図を指しながら順路を説明します。",
+      "expected": [
+        "nagara"
+      ]
+    },
+    {
+      "text": "停電に備えて電池を買っておいた。",
+      "expected": [
+        "te-oku"
+      ]
+    },
+    {
+      "text": "人数分の椅子はこっちで並べとくね。",
+      "expected": [
+        "te-oku"
+      ]
+    },
+    {
+      "text": "明日の分までタオルを畳んどきます。",
+      "expected": [
+        "te-oku"
+      ]
+    },
+    {
+      "text": "試しに利き手と逆の手で描いてみた。",
+      "expected": [
+        "te-miru"
+      ]
+    },
+    {
+      "text": "新しい検索機能を使ってみませんか？",
+      "expected": [
+        "masen-ka",
+        "te-miru"
+      ]
+    },
+    {
+      "text": "次は粘土で小皿を作ってみたい。",
+      "expected": [
+        "tai",
+        "te-miru"
+      ]
+    },
+    {
+      "text": "余った布は自由に持ち帰ってもいいですよ。",
+      "expected": [
+        "te-mo-ii"
+      ]
+    },
+    {
+      "text": "本名は記入しなくてもかまいません。",
+      "expected": [
+        "nakute-mo-ii",
+        "te-mo-ii"
+      ]
+    },
+    {
+      "text": "この端末で残高を確認してもよろしいですか？",
+      "expected": [
+        "te-mo-ii"
+      ]
+    },
+    {
+      "text": "実験中は保護眼鏡を外してはいけません。",
+      "expected": [
+        "te-wa-ikenai"
+      ]
+    },
+    {
+      "text": "他人の失敗を笑っちゃだめだよ。",
+      "expected": [
+        "te-wa-ikenai"
+      ]
+    },
+    {
+      "text": "貴重な湿地を埋め立ててはならない。",
+      "expected": [
+        "te-wa-ikenai"
+      ]
+    },
+    {
+      "text": "この傷は輸送中についたかもしれない。",
+      "expected": [
+        "kamoshirenai"
+      ]
+    },
+    {
+      "text": "担当者は今日は不在かもしれません。",
+      "expected": [
+        "kamoshirenai"
+      ]
+    },
+    {
+      "text": "あれ、裏口のほうが近道かもね。",
+      "expected": [
+        "kamoshirenai"
+      ]
+    },
+    {
+      "text": "その細い枝は今にも折れそうだ。",
+      "expected": [
+        "sou-da-looks"
+      ]
+    },
+    {
+      "text": "受付の人はあまり忙しくなさそうだった。",
+      "expected": [
+        "amari-nai",
+        "sou-da-looks"
+      ]
+    },
+    {
+      "text": "祖母は嬉しそうに包みを開けた。",
+      "expected": [
+        "sou-da-looks"
+      ]
+    },
+    {
+      "text": "例の橋は来週開通するそうです。",
+      "expected": [
+        "sou-da-hearsay"
+      ]
+    },
+    {
+      "text": "隣の工場では昨夜停電があったそうだ。",
+      "expected": [
+        "sou-da-hearsay"
+      ]
+    },
+    {
+      "text": "聞いた話では、次の講師は陶芸家だそうです。",
+      "expected": [
+        "sou-da-hearsay"
+      ]
+    },
+    {
+      "text": "つまみを回したら、急に音が出た。",
+      "expected": [
+        "tara"
+      ]
+    },
+    {
+      "text": "箱が大きかったら二人で運ぼう。",
+      "expected": [
+        "tara",
+        "volitional"
+      ]
+    },
+    {
+      "text": "席が窓側だったら景色も楽しめるね。",
+      "expected": [
+        "tara"
+      ]
+    },
+    {
+      "text": "その怪しい広告は開かないほうがいい。",
+      "expected": [
+        "hou-ga-ii"
+      ]
+    },
+    {
+      "text": "足首の腫れは医師に診せたほうがいいですよ。",
+      "expected": [
+        "hou-ga-ii"
+      ]
+    },
+    {
+      "text": "昨日は余計な口出しをしないほうがよかった。",
+      "expected": [
+        "hou-ga-ii"
+      ]
+    },
+    {
+      "text": "今度の休暇は古道を巡るつもりです。",
+      "expected": [
+        "tsumori"
+      ]
+    },
+    {
+      "text": "その契約を更新するつもりはない。",
+      "expected": [
+        "tsumori"
+      ]
+    },
+    {
+      "text": "今回は抽選に応募しないつもりだった。",
+      "expected": [
+        "tsumori"
+      ]
+    },
+    {
+      "text": "この棚は奥行きがありすぎます。",
+      "expected": [
+        "sugiru"
+      ]
+    },
+    {
+      "text": "力を入れすぎて、取っ手が折れた。",
+      "expected": [
+        "sugiru"
+      ]
+    },
+    {
+      "text": "昨日の説明は抽象的すぎたね。",
+      "expected": [
+        "sugiru",
+        "teki"
+      ]
+    },
+    {
+      "text": "時刻表では次の便が最終のはずです。",
+      "expected": [
+        "hazu-da"
+      ]
+    },
+    {
+      "text": "注文した部品は昨日届くはずだった。",
+      "expected": [
+        "hazu-da"
+      ]
+    },
+    {
+      "text": "新品の電池なら、まだ使えるはずだ。",
+      "expected": [
+        "hazu-da",
+        "nara"
+      ]
+    },
+    {
+      "text": "参加者全員が賛成したわけではない。",
+      "expected": [
+        "wake-dewa-nai"
+      ]
+    },
+    {
+      "text": "別に君を責めるわけじゃないよ。",
+      "expected": [
+        "wake-dewa-nai"
+      ]
+    },
+    {
+      "text": "当時も暮らしが楽だったわけではありません。",
+      "expected": [
+        "wake-dewa-nai"
+      ]
+    },
+    {
+      "text": "審査の結果、作品を展示することになった。",
+      "expected": [
+        "koto-ni-naru"
+      ]
+    },
+    {
+      "text": "雨天時は屋上を開放しないことになりました。",
+      "expected": [
+        "koto-ni-naru"
+      ]
+    },
+    {
+      "text": "当館では入口で荷物を預けることになっている。",
+      "expected": [
+        "koto-ni-naru",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "刷ったばかりの冊子はインクの匂いがする。",
+      "expected": [
+        "ta-bakari"
+      ]
+    },
+    {
+      "text": "その頃は免許を取ったばかりでした。",
+      "expected": [
+        "ta-bakari"
+      ]
+    },
+    {
+      "text": "さっき充電したばかりなのに電源が落ちた。",
+      "expected": [
+        "noni",
+        "ta-bakari"
+      ]
+    },
+    {
+      "text": "布は洗えば洗うほど柔らかくなる。",
+      "expected": [
+        "ba-hodo",
+        "naru-change"
+      ]
+    },
+    {
+      "text": "荷物は軽ければ軽いほど助かります。",
+      "expected": [
+        "ba-hodo"
+      ]
+    },
+    {
+      "text": "道具は単純なら単純なほど扱いやすい。",
+      "expected": [
+        "ba-hodo",
+        "yasui"
+      ]
+    },
+    {
+      "text": "座席によって舞台の見え方が変わる。",
+      "expected": [
+        "kata",
+        "ni-yotte"
+      ]
+    },
+    {
+      "text": "落雷により周辺の信号が停止した。",
+      "expected": [
+        "ni-yotte"
+      ]
+    },
+    {
+      "text": "専門家による鑑定が来週始まります。",
+      "expected": [
+        "ni-yotte"
+      ]
+    },
+    {
+      "text": "一晩で城を建てられるわけがない！",
+      "expected": [
+        "rareru",
+        "wake-ga-nai"
+      ]
+    },
+    {
+      "text": "あの頑固者が簡単に譲るわけないよ。",
+      "expected": [
+        "wake-ga-nai"
+      ]
+    },
+    {
+      "text": "封も開けずに中身が分かるわけがありません。",
+      "expected": [
+        "wake-ga-nai",
+        "zuni"
+      ]
+    },
+    {
+      "text": "定休日の店に店員がいるはずがない。",
+      "expected": [
+        "hazu-ga-nai"
+      ]
+    },
+    {
+      "text": "未公開の番号を彼女が知るはずはありません。",
+      "expected": [
+        "hazu-ga-nai"
+      ]
+    },
+    {
+      "text": "新品の金庫がもう錆びるはずがない。",
+      "expected": [
+        "hazu-ga-nai"
+      ]
+    },
+    {
+      "text": "迷った末に、屋号を変えることにした。",
+      "expected": [
+        "koto-ni-suru"
+      ]
+    },
+    {
+      "text": "今夜は通知を開かないことにします。",
+      "expected": [
+        "koto-ni-suru"
+      ]
+    },
+    {
+      "text": "私は借りた物をその日のうちに返すことにしている。",
+      "expected": [
+        "koto-ni-suru",
+        "te-iru",
+        "uchi-ni"
+      ]
+    },
+    {
+      "text": "この引き出しには古い切手ばかりある。",
+      "expected": [
+        "bakari"
+      ]
+    },
+    {
+      "text": "会議では費用の話ばかり出ました。",
+      "expected": [
+        "bakari"
+      ]
+    },
+    {
+      "text": "彼は頼まれると黙ってうなずくばかりだった。",
+      "expected": [
+        "bakari",
+        "rareru",
+        "to-conditional"
+      ]
+    },
+    {
+      "text": "今から舞台の幕を上げるところです。",
+      "expected": [
+        "tokoro-da"
+      ]
+    },
+    {
+      "text": "ちょうど靴底の泥を落としたところだ。",
+      "expected": [
+        "tokoro-da"
+      ]
+    },
+    {
+      "text": "現在、申請内容を照合しているところです。",
+      "expected": [
+        "te-iru",
+        "tokoro-da"
+      ]
+    },
+    {
+      "text": "漁師にとって潮の流れは重要だ。",
+      "expected": [
+        "ni-totte"
+      ]
+    },
+    {
+      "text": "私たちにとっては痛い出費でした。",
+      "expected": [
+        "ni-totte"
+      ]
+    },
+    {
+      "text": "初心者にとっての難関は最初の設定です。",
+      "expected": [
+        "ni-totte"
+      ]
+    },
+    {
+      "text": "通訳のおかげで商談がまとまった。",
+      "expected": [
+        "okage-de"
+      ]
+    },
+    {
+      "text": "早めに予約したおかげで最前列に座れた。",
+      "expected": [
+        "okage-de"
+      ]
+    },
+    {
+      "text": "再開できたのは地域の支援のおかげです。",
+      "expected": [
+        "okage-de"
+      ]
+    },
+    {
+      "text": "配線を間違えたせいで画面が映らない。",
+      "expected": [
+        "sei-de"
+      ]
+    },
+    {
+      "text": "湿気のせいか、引き戸が重い。",
+      "expected": [
+        "sei-de"
+      ]
+    },
+    {
+      "text": "今回の損失は私の判断ミスのせいです。",
+      "expected": [
+        "sei-de"
+      ]
+    },
+    {
+      "text": "染料を落とすために専用の液を使う。",
+      "expected": [
+        "tame-ni"
+      ]
+    },
+    {
+      "text": "設備点検のため、本日は休館します。",
+      "expected": [
+        "tame-ni"
+      ]
+    },
+    {
+      "text": "これは小鳥のための水飲み場です。",
+      "expected": [
+        "tame-ni"
+      ]
+    },
+    {
+      "text": "裏山には珍しいキノコが生えるらしい。",
+      "expected": [
+        "rashii"
+      ]
+    },
+    {
+      "text": "昨夜の客は代金を払わなかったらしいです。",
+      "expected": [
+        "rashii"
+      ]
+    },
+    {
+      "text": "新設の窓口は手続きが簡単らしいね。",
+      "expected": [
+        "rashii"
+      ]
+    },
+    {
+      "text": "港の赤い建物は倉庫らしいです。",
+      "expected": [
+        "rashii-noun"
+      ]
+    },
+    {
+      "text": "今日は秋らしい澄んだ空ですね。",
+      "expected": [
+        "rashii-noun"
+      ]
+    },
+    {
+      "text": "ようやく職人らしい手つきになった。",
+      "expected": [
+        "naru-change",
+        "rashii-noun"
+      ]
+    },
+    {
+      "text": "洗ったはずの皿がまだ油っぽい。",
+      "expected": [
+        "hazu-da",
+        "ppoi"
+      ]
+    },
+    {
+      "text": "乾燥したせいで部屋が埃っぽくなった。",
+      "expected": [
+        "naru-change",
+        "ppoi",
+        "sei-de"
+      ]
+    },
+    {
+      "text": "この煮物は昨日ほど水っぽくないね。",
+      "expected": [
+        "hodo-nai",
+        "ppoi"
+      ]
+    },
+    {
+      "text": "厚いわりに、この毛布は軽い。",
+      "expected": [
+        "wari-ni"
+      ]
+    },
+    {
+      "text": "念入りに磨いたわりには光沢が出ない。",
+      "expected": [
+        "wari-ni"
+      ]
+    },
+    {
+      "text": "小規模なわりに設備は充実しています。",
+      "expected": [
+        "te-iru",
+        "wari-ni"
+      ]
+    },
+    {
+      "text": "リハーサルの最中に照明が消えた。",
+      "expected": [
+        "saichuu-ni"
+      ]
+    },
+    {
+      "text": "今は床のワックスがけの最中です。",
+      "expected": [
+        "saichuu-ni"
+      ]
+    },
+    {
+      "text": "生地をこねている最中に来客があった。",
+      "expected": [
+        "saichuu-ni",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "頼まれた荷物はもう運んじゃいました。",
+      "expected": [
+        "rareru",
+        "te-shimau"
+      ]
+    },
+    {
+      "text": "開場前に配線を済ませなくちゃいけません。",
+      "expected": [
+        "nakereba-naranai"
+      ]
+    },
+    {
+      "text": "水が出なければ管理人に連絡してください。",
+      "expected": [
+        "ba-conditional",
+        "te-kudasai"
+      ]
+    },
+    {
+      "text": "梱包中に商品を傷つけないようにしてください。",
+      "expected": [
+        "te-kudasai",
+        "you-ni-suru"
+      ]
+    },
+    {
+      "text": "申込書によると、再発行は有料だそうです。",
+      "expected": [
+        "ni-yoru-to",
+        "sou-da-hearsay"
+      ]
+    },
+    {
+      "text": "申請する前に証明書を取っておきましょう。",
+      "expected": [
+        "mae-ni",
+        "mashou",
+        "te-oku"
+      ]
+    },
+    {
+      "text": "このソフトで図面を描いてみてもいいですか？",
+      "expected": [
+        "te-miru",
+        "te-mo-ii"
+      ]
+    },
+    {
+      "text": "準備が済んだら、責任者を呼んでください。",
+      "expected": [
+        "tara",
+        "te-kudasai"
+      ]
+    },
+    {
+      "text": "箱が潰れそうだから上には積まないでください。",
+      "expected": [
+        "kara-reason",
+        "nai-de-kudasai",
+        "sou-da-looks"
+      ]
+    },
+    {
+      "text": "鍵を預けた後で、受付に番号を伝えてください。",
+      "expected": [
+        "ato-de",
+        "te-kudasai"
+      ]
+    },
+    {
+      "text": "君にもこの音を聴かせたくて録音したんだ。",
+      "expected": [
+        "n-desu",
+        "saseru",
+        "tai"
+      ]
+    },
+    {
+      "text": "客が来ないから、店主も退屈してる。",
+      "expected": [
+        "kara-reason",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "疲れてるなら、今日は休んだほうがいいでしょ？",
+      "expected": [
+        "deshou",
+        "hou-ga-ii",
+        "nara",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "港から旧市街までは坂道が続く。",
+      "expected": []
+    },
+    {
+      "text": "販売は来週の火曜日からです。",
+      "expected": []
+    },
+    {
+      "text": "この封筒は海外から届きました。",
+      "expected": []
+    },
+    {
+      "text": "手を洗ってから生地に触ろう。",
+      "expected": [
+        "te-kara",
+        "volitional"
+      ]
+    },
+    {
+      "text": "館内を一巡してから出口へ向かった。",
+      "expected": [
+        "te-kara"
+      ]
+    },
+    {
+      "text": "後で受付に領収書を預けます。",
+      "expected": []
+    },
+    {
+      "text": "続きの説明はあとでお願いします。",
+      "expected": []
+    },
+    {
+      "text": "二週間後に新しい担当者が来ます。",
+      "expected": []
+    },
+    {
+      "text": "その後で急に風向きが変わった。",
+      "expected": []
+    },
+    {
+      "text": "噴水の前に観光客が集まった。",
+      "expected": []
+    },
+    {
+      "text": "出発の前に全員の点呼を済ませた。",
+      "expected": []
+    },
+    {
+      "text": "半年ほど前に屋根を修理した。",
+      "expected": []
+    },
+    {
+      "text": "砂糖を十グラムばかり足した。",
+      "expected": []
+    },
+    {
+      "text": "会場には百人ばかり集まった。",
+      "expected": []
+    },
+    {
+      "text": "十分ばかり廊下で足止めされた。",
+      "expected": [
+        "rareru"
+      ]
+    },
+    {
+      "text": "そう、それが探偵の答えなんだね。",
+      "expected": [
+        "n-desu"
+      ]
+    },
+    {
+      "text": "私もそう思ったけど口には出さなかった。",
+      "expected": []
+    },
+    {
+      "text": "そうですね、締切は金曜日です。",
+      "expected": []
+    },
+    {
+      "text": "工具は作業台の下にしまいます。",
+      "expected": []
+    },
+    {
+      "text": "冬の毛布を押し入れにしまった。",
+      "expected": []
+    },
+    {
+      "text": "この図鑑は調べ物のためになる。",
+      "expected": [
+        "tame-ni-naru"
+      ]
+    },
+    {
+      "text": "新人にもためになる講習でした。",
+      "expected": [
+        "tame-ni-naru"
+      ]
+    },
+    {
+      "text": "念のため、予備の鍵も持参した。",
+      "expected": []
+    },
+    {
+      "text": "あの受付の人は学生じゃないよ。",
+      "expected": []
+    },
+    {
+      "text": "この仕事は素人じゃだめなんだ。",
+      "expected": [
+        "n-desu"
+      ]
+    },
+    {
+      "text": "これは私物じゃありませんよ。",
+      "expected": []
+    },
+    {
+      "text": "ちゃんと噛まなきゃ喉に詰まるよ。",
+      "expected": []
+    },
+    {
+      "text": "暗くなくちゃ星はよく見えない。",
+      "expected": []
+    },
+    {
+      "text": "皆で支えなきゃ、この棚は倒れる。",
+      "expected": []
+    },
+    {
+      "text": "屋台の焼きそばが人気でした。",
+      "expected": []
+    },
+    {
+      "text": "今朝はたらの切り身を煮ました。",
+      "expected": []
+    },
+    {
+      "text": "残念ながら抽選には外れました。",
+      "expected": []
+    },
+    {
+      "text": "この通りには昔ながらの銭湯がある。",
+      "expected": []
+    },
+    {
+      "text": "ながら運転は事故の原因になる。",
+      "expected": [
+        "naru-change"
+      ]
+    },
+    {
+      "text": "紙袋をそっと玄関の隅に置いた。",
+      "expected": []
+    },
+    {
+      "text": "望遠鏡で木星の衛星を見た。",
+      "expected": []
+    },
+    {
+      "text": "穴を開けても空気は抜けなかった。",
+      "expected": [
+        "te-mo"
+      ]
+    },
+    {
+      "text": "風が強くても船は出ます。",
+      "expected": [
+        "te-mo"
+      ]
+    },
+    {
+      "text": "集合時刻は午後でもいいですよ。",
+      "expected": []
+    },
+    {
+      "text": "昼食は麺類のほうがいいな。",
+      "expected": []
+    },
+    {
+      "text": "病院の方が郵便局より遠い。",
+      "expected": [
+        "hou-ga-yori"
+      ]
+    },
+    {
+      "text": "親切のつもりで席を譲った。",
+      "expected": []
+    },
+    {
+      "text": "送ったつもりのメールが下書きに残った。",
+      "expected": []
+    },
+    {
+      "text": "時計の針はもう正午を過ぎた。",
+      "expected": []
+    },
+    {
+      "text": "急行は小さな駅を通り過ぎた。",
+      "expected": []
+    },
+    {
+      "text": "今度の展覧会は素晴らしかった。",
+      "expected": []
+    },
+    {
+      "text": "あの縁側の人形は愛らしいね。",
+      "expected": []
+    },
+    {
+      "text": "弁当箱は昼には空っぽだった。",
+      "expected": []
+    },
+    {
+      "text": "割に合わない依頼は断りました。",
+      "expected": []
+    },
+    {
+      "text": "困ったことに、予備の電球も切れた。",
+      "expected": []
+    },
+    {
+      "text": "ところで、今度の当番は誰ですか？",
+      "expected": []
+    },
+    {
+      "text": "今のところ応募者は七名です。",
+      "expected": []
+    },
+    {
+      "text": "ここは昔、船を修理したところだ。",
+      "expected": []
+    },
+    {
+      "text": "休日には島へ渡ることもある。",
+      "expected": []
+    },
+    {
+      "text": "店員が落とし物を届けてくださった。",
+      "expected": [
+        "te-kureru"
+      ]
+    },
+    {
+      "text": "返信用の封筒を一枚ください。",
+      "expected": []
+    },
+    {
+      "text": "長い廊下の奥から足音が響いた。",
+      "expected": []
+    },
+    {
+      "text": "叔母は庭の柿を籠いっぱいに収穫した。",
+      "expected": []
+    },
+    {
+      "text": "明日の昼食は各自で用意します。",
+      "expected": []
+    },
+    {
+      "text": "古い市場の入口には大きな時計がある。",
+      "expected": []
+    },
+    {
+      "text": "今夜は鍋を囲みませんか？",
+      "expected": [
+        "masen-ka"
+      ]
+    },
+    {
+      "text": "この声が聞こえませんか？",
+      "expected": [
+        "masen-ka"
+      ]
+    },
+    {
+      "text": "今夜は鍋を囲みますか？",
+      "expected": []
+    },
+    {
+      "text": "靴を脱いでから畳に上がる。",
+      "expected": [
+        "te-kara"
+      ]
+    },
+    {
+      "text": "料金を払ってから入場しました。",
+      "expected": [
+        "te-kara"
+      ]
+    },
+    {
+      "text": "午後から雨が降りました。",
+      "expected": []
+    },
+    {
+      "text": "週末は栗を拾いに行く。",
+      "expected": [
+        "ni-iku"
+      ]
+    },
+    {
+      "text": "姉が夕飯を作りに来ました。",
+      "expected": [
+        "ni-iku"
+      ]
+    },
+    {
+      "text": "姉は昨日うちに来ました。",
+      "expected": []
+    },
+    {
+      "text": "私は軽い水筒がほしい。",
+      "expected": [
+        "ga-hoshii"
+      ]
+    },
+    {
+      "text": "当時は自分の机がほしかった。",
+      "expected": [
+        "ga-hoshii"
+      ]
+    },
+    {
+      "text": "弟に荷物を持ってほしい。",
+      "expected": [
+        "te-hoshii"
+      ]
+    },
+    {
+      "text": "眠いときは顔を洗います。",
+      "expected": [
+        "toki"
+      ]
+    },
+    {
+      "text": "財布をなくした時は焦った。",
+      "expected": [
+        "toki"
+      ]
+    },
+    {
+      "text": "壁の時計が急に止まった。",
+      "expected": []
+    },
+    {
+      "text": "休日は縫ったり編んだりする。",
+      "expected": [
+        "tari-tari"
+      ]
+    },
+    {
+      "text": "昨日は晴れたり曇ったりした。",
+      "expected": [
+        "tari-tari"
+      ]
+    },
+    {
+      "text": "二人で新しい布を選んだ。",
+      "expected": []
+    },
+    {
+      "text": "棚には湯飲みしかない。",
+      "expected": [
+        "shika-nai"
+      ]
+    },
+    {
+      "text": "昼はおにぎりしか食べませんでした。",
+      "expected": [
+        "shika-nai"
+      ]
+    },
+    {
+      "text": "修理は諦めるしかない。",
+      "expected": [
+        "shika-nai-choice"
+      ]
+    },
+    {
+      "text": "最近はあまり肉を買わない。",
+      "expected": [
+        "amari-nai"
+      ]
+    },
+    {
+      "text": "その映画はあんまり怖くなかった。",
+      "expected": [
+        "amari-nai"
+      ]
+    },
+    {
+      "text": "あまりの暑さに犬も動かない。",
+      "expected": []
+    },
+    {
+      "text": "この石けんは全然泡立たない。",
+      "expected": [
+        "zenzen-nai"
+      ]
+    },
+    {
+      "text": "昨日はぜんぜん寒くなかった。",
+      "expected": [
+        "zenzen-nai"
+      ]
+    },
+    {
+      "text": "この古い椅子でも全然平気だ。",
+      "expected": []
+    },
+    {
+      "text": "実は明日引っ越すんです。",
+      "expected": [
+        "n-desu"
+      ]
+    },
+    {
+      "text": "昨日は店が休みだったんだ。",
+      "expected": [
+        "n-desu"
+      ]
+    },
+    {
+      "text": "これは姉の古いかばんです。",
+      "expected": []
+    },
+    {
+      "text": "私は朝に泳ぐのが好きだ。",
+      "expected": [
+        "no-ga-suki"
+      ]
+    },
+    {
+      "text": "昔は人前で話すのが苦手でした。",
+      "expected": [
+        "no-ga-suki"
+      ]
+    },
+    {
+      "text": "祖母は庭の白い花が好きだ。",
+      "expected": []
+    },
+    {
+      "text": "まだ靴を磨いていない。",
+      "expected": [
+        "mada-te-inai",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "荷物はまだ届いてません。",
+      "expected": [
+        "mada-te-inai",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "父はまだ風呂に入っている。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "桃より梨のほうが安い。",
+      "expected": [
+        "hou-ga-yori"
+      ]
+    },
+    {
+      "text": "歩くほうが待つより楽だった。",
+      "expected": [
+        "hou-ga-yori"
+      ]
+    },
+    {
+      "text": "窓側のほうがいいですね。",
+      "expected": []
+    },
+    {
+      "text": "兄弟の中で妹が一番背が高い。",
+      "expected": [
+        "naka-de-ichiban"
+      ]
+    },
+    {
+      "text": "この中でどの椅子が一番楽ですか？",
+      "expected": [
+        "naka-de-ichiban"
+      ]
+    },
+    {
+      "text": "箱の中で子猫が眠っている。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "ここで切符を買うことができる。",
+      "expected": [
+        "koto-ga-dekiru"
+      ]
+    },
+    {
+      "text": "去年は一人で泳ぐことができなかった。",
+      "expected": [
+        "koto-ga-dekiru"
+      ]
+    },
+    {
+      "text": "庭に小さな池ができました。",
+      "expected": []
+    },
+    {
+      "text": "弟に靴ひもを結んであげた。",
+      "expected": [
+        "te-ageru"
+      ]
+    },
+    {
+      "text": "犬の背中をかいてやります。",
+      "expected": [
+        "te-ageru"
+      ]
+    },
+    {
+      "text": "旗を両手で高く上げた。",
+      "expected": []
+    },
+    {
+      "text": "隣の人が道を教えてくれた。",
+      "expected": [
+        "te-kureru"
+      ]
+    },
+    {
+      "text": "先生が傘を貸してくださいました。",
+      "expected": [
+        "te-kureru"
+      ]
+    },
+    {
+      "text": "叔父が私に腕時計をくれた。",
+      "expected": []
+    },
+    {
+      "text": "友達に髪を切ってもらった。",
+      "expected": [
+        "te-morau"
+      ]
+    },
+    {
+      "text": "先生に作文を見ていただきます。",
+      "expected": [
+        "te-morau"
+      ]
+    },
+    {
+      "text": "卒業祝いに辞書をもらった。",
+      "expected": []
+    },
+    {
+      "text": "机に地図が広げてある。",
+      "expected": [
+        "te-aru"
+      ]
+    },
+    {
+      "text": "玄関には花が飾ってありました。",
+      "expected": [
+        "te-aru"
+      ]
+    },
+    {
+      "text": "机の下に空き箱がある。",
+      "expected": []
+    },
+    {
+      "text": "明日は弁当を持っていく。",
+      "expected": [
+        "te-iku"
+      ]
+    },
+    {
+      "text": "これから少しずつ日が延びていく。",
+      "expected": [
+        "te-iku"
+      ]
+    },
+    {
+      "text": "夕方は一人で駅へ行く。",
+      "expected": []
+    },
+    {
+      "text": "弟が友達を連れてきた。",
+      "expected": [
+        "te-kuru"
+      ]
+    },
+    {
+      "text": "最近は客が増えてきました。",
+      "expected": [
+        "te-kuru"
+      ]
+    },
+    {
+      "text": "明日は宅配便が来ます。",
+      "expected": []
+    },
+    {
+      "text": "この包丁は野菜を切りやすい。",
+      "expected": [
+        "yasui"
+      ]
+    },
+    {
+      "text": "昔の携帯は壊れやすかった。",
+      "expected": [
+        "yasui"
+      ]
+    },
+    {
+      "text": "この八百屋の野菜は安い。",
+      "expected": []
+    },
+    {
+      "text": "この瓶はふたを開けにくい。",
+      "expected": [
+        "nikui"
+      ]
+    },
+    {
+      "text": "あの人には頼みにくかったです。",
+      "expected": [
+        "nikui"
+      ]
+    },
+    {
+      "text": "私は人の失敗を笑う人が憎い。",
+      "expected": []
+    },
+    {
+      "text": "来月から日記を書こうと思う。",
+      "expected": [
+        "you-to-omou"
+      ]
+    },
+    {
+      "text": "今夜は早く寝ようと思っている。",
+      "expected": [
+        "te-iru",
+        "you-to-omou"
+      ]
+    },
+    {
+      "text": "私はこの絵が好きだと思う。",
+      "expected": []
+    },
+    {
+      "text": "今日中に会費を払わないといけない。",
+      "expected": [
+        "nai-to-ikenai"
+      ]
+    },
+    {
+      "text": "明日は六時に起きないとだめだ。",
+      "expected": [
+        "nai-to-ikenai"
+      ]
+    },
+    {
+      "text": "水をやらないと花が枯れる。",
+      "expected": [
+        "to-conditional"
+      ]
+    },
+    {
+      "text": "今日は制服を着なくてもいい。",
+      "expected": [
+        "nakute-mo-ii",
+        "te-mo-ii"
+      ]
+    },
+    {
+      "text": "急いで返さなくてもかまいません。",
+      "expected": [
+        "nakute-mo-ii",
+        "te-mo-ii"
+      ]
+    },
+    {
+      "text": "傘を持って入ってもいい。",
+      "expected": [
+        "te-mo-ii"
+      ]
+    },
+    {
+      "text": "道が狭いので車は入れない。",
+      "expected": [
+        "node"
+      ]
+    },
+    {
+      "text": "本日は休みなので電話に出ません。",
+      "expected": [
+        "node"
+      ]
+    },
+    {
+      "text": "これは駅で買ったものです。",
+      "expected": []
+    },
+    {
+      "text": "晴れているのに肌寒い。",
+      "expected": [
+        "noni",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "約束したのに誰も来なかった。",
+      "expected": [
+        "noni"
+      ]
+    },
+    {
+      "text": "野菜を切るのにこの包丁を使う。",
+      "expected": []
+    },
+    {
+      "text": "このボタンを押すと蓋が開く。",
+      "expected": [
+        "to-conditional"
+      ]
+    },
+    {
+      "text": "窓を開けると猫が逃げた。",
+      "expected": [
+        "to-conditional"
+      ]
+    },
+    {
+      "text": "私は弟と公園で走った。",
+      "expected": []
+    },
+    {
+      "text": "魚ならこの市場が安いよ。",
+      "expected": [
+        "nara"
+      ]
+    },
+    {
+      "text": "眠いなら少し休みましょう。",
+      "expected": [
+        "mashou",
+        "nara"
+      ]
+    },
+    {
+      "text": "昨日は奈良の寺を見学した。",
+      "expected": []
+    },
+    {
+      "text": "あの店で手袋を買えばよかった。",
+      "expected": [
+        "ba-conditional",
+        "ba-yokatta"
+      ]
+    },
+    {
+      "text": "夜更かししなければよかったです。",
+      "expected": [
+        "ba-conditional",
+        "ba-yokatta"
+      ]
+    },
+    {
+      "text": "晴れれば庭で昼食にする。",
+      "expected": [
+        "ba-conditional"
+      ]
+    },
+    {
+      "text": "兄に駅まで迎えに来てほしい。",
+      "expected": [
+        "ni-iku",
+        "te-hoshii"
+      ]
+    },
+    {
+      "text": "その話は誰にも言わないでほしい。",
+      "expected": [
+        "te-hoshii"
+      ]
+    },
+    {
+      "text": "私は新しい自転車がほしい。",
+      "expected": [
+        "ga-hoshii"
+      ]
+    },
+    {
+      "text": "庭の梅が咲き始めた。",
+      "expected": [
+        "hajimeru"
+      ]
+    },
+    {
+      "text": "妹は急に日記を書き始めました。",
+      "expected": [
+        "hajimeru"
+      ]
+    },
+    {
+      "text": "会議は予定の時刻に始まった。",
+      "expected": []
+    },
+    {
+      "text": "やっと靴下を編み終わった。",
+      "expected": [
+        "owaru"
+      ]
+    },
+    {
+      "text": "夕飯を食べ終わって皿を洗った。",
+      "expected": [
+        "owaru"
+      ]
+    },
+    {
+      "text": "町の祭りは昨日終わった。",
+      "expected": []
+    },
+    {
+      "text": "祖父は黙って歩き続けた。",
+      "expected": [
+        "tsuzukeru"
+      ]
+    },
+    {
+      "text": "この坂を登り続けます。",
+      "expected": [
+        "tsuzukeru"
+      ]
+    },
+    {
+      "text": "兄は今も剣道を続けている。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "母は弟に野菜を洗わせた。",
+      "expected": [
+        "saseru"
+      ]
+    },
+    {
+      "text": "今日は子供を好きなだけ遊ばせます。",
+      "expected": [
+        "saseru"
+      ]
+    },
+    {
+      "text": "母は台所で野菜を洗った。",
+      "expected": []
+    },
+    {
+      "text": "駅で知らない人に話しかけられた。",
+      "expected": [
+        "rareru"
+      ]
+    },
+    {
+      "text": "この席から花火が見られます。",
+      "expected": [
+        "rareru"
+      ]
+    },
+    {
+      "text": "庭の赤いバラが風で揺れる。",
+      "expected": []
+    },
+    {
+      "text": "あの雲は大きな魚みたいだ。",
+      "expected": [
+        "mitai"
+      ]
+    },
+    {
+      "text": "昨日の受付は新人みたいでした。",
+      "expected": [
+        "mitai"
+      ]
+    },
+    {
+      "text": "今夜は古い映画を見たい。",
+      "expected": [
+        "tai"
+      ]
+    },
+    {
+      "text": "夕方には空が赤くなった。",
+      "expected": [
+        "naru-change"
+      ]
+    },
+    {
+      "text": "妹は来年中学生になります。",
+      "expected": [
+        "naru-change"
+      ]
+    },
+    {
+      "text": "遠くでお寺の鐘が鳴った。",
+      "expected": []
+    },
+    {
+      "text": "この坂は前の坂ほど急ではない。",
+      "expected": [
+        "hodo-nai"
+      ]
+    },
+    {
+      "text": "旅費は思ったほど高くなかった。",
+      "expected": [
+        "hodo-nai"
+      ]
+    },
+    {
+      "text": "十分ほど駅前で待った。",
+      "expected": []
+    },
+    {
+      "text": "この宿は静かだし庭も広い。",
+      "expected": [
+        "shi"
+      ]
+    },
+    {
+      "text": "雨も止んだし散歩しよう。",
+      "expected": [
+        "shi",
+        "volitional"
+      ]
+    },
+    {
+      "text": "私は去年その町へ引っ越した。",
+      "expected": []
+    },
+    {
+      "text": "週に二回プールへ通う。",
+      "expected": [
+        "kai-frequency"
+      ]
+    },
+    {
+      "text": "去年は月に一度映画を見た。",
+      "expected": [
+        "kai-frequency"
+      ]
+    },
+    {
+      "text": "昨日は同じ曲を二回聴いた。",
+      "expected": []
+    },
+    {
+      "text": "弟は新しい靴をほしがっている。",
+      "expected": [
+        "garu",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "娘は一人で電車に乗りたがった。",
+      "expected": [
+        "garu"
+      ]
+    },
+    {
+      "text": "私はその赤い帽子がほしい。",
+      "expected": [
+        "ga-hoshii"
+      ]
+    },
+    {
+      "text": "一度店長に相談したらどう？",
+      "expected": [
+        "tara-dou"
+      ]
+    },
+    {
+      "text": "近くの宿で休んだらいかがですか？",
+      "expected": [
+        "tara-dou"
+      ]
+    },
+    {
+      "text": "相談したらすぐ解決した。",
+      "expected": [
+        "tara"
+      ]
+    },
+    {
+      "text": "財布に切符が十枚も入っていた。",
+      "expected": [
+        "number-mo",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "その話は何度も聞きました。",
+      "expected": [
+        "number-mo"
+      ]
+    },
+    {
+      "text": "その店には一度も入っていない。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "今日は川沿いを歩こう。",
+      "expected": [
+        "volitional"
+      ]
+    },
+    {
+      "text": "帰りにパンを買って帰ろう。",
+      "expected": [
+        "volitional"
+      ]
+    },
+    {
+      "text": "明日は家でゆっくりしようと思う。",
+      "expected": [
+        "you-to-omou"
+      ]
+    },
+    {
+      "text": "住所を確認していただけませんか？",
+      "expected": [
+        "te-itadakemasen-ka"
+      ]
+    },
+    {
+      "text": "この箱を運んでもらえませんか？",
+      "expected": [
+        "te-itadakemasen-ka"
+      ]
+    },
+    {
+      "text": "姉に荷物を預かってもらった。",
+      "expected": [
+        "te-morau"
+      ]
+    },
+    {
+      "text": "なくした鍵が見つかるといいね。",
+      "expected": [
+        "to-ii"
+      ]
+    },
+    {
+      "text": "迷った時は受付に聞くといいですよ。",
+      "expected": [
+        "to-ii",
+        "toki"
+      ]
+    },
+    {
+      "text": "私はこの香りがいいと思う。",
+      "expected": []
+    },
+    {
+      "text": "約束を忘れてごめんね。",
+      "expected": [
+        "te-sumimasen"
+      ]
+    },
+    {
+      "text": "急に電話してすみません。",
+      "expected": [
+        "te-sumimasen"
+      ]
+    },
+    {
+      "text": "この部屋は狭くて静かです。",
+      "expected": []
+    },
+    {
+      "text": "脱いだ靴はそろえなさい。",
+      "expected": [
+        "nasai"
+      ]
+    },
+    {
+      "text": "答えは鉛筆で書きなさい。",
+      "expected": [
+        "nasai"
+      ]
+    },
+    {
+      "text": "雪が降っても配達は続く。",
+      "expected": [
+        "te-mo"
+      ]
+    },
+    {
+      "text": "高くてもこの靴を買います。",
+      "expected": [
+        "te-mo"
+      ]
+    },
+    {
+      "text": "兄は昨日も遅く帰った。",
+      "expected": []
+    },
+    {
+      "text": "席を取ってくれてありがとう。",
+      "expected": [
+        "te-kurete-arigatou"
+      ]
+    },
+    {
+      "text": "誘ってくださってありがとうございます。",
+      "expected": [
+        "te-kurete-arigatou"
+      ]
+    },
+    {
+      "text": "母が私の席を取ってくれた。",
+      "expected": [
+        "te-kureru"
+      ]
+    },
+    {
+      "text": "あの時写真を撮ってよかった。",
+      "expected": [
+        "te-yokatta"
+      ]
+    },
+    {
+      "text": "道を間違えなくてよかったです。",
+      "expected": [
+        "te-yokatta"
+      ]
+    },
+    {
+      "text": "この包丁は切れ味がよかった。",
+      "expected": []
+    },
+    {
+      "text": "今朝は傘を持たないで出た。",
+      "expected": [
+        "nai-de"
+      ]
+    },
+    {
+      "text": "昨日は砂糖を入れないで飲みました。",
+      "expected": [
+        "nai-de"
+      ]
+    },
+    {
+      "text": "今日は外に出ないでください。",
+      "expected": [
+        "nai-de-kudasai"
+      ]
+    },
+    {
+      "text": "今夜空いているかどうか教えて。",
+      "expected": [
+        "ka-dou-ka",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "鍵が本物かどうか確かめた。",
+      "expected": [
+        "ka-dou-ka"
+      ]
+    },
+    {
+      "text": "どうか無事に帰ってください。",
+      "expected": [
+        "te-kudasai"
+      ]
+    },
+    {
+      "text": "駅前に小春という店がある。",
+      "expected": [
+        "to-iu"
+      ]
+    },
+    {
+      "text": "橋が通れるという知らせが来た。",
+      "expected": [
+        "to-iu"
+      ]
+    },
+    {
+      "text": "祖母は笑顔でおはようと言った。",
+      "expected": []
+    },
+    {
+      "text": "湯が沸く間に野菜を洗う。",
+      "expected": [
+        "aida-ni"
+      ]
+    },
+    {
+      "text": "子供が寝ている間は静かにした。",
+      "expected": [
+        "aida-ni",
+        "suru-change",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "棚と壁の間に紙が落ちた。",
+      "expected": []
+    },
+    {
+      "text": "写真の文字を大きくした。",
+      "expected": [
+        "suru-change"
+      ]
+    },
+    {
+      "text": "客が来るので部屋をきれいにします。",
+      "expected": [
+        "node",
+        "suru-change"
+      ]
+    },
+    {
+      "text": "庭の木が急に大きくなった。",
+      "expected": [
+        "naru-change"
+      ]
+    },
+    {
+      "text": "綿のような雲が浮かんでいる。",
+      "expected": [
+        "no-you-na",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "弟は風のように走り去った。",
+      "expected": [
+        "no-you-na"
+      ]
+    },
+    {
+      "text": "誰かが窓を開けたようだ。",
+      "expected": [
+        "you-da"
+      ]
+    },
+    {
+      "text": "朝から廊下を掃除させられた。",
+      "expected": [
+        "saserareru"
+      ]
+    },
+    {
+      "text": "宴会では何度も歌わされました。",
+      "expected": [
+        "number-mo",
+        "saserareru"
+      ]
+    },
+    {
+      "text": "妹に好きな服を選ばせた。",
+      "expected": [
+        "saseru"
+      ]
+    },
+    {
+      "text": "この帯の結び方を教えて。",
+      "expected": [
+        "kata"
+      ]
+    },
+    {
+      "text": "券の買い方が分かりません。",
+      "expected": [
+        "kata"
+      ]
+    },
+    {
+      "text": "隣に住む方はパン屋さんだ。",
+      "expected": []
+    },
+    {
+      "text": "眠い時は横になればいい。",
+      "expected": [
+        "ba-ii",
+        "naru-change",
+        "toki"
+      ]
+    },
+    {
+      "text": "どの窓口に並んだらいいですか？",
+      "expected": [
+        "ba-ii"
+      ]
+    },
+    {
+      "text": "この部屋は日当たりがいい。",
+      "expected": []
+    },
+    {
+      "text": "この失敗も将来のためになる。",
+      "expected": [
+        "tame-ni-naru"
+      ]
+    },
+    {
+      "text": "昨日の講座はためになりました。",
+      "expected": [
+        "tame-ni-naru"
+      ]
+    },
+    {
+      "text": "家族のために夕飯を作る。",
+      "expected": [
+        "tame-ni"
+      ]
+    },
+    {
+      "text": "外は風が強いようです。",
+      "expected": [
+        "you-da"
+      ]
+    },
+    {
+      "text": "どうも道を間違えたようだ。",
+      "expected": [
+        "you-da"
+      ]
+    },
+    {
+      "text": "池は鏡のように静かだった。",
+      "expected": [
+        "no-you-na"
+      ]
+    },
+    {
+      "text": "この足跡は猫に違いない。",
+      "expected": [
+        "ni-chigainai"
+      ]
+    },
+    {
+      "text": "あの声は隣の奥さんに違いありません。",
+      "expected": [
+        "ni-chigainai"
+      ]
+    },
+    {
+      "text": "姉と私の靴には違いがある。",
+      "expected": []
+    },
+    {
+      "text": "そんな話は冗談に決まっている。",
+      "expected": [
+        "ni-kimatteiru",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "この勝負は兄が勝つに決まってる。",
+      "expected": [
+        "ni-kimatteiru",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "次の会議は月曜に決まった。",
+      "expected": []
+    },
+    {
+      "text": "祭りの歴史について調べる。",
+      "expected": [
+        "ni-tsuite"
+      ]
+    },
+    {
+      "text": "料金についての質問がありました。",
+      "expected": [
+        "ni-tsuite"
+      ]
+    },
+    {
+      "text": "靴の裏に泥がついている。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "店員に対して失礼な態度だ。",
+      "expected": [
+        "ni-taishite"
+      ]
+    },
+    {
+      "text": "子供に対する考え方が変わった。",
+      "expected": [
+        "kata",
+        "ni-taishite"
+      ]
+    },
+    {
+      "text": "姉は通訳として旅に同行した。",
+      "expected": [
+        "to-shite"
+      ]
+    },
+    {
+      "text": "親としての責任を感じます。",
+      "expected": [
+        "to-shite"
+      ]
+    },
+    {
+      "text": "立とうとして椅子を倒した。",
+      "expected": [
+        "you-to-suru"
+      ]
+    },
+    {
+      "text": "引っ越しに関して相談がある。",
+      "expected": [
+        "ni-kanshite"
+      ]
+    },
+    {
+      "text": "水質に関する資料を読みました。",
+      "expected": [
+        "ni-kanshite"
+      ]
+    },
+    {
+      "text": "先月に比べて食費が減った。",
+      "expected": [
+        "ni-kurabete"
+      ]
+    },
+    {
+      "text": "兄に比べると私は背が低い。",
+      "expected": [
+        "ni-kurabete"
+      ]
+    },
+    {
+      "text": "店で二つの時計を比べた。",
+      "expected": []
+    },
+    {
+      "text": "初挑戦にしては上手にできた。",
+      "expected": [
+        "ni-shite-wa"
+      ]
+    },
+    {
+      "text": "春にしては寒い夜でした。",
+      "expected": [
+        "ni-shite-wa"
+      ]
+    },
+    {
+      "text": "この服は部屋着にしています。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "帰省するたびに写真を撮る。",
+      "expected": [
+        "tabi-ni"
+      ]
+    },
+    {
+      "text": "引っ越しのたびに本を減らした。",
+      "expected": [
+        "tabi-ni"
+      ]
+    },
+    {
+      "text": "足袋に小さな穴が開いた。",
+      "expected": []
+    },
+    {
+      "text": "暖かいうちにスープを飲もう。",
+      "expected": [
+        "uchi-ni",
+        "volitional"
+      ]
+    },
+    {
+      "text": "雨が降らないうちに帰りました。",
+      "expected": [
+        "uchi-ni"
+      ]
+    },
+    {
+      "text": "うちには黒い犬が二匹いる。",
+      "expected": []
+    },
+    {
+      "text": "鍵をかけずに出かけた。",
+      "expected": [
+        "zuni"
+      ]
+    },
+    {
+      "text": "弟は返事をせずに部屋へ戻った。",
+      "expected": [
+        "zuni"
+      ]
+    },
+    {
+      "text": "椅子に座ったとたん電話が鳴った。",
+      "expected": [
+        "totan"
+      ]
+    },
+    {
+      "text": "鍋の蓋を取った途端に湯気が出た。",
+      "expected": [
+        "totan"
+      ]
+    },
+    {
+      "text": "車庫の屋根はトタンでできている。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "借りた物は早く返すべきだ。",
+      "expected": [
+        "beki"
+      ]
+    },
+    {
+      "text": "他人の手紙を開けるべきではない。",
+      "expected": [
+        "beki"
+      ]
+    },
+    {
+      "text": "集合場所は駅前だっけ？",
+      "expected": [
+        "kke"
+      ]
+    },
+    {
+      "text": "この店は日曜も開いてたっけ？",
+      "expected": [
+        "kke",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "夕飯にはコロッケを作った。",
+      "expected": []
+    },
+    {
+      "text": "こんな所で会うなんて驚いた。",
+      "expected": [
+        "nante"
+      ]
+    },
+    {
+      "text": "徹夜なんてもう無理だよ。",
+      "expected": [
+        "nante"
+      ]
+    },
+    {
+      "text": "さっきの人は何て言ったの？",
+      "expected": [
+        "n-desu"
+      ]
+    },
+    {
+      "text": "最近は朝食を抜きがちだ。",
+      "expected": [
+        "gachi"
+      ]
+    },
+    {
+      "text": "冬の空は曇りがちでした。",
+      "expected": [
+        "gachi"
+      ]
+    },
+    {
+      "text": "じゃんけんは弟の勝ちだ。",
+      "expected": []
+    },
+    {
+      "text": "作業服が泥だらけになった。",
+      "expected": [
+        "darake",
+        "naru-change"
+      ]
+    },
+    {
+      "text": "机の中は古いレシートだらけです。",
+      "expected": [
+        "darake"
+      ]
+    },
+    {
+      "text": "隣の赤ん坊が急に笑い出した。",
+      "expected": [
+        "dasu"
+      ]
+    },
+    {
+      "text": "午後から風が吹き出しました。",
+      "expected": [
+        "dasu"
+      ]
+    },
+    {
+      "text": "引き出しから鍵を取り出した。",
+      "expected": []
+    },
+    {
+      "text": "袋を開けようとしたら破れた。",
+      "expected": [
+        "tara",
+        "you-to-suru"
+      ]
+    },
+    {
+      "text": "猫は外へ逃げようとしている。",
+      "expected": [
+        "te-iru",
+        "you-to-suru"
+      ]
+    },
+    {
+      "text": "今週こそ部屋を片づけよう。",
+      "expected": [
+        "koso",
+        "volitional"
+      ]
+    },
+    {
+      "text": "そんな小さな傷で慌てることはない。",
+      "expected": [
+        "koto-wa-nai"
+      ]
+    },
+    {
+      "text": "無理に全部食べることはありません。",
+      "expected": [
+        "koto-wa-nai"
+      ]
+    },
+    {
+      "text": "私はまだ船に乗ったことはない。",
+      "expected": [
+        "ta-koto-ga-aru"
+      ]
+    },
+    {
+      "text": "郵便局へ行くついでに牛乳を買う。",
+      "expected": [
+        "tsuide-ni"
+      ]
+    },
+    {
+      "text": "洗濯のついでに靴も洗った。",
+      "expected": [
+        "tsuide-ni"
+      ]
+    },
+    {
+      "text": "空の湯飲みにお茶を注いでいる。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "牛乳の代わりに豆乳を使った。",
+      "expected": [
+        "kawari-ni"
+      ]
+    },
+    {
+      "text": "留守番をする代わりに本をもらう。",
+      "expected": [
+        "kawari-ni"
+      ]
+    },
+    {
+      "text": "あの日の親切は決して忘れない。",
+      "expected": [
+        "kesshite-nai"
+      ]
+    },
+    {
+      "text": "この扉は決して開けるな。",
+      "expected": [
+        "kesshite-nai"
+      ]
+    },
+    {
+      "text": "出発前に部屋の電気を消して。",
+      "expected": []
+    },
+    {
+      "text": "この靴は色もよければ形もいい。",
+      "expected": [
+        "mo-ba-mo"
+      ]
+    },
+    {
+      "text": "姉は歌もうまければ料理も上手でした。",
+      "expected": [
+        "mo-ba-mo"
+      ]
+    },
+    {
+      "text": "庭には梅も桃も植えてある。",
+      "expected": [
+        "te-aru"
+      ]
+    },
+    {
+      "text": "鍵さえあれば中に入れる。",
+      "expected": [
+        "sae-ba"
+      ]
+    },
+    {
+      "text": "名前さえ書いたら応募できる。",
+      "expected": [
+        "sae-ba"
+      ]
+    },
+    {
+      "text": "自分の住所さえ忘れた。",
+      "expected": [
+        "sae"
+      ]
+    },
+    {
+      "text": "この量はとても食べられない。",
+      "expected": [
+        "rareru",
+        "totemo-nai"
+      ]
+    },
+    {
+      "text": "今の給料では到底家を買えません。",
+      "expected": [
+        "totemo-nai"
+      ]
+    },
+    {
+      "text": "この季節の川はとても美しい。",
+      "expected": []
+    },
+    {
+      "text": "親になって初めて苦労が分かった。",
+      "expected": [
+        "naru-change",
+        "te-hajimete"
+      ]
+    },
+    {
+      "text": "一人で暮らして初めて料理の楽しさを知った。",
+      "expected": [
+        "te-hajimete"
+      ]
+    },
+    {
+      "text": "昨日初めて陶芸を体験した。",
+      "expected": []
+    },
+    {
+      "text": "この町は焼き物で有名だ。",
+      "expected": [
+        "de-yuumei"
+      ]
+    },
+    {
+      "text": "あの店は量が多いことで有名です。",
+      "expected": [
+        "de-yuumei"
+      ]
+    },
+    {
+      "text": "昨日駅前で有名な歌手を見た。",
+      "expected": []
+    },
+    {
+      "text": "母をはじめ家族全員が猫好きだ。",
+      "expected": [
+        "wo-hajime"
+      ]
+    },
+    {
+      "text": "米をはじめとして食料品が値上がりした。",
+      "expected": [
+        "wo-hajime"
+      ]
+    },
+    {
+      "text": "今日から新しい仕事を始める。",
+      "expected": []
+    },
+    {
+      "text": "それは現実的な値段ではない。",
+      "expected": [
+        "teki"
+      ]
+    },
+    {
+      "text": "定期的に歯の検査を受けます。",
+      "expected": [
+        "teki"
+      ]
+    },
+    {
+      "text": "庭の木から水滴が落ちた。",
+      "expected": []
+    },
+    {
+      "text": "声が出ないくらい驚いた。",
+      "expected": [
+        "kurai"
+      ]
+    },
+    {
+      "text": "これぐらい自分で運べます。",
+      "expected": [
+        "kurai"
+      ]
+    },
+    {
+      "text": "駅まで五分ぐらい歩いた。",
+      "expected": []
+    },
+    {
+      "text": "手が震えるほど緊張した。",
+      "expected": [
+        "hodo-extent"
+      ]
+    },
+    {
+      "text": "涙が出るほど笑いました。",
+      "expected": [
+        "hodo-extent"
+      ]
+    },
+    {
+      "text": "店には十人ほど客がいた。",
+      "expected": []
+    },
+    {
+      "text": "眼鏡をかけたまま寝た。",
+      "expected": [
+        "mama"
+      ]
+    },
+    {
+      "text": "箱はそのまま棚に戻してください。",
+      "expected": [
+        "mama",
+        "te-kudasai"
+      ]
+    },
+    {
+      "text": "引っ越すとしたら海の近くがいい。",
+      "expected": [
+        "to-shitara"
+      ]
+    },
+    {
+      "text": "明日が休みだとすれば今夜は暇だ。",
+      "expected": [
+        "to-shitara"
+      ]
+    },
+    {
+      "text": "祖父は少し休むと言った。",
+      "expected": []
+    },
+    {
+      "text": "いれたてのお茶は香りがいい。",
+      "expected": [
+        "tate"
+      ]
+    },
+    {
+      "text": "塗りたての椅子に座ってしまった。",
+      "expected": [
+        "tate",
+        "te-shimau"
+      ]
+    },
+    {
+      "text": "玄関に傘立てを置いた。",
+      "expected": []
+    },
+    {
+      "text": "今夜は娘と二人きりだ。",
+      "expected": [
+        "kiri"
+      ]
+    },
+    {
+      "text": "彼とは一度会ったきりです。",
+      "expected": [
+        "kiri"
+      ]
+    },
+    {
+      "text": "今朝は山に濃い霧が出た。",
+      "expected": []
+    },
+    {
+      "text": "弟は眠ったふりをしている。",
+      "expected": [
+        "furi",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "私は元気なふりをしました。",
+      "expected": [
+        "furi"
+      ]
+    },
+    {
+      "text": "祖母は手の振りが大きい。",
+      "expected": []
+    },
+    {
+      "text": "もう同じ失敗は繰り返すまい。",
+      "expected": [
+        "mai"
+      ]
+    },
+    {
+      "text": "この雨では客も来るまい。",
+      "expected": [
+        "mai"
+      ]
+    },
+    {
+      "text": "引き出しに紙が三枚ある。",
+      "expected": []
+    },
+    {
+      "text": "疲れて靴を脱ぐ気力さえない。",
+      "expected": [
+        "sae"
+      ]
+    },
+    {
+      "text": "あの話は先生でさえ知らなかった。",
+      "expected": [
+        "sae"
+      ]
+    },
+    {
+      "text": "時間さえあれば完成する。",
+      "expected": [
+        "sae-ba"
+      ]
+    },
+    {
+      "text": "瓶の蓋がなかなか開かない。",
+      "expected": [
+        "nakanaka-nai"
+      ]
+    },
+    {
+      "text": "昨夜はなかなか寝つけませんでした。",
+      "expected": [
+        "nakanaka-nai"
+      ]
+    },
+    {
+      "text": "この弁当はなかなかおいしい。",
+      "expected": []
+    },
+    {
+      "text": "彼は振り向かず、先へ進んだ。",
+      "expected": [
+        "zu"
+      ]
+    },
+    {
+      "text": "住所を確認せず、荷物を送った。",
+      "expected": [
+        "zu"
+      ]
+    },
+    {
+      "text": "弟は水をこぼさずに運んだ。",
+      "expected": [
+        "zuni"
+      ]
+    },
+    {
+      "text": "迷わないように地図を描いた。",
+      "expected": [
+        "you-ni"
+      ]
+    },
+    {
+      "text": "母に早く帰るように言われた。",
+      "expected": [
+        "rareru",
+        "you-ni"
+      ]
+    },
+    {
+      "text": "明日から毎日歩くようにする。",
+      "expected": [
+        "you-ni-suru"
+      ]
+    },
+    {
+      "text": "今日こそ台所を片づける。",
+      "expected": [
+        "koso"
+      ]
+    },
+    {
+      "text": "こちらこそお世話になりました。",
+      "expected": [
+        "koso"
+      ]
+    },
+    {
+      "text": "弟はこそこそ部屋を出た。",
+      "expected": []
+    },
+    {
+      "text": "疲れた日は早く寝るに限る。",
+      "expected": [
+        "ni-kagiru"
+      ]
+    },
+    {
+      "text": "冬の朝は熱いお茶に限ります。",
+      "expected": [
+        "ni-kagiru"
+      ]
+    },
+    {
+      "text": "特売は今日一日に限ります。",
+      "expected": []
+    },
+    {
+      "text": "仲間とともに頂上を目指した。",
+      "expected": [
+        "to-tomo-ni"
+      ]
+    },
+    {
+      "text": "日が沈むとともに風が冷たくなった。",
+      "expected": [
+        "naru-change",
+        "to-tomo-ni"
+      ]
+    },
+    {
+      "text": "父と友達が将棋を始めた。",
+      "expected": []
+    },
+    {
+      "text": "これは私の想像にすぎない。",
+      "expected": [
+        "ni-suginai"
+      ]
+    },
+    {
+      "text": "今回の結果は偶然にすぎません。",
+      "expected": [
+        "ni-suginai"
+      ]
+    },
+    {
+      "text": "駅前を通り過ぎないでください。",
+      "expected": [
+        "nai-de-kudasai"
+      ]
+    },
+    {
+      "text": "式典は公民館において行う。",
+      "expected": [
+        "ni-oite"
+      ]
+    },
+    {
+      "text": "家庭における節電を考えます。",
+      "expected": [
+        "ni-oite"
+      ]
+    },
+    {
+      "text": "荷物は玄関に置いてください。",
+      "expected": [
+        "te-kudasai"
+      ]
+    },
+    {
+      "text": "弟は不安げに窓を見た。",
+      "expected": [
+        "ge"
+      ]
+    },
+    {
+      "text": "姉の顔はどこか悲しげだった。",
+      "expected": [
+        "ge"
+      ]
+    },
+    {
+      "text": "夕方に長い影が伸びた。",
+      "expected": []
+    },
+    {
+      "text": "終電がないので泊まるしかない。",
+      "expected": [
+        "node",
+        "shika-nai-choice"
+      ]
+    },
+    {
+      "text": "故障したので買い替えるしかありません。",
+      "expected": [
+        "node",
+        "shika-nai-choice"
+      ]
+    },
+    {
+      "text": "冷蔵庫には卵しかない。",
+      "expected": [
+        "shika-nai"
+      ]
+    },
+    {
+      "text": "夜が更けるにつれて客が減った。",
+      "expected": [
+        "ni-tsurete"
+      ]
+    },
+    {
+      "text": "季節が進むにつれ日が短くなる。",
+      "expected": [
+        "naru-change",
+        "ni-tsurete"
+      ]
+    },
+    {
+      "text": "娘を動物園に連れて行った。",
+      "expected": [
+        "te-iku"
+      ]
+    },
+    {
+      "text": "人数が増えるに従って費用も増す。",
+      "expected": [
+        "ni-shitagatte"
+      ]
+    },
+    {
+      "text": "係員の指示にしたがって並んだ。",
+      "expected": [
+        "ni-shitagatte"
+      ]
+    },
+    {
+      "text": "新人は先輩に従った。",
+      "expected": []
+    },
+    {
+      "text": "借りた傘をなくすわけにはいかない。",
+      "expected": [
+        "wake-ni-wa-ikanai"
+      ]
+    },
+    {
+      "text": "大事な式を欠席するわけにはいきません。",
+      "expected": [
+        "wake-ni-wa-ikanai"
+      ]
+    },
+    {
+      "text": "蚊に刺された所がかゆくてたまらない。",
+      "expected": [
+        "rareru",
+        "te-tamaranai"
+      ]
+    },
+    {
+      "text": "昨日は眠くてしょうがなかった。",
+      "expected": [
+        "te-tamaranai"
+      ]
+    },
+    {
+      "text": "小銭を使って貯金がたまらない。",
+      "expected": []
+    },
+    {
+      "text": "知っているくせに黙っていた。",
+      "expected": [
+        "kuse-ni",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "弟は暇なくせに手伝わない。",
+      "expected": [
+        "kuse-ni"
+      ]
+    },
+    {
+      "text": "私は爪をかむ癖に悩んでいる。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "たとえ負けてもまた挑戦する。",
+      "expected": [
+        "tatoe-temo"
+      ]
+    },
+    {
+      "text": "たとえ遠くても会いに行きます。",
+      "expected": [
+        "ni-iku",
+        "tatoe-temo"
+      ]
+    },
+    {
+      "text": "例え話を聞いても分からない。",
+      "expected": [
+        "te-mo"
+      ]
+    },
+    {
+      "text": "庭の花に一日おきに水をやる。",
+      "expected": [
+        "okini"
+      ]
+    },
+    {
+      "text": "バスは十五分おきに来ます。",
+      "expected": [
+        "okini"
+      ]
+    },
+    {
+      "text": "鍵を置きに二階へ上がった。",
+      "expected": [
+        "ni-iku"
+      ]
+    },
+    {
+      "text": "道理で静かなわけだ。",
+      "expected": [
+        "wake-da"
+      ]
+    },
+    {
+      "text": "つまり一人千円払うわけですね。",
+      "expected": [
+        "wake-da"
+      ]
+    },
+    {
+      "text": "彼が黙って帰ったわけを聞いた。",
+      "expected": []
+    },
+    {
+      "text": "見本のとおりに紙を折った。",
+      "expected": [
+        "toori-ni"
+      ]
+    },
+    {
+      "text": "予定通りに荷物が届きました。",
+      "expected": [
+        "toori-ni"
+      ]
+    },
+    {
+      "text": "この通りには本屋が二軒ある。",
+      "expected": []
+    },
+    {
+      "text": "感謝を込めて花を贈った。",
+      "expected": [
+        "wo-komete"
+      ]
+    },
+    {
+      "text": "祈りをこめて鶴を折ります。",
+      "expected": [
+        "wo-komete"
+      ]
+    },
+    {
+      "text": "姉を通じてその店を知った。",
+      "expected": [
+        "wo-tsuujite"
+      ]
+    },
+    {
+      "text": "この町は一年を通して風が強い。",
+      "expected": [
+        "wo-tsuujite"
+      ]
+    },
+    {
+      "text": "廊下を通って裏口へ出た。",
+      "expected": []
+    },
+    {
+      "text": "兄だけでなく妹も眼鏡をかけている。",
+      "expected": [
+        "dake-de-naku",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "この店は安いだけじゃなく味もいい。",
+      "expected": [
+        "dake-de-naku"
+      ]
+    },
+    {
+      "text": "私だけがまだ残っている。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "父はわざわざ駅まで迎えに来た。",
+      "expected": [
+        "ni-iku",
+        "wazawaza"
+      ]
+    },
+    {
+      "text": "わざわざ包み直してくれた。",
+      "expected": [
+        "te-kureru",
+        "wazawaza"
+      ]
+    },
+    {
+      "text": "まさか弟が店長だったとは。",
+      "expected": [
+        "masaka"
+      ]
+    },
+    {
+      "text": "まさか財布までなくしたの？",
+      "expected": [
+        "masaka",
+        "n-desu"
+      ]
+    },
+    {
+      "text": "一体誰が窓を割ったの？",
+      "expected": [
+        "ittai",
+        "n-desu"
+      ]
+    },
+    {
+      "text": "いったい鍵はどこにある？",
+      "expected": [
+        "ittai"
+      ]
+    },
+    {
+      "text": "入口に銅像が一体立っている。",
+      "expected": [
+        "te-iru"
+      ]
+    },
+    {
+      "text": "どうやら誰かが先に来たようだ。",
+      "expected": [
+        "douyara",
+        "you-da"
+      ]
+    },
+    {
+      "text": "どうやら店は休みらしい。",
+      "expected": [
+        "douyara",
+        "rashii-noun"
+      ]
+    },
+    {
+      "text": "この箱はどうやって開けるの？",
+      "expected": [
+        "n-desu"
+      ]
+    },
+    {
+      "text": "さらに送料が五百円かかる。",
+      "expected": [
+        "sarani"
+      ]
+    },
+    {
+      "text": "夕方には風がさらに強くなった。",
+      "expected": [
+        "naru-change",
+        "sarani"
+      ]
+    },
+    {
+      "text": "皿に切った果物を並べた。",
+      "expected": []
+    },
+    {
+      "text": "切符はすでに売り切れていた。",
+      "expected": [
+        "sudeni",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "店には既に長い列ができています。",
+      "expected": [
+        "sudeni",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "つい余計な一言を言ってしまった。",
+      "expected": [
+        "te-shimau",
+        "tsui"
+      ]
+    },
+    {
+      "text": "昨日もつい夜更かしした。",
+      "expected": [
+        "tsui"
+      ]
+    },
+    {
+      "text": "兄はついたての後ろに隠れた。",
+      "expected": []
+    },
+    {
+      "text": "この服はむしろ冬に合う。",
+      "expected": [
+        "mushiro"
+      ]
+    },
+    {
+      "text": "急ぐよりむしろ休むべきだ。",
+      "expected": [
+        "beki",
+        "mushiro"
+      ]
+    },
+    {
+      "text": "庭にむしろを一枚敷いた。",
+      "expected": []
+    },
+    {
+      "text": "どうしても祖母の家に泊まりたい。",
+      "expected": [
+        "doushitemo",
+        "tai"
+      ]
+    },
+    {
+      "text": "番号がどうしても思い出せなかった。",
+      "expected": [
+        "doushitemo"
+      ]
+    },
+    {
+      "text": "どうして今日は店を閉めるの？",
+      "expected": [
+        "n-desu"
+      ]
+    },
+    {
+      "text": "この箱はせいぜい五キロだ。",
+      "expected": [
+        "seizei"
+      ]
+    },
+    {
+      "text": "泊まれてもせいぜい二泊です。",
+      "expected": [
+        "seizei",
+        "te-mo"
+      ]
+    },
+    {
+      "text": "大きい魚がおいしいとは限らない。",
+      "expected": [
+        "to-wa-kagiranai"
+      ]
+    },
+    {
+      "text": "明日も晴れるとは限りません。",
+      "expected": [
+        "to-wa-kagiranai"
+      ]
+    },
+    {
+      "text": "庭の花は赤いものに限らない。",
+      "expected": []
+    },
+    {
+      "text": "辛い物も食べられないことはない。",
+      "expected": [
+        "nai-koto-wa-nai",
+        "rareru"
+      ]
+    },
+    {
+      "text": "今からでも間に合わないこともない。",
+      "expected": [
+        "nai-koto-wa-nai"
+      ]
+    },
+    {
+      "text": "この町で雪が降ったことはない。",
+      "expected": [
+        "ta-koto-ga-aru"
+      ]
+    },
+    {
+      "text": "夕方から夜にかけて雪が降る。",
+      "expected": [
+        "kara-ni-kakete"
+      ]
+    },
+    {
+      "text": "肩から背中にかけて痛みがあった。",
+      "expected": [
+        "kara-ni-kakete"
+      ]
+    },
+    {
+      "text": "朝から庭で水をかけた。",
+      "expected": []
+    },
+    {
+      "text": "今日は少し風邪気味だ。",
+      "expected": [
+        "kimi"
+      ]
+    },
+    {
+      "text": "最近は仕事で疲れ気味です。",
+      "expected": [
+        "kimi"
+      ]
+    },
+    {
+      "text": "この肉は少し気味が悪い。",
+      "expected": []
+    },
+    {
+      "text": "初心者向けの講座に通う。",
+      "expected": [
+        "muke"
+      ]
+    },
+    {
+      "text": "海外向けにお菓子を作っています。",
+      "expected": [
+        "muke",
+        "te-iru"
+      ]
+    },
+    {
+      "text": "窓の方へ顔を向けた。",
+      "expected": []
+    },
+    {
+      "text": "祖母の話をもとに絵を描いた。",
+      "expected": [
+        "wo-moto-ni"
+      ]
+    },
+    {
+      "text": "この小説は日記を元にしている。",
+      "expected": [
+        "te-iru",
+        "wo-moto-ni"
+      ]
+    },
+    {
+      "text": "借りた椅子を元に戻した。",
+      "expected": []
+    },
+    {
+      "text": "予報に反して晴れました。",
+      "expected": [
+        "ni-hanshite"
+      ]
+    },
+    {
+      "text": "親の願いに反する選択をした。",
+      "expected": [
+        "ni-hanshite"
+      ]
+    },
+    {
+      "text": "買うとしても来月になる。",
+      "expected": [
+        "naru-change",
+        "to-shite-mo"
+      ]
+    },
+    {
+      "text": "熱が下がったとしても今日は休む。",
+      "expected": [
+        "to-shite-mo"
+      ]
+    },
+    {
+      "text": "私は代表として挨拶した。",
+      "expected": [
+        "to-shite"
+      ]
+    },
+    {
+      "text": "財布ばかりか鍵までなくした。",
+      "expected": [
+        "bakari-ka"
+      ]
+    },
+    {
+      "text": "姉は料理ばかりか裁縫も上手です。",
+      "expected": [
+        "bakari-ka"
+      ]
+    },
+    {
+      "text": "祖父は最近魚ばかり食べる。",
+      "expected": [
+        "bakari"
+      ]
+    },
+    {
+      "text": "店からの電話では修理は無理ということだ。",
+      "expected": [
+        "to-iu-koto-da"
+      ]
+    },
+    {
+      "text": "つまり今日は入れないということですね。",
+      "expected": [
+        "to-iu-koto-da"
+      ]
+    },
+    {
+      "text": "無理だという話は昨日聞いた。",
+      "expected": [
+        "to-iu"
+      ]
+    },
+    {
+      "text": "あの人は上司というより先生だ。",
+      "expected": [
+        "to-iu-yori"
+      ]
+    },
+    {
+      "text": "今日は寒いというより涼しい。",
+      "expected": [
+        "to-iu-yori"
+      ]
+    },
+    {
+      "text": "隣に森という人が住んでいる。",
+      "expected": [
+        "te-iru",
+        "to-iu"
+      ]
+    },
+    {
+      "text": "兄に代わって私が荷物を運んだ。",
+      "expected": [
+        "ni-kawatte"
+      ]
+    },
+    {
+      "text": "紙の券に代わってカードを使う。",
+      "expected": [
+        "ni-kawatte"
+      ]
+    },
+    {
+      "text": "信号が青に変わった。",
+      "expected": []
+    },
+    {
+      "text": "冗談にしてもその言葉はひどい。",
+      "expected": [
+        "ni-shite-mo"
+      ]
+    },
+    {
+      "text": "忙しいにしても連絡はできたはずだ。",
+      "expected": [
+        "hazu-da",
+        "ni-shite-mo"
+      ]
+    },
+    {
+      "text": "部屋をきれいにしてもすぐ汚れる。",
+      "expected": [
+        "suru-change",
+        "te-mo"
+      ]
+    },
+    {
+      "text": "どこかで会った気がする。",
+      "expected": [
+        "ki-ga-suru"
+      ]
+    },
+    {
+      "text": "今日はいい知らせが来る気がします。",
+      "expected": [
+        "ki-ga-suru"
+      ]
+    },
+    {
+      "text": "台所から焦げた匂いがする。",
+      "expected": []
+    },
+    {
+      "text": "洗ってからでないとこの皿は使えない。",
+      "expected": [
+        "te-kara-de-nai-to"
+      ]
+    },
+    {
+      "text": "予約してからじゃないと入れません。",
+      "expected": [
+        "te-kara-de-nai-to"
+      ]
+    },
+    {
+      "text": "昼ご飯を食べてから出発する。",
+      "expected": [
+        "te-kara"
+      ]
+    }
+  ]
+}
