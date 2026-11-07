@@ -107,33 +107,20 @@
     "id": "ba-hodo",
     "pattern": "～ば～ほど",
     "level": "N3",
-    "meaning": "the more ~, the more ~",
-    "explanation": "Repeats the same word, first in its ば-conditional form and then in its plain form before ほど, to say that as one thing increases so does another. な-adjectives use なら in the first half and な before ほど.",
+    "meaning": "the more ~, the more/less ~",
+    "explanation": "Repeats a predicate in its ば-conditional and plain forms before ほど: the more one condition develops, the more or less another does. な-adjectives use なら followed by the same adjective plus な, or であればあるほど. サ変 verbs can repeat the action noun or leave it out in the second half.",
     "subsumes": ["ba-conditional", "nara", "hodo-extent"],
     "steps": [
       { "anyOf": [
-        [ { "conjForm": "仮定形", "pos": ["動詞", "形容詞", "助動詞"] }, { "surface": "ば", "pos": "助詞" } ],
-        [ { "surface": "なら", "baseForm": "だ" } ]
-      ] },
-      { "anyOf": [
-        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
-        [ { "pos2": "形容動詞語幹" }, { "surface": "な", "baseForm": "だ" } ]
+        [ { "pos": "名詞", "pos2": "形容動詞語幹" }, { "anyOf": [[{"surface": "なら"}, {"pos2": "読点", "optional": true}, {"sameAsFirst": true}, {"surface": "な"}], [{"surface": "で", "baseForm": "だ"}, {"baseForm": "ある", "conjForm": "仮定形"}, {"surface": "ば"}, {"pos2": "読点", "optional": true}, {"baseForm": "ある", "conjForm": "基本形"}]] } ],
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "仮定形" }, { "surface": "ば" }, { "pos2": "読点", "optional": true }, { "sameAsFirst": true, "conjForm": ["基本形", "*"] } ],
+        [ { "pos": ["動詞", "形容詞"] }, { "baseForm": "ない", "conjForm": "仮定形" }, { "surface": "ば" }, { "pos2": "読点", "optional": true }, { "sameAsFirst": true }, { "baseForm": "ない", "conjForm": "基本形" } ],
+        [ { "pos": "名詞", "pos2": "サ変接続" }, { "baseForm": "する", "conjForm": "仮定形" }, { "surface": "ば" }, { "pos2": "読点", "optional": true }, { "sameAsFirst": true, "optional": true }, { "baseForm": "する", "conjForm": "基本形" } ]
       ] },
       { "surface": "ほど", "pos": "助詞" }
     ],
-    "examples": [
-      "練習すればするほど上手になる。",
-      "考えれば考えるほど分からなくなる。",
-      "安ければ安いほどいい。",
-      "早ければ早いほどいいです。",
-      "静かなら静かなほどいい。",
-      "静かであればあるほどいい。"
-    ],
-    "counterExamples": [
-      "練習すれば上手になる。",
-      "山ほど宿題がある。",
-      "死ぬほど疲れた。"
-    ]
+    "examples": ["練習すればするほど上手になる。", "考えれば考えるほど分からなくなる。", "安ければ安いほどいい。", "早ければ早いほどいいです。", "静かなら静かなほどいい。", "静かであればあるほどいい。", "録音室は静かなら静かなほど、小さな音まで拾える。", "夜の森は静かであればあるほど、遠い波音がよく聞こえた。", "手紙はかけばかくほど、自分の気持ちが整理できる。", "朝ご飯を食べなければ食べないほど、昼前に集中できなくなる。", "この曲は練習すれば、するほど、細かな違いが聞こえてくる。", "作業場は静かなら、静かなほど、合図を聞き取りやすい。", "練習すれば練習するほど上達する。"],
+    "counterExamples": ["練習すれば上手になる。", "山ほど宿題がある。", "死ぬほど疲れた。", "「高ければ安いほど」という説明は、比較の向きが逆だ。", "「読めば書くほど」という記載は、誤植だった。", "「静かなら便利なほど」という見出しを消した。", "練習すれば勉強するほど上達する。"]
   },
   {
     "id": "ni-yotte",
@@ -469,20 +456,15 @@
     "pattern": "～っぽい",
     "level": "N3",
     "meaning": "-ish / tends to ~ / looks like ~",
-    "explanation": "A casual suffix that turns a noun or verb stem into an い-adjective meaning 'having the feel of' (子供っぽい, 'childish') or 'tending to' (忘れっぽい, 'forgetful'). Some common words like 白っぽい are stored in the dictionary as single words.",
+    "explanation": "A casual suffix forms an い-adjective from a noun, verb stem, or adjective stem. It can mean having a certain feel (子供っぽい, childish), tending to do something (忘れっぽい, forgetful), or looking a certain way (安っぽい, cheap-looking). Many combinations are dictionary words; 色っぽい has the established lexical meaning sensual or attractive.",
     "steps": [
-      { "baseForm": ["っぽい", "忘れっぽい", "安っぽい", "黒っぽい", "白っぽい", "水っぽい", "熱っぽい"] }
+      { "anyOf": [
+        [ { "pos": ["名詞", "動詞"] }, { "baseForm": "っぽい", "pos": "形容詞", "pos2": "接尾" } ],
+        [ { "baseFormSuffix": ["っぽい"], "pos": "形容詞", "notBaseForm": ["っぽい"] } ]
+      ] }
     ],
-    "examples": [
-      "彼は子供っぽい。",
-      "彼は怒りっぽい。",
-      "最近忘れっぽくなった。",
-      "この服は安っぽく見える。",
-      "黒っぽいかばんを買った。"
-    ],
-    "counterExamples": [
-      "箱は空っぽだ。"
-    ]
+    "examples": ["彼は子供っぽい。", "彼は怒りっぽい。", "最近忘れっぽくなった。", "この服は安っぽく見える。", "黒っぽいかばんを買った。", "長く閉めていた押し入れは、少し湿っぽかった。", "あの人の説明は理屈っぽくて、子供には難しかった。", "歌手の低い声は、どこか色っぽく聞こえました。", "この魚は骨っぽいから、ゆっくり食べてください。", "水を足した汁は、前ほどみずっぽくなかった。"],
+    "counterExamples": ["箱は空っぽだ。", "荷物を出したあとの戸棚は、すっかり空っぽになった。", "その梅は、顔をしかめるほど酸っぱい。"]
   },
   {
     "id": "wari-ni",
@@ -923,21 +905,17 @@
     "pattern": "～出す",
     "level": "N3",
     "meaning": "suddenly start ~ing",
-    "explanation": "A verb stem plus 出す (だす) says an action or a change starts suddenly: 泣き出す ('burst into tears'). Some common combinations, like 降り出す, are single words in the dictionary.",
+    "explanation": "A verb stem plus 出す or だす marks an action or change beginning abruptly, such as bursting into tears or starting to move. Fused compounds are limited to selected forms with this use; taking something out or transferring it is a different meaning. 吹き出す is excluded because the tokenizer cannot distinguish bursting into laughter from blowing outward.",
     "steps": [
       { "anyOf": [
         [ { "pos": "動詞", "conjForm": "連用形" }, { "baseForm": ["出す", "だす"], "pos": "動詞", "pos2": "非自立" } ],
-        [ { "baseForm": ["降り出す", "泣き出す", "笑い出す", "歩き出す", "走り出す"] } ]
+        [ { "baseForm": "叫ぶ", "pos": "動詞", "conjForm": "連用形" }, { "baseForm": "出す", "pos": "動詞", "pos2": "自立" } ],
+        [ { "baseForm": ["降り出す", "走り出す", "話し出す", "動き出す", "言い出す", "鳴り出す", "騒ぎ出す"], "pos": "動詞" } ]
       ] }
     ],
-    "examples": [
-      "急に雨が降り出した。",
-      "子供が泣き出しました。"
-    ],
-    "counterExamples": [
-      "手紙を出した。",
-      "猫が飛び出した。"
-    ]
+    "examples": ["急に雨が降り出した。", "子供が泣き出しました。", "弟がしゃべりだして、静かだった車内がにぎやかになった。", "驚いたが、誰も叫び出さなかった。", "模型の列車が動き出して、子供たちも拍手を始めた。", "犬が騒ぎ出すと、近所の猫は塀の向こうへ逃げた。", "妹は注射を見ても、今回は泣き出しませんでした。", "話し出したらきりがない。", "子供が笑い出した。", "犬が走り出した。", "彼が歩き出した。", "彼が言い出した。", "鐘が鳴り出した。", "彼が怒り出した。"],
+    "counterExamples": ["手紙を出した。", "猫が飛び出した。", "係員は引き出しから、青い封筒を取り出した。", "古い切符を見て、初めての一人旅を思い出す。", "やかんの口から、白い蒸気が勢いよく吹き出す。", "図書館で本を貸し出す。", "彼は手を差し出した。", "この資料を部屋の外へ持ち出すには、許可が要る。", "祖母は駅前で、口座から生活費を引き出した。", "店主は勝手に入った客を、店の外へ追い出した。", "係員が客を呼び出した。", "家族は息子を送り出した。", "司会の言い間違いを聞いて、隣の客が吹き出した。"],
+    "subsumes": ["tara"]
   },
   {
     "id": "you-to-suru",
@@ -1365,20 +1343,15 @@
     "explanation": "The verb stem plus たて describes something that has only just been made or done: 焼きたてのパン is 'freshly baked bread'. Many common combinations are listed in the dictionary as single words (洗いたて, 生まれたて).",
     "steps": [
       { "anyOf": [
-        [ { "pos": ["動詞", "名詞"] }, { "surface": "たて", "pos": "名詞", "pos2": "接尾" } ],
-        [ { "surface": ["洗いたて", "生まれたて", "炊きたて", "揚げたて", "作りたて", "塗りたて"] } ]
+        [ { "pos": "動詞", "pos2": ["自立", "非自立"], "conjForm": "連用形" }, { "surface": ["たて", "立て"], "pos": "名詞", "pos2": "接尾" } ],
+        [ { "pos": "名詞", "pos2": "一般" }, { "surface": ["たて", "立て"], "pos": "名詞", "pos2": "接尾" } ],
+        [ { "surface": "淹", "pos": "名詞" }, { "surface": "れ", "baseForm": "れる", "pos": "動詞", "pos2": "接尾" }, { "surface": "たて", "pos": "名詞", "pos2": "接尾" } ],
+        [ { "surfaceSuffix": ["たて"], "pos": "名詞", "notBaseForm": ["たて", "ついたて"] } ],
+        [ { "surface": "焼き立て", "pos": "名詞" } ]
       ] }
     ],
-    "examples": [
-      "焼きたてのパンはおいしい。",
-      "このシャツは洗いたてです。",
-      "生まれたての赤ちゃんを見た。",
-      "炊きたてのご飯が好きだ。"
-    ],
-    "counterExamples": [
-      "紙をたてに切る。",
-      "古い建物を見た。"
-    ]
+    "examples": ["焼きたてのパンはおいしい。", "このシャツは洗いたてです。", "生まれたての赤ちゃんを見た。", "炊きたてのご飯が好きだ。", "山小屋で飲む淹れたての珈琲は、香りが強い。", "その麺は茹でたてではありません。", "饅頭は蒸したてで、紙をはがすと湯気が出た。", "焼き立ての煎餅には、まだ触らないでください。", "祖母は炊き立てのご飯を、小さな茶碗によそった。"],
+    "counterExamples": ["紙をたてに切る。", "古い建物を見た。", "玄関には、竹でできたついたてを置いた。", "この上着は仕立てが丁寧で、縫い目もそろっている。", "机の組み立てには、細いねじが六本必要です。", "机に本立てを置いた。"]
   },
   {
     "id": "kiri",
@@ -1498,7 +1471,7 @@
       { "pos": "助詞", "pos2": "終助詞", "optional": true }
     ],
     "examples": [
-      "バスがなかなか来ない。",
+      "迎えの車がなかなか来ない。",
       "漢字がなかなか覚えられません。",
       "この問題はなかなか解けなかった。",
       "なかなか寝られない。",
@@ -5135,5 +5108,232 @@
       "小雨でも、屋外の点検は行う。",
       "これは町に一つしかない時計塔である。"
     ]
+  },
+  {
+    "id": "kakeru",
+    "pattern": "～かける / ～かけの / ～かけだ",
+    "level": "N3",
+    "meaning": "start without finishing ~ / be on the verge of ~",
+    "explanation": "A verb stem followed by かける can describe an action that has begun but remains unfinished, or a change that is about to happen. The forms かけの and かけだ describe something left partway through, while 死にかける describes nearly dying.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "連用形" }, { "anyOf": [[{"baseForm": ["かける", "掛ける"], "pos": "動詞"}], [{"surface": ["かけ", "掛け"], "pos": "名詞", "pos2": ["非自立", "接尾"]}]] } ],
+        [ { "pos": "動詞", "baseForm": ["忘れかける", "死にかける", "読みかける"] } ]
+      ] },
+      { "anyOf": [
+        [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ],
+        [ { "baseForm": ["だ", "です"], "pos": "助動詞", "conjType": ["特殊・ダ", "特殊・デス"] } ]
+      ], "optional": true }
+    ],
+    "examples": ["書斎の読みかけの伝記には、青いしおりが挟まっている。", "姉は秘密を言いかけて、急に口をつぐんだ。", "救助された登山者は、冷たい川で死にかけたそうだ。", "昔の校歌を忘れかけていたが、伴奏を聞いて思い出した。", "この低温庫なら、野菜は一週間たっても腐り掛けません。", "その連載はまだ読みかけだが、続編も読み始めた。", "本を読み掛けた。"],
+    "counterExamples": ["通訳は迷っている旅行者に英語で話しかけた。", "祖父は朝早く出かける前に、玄関の椅子に腰かけた。", "弟は針金に袖を引っ掛けてしまった。"]
+  },
+  {
+    "id": "kiru",
+    "pattern": "～切る / ～切れる / ～切れない",
+    "level": "N3",
+    "meaning": "do all of ~ / finish completely / be able or unable to finish ~",
+    "explanation": "Adding 切る or きる to a verb stem stresses that an action is carried all the way through, or that a state is complete, as in 疲れ切る. 切れる and きれる express the ability to finish, and their negative forms say that the amount or task cannot be completed.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "連用形" }, { "baseForm": ["切る", "切れる", "きる", "きれる"], "pos": "動詞", "pos2": "非自立" } ],
+        [ { "pos": "動詞", "baseForm": ["使い切る", "読み切る", "読み切れる"] } ]
+      ] }
+    ],
+    "examples": ["残った毛糸は、小さな手袋を編んで使い切る。", "妹は貸出期限の朝に、分厚い伝記を読み切った。", "この大きな弁当は、一人では食べきれない。", "夜勤明けの看護師は疲れ切っているので、電話を控えた。", "今年こそ、制限時間内にコースを走り切ります。", "挿絵が多ければ、弟でも最後まで読み切れる。", "結果は分かり切っている。"],
+    "counterExamples": ["夕飯の支度では、最初に硬い野菜を切る。", "父は思い切って、長年乗った車を売った。", "この魚は冷たい水でも生きることができる。"]
+  },
+  {
+    "id": "komu",
+    "pattern": "～込む / ～こむ",
+    "level": "N3",
+    "meaning": "go into ~ / do deeply or thoroughly",
+    "explanation": "込む or こむ after a verb stem can describe movement into something, as in 飛び込む, or sustained involvement, as in 考え込む. Some combinations describe a deepened state or a fixed belief, such as 落ち込む and 思い込む; standalone 込む or 混む meaning crowded is different.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "連用形" }, { "baseForm": ["込む", "こむ"], "pos": "動詞", "pos2": "非自立" } ],
+        [ { "pos": "動詞", "baseFormSuffix": ["込む", "込める"], "notBaseForm": ["込む", "込める", "申し込む", "見込む"] } ],
+        [ { "pos": "動詞", "baseForm": ["詰めこむ", "飲みこむ", "書きこむ", "入りこむ", "思いこむ", "飛びこむ", "落ちこむ", "黙りこむ"] } ]
+      ] }
+    ],
+    "examples": ["救助員はためらわずに冷たい池へ飛び込む。", "係員は変更後の集合時刻を掲示板に書き込んだ。", "祖父は古い写真を前に、黙って考え込んでいる。", "弟は一度の失敗で、自分には才能がないと思い込む。", "子供は錠剤を水と一緒に飲みこみました。", "明日は早いので、今夜は廊下で話し込まないでください。", "この欄には書き込める。", "鞄に本を詰めこんだ。"],
+    "counterExamples": ["祭りの帰りは電車が込んでいるので、一本見送った。", "家族で食卓をかこむ時間を、大切にしたい。", "この薄い缶は、指で軽く押すだけでへこむ。", "来年の大会に申し込んだ。"]
+  },
+  {
+    "id": "naosu",
+    "pattern": "～直す / ～なおす",
+    "level": "N3",
+    "meaning": "do again / redo to correct or improve ~",
+    "explanation": "A verb stem plus 直す or なおす means performing the action again to correct, improve, or reconsider it. 見直す can mean reviewing something or revising an earlier judgment, rather than simply looking a second time.",
+    "subsumes": ["tara"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "連用形" }, { "baseForm": ["直す", "なおす"], "pos": "動詞", "pos2": "非自立" } ],
+        [ { "pos": "動詞", "baseFormSuffix": ["直す", "なおす", "直せる", "なおせる"], "notBaseForm": ["直す", "なおす", "直せる", "なおせる", "持ち直す"] } ]
+      ] }
+    ],
+    "examples": ["提出する前に、住所の欄だけ書き直す。", "兄は失敗した実験を、条件を変えてやり直した。", "明日の予定は、天気予報を見て考え直してください。", "次の会議で、道具の保管方法を見直します。", "子供たちは崩れた積み木の城を組みなおした。", "画家は顔の輪郭を描き直さなかった。", "ここは書き直せる。", "説明書を読み直したら、組み立ての間違いに気付いた。", "もう一度はやり直せませんでした。"],
+    "counterExamples": ["叔父は休みの日に、止まった時計を直す。", "旅行の前に、しっかり休んで風邪を治すつもりだ。", "正直な返事を聞いて、相談者は安心した。", "病状が持ち直した。"]
+  },
+  {
+    "id": "au",
+    "pattern": "～合う / ～あう",
+    "level": "N3",
+    "meaning": "do to or with one another",
+    "explanation": "合う or あう after a verb stem describes people directing the same action toward one another, or doing it together. 知り合う means becoming acquainted, while standalone 合う meaning fit and lexical expressions such as 間に合う are different uses.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "連用形" }, { "anyOf": [[{"baseForm": ["合う", "あう"], "pos": "動詞", "pos2": "非自立"}], [{"surface": "あっ", "baseForm": "ある", "pos": "動詞", "pos2": "非自立", "conjForm": "連用タ接続"}]] } ],
+        [ { "pos": "動詞", "conjForm": "連用形" }, { "baseForm": "あえる", "pos": "動詞" } ],
+        [ { "pos": "動詞", "baseFormSuffix": ["合う", "あう", "合える", "あえる"], "notBaseForm": ["合う", "あう", "合える", "あえる", "似合う", "間に合う", "付き合う", "見合う", "釣り合う"] } ]
+      ] }
+    ],
+    "examples": ["班の役割は、全員がそろってから話し合う。", "停電した夜、近所の人たちは食料を分けて助け合った。", "舞台の二人は見つめ合って、同時にうなずいた。", "分からない単語は、休み時間に教え合いましょう。", "兄弟は古い写真を見ながら、声を上げて笑いあいました。", "失敗しても、班の仲間を責め合わないでほしい。", "私たちは助け合える。", "二人は港の清掃活動で知り合った。", "友達とは話し合えませんでした。", "互いの違いを認めあえる関係だ。"],
+    "counterExamples": ["借りた上着は、肩のサイズが合う。", "裏道を走れば、最終の連絡船に間に合う。", "姉は大学時代から同じ人と付き合っている。", "赤い服がよく似合う。"]
+  },
+  {
+    "id": "ageru",
+    "pattern": "～上げる / ～上がる",
+    "level": "N3",
+    "meaning": "finish making or doing ~ / be completed",
+    "explanation": "In completion compounds, 上げる describes bringing work or a process to its finished result, and 上がる describes that result becoming ready. This includes creating or raising something to completion; lifting, looking upward, giving, and the respectful verb 召し上がる have different meanings.",
+    "subsumes": ["rareru"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "連用形" }, { "baseForm": ["上げる", "上がる", "あげる", "あがる"], "pos": "動詞" } ],
+        [ { "pos": "動詞", "baseForm": ["できあがる", "作り上げる", "出来上がる", "書き上げる", "育て上げる"] } ]
+      ] },
+      { "baseForm": ["れる", "られる"], "pos": "動詞", "pos2": "接尾", "optional": true }
+    ],
+    "examples": ["作家は雪が解けるまでに、最後の一章を書き上げる。", "祖母は三人の子を、一人で育て上げた。", "胡桃入りのパンが、ちょうど焼き上がった。", "職人は細い糸だけで、飾りの網を編みあげます。", "粘土の器ができあがって、棚に並べられた。", "パンが焼きあがった。", "資料が足りず、今日中には報告書を書き上げられない。", "招待状は日曜までに出来上がる予定だ。"],
+    "counterExamples": ["質問のある参加者は、静かに手を上げる。", "作業員は二人で、重い棚を持ち上げた。", "弟に紙の船を折ってあげたら、とても喜んだ。", "部品が届かなかったので、模型は昨日も仕上がりませんでした。", "兄が読んでも弟が書かなくても、この原稿は私が仕上げる。"]
+  },
+  {
+    "id": "toosu",
+    "pattern": "～通す / ～とおす",
+    "level": "N3",
+    "meaning": "persist in ~ / carry ~ through to the end",
+    "explanation": "通す or とおす after a verb stem stresses continuing an action or maintaining a decision until the end. The potential form 通せる says that this can be sustained, while 通せない says it cannot; standalone 通す meaning let through or pass something through is different.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "連用形" }, { "baseForm": ["通す", "通せる", "とおす", "とおせる"], "pos": "動詞" } ],
+        [ { "pos": "動詞", "baseFormSuffix": ["通す", "通せる"], "notBaseForm": ["通す", "通せる", "見通す", "見通せる"] } ]
+      ] }
+    ],
+    "examples": ["始めた調査は、途中で投げ出さずにやり通す。", "祖父は休憩もせずに、昔の航海記を読み通した。", "こんな大きな失敗は、家族に隠し通せない。", "私は反対されても、この企画をやりとおします。", "一行は峠まで歩き通して、ようやく腰を下ろした。", "俳優は喉を痛めたので、最後の場面まで演じ通さなかった。", "この本なら一日で読み通せる。", "最後まで自分の考えを押し通した。"],
+    "counterExamples": ["受付係は到着した客を奥の部屋に通す。", "この厚い布は、日差しをほとんどとおしません。", "丘の上からは、港の入り口まで見通せる。", "将来を見通すのは難しい。"]
+  },
+  {
+    "id": "ppanashi",
+    "pattern": "～っぱなし / ～っ放し",
+    "level": "N3",
+    "meaning": "leave ~ that way / keep doing ~ without a break",
+    "explanation": "A verb stem plus っぱなし or っ放し describes a state left unchanged, often because someone has neglected to put things right. It can also describe an action or situation continuing without a break, such as standing throughout a shift or losing repeatedly.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+        [ { "anyOf": [[{"pos": "動詞", "pos2": ["自立", "非自立"], "conjForm": "連用形"}], [{"pos": "動詞", "pos2": ["自立", "非自立"], "conjForm": "未然形"}, {"baseForm": ["せる", "させる"], "pos": "動詞", "pos2": "接尾", "conjForm": "連用形"}], [{"pos": "名詞", "pos2": "一般"}]] }, { "surface": ["っぱなし", "っ放し"], "pos": "名詞", "pos2": "接尾" } ],
+        [ { "pos": "名詞", "surfaceSuffix": ["っぱなし", "っ放し"], "notBaseForm": ["っぱなし", "っ放し"] } ]
+      ] }
+    ],
+    "examples": ["冬でも勝手口を開けっぱなしだと、猫が外へ出てしまう。", "弟は寝る前まで、机の電気をつけっぱなしにする。", "売り場で一日立ちっぱなしで疲れたので、帰りは座った。", "今月の練習試合は負けっぱなしで、監督も困っている。", "見回りのとき、流しの蛇口は開けっ放しでした。", "その鞄は置きっぱなしではありません。", "客を待たせっぱなしにした。"],
+    "counterExamples": ["祖母の昔話を聞きながら、豆の皮をむいた。", "父は引っ越すときに、古い釣り道具を手放した。", "読みかけの図鑑を開いたまま、机で眠ってしまった。"]
+  },
+  {
+    "id": "chuu-juu",
+    "pattern": "～中（ちゅう / じゅう）",
+    "level": "N3",
+    "meaning": "during ~ / currently ~ / by the end of ~ / throughout ~",
+    "explanation": "中 after an activity marks something in progress, usually read ちゅう. With a time period it can mean within that period or by its end, as in 今週中に (by the end of this week). Read じゅう, it can cover a whole time or place, as in 一日中 and 世界中. 町中 may mean the whole town or the town area; の中 means inside.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "名詞", "pos2": ["一般", "サ変接続", "副詞可能", "固有名詞", "数"] }, { "pos": "名詞", "pos2": "接尾", "notBaseForm": ["中", "じゅう"], "optional": true }, { "surface": ["中", "じゅう"], "pos": "名詞", "pos2": "接尾" } ],
+        [ { "baseForm": ["一年中", "世界中", "町中"], "pos": "名詞" } ]
+      ] }
+    ],
+    "examples": ["台風の日は一日中、窓の音を気にしていた。", "この温室では一年中、赤い花が咲いている。", "あの小さな工場の製品は、世界中で使われている。", "担当者はただいま会議中ですので、折り返します。", "昨日の午後は橋が工事中だったので、川上へ回った。", "蚊が気になり、一晩じゅう眠れなかった。", "確認した書類は、今週中に返送してください。"],
+    "counterExamples": ["木の箱の中には、色の違う石が三つ入っていた。", "山小屋へ向かう途中で、地図を落としてしまった。", "料理の最中に停電して、鍋の中身が見えなくなった。"]
+  },
+  {
+    "id": "temo-nakutemo",
+    "pattern": "～ても～なくても",
+    "level": "N3",
+    "meaning": "whether ~ or not, the result is the same",
+    "explanation": "Repeating a verb, adjective, or noun in affirmative and negative ても forms says that either possibility leads to the same result. Verbs use ても or でも followed by なくても, い-adjectives use くても and くなくても, and な-adjectives and nouns use でも or であっても with でなくても.",
+    "subsumes": ["te-mo"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞", "名詞"], "pos2": ["自立", "形容動詞語幹", "一般"] }, { "anyOf": [[{"surface": ["て", "で"], "pos": "助詞"}, {"baseForm": "いる", "pos": "動詞"}], [{"surface": "で", "baseForm": "だ"}, {"baseForm": "ある", "pos": "助動詞"}]], "optional": true }, { "anyOf": [[{"surface": ["て", "で"], "pos": "助詞"}, {"surface": "も"}], [{"surface": "でも", "pos": "助詞"}]] }, { "pos2": "読点", "optional": true }, { "sameAsFirst": true }, { "anyOf": [[{"surface": ["て", "で"], "pos": "助詞"}, {"baseForm": "いる", "pos": "動詞"}], [{"surface": "で", "baseForm": "だ"}]], "optional": true } ],
+        [ { "pos": "名詞", "pos2": "サ変接続" }, { "baseForm": "する" }, { "surface": ["て", "で"], "pos": "助詞" }, { "surface": "も" }, { "pos2": "読点", "optional": true }, { "sameAsFirst": true, "optional": true }, { "baseForm": "する" } ]
+      ] },
+      { "baseForm": "ない", "conjForm": "連用テ接続" },
+      { "surface": "て", "pos": "助詞" },
+      { "surface": "も" }
+    ],
+    "notPrecededBy": [[{"pos": "名詞", "pos2": "サ変接続"}]],
+    "examples": ["下見に行っても行かなくても、集合場所は同じです。", "材料が高くても高くなくても、丈夫な棚を作りたい。", "試験の前日に勉強してもしなくても、提出期限は変わらない。", "注意書きを読んでも読まなくても、利用者には規則が適用される。", "仕事が忙しくても、忙しくなくても、毎晩弟に電話をした。", "教室が静かでも静かでなくても、妹は集中できる。", "勉強しても勉強しなくても結果は同じだ。", "会員であっても会員でなくても入れる。"],
+    "counterExamples": ["いま窓口へ行っても無駄だから、先に電話してみよう。", "明日の補習には行かなくてもいいと、先生から連絡があった。", "「寒くても暑くなくても」という文は、同じ語を繰り返していない。", "勉強しても運動しなくても結果は同じだ。"]
+  },
+  {
+    "id": "koto-wa-ga",
+    "pattern": "～ことは～が / ～ことは～けど",
+    "level": "N3",
+    "meaning": "it is true that ~, but ~ / granted, ~",
+    "explanation": "Repeating the same predicate around ことは acknowledges that it is true, then が or けど introduces a reservation. The second predicate can be polite even when the first is plain, and adjectives, past statements, and negative statements can also be conceded this way.",
+    "subsumes": ["kedo"],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": ["動詞", "形容詞", "名詞"], "pos2": ["自立", "形容動詞語幹"] } ],
+        [ { "pos": "名詞", "pos2": "サ変接続" }, { "baseForm": "する" } ]
+      ] },
+      { "anyOf": [
+        [ { "pos": "助動詞", "baseForm": ["た", "だ", "ない"] } ],
+        [ { "surface": ["て", "で"], "pos": "助詞" }, { "baseForm": "いる", "pos": "動詞" } ]
+      ], "optional": true },
+      { "conjType": "特殊・タ", "optional": true },
+      { "surface": ["こと", "事"], "pos": "名詞" },
+      { "surface": "は" },
+      { "pos2": "読点", "optional": true },
+      { "sameAsFirst": true },
+      { "baseForm": "する", "optional": true },
+      { "anyOf": [
+        [ { "pos": "助動詞", "baseForm": ["ます", "た", "だ", "ない", "です"] } ],
+        [ { "surface": ["て", "で"], "pos": "助詞" }, { "baseForm": "いる", "pos": "動詞" }, { "baseForm": "ます", "optional": true } ]
+      ], "optional": true },
+      { "conjType": "特殊・タ", "optional": true },
+      { "surface": ["が", "けど", "けれど", "けれども"], "pos": "助詞", "pos2": "接続助詞" }
+    ],
+    "notPrecededBy": [[{"pos": "名詞", "pos2": "サ変接続"}]],
+    "examples": ["この双眼鏡は高いことは高いが、星がとてもよく見える。", "報告書は読んだことは読んだけど、数字までは覚えていない。", "明日の集まりには行くことは行きますが、長居はできません。", "この端末は便利なことは便利だけど、電池の持ちが悪い。", "この宿は安くないことは安くないが、食事代も含まれている。", "契約書は読んだことは、読みましたけれど、説明も聞きたいです。", "勉強することは勉強するが、長続きしない。", "読まなかったことは読まなかったが、内容は知っている。"],
+    "counterExamples": ["大事なことは、道具を使ったら元の棚に戻すことです。", "分からなければ、無理に今日中に答えることはない。", "「高いことは安いが」という下書きは、形容詞の選び間違いだ。", "勉強することは運動するが、長続きしない。"]
+  },
+  {
+    "id": "ni-wa-no-ga-aru",
+    "pattern": "～には～の～がある",
+    "level": "N3",
+    "meaning": "each ~ has its own ~",
+    "explanation": "Repeating a noun in には and の gives that person, group, or place its own reasons, values, methods, or other distinguishing qualities. The final ある can be polite or past, and negative forms deny that the stated quality exists for that noun.",
+    "subsumes": [],
+    "steps": [
+      { "pos": "名詞", "pos2": ["一般", "固有名詞", "代名詞", "サ変接続"] },
+      { "anyOf": [
+        [ { "surface": "に" }, { "surface": "は" }, { "pos2": "読点", "optional": true }, { "surface": "この", "pos": "連体詞", "optional": true }, { "sameAsFirst": true, "pos": "名詞" } ],
+        [ { "surface": "者", "pos": "名詞" }, { "surface": "に" }, { "surface": "は" }, { "pos2": "読点", "optional": true }, { "surface": "この", "pos": "連体詞", "optional": true }, { "sameAsFirst": true, "pos": "名詞" }, { "surface": "者", "pos": "名詞" } ],
+        [ { "surface": "たち", "pos": "名詞" }, { "surface": "に" }, { "surface": "は" }, { "pos2": "読点", "optional": true }, { "surface": "この", "pos": "連体詞", "optional": true }, { "sameAsFirst": true, "pos": "名詞" }, { "surface": "たち", "pos": "名詞" } ]
+      ] },
+      { "surface": "の", "pos": "助詞" },
+      { "pos": ["名詞", "形容詞", "動詞"] },
+      { "gap": 8 },
+      { "surface": "が", "pos": "助詞", "pos2": "格助詞" },
+      { "baseForm": ["ある", "ない"], "pos": ["動詞", "形容詞"] }
+    ],
+    "examples": ["子供には子供の考えがあるから、最後まで話を聞こう。", "私には私のやり方がありますが、まず手本も見てみます。", "田舎には田舎のよさがあると、移り住んでから分かった。", "昔の職人には職人のこだわりがあった。", "今の私には私の迷いがありません。", "彼には、彼の事情があるのだから、返事を急がせないでほしい。", "子供たちには子供たちの考えがある。", "研究者には、研究者の確かめるべき問題がある。"],
+    "counterExamples": ["東京には大きな公園があるので、昼休みに散歩できる。", "私には兄の本があるから、新しく買わなくてもいい。", "祖父には祖父の帰りを待つ犬がいる。", "子供たちには子供の考えがある。", "子供には子供たちの考えがある。"]
   }
 ]

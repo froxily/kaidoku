@@ -1445,5 +1445,28 @@
       "薄い辞書より厚い辞書のほうが便利だ。",
       "薄い辞書より、厚い辞書のほうが便利だ。"
     ]
+  },
+  {
+    "id": "ka-ka",
+    "pattern": "～か～ないか",
+    "level": "N5",
+    "meaning": "whether to ~ or not / whether ~ or not",
+    "explanation": "Repeating the same verb first affirmatively and then negatively between two か presents a yes-or-no choice. It can ask whether an action happened or express uncertainty about doing it, and polite forms or a comma can separate the alternatives.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+        [ { "pos": "動詞", "pos2": "自立" }, { "anyOf": [[{"baseForm": "ます"}], [{"surface": ["て", "で"], "pos": "助詞"}, {"baseForm": "いる"}]], "optional": true }, { "conjType": "特殊・タ", "optional": true }, { "surface": "か" }, { "pos2": "読点", "optional": true }, { "pos": "動詞", "sameAsFirst": true } ],
+        [ { "pos": "名詞", "pos2": "サ変接続" }, { "baseForm": "する" }, { "anyOf": [[{"baseForm": "ます"}], [{"surface": ["て", "で"], "pos": "助詞"}, {"baseForm": "いる"}]], "optional": true }, { "conjType": "特殊・タ", "optional": true }, { "surface": "か" }, { "pos2": "読点", "optional": true }, { "sameAsFirst": true, "optional": true }, { "baseForm": "する" } ]
+      ] },
+      { "surface": ["て", "で"], "pos": "助詞", "optional": true },
+      { "baseForm": ["ます", "いる"], "optional": true },
+      { "baseForm": ["ない", "ん"], "pos": "助動詞" },
+      { "baseForm": "です", "optional": true },
+      { "conjType": "特殊・タ", "optional": true },
+      { "surface": "か" }
+    ],
+    "notPrecededBy": [[{"pos": "名詞", "pos2": "サ変接続"}]],
+    "examples": ["明日は港へ行くか行かないか、朝の天気を見て決める。", "修理の人が来るか来ないか分からないので、家で待つ。", "朝ご飯を食べるか食べないかで、持っていく菓子の量が変わる。", "配達員がくるか、こないかは、この画面で確認できる。", "技師が点検したかしなかったか、記録を読み直した。", "係員が荷物を受け取りましたか、受け取りませんでしたか。", "勉強するか勉強しないか決める。"],
+    "counterExamples": ["港へ行かないか行くかは、明日の朝に決める。", "これから港へ行くか帰るか、交差点で相談した。", "「開けるか閉めないか」では、選択肢の区別が分かりにくい。", "勉強するか運動しないか決める。"]
   }
 ]
