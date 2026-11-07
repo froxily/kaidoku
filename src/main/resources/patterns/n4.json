@@ -856,15 +856,22 @@
       { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": "基本形" },
       { "surface": "と", "pos": "助詞", "pos2": "接続助詞" }
     ],
+    "notFollowedBy": [
+      { "surface": "同時に", "pos": "副詞" }
+    ],
     "examples": [
       "春になると、桜が咲く。",
       "このボタンを押すと、ドアが開く。",
       "安いと、すぐ売れる。",
-      "行かないと、遅れる。"
+      "行かないと、遅れる。",
+      "このつまみを右に回すと、音が大きくなる。",
+      "窓が開くとすぐに、猫が外へ飛び出した。",
+      "駅から歩くと、十分ほどかかる。"
     ],
     "counterExamples": [
       "友達と映画を見た。",
-      "行くと言った。"
+      "行くと言った。",
+      "ドアが開くと同時に、子どもたちが中へ走り込んだ。"
     ]
   },
   {
@@ -1655,6 +1662,42 @@
     "counterExamples": [
       "早く来ればよかった。",
       "安ければ買います。"
+    ]
+  },
+  {
+    "id": "o-ni-naru",
+    "pattern": "お～になる / ご～になる",
+    "level": "N4",
+    "meaning": "do ~ (respectful)",
+    "explanation": "Describes another person's action respectfully by placing お before a verb stem, or ご before an action noun, and adding になる. ご覧になる is a common expression for looking or watching, and the final verb can take past, negative, polite, ongoing, or potential forms.",
+    "subsumes": ["naru-change"],
+    "steps": [
+      { "anyOf": [
+        [ { "surface": ["お", "ご"], "pos": "接頭詞" }, { "pos": "名詞", "pos2": ["一般", "サ変接続"] } ],
+        [ { "surface": "お", "pos": "接頭詞" }, { "pos": "動詞", "conjForm": "連用形" } ],
+        [ { "surface": "ご覧", "pos": "名詞", "pos2": "一般" } ],
+        [ { "surface": ["お待ち", "お越し"], "pos": "名詞", "pos2": ["サ変接続", "一般"] } ]
+      ] },
+      { "surface": "に", "pos": "助詞", "pos2": "格助詞" },
+      { "baseForm": ["なる", "なれる"], "pos": "動詞" },
+      { "anyOf": [
+        [ { "surface": "て", "pos": "助詞", "pos2": "接続助詞" }, { "baseForm": "いる", "pos": "動詞", "pos2": "非自立" } ]
+      ], "optional": true }
+    ],
+    "examples": [
+      "先生は毎週金曜日にお帰りになる。",
+      "昨日は校長がお帰りになった。",
+      "先生は今夜こちらにはお泊まりになりません。",
+      "先生は窓際で新聞をお読みになっています。",
+      "お客様はさきほど案内図をご覧になりました。",
+      "こちらの端末は閉館までご利用になれます。",
+      "お客様はロビーでしばらくお待ちになりました。",
+      "先生は内容をお確かめになりました。"
+    ],
+    "counterExamples": [
+      "妹は来年、医者になる。",
+      "客が帰ると店内は静かになりました。",
+      "休憩の飲み物はお茶にする。"
     ]
   }
 ]
