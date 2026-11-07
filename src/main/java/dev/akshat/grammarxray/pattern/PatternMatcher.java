@@ -132,9 +132,20 @@ public class PatternMatcher {
     }
 
     private static boolean isFollowedCorrectly(Rule rule, List<Token> tokens, int next) {
-        return rule.followedBy().isEmpty()
-                || next == tokens.size()
-                || rule.followedBy().stream().anyMatch(step -> step.matches(tokens.get(next)));
+        if (next == tokens.size()) {
+            return true;
+        }
+        for (Step excluded : rule.notFollowedBy()) {
+            if (excluded.matches(tokens.get(next))) {
+                return false;
+            }
+        }
+        for (Step allowed : rule.followedBy()) {
+            if (allowed.matches(tokens.get(next))) {
+                return true;
+            }
+        }
+        return rule.followedBy().isEmpty();
     }
 
     private static int wordEnd(List<Token> tokens, int last) {

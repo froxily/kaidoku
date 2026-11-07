@@ -90,6 +90,10 @@ public final class RuleRepository {
             validateSequence(rule, rule.steps());
             require(rule.followedBy().stream().allMatch(RuleRepository::isTokenStep),
                     rule, "followedBy steps need token constraints and cannot be optional, a gap or use anyOf");
+            for (Step step : rule.notFollowedBy()) {
+                require(isTokenStep(step),
+                        rule, "notFollowedBy steps need token constraints and cannot be optional, a gap or use anyOf");
+            }
             require(rule.notPrecededBy().stream().allMatch(sequence -> !sequence.isEmpty() && sequence.stream().allMatch(RuleRepository::isTokenStep)),
                     rule, "notPrecededBy sequences must not be empty, and their steps need token constraints and cannot be optional, a gap or use anyOf");
             require(rule.examples() != null && rule.examples().size() >= MIN_EXAMPLES, rule,

@@ -35,6 +35,7 @@ class RuleRepositoryTest {
         assertThat(rule.steps().getFirst().pos()).containsExactly("名詞", "動詞");
         assertThat(rule.steps().getFirst().optional()).isFalse();
         assertThat(rule.subsumes()).isEmpty();
+        assertThat(rule.notFollowedBy()).isEmpty();
     }
 
     @Test
@@ -46,6 +47,17 @@ class RuleRepositoryTest {
         assertThat(rule.steps()).extracting(Step::isGap).containsExactly(false, true, false);
         assertThat(rule.steps().get(1).gap()).isEqualTo(3);
         assertThat(rule.steps().get(1).constraints()).isEmpty();
+    }
+
+    @Test
+    void readsNotFollowedBySteps() {
+        String tail = EXAMPLES + ", \"notFollowedBy\": [{\"surface\": \"x\"}, {\"baseForm\": \"y\"}]";
+
+        Rule rule = repository(rule("r", STEPS, tail)).find("r").orElseThrow();
+
+        assertThat(rule.notFollowedBy()).hasSize(2);
+        assertThat(rule.notFollowedBy().getFirst().surface()).containsExactly("x");
+        assertThat(rule.notFollowedBy().get(1).baseForm()).containsExactly("y");
     }
 
     @Test
@@ -78,6 +90,10 @@ class RuleRepositoryTest {
                 Arguments.of(rule("r", STEPS, EXAMPLES + ", \"followedBy\": [{\"surface\": \"a\", \"optional\": true}]"), "followedBy steps"),
                 Arguments.of(rule("r", STEPS, EXAMPLES + ", \"followedBy\": [{}]"), "followedBy steps"),
                 Arguments.of(rule("r", STEPS, EXAMPLES + ", \"followedBy\": [{\"surface\": \"a\", \"gap\": 2}]"), "followedBy steps"),
+                Arguments.of(rule("r", STEPS, EXAMPLES + ", \"notFollowedBy\": [{\"surface\": \"a\", \"optional\": true}]"), "notFollowedBy steps"),
+                Arguments.of(rule("r", STEPS, EXAMPLES + ", \"notFollowedBy\": [{\"gap\": 1}]"), "notFollowedBy steps"),
+                Arguments.of(rule("r", STEPS, EXAMPLES + ", \"notFollowedBy\": [{\"anyOf\": [[{\"surface\": \"a\"}]]}]"), "notFollowedBy steps"),
+                Arguments.of(rule("r", STEPS, EXAMPLES + ", \"notFollowedBy\": [{}]"), "notFollowedBy steps"),
                 Arguments.of(rule("r", STEPS, EXAMPLES + ", \"notPrecededBy\": [[]]"), "notPrecededBy sequences"),
                 Arguments.of(rule("r", STEPS, EXAMPLES + ", \"notPrecededBy\": [[{\"surface\": \"a\", \"optional\": true}]]"), "notPrecededBy sequences"),
                 Arguments.of(rule("r", STEPS, EXAMPLES + ", \"notPrecededBy\": [[{\"gap\": 1}]]"), "notPrecededBy sequences"),

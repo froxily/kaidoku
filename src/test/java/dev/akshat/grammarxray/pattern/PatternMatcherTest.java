@@ -255,6 +255,51 @@ class PatternMatcherTest {
     }
 
     @Test
+    void notFollowedByRejectsMatchesBeforeAnyExcludedToken() {
+        List<Rule> rules = List.of(notFollowedBy(List.of(surface("b"), baseForm("c")), "r", surface("a")));
+
+        assertThat(texts(rules, "a", "b")).isEmpty();
+        assertThat(texts(rules, "a", "cc/c")).isEmpty();
+    }
+
+    @Test
+    void notFollowedByKeepsMatchesBeforeOtherTokens() {
+        List<Rule> rules = List.of(notFollowedBy(List.of(surface("b")), "r", surface("a")));
+
+        assertThat(texts(rules, "a", "x")).containsExactly("a");
+        assertThat(texts(rules, "a", "x", "b")).containsExactly("a");
+    }
+
+    @Test
+    void notFollowedByKeepsMatchesAtEndOfText() {
+        List<Rule> rules = List.of(notFollowedBy(List.of(surface("b")), "r", surface("a")));
+
+        assertThat(texts(rules, "a")).containsExactly("a");
+        assertThat(texts(rules, "x", "a")).containsExactly("a");
+    }
+
+    @Test
+    void followedByAndNotFollowedByBothApply() {
+        List<Rule> rules = List.of(new Rule("r", "r", Level.N5, "meaning", "explanation", List.of(),
+                List.of(surface("a")), List.of(surface("b"), surface("c")), List.of(surface("c")),
+                List.of(), List.of(), List.of()));
+
+        assertThat(texts(rules, "a", "b")).containsExactly("a");
+        assertThat(texts(rules, "a", "c")).isEmpty();
+        assertThat(texts(rules, "a", "x")).isEmpty();
+        assertThat(texts(rules, "a")).containsExactly("a");
+    }
+
+    @Test
+    void notFollowedByChecksBeforeWordCompletion() {
+        List<Rule> excluded = List.of(notFollowedBy(List.of(surface("た")), "r", surface("なっ")));
+        List<Rule> allowed = List.of(notFollowedBy(List.of(surface("。")), "r", surface("なっ")));
+
+        assertThat(texts(excluded, "なっ/なる/動詞/連用タ接続", "た/た/助動詞/基本形/特殊・タ", "。")).isEmpty();
+        assertThat(texts(allowed, "なっ/なる/動詞/連用タ接続", "た/た/助動詞/基本形/特殊・タ", "。")).containsExactly("なった");
+    }
+
+    @Test
     void notPrecededByRejectsMatchesRightAfterAnExcludedSequence() {
         List<Rule> rules = List.of(notPrecededBy(List.of(surface("x"), surface("y")), "r", surface("a")));
 
@@ -296,15 +341,19 @@ class PatternMatcherTest {
     }
 
     private static Rule rule(String id, List<String> subsumes, Step... steps) {
-        return new Rule(id, id, Level.N5, "meaning", "explanation", subsumes, List.of(steps), List.of(), List.of(), List.of(), List.of());
+        return new Rule(id, id, Level.N5, "meaning", "explanation", subsumes, List.of(steps), List.of(), List.of(), List.of(), List.of(), List.of());
     }
 
     private static Rule followedBy(Step next, String id, Step... steps) {
-        return new Rule(id, id, Level.N5, "meaning", "explanation", List.of(), List.of(steps), List.of(next), List.of(), List.of(), List.of());
+        return new Rule(id, id, Level.N5, "meaning", "explanation", List.of(), List.of(steps), List.of(next), List.of(), List.of(), List.of(), List.of());
+    }
+
+    private static Rule notFollowedBy(List<Step> next, String id, Step... steps) {
+        return new Rule(id, id, Level.N5, "meaning", "explanation", List.of(), List.of(steps), List.of(), next, List.of(), List.of(), List.of());
     }
 
     private static Rule notPrecededBy(List<Step> before, String id, Step... steps) {
-        return new Rule(id, id, Level.N5, "meaning", "explanation", List.of(), List.of(steps), List.of(), List.of(before), List.of(), List.of());
+        return new Rule(id, id, Level.N5, "meaning", "explanation", List.of(), List.of(steps), List.of(), List.of(), List.of(before), List.of(), List.of());
     }
 
     private static Step surface(String... values) {

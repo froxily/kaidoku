@@ -51,7 +51,7 @@ class RuleConsistencyTest {
     void everyDeclaredSubsumptionSuppressesAMatchInSomeExample() {
         PatternMatcher withoutSubsumption = new PatternMatcher(rules.all().stream()
                 .map(rule -> new Rule(rule.id(), rule.pattern(), rule.level(), rule.meaning(), rule.explanation(), List.of(),
-                        rule.steps(), rule.followedBy(), rule.notPrecededBy(), rule.examples(), rule.counterExamples()))
+                        rule.steps(), rule.followedBy(), rule.notFollowedBy(), rule.notPrecededBy(), rule.examples(), rule.counterExamples()))
                 .toList());
         List<List<Match>> raw = sentences.stream().map(text -> withoutSubsumption.match(text, tokenizer.tokenize(text))).toList();
 
