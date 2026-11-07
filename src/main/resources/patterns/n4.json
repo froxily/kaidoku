@@ -863,7 +863,8 @@
       { "surface": "と", "pos": "助詞", "pos2": "接続助詞" }
     ],
     "notFollowedBy": [
-      { "surface": "同時に", "pos": "副詞" }
+        { "surface": "同時に", "pos": "副詞" },
+        { "surface": "かし", "baseForm": "かす", "pos": "動詞", "conjForm": "連用形" }
     ],
     "examples": [
       "春になると、桜が咲く。",
@@ -877,7 +878,8 @@
     "counterExamples": [
       "友達と映画を見た。",
       "行くと言った。",
-      "ドアが開くと同時に、子どもたちが中へ走り込んだ。"
+        "ドアが開くと同時に、子どもたちが中へ走り込んだ。",
+        "冬の浜では貝を拾うとか流木を集めるとかして遊んだ。"
     ]
   },
   {
@@ -2142,6 +2144,1375 @@
       "かな文字で宛名を書いてください。",
       "彼は一座のかしらとして舞台に立った。",
       "今日は帰るか、残るかを決めよう。"
+    ]
+  },
+  {
+    "id": "kai",
+    "pattern": "～かい",
+    "level": "N4",
+    "meaning": "casual (often male/older-speaker) yes-no question ending",
+    "explanation": "A familiar question ending used to ask whether something is true, often associated with older or male speakers. It follows a plain predicate or noun, and の can introduce a question about an action or situation.",
+    "subsumes": [],
+    "steps": [
+      {
+        "surface": "かい",
+        "pos": "助詞",
+        "pos2": "終助詞"
+      }
+    ],
+    "followedBy": [
+      {
+        "pos": "記号",
+        "pos2": [
+          "句点",
+          "括弧閉"
+        ]
+      },
+      {
+        "surface": [
+          "！",
+          "？",
+          "!",
+          "?"
+        ]
+      },
+      {
+        "pos": "助詞",
+        "pos2": "終助詞"
+      }
+    ],
+    "examples": [
+      "おじいさんは今も元気かい。",
+      "君も明日の見学に行くのかい。",
+      "橋が今夜から通れるという話は本当かい。",
+      "頼んでおいた資料はもう届いたかい。",
+      "その上着は十分暖かいかい。",
+      "裏の門はまだ開かないのかい。"
+    ],
+    "counterExamples": [
+      "あの展望台には月に二回登っている。",
+      "浜辺で紫色の貝を拾った。",
+      "来週の会は公民館で開きます。",
+      "受付はこの建物の三階にあります。",
+      "予備の電池は持ってきたか。"
+    ]
+  },
+  {
+    "id": "interrogative-demo",
+    "pattern": "question word + でも",
+    "level": "N4",
+    "meaning": "\"any- / whatever / anyone at all\"",
+    "explanation": "Adding でも to a question word leaves the choice open to any member of a group. Depending on the question word, it means anyone, anything, anywhere, anytime, or either choice.",
+    "subsumes": [],
+    "steps": [
+      {
+        "surface": [
+          "誰",
+          "だれ",
+          "何",
+          "なん",
+          "どこ",
+          "いつ",
+          "どれ",
+          "どちら"
+        ],
+        "pos": "名詞",
+        "pos2": "代名詞"
+      },
+      {
+        "surface": "でも",
+        "pos": "助詞",
+        "pos2": "副助詞"
+      }
+    ],
+    "examples": [
+      "この工作教室には誰でも参加できます。",
+      "壊れた道具でも何でも修理してくれる。",
+      "この小さな机ならどこでも置ける。",
+      "鍵の返却はいつでも構いません。",
+      "棚の見本はどれでも自由に触ってください。",
+      "昼食の時間はどちらでも都合がいいです。"
+    ],
+    "counterExamples": [
+      "この仕組みなら子供でも理解できる。",
+      "でも今日は海辺の道を通りません。",
+      "休憩室でお茶でも飲みましょう。"
+    ]
+  },
+  {
+    "id": "to-to-dochira",
+    "pattern": "AとBと、どちらが～",
+    "level": "N4",
+    "meaning": "asking which of two options is more ~",
+    "explanation": "Presents two options and asks which has a particular quality or is preferable. The second option can be followed by と or では, and どっち is a more casual alternative to どちら.",
+    "subsumes": [],
+    "steps": [
+      {
+        "surface": "と",
+        "pos": "助詞",
+        "pos2": [
+          "並立助詞",
+          "格助詞"
+        ]
+      },
+      {
+        "pos": "記号",
+        "pos2": "読点",
+        "optional": true
+      },
+      {
+        "pos": [
+          "名詞",
+          "形容詞",
+          "動詞",
+          "連体詞"
+        ]
+      },
+      {
+        "gap": 6
+      },
+      {
+        "anyOf": [
+          [
+            {
+              "surface": "と",
+              "pos": "助詞",
+              "pos2": "並立助詞"
+            }
+          ],
+          [
+            {
+              "surface": "で",
+              "pos": "助詞",
+              "pos2": "格助詞"
+            },
+            {
+              "surface": "は",
+              "pos": "助詞",
+              "pos2": "係助詞"
+            }
+          ]
+        ]
+      },
+      {
+        "pos": "記号",
+        "pos2": "読点",
+        "optional": true
+      },
+      {
+        "surface": [
+          "どちら",
+          "どっち"
+        ],
+        "pos": "名詞",
+        "pos2": "代名詞"
+      },
+      {
+        "surface": "が",
+        "pos": "助詞",
+        "pos2": "格助詞"
+      }
+    ],
+    "examples": [
+      "徒歩と自転車とどちらが早いですか。",
+      "麻と綿と、どちらが涼しいですか。",
+      "新館と別館とどっちが静かですか。",
+      "紙の辞書と電子辞書では、どちらが便利ですか。",
+      "北の浜と南の浜と、どっちが泳ぎやすいですか。",
+      "白い皿と青い皿ではどちらが料理に合いますか。",
+      "徒歩と、自転車と、どちらが早いですか。"
+    ],
+    "counterExamples": [
+      "皆さんはこれからどちらへ向かいますか。",
+      "市場で梨と桃を買った。",
+      "バスより路面電車のほうが景色を楽しめる。"
+    ]
+  },
+  {
+    "id": "to-omou",
+    "pattern": "～と思う",
+    "level": "N4",
+    "meaning": "\"I think that ~\" (stating one's opinion/belief)",
+    "explanation": "Quotes a statement as someone's opinion or belief, with the ending of 思う showing tense, politeness, or negation. The は in とは思わない emphasizes rejecting a belief. Casual speech can use って, while a volitional form before と思う expresses an intention and has a separate explanation.",
+    "subsumes": [],
+    "steps": [
+      {
+        "surface": [
+          "と",
+          "って"
+        ],
+        "pos": "助詞",
+        "pos2": "格助詞"
+      },
+      {
+        "surface": "は",
+        "pos": "助詞",
+        "pos2": "係助詞",
+        "optional": true
+      },
+      {
+        "baseForm": "思う",
+        "pos": "動詞"
+      }
+    ],
+    "notPrecededBy": [
+      [
+        {
+          "pos": "動詞",
+          "conjForm": "未然ウ接続"
+        },
+        {
+          "pos": "助動詞"
+        }
+      ]
+    ],
+    "examples": [
+      "この迂回路のほうが安全だと思う。",
+      "その説明で十分だと思います。",
+      "古い地図にも価値があると思った。",
+      "私はこの計画が必要だと思っている。",
+      "その結末が悲しいと思わない人もいる。",
+      "あの橋は来月開通するって思う。"
+    ],
+    "counterExamples": [
+      "ここは昔「潮見」という村だった。",
+      "明日は早めに出発しようと思う。",
+      "来週から日記を書こうと思っています。",
+      "もう一度説明しようって思う。",
+      "古い切符を見て旅の夜を思い出した。",
+      "彼女の思いやりに救われた。",
+      "そんなことは誰だって思う。"
+    ]
+  },
+  {
+    "id": "to-kiita",
+    "pattern": "～と聞いた",
+    "level": "N4",
+    "meaning": "\"I heard that ~\" (reporting hearsay)",
+    "explanation": "Reports information the speaker has heard from someone else. The reported statement is followed by と聞いた or the polite と聞きました, with って replacing と in casual conversation.",
+    "subsumes": [],
+    "steps": [
+      {
+        "surface": [
+          "と",
+          "って"
+        ],
+        "pos": "助詞",
+        "pos2": "格助詞"
+      },
+      {
+        "anyOf": [
+          [
+            {
+              "baseForm": "聞く",
+              "pos": "動詞",
+              "conjForm": "連用タ接続"
+            },
+            {
+              "surface": "た",
+              "pos": "助動詞",
+              "conjType": "特殊・タ",
+              "conjForm": "基本形"
+            }
+          ],
+          [
+            {
+              "baseForm": "聞く",
+              "pos": "動詞",
+              "conjForm": "連用形"
+            },
+            {
+              "baseForm": "ます",
+              "pos": "助動詞",
+              "conjForm": "連用形"
+            },
+            {
+              "surface": "た",
+              "pos": "助動詞",
+              "conjType": "特殊・タ",
+              "conjForm": "基本形"
+            }
+          ]
+        ]
+      }
+    ],
+    "notPrecededBy": [
+      [
+        {
+          "surface": "か",
+          "pos": "助詞"
+        },
+        {
+          "pos": "記号",
+          "pos2": "括弧閉"
+        }
+      ],
+      [
+        {
+          "surface": "？"
+        },
+        {
+          "pos": "記号",
+          "pos2": "括弧閉"
+        }
+      ]
+    ],
+    "examples": [
+      "朝市は今月で終わると聞いた。",
+      "資料の提出は金曜までだと聞きました。",
+      "駅前に小さな映画館ができるって聞いた。",
+      "この井戸の水は飲めないと聞いた。",
+      "あの職人は昔船乗りだったと聞きました。",
+      "峠の茶屋は冬も開いているって聞いた。",
+      "駅前で「明日は休みだ」と聞いた。"
+    ],
+    "counterExamples": [
+      "昨夜はレコードで古い音楽を聞いた。",
+      "交差点で郵便局への道を聞いた。",
+      "あの店は来月移転するそうです。",
+      "私は受付で「出発は何時ですか」と聞いた。"
+    ]
+  },
+  {
+    "id": "to-iwarete-iru",
+    "pattern": "～と言われている",
+    "level": "N4",
+    "meaning": "\"it is said that ~ / someone has been told ~\"",
+    "explanation": "Presents a view, reputation, or traditional account as something people generally say. It can also report what a specific person has told someone, including an instruction. と言われてきた emphasizes that the account or message has been passed down or repeated up to the present.",
+    "subsumes": [
+      "rareru"
+    ],
+    "steps": [
+      {
+        "surface": "と",
+        "pos": "助詞",
+        "pos2": "格助詞"
+      },
+      {
+        "baseForm": [
+          "言う",
+          "いう"
+        ],
+        "pos": "動詞",
+        "conjForm": "未然形"
+      },
+      {
+        "baseForm": "れる",
+        "pos": "動詞",
+        "pos2": "接尾",
+        "conjForm": "連用形"
+      },
+      {
+        "anyOf": [
+          [
+            {
+              "surface": "て",
+              "pos": "助詞",
+              "pos2": "接続助詞"
+            },
+            {
+              "baseForm": [
+                "いる",
+                "くる"
+              ],
+              "pos": "動詞",
+              "pos2": "非自立"
+            }
+          ],
+          [
+            {
+              "baseForm": "てる",
+              "pos": "動詞",
+              "pos2": "非自立"
+            }
+          ]
+        ]
+      }
+    ],
+    "examples": [
+      "この峠には昔から白い鹿が住むと言われている。",
+      "この湧き水は夏でも冷たいと言われています。",
+      "この岬は船乗りの目印だったと言われてきた。",
+      "あの洞窟は海まで続いているといわれている。",
+      "この坂は昔はもっと急だったと言われていた。",
+      "この石は月の光を集めると言われてる。",
+      "母に「早く寝ろ」と言われている。"
+    ],
+    "counterExamples": [
+      "先生に廊下では走らないように言われた。",
+      "先生に発音の間違いを言われた。",
+      "案内人はこの池が村で最も深いと言っている。",
+      "この手紙は今も多くの研究者に読まれている。"
+    ]
+  },
+  {
+    "id": "to-ittemo-ii",
+    "pattern": "～と言ってもいい",
+    "level": "N4",
+    "meaning": "\"you could say ~ / it's no exaggeration to say ~\"",
+    "explanation": "Judges a description to be fair or close enough to the truth: you could call something that, or say that it is so. よい is a slightly more formal alternative to いい; asking permission to utter particular words is a different use.",
+    "subsumes": [
+      "te-mo-ii"
+    ],
+    "steps": [
+      {
+        "surface": "と",
+        "pos": "助詞",
+        "pos2": "格助詞"
+      },
+      {
+        "baseForm": [
+          "言う",
+          "いう"
+        ],
+        "pos": "動詞",
+        "conjForm": "連用タ接続"
+      },
+      {
+        "surface": "て",
+        "pos": "助詞",
+        "pos2": "接続助詞"
+      },
+      {
+        "surface": "も",
+        "pos": "助詞",
+        "pos2": "係助詞"
+      },
+      {
+        "baseForm": [
+          "いい",
+          "よい"
+        ],
+        "pos": "形容詞",
+        "pos2": "非自立",
+        "conjForm": "基本形"
+      },
+      {
+        "baseForm": "です",
+        "pos": "助動詞",
+        "conjForm": "基本形",
+        "optional": true
+      }
+    ],
+    "notFollowedBy": [
+      {
+        "surface": "か",
+        "pos": "助詞"
+      }
+    ],
+    "examples": [
+      "この修復は職人技の集大成と言ってもいい。",
+      "この一枚は今回の展示の主役と言ってもよい。",
+      "あの二人は村の歴史の生き証人と言ってもいいでしょう。",
+      "ここまで仕上がれば完成といってもいい。",
+      "この道具は旅の必需品と言ってもよいと思います。",
+      "その一言が交渉の決め手になったと言ってもいい。",
+      "あの人は「歩く辞書」と言ってもいい。"
+    ],
+    "counterExamples": [
+      "この発見は研究の転機と言っても過言ではない。",
+      "別荘と言っても、小さな小屋が一軒あるだけだ。",
+      "会議で本当の理由を言ってもいいですか。",
+      "受付で「予約済みです」と言ってもいいですか。",
+      "合格と言っても、いい点数ではなかった。"
+    ]
+  },
+  {
+    "id": "sa-nominal",
+    "pattern": "adjective + さ",
+    "level": "N4",
+    "meaning": "turns an adjective into a noun of degree (\"-ness\"): 高さ, 大きさ, 便利さ",
+    "explanation": "Adds さ to an adjective stem to name a quality or its degree, such as height, size, or convenience. The resulting expression is a noun, so it can take particles and be measured or discussed as a thing.",
+    "subsumes": [],
+    "steps": [
+      {
+        "anyOf": [
+          [
+            {
+              "pos": "形容詞",
+              "conjForm": "ガル接続"
+            }
+          ],
+          [
+            {
+              "pos": "名詞",
+              "pos2": "形容動詞語幹"
+            }
+          ]
+        ]
+      },
+      {
+        "surface": "さ",
+        "pos": "名詞",
+        "pos2": "接尾"
+      }
+    ],
+    "notFollowedBy": [
+      {
+        "surface": "そう",
+        "pos": "名詞",
+        "pos2": "接尾"
+      }
+    ],
+    "examples": [
+      "梯子を選ぶ前に天井の高さを測った。",
+      "箱の大きさに合う袋を探しています。",
+      "乗り換えなしで行ける便利さはありがたい。",
+      "夜明けの森の静かさを録音した。",
+      "道具を手入れする大切さを親方に教わった。",
+      "ひもは同じ長さに切っておいてください。"
+    ],
+    "counterExamples": [
+      "雨が降っても明日の見送りには行くさ。",
+      "森田さんは奥の作業場にいます。",
+      "さっき裏庭で銀色の猫を見た。",
+      "天気がよさそうだ。"
+    ]
+  },
+  {
+    "id": "ka-suru",
+    "pattern": "～化する",
+    "level": "N4",
+    "meaning": "\"-ize / become ~\" (turning into a state)",
+    "explanation": "化 after a noun describes a change toward that state, often like English endings such as -ize or -ification. Adding する makes it an action or process whose ending can show tense, politeness, or negation.",
+    "subsumes": [],
+    "steps": [
+      {
+        "pos": "名詞"
+      },
+      {
+        "surface": "化",
+        "pos": "名詞",
+        "pos2": "接尾"
+      },
+      {
+        "baseForm": "する",
+        "pos": "動詞"
+      },
+      {
+        "baseForm": "れる",
+        "pos": "動詞",
+        "pos2": "接尾",
+        "optional": true
+      }
+    ],
+    "examples": [
+      "来年度は受付の確認作業を自動化する。",
+      "図書館は古い郷土資料を電子化した。",
+      "工場では箱詰めの工程を機械化しています。",
+      "安全に関わる手続きは簡素化しない。",
+      "市場が国際化して小さな店も輸出を始めた。",
+      "駅の設備は数年前に近代化された。"
+    ],
+    "counterExamples": [
+      "この地域では急速に高齢化が進んでいる。",
+      "姉は大学で化学を学んでいます。",
+      "鏡の前で舞台用の化粧をした。",
+      "この祭りは島の文化を伝えている。"
+    ]
+  },
+  {
+    "id": "fuu",
+    "pattern": "～風 (style)",
+    "level": "N4",
+    "meaning": "\"~ style / in the manner of ~\" (suffix only)",
+    "explanation": "風 attached to a name or category describes a style or manner associated with it. The expression can modify a noun with の or an action with に, as in Japanese-style decoration or cooking.",
+    "subsumes": [],
+    "steps": [
+      {
+        "anyOf": [
+          [
+            {
+              "pos": "名詞"
+            },
+            {
+              "surface": "風",
+              "pos": "名詞",
+              "pos2": "接尾"
+            }
+          ],
+          [
+            {
+              "surface": [
+                "和風",
+                "洋風",
+                "欧風"
+              ],
+              "pos": "名詞",
+              "pos2": "一般"
+            }
+          ]
+        ]
+      }
+    ],
+    "examples": [
+      "玄関に和風の照明を取り付けた。",
+      "中庭を日本風に整えました。",
+      "通りの角に洋風の館が残っている。",
+      "祖父は昔風の外套を大事にしている。",
+      "今夜は中華風の料理を持ち寄ります。",
+      "この店の弁当は見た目も和風だ。"
+    ],
+    "counterExamples": [
+      "今日は港から吹く風が強い。",
+      "夕方になって冷たい風に変わった。",
+      "こういうふうに布を折ると角がそろう。",
+      "そんなふうに急かされると困ります。"
+    ]
+  },
+  {
+    "id": "zurai",
+    "pattern": "～づらい",
+    "level": "N4",
+    "meaning": "\"hard to ~ (because it is unpleasant/awkward)\"",
+    "explanation": "A verb stem followed by づらい describes an action that feels painful, awkward, or uncomfortable to carry out. The ending behaves like an い-adjective, so it can change to past, negative, or て-form.",
+    "subsumes": [],
+    "steps": [
+      {
+        "anyOf": [
+          [
+            {
+              "pos": "動詞",
+              "conjForm": "連用形"
+            },
+            {
+              "baseForm": "づらい",
+              "pos": "形容詞"
+            }
+          ],
+          [
+            {
+              "baseForm": "ききづらい",
+              "pos": "形容詞"
+            }
+          ]
+        ]
+      }
+    ],
+    "examples": [
+      "初対面の相手にはお金の相談をしづらい。",
+      "皆が静かなので途中で席を立ちづらいです。",
+      "親切にしてくれた人には断りづらかった。",
+      "傷つけそうで本当の理由を言いづらくて黙った。",
+      "親しい人が相手なら話しづらくない。",
+      "この話題は電話ではききづらい。"
+    ],
+    "counterExamples": [
+      "この墨の字は暗い所では読みにくい。",
+      "慣れない夜の仕事がつらい。",
+      "肩の痛みがつらくて眠れない。"
+    ]
+  },
+  {
+    "id": "de-dekiru",
+    "pattern": "～でできている / ～からできている / ～から作る",
+    "level": "N4",
+    "meaning": "\"made of / made from ~\"",
+    "explanation": "Names the material something consists of or the ingredients it is produced from. でできている and でできた describe its composition, while から作る and から作られる describe making it from a source material. With で, the same token pattern can also describe where something was completed or came into being, so context is needed to distinguish a location from a material.",
+    "subsumes": [],
+    "steps": [
+      {
+        "pos": "名詞"
+      },
+      {
+        "anyOf": [
+          [
+            {
+              "surface": [
+                "で",
+                "から"
+              ],
+              "pos": "助詞",
+              "pos2": "格助詞"
+            },
+            {
+              "baseForm": "できる",
+              "pos": "動詞",
+              "conjForm": "連用形"
+            },
+            {
+              "anyOf": [
+                [
+                  {
+                    "surface": "て",
+                    "pos": "助詞",
+                    "pos2": "接続助詞"
+                  },
+                  {
+                    "baseForm": "いる",
+                    "pos": "動詞",
+                    "pos2": "非自立"
+                  }
+                ],
+                [
+                  {
+                    "surface": "た",
+                    "pos": "助動詞",
+                    "conjType": "特殊・タ",
+                    "conjForm": "基本形"
+                  }
+                ]
+              ]
+            }
+          ],
+          [
+            {
+              "surface": "から",
+              "pos": "助詞",
+              "pos2": "格助詞"
+            },
+            {
+              "anyOf": [
+                [
+                  {
+                    "pos": "名詞"
+                  },
+                  {
+                    "surface": "を",
+                    "pos": "助詞",
+                    "pos2": "格助詞"
+                  }
+                ]
+              ],
+              "optional": true
+            },
+            {
+              "baseForm": "作る",
+              "pos": "動詞"
+            },
+            {
+              "baseForm": "れる",
+              "pos": "動詞",
+              "pos2": "接尾",
+              "optional": true
+            },
+            {
+              "anyOf": [
+                [
+                  {
+                    "surface": "て",
+                    "pos": "助詞",
+                    "pos2": "接続助詞"
+                  },
+                  {
+                    "baseForm": "いる",
+                    "pos": "動詞",
+                    "pos2": "非自立"
+                  }
+                ]
+              ],
+              "optional": true
+            }
+          ]
+        ]
+      }
+    ],
+    "examples": [
+      "この小さな笛は桜の木でできている。",
+      "祭りで使う面は厚い紙でできた。",
+      "この地方では赤いぶどうから作る酢が売られている。",
+      "この甘い飲み物は蒸した米から作られる。",
+      "この包装材は海藻からできている。",
+      "展示用の船は薄い金属でできています。"
+    ],
+    "counterExamples": [
+      "このアプリで診察の予約ができる。",
+      "この作業は一人でできる。",
+      "港から荷物が届くのは夕方です。",
+      "京都から取り寄せた竹を庭に植えた。"
+    ]
+  },
+  {
+    "id": "koto-ga-aru-sometimes",
+    "pattern": "(dictionary/ない form) + ことがある",
+    "level": "N4",
+    "meaning": "\"sometimes ~ happens / there are times when ~\", also \"there is something to ~\"",
+    "explanation": "A dictionary-form or negative verb before ことがある describes something that happens on occasion. も can replace が to mean that this also happens sometimes, while a past form before ことがある describes an experience instead. Depending on context, a dictionary-form verb before ことがある can also mean there is something to do or something that still needs doing.",
+    "subsumes": [],
+    "steps": [
+      {
+        "anyOf": [
+          [
+            {
+              "pos": "動詞",
+              "conjForm": "基本形"
+            }
+          ],
+          [
+            {
+              "pos": "動詞",
+              "conjForm": "未然形"
+            },
+            {
+              "baseForm": "ない",
+              "pos": "助動詞",
+              "conjForm": "基本形"
+            }
+          ]
+        ]
+      },
+      {
+        "surface": "こと",
+        "pos": "名詞",
+        "pos2": "非自立"
+      },
+      {
+        "surface": [
+          "が",
+          "も"
+        ],
+        "pos": "助詞"
+      },
+      {
+        "baseForm": "ある",
+        "pos": "動詞"
+      }
+    ],
+    "examples": [
+      "仕事帰りに川沿いの市場へ行くことがある。",
+      "雪の日には配達が遅れることもある。",
+      "忙しい朝は何も食べないことがある。",
+      "停電で時計が止まることがあります。",
+      "冬には夜明け前に目が覚めることもあった。",
+      "山小屋では電波が届かないこともある。"
+    ],
+    "counterExamples": [
+      "以前あの岬まで歩いたことがある。",
+      "忙しくて昼食を食べなかったことがある。",
+      "この端末で座席を選ぶことができる。"
+    ]
+  },
+  {
+    "id": "nado-nanka",
+    "pattern": "～など / ～なんか",
+    "level": "N4",
+    "meaning": "\"things like ~ / and so on\", also dismissive \"the likes of ~\"",
+    "explanation": "Follows a noun to give it as an example rather than a complete list. なんか is more casual and can make the example sound unimportant, unworthy, or modestly self-deprecating.",
+    "subsumes": [],
+    "steps": [
+      {
+        "pos": "名詞"
+      },
+      {
+        "surface": [
+          "など",
+          "なんか"
+        ],
+        "pos": "助詞",
+        "pos2": "副助詞"
+      },
+      {
+        "surface": [
+          "は",
+          "に"
+        ],
+        "pos": "助詞",
+        "optional": true
+      }
+    ],
+    "examples": [
+      "戸棚には封筒や便箋などが入っている。",
+      "うわさなんか信じないでください。",
+      "刃物などは子供の手が届かない所に置く。",
+      "安物なんかに大切な記録を任せられない。",
+      "私なんかには大役すぎます。",
+      "地図など読めないくらい暗かった。"
+    ],
+    "counterExamples": [
+      "そんな約束なんてすぐ忘れた。",
+      "台所で何かが焦げている。",
+      "なんか今日は廊下が騒がしい。",
+      "彼くらい手先の器用な人を探している。"
+    ]
+  },
+  {
+    "id": "ni-ki-ga-tsuku",
+    "pattern": "～に気がつく / ～に気づく",
+    "level": "N4",
+    "meaning": "\"notice ~ / realise ~\"",
+    "explanation": "Marks the thing or fact that someone notices or becomes aware of. A whole statement can be turned into the object of noticing with ことに, and 気づく expresses the same idea as 気がつく.",
+    "subsumes": [],
+    "steps": [
+      {
+        "surface": "に",
+        "pos": "助詞",
+        "pos2": "格助詞"
+      },
+      {
+        "baseForm": [
+          "気がつく",
+          "気づく",
+          "気付く",
+          "気が付く"
+        ],
+        "pos": "動詞"
+      }
+    ],
+    "examples": [
+      "作業を終えてから小さな傷に気がつく。",
+      "帰りの車内で切符の間違いに気がついた。",
+      "窓辺に置いた鉢の変化に気づいた。",
+      "鍵がないことに気がつくまで時間がかかった。",
+      "散歩中に季節の匂いに気付いた。",
+      "壁の細いひびに気が付く人は少ない。"
+    ],
+    "counterExamples": [
+      "横断歩道では曲がってくる車に気をつける。",
+      "今日は前より声がよく響く気がする。",
+      "この景色は夢で見たような気がします。"
+    ]
+  },
+  {
+    "id": "nan-counter-ka",
+    "pattern": "何 + counter + か",
+    "level": "N4",
+    "meaning": "\"several ~ / a few ~\"",
+    "explanation": "何 followed by a counter and か refers to an unspecified small number, such as a few people or several occasions. It states an approximate quantity rather than asking how many there are.",
+    "subsumes": [],
+    "steps": [
+      {
+        "surface": "何",
+        "pos": "名詞",
+        "pos2": "数"
+      },
+      {
+        "pos": "名詞",
+        "pos2": "接尾"
+      },
+      {
+        "surface": "か",
+        "pos": "助詞"
+      }
+    ],
+    "notFollowedBy": [
+      {
+        "baseForm": [
+          "分かる",
+          "知る"
+        ],
+        "pos": "動詞"
+      }
+    ],
+    "examples": [
+      "締め切りまでに何回か試作品を動かした。",
+      "開場前から何人かが入口に並んでいた。",
+      "祖母にはその話を何度か聞かされた。",
+      "台風の後は何日か船が欠航した。",
+      "調査のために郷土史の本を何冊か借りた。",
+      "修理のために何週間か車を預けた。"
+    ],
+    "counterExamples": [
+      "この講習は全部で何回ですか。",
+      "今朝の見学には何人来ましたか。",
+      "戸締まりは何度も確かめました。",
+      "工具箱に何か細い棒が入っている。",
+      "鐘が鳴ったのが何回か分かりません。",
+      "参加者が何人か知っていますか。"
+    ]
+  },
+  {
+    "id": "no-hitotsu",
+    "pattern": "～の一つだ",
+    "level": "N4",
+    "meaning": "\"is one of the ~\"",
+    "explanation": "Places something among the members of a larger group: it is one of those things. の一つとして describes treating or using it as one member of that group.",
+    "subsumes": [
+      "to-shite"
+    ],
+    "steps": [
+      {
+        "surface": "の",
+        "pos": "助詞",
+        "pos2": "連体化"
+      },
+      {
+        "surface": [
+          "一つ",
+          "ひとつ"
+        ],
+        "pos": "名詞"
+      },
+      {
+        "anyOf": [
+          [
+            {
+              "baseForm": [
+                "だ",
+                "です"
+              ],
+              "pos": "助動詞"
+            }
+          ],
+          [
+            {
+              "surface": "として",
+              "pos": "助詞",
+              "pos2": "格助詞"
+            }
+          ]
+        ]
+      }
+    ],
+    "examples": [
+      "この湿原は渡り鳥の重要な休息地の一つだ。",
+      "古い時計は祖父の大切な収集品の一つです。",
+      "潮の流れを調べるのは航海の準備のひとつだ。",
+      "地域活動の一つとして浜辺を掃除している。",
+      "この橋は町を代表する建造物の一つだった。"
+    ],
+    "counterExamples": [
+      "あんパンを一つください。",
+      "坂を上ったら一つ目の角を左に曲がる。",
+      "残った箱は一つだけでした。"
+    ]
+  },
+  {
+    "id": "moshi",
+    "pattern": "もし～たら / もし～ば / もし～なら / もしも",
+    "level": "N4",
+    "meaning": "\"if (hypothetically) ~\" — もし marks a conditional clause",
+    "explanation": "Introduces a situation to consider hypothetically and pairs it with a conditional ending such as たら, ば, or なら. もしも gives the hypothetical situation a little more emphasis.",
+    "subsumes": [
+      "tara",
+      "ba-conditional",
+      "nara"
+    ],
+    "steps": [
+      {
+        "surface": [
+          "もし",
+          "もしも"
+        ],
+        "pos": "副詞"
+      },
+      {
+        "pos": "記号",
+        "pos2": "読点",
+        "optional": true
+      },
+      {
+        "gap": 8
+      },
+      {
+        "anyOf": [
+          [
+            {
+              "pos": [
+                "動詞",
+                "形容詞",
+                "助動詞"
+              ],
+              "conjForm": [
+                "連用タ接続",
+                "連用形"
+              ]
+            },
+            {
+              "surface": [
+                "たら",
+                "だら"
+              ],
+              "pos": "助動詞",
+              "conjType": "特殊・タ",
+              "conjForm": "仮定形"
+            }
+          ],
+          [
+            {
+              "pos": [
+                "動詞",
+                "形容詞",
+                "助動詞"
+              ],
+              "conjForm": "仮定形"
+            },
+            {
+              "surface": "ば",
+              "pos": "助詞",
+              "pos2": "接続助詞"
+            }
+          ],
+          [
+            {
+              "surface": "なら",
+              "baseForm": "だ",
+              "pos": "助動詞",
+              "conjForm": "仮定形"
+            }
+          ]
+        ]
+      }
+    ],
+    "examples": [
+      "もし船が欠航したら宿でもう一泊しよう。",
+      "もし予備の鍵があれば貸してください。",
+      "もし明日が休みなら朝から庭を片づけたい。",
+      "もしも道に迷ったら灯台を目印に戻ってきて。",
+      "もし返事が来なければ受付に電話します。",
+      "もし、坂が凍っていたら遠回りしてください。"
+    ],
+    "counterExamples": [
+      "もしかしたら古い倉庫に予備があるかもしれない。",
+      "もしかすると彼は北口で待っているかもしれません。",
+      "もしかしてこの傘を探していましたか。",
+      "もしもし、海辺の宿を予約した者です。"
+    ]
+  },
+  {
+    "id": "masu-you-ni",
+    "pattern": "～ますように",
+    "level": "N4",
+    "meaning": "\"I hope that ~ / may ~\" (a wish or prayer)",
+    "explanation": "Ends a wish or prayer for an outcome with a polite verb and ように. Use ますように for something hoped for and ませんように for something hoped against.",
+    "subsumes": [],
+    "steps": [
+      {
+        "anyOf": [
+          [
+            {
+              "baseForm": "ます",
+              "pos": "助動詞",
+              "conjForm": "基本形"
+            }
+          ],
+          [
+            {
+              "baseForm": "ます",
+              "pos": "助動詞",
+              "conjForm": "未然形"
+            },
+            {
+              "surface": "ん",
+              "pos": "助動詞"
+            }
+          ]
+        ]
+      },
+      {
+        "surface": "よう",
+        "pos": "名詞",
+        "pos2": "非自立"
+      },
+      {
+        "surface": "に",
+        "pos": "助詞"
+      }
+    ],
+    "followedBy": [
+      {
+        "pos": "記号",
+        "pos2": [
+          "句点",
+          "括弧閉"
+        ]
+      },
+      {
+        "surface": [
+          "！",
+          "？",
+          "!",
+          "?"
+        ]
+      }
+    ],
+    "examples": [
+      "父の手術が無事に終わりますように。",
+      "帰りの船が予定どおり出ますように。",
+      "一人もけがをしませんように。",
+      "明日の発表で声が震えませんように。",
+      "全員が日没までに到着できますように。",
+      "山頂で雲が切れますように！"
+    ],
+    "counterExamples": [
+      "後ろの席にも聞こえるように声を張った。",
+      "薬は毎日同じ時刻に飲むようにしています。",
+      "お忘れになりませんようにご注意ください。",
+      "明日は風が弱いといいな。"
+    ]
+  },
+  {
+    "id": "toka-toka",
+    "pattern": "～とか～とか",
+    "level": "N4",
+    "meaning": "\"things like A and B\" (listing examples)",
+    "explanation": "Repeats とか to offer two or more examples without claiming to list every possibility. Both nouns and whole actions can be listed this way, often followed by する when describing activities.",
+    "subsumes": [],
+    "steps": [
+      {
+        "surface": "とか",
+        "pos": "助詞",
+        "pos2": "並立助詞"
+      },
+      {
+        "pos": "記号",
+        "pos2": "読点",
+        "optional": true
+      },
+      {
+        "gap": 8
+      },
+      {
+        "anyOf": [
+          [
+            {
+              "surface": "とか",
+              "pos": "助詞",
+              "pos2": "並立助詞"
+            }
+          ],
+          [
+            {
+              "pos": "動詞",
+              "conjForm": "基本形"
+            },
+            {
+              "surface": "と",
+              "pos": "助詞",
+              "pos2": "接続助詞"
+            },
+            {
+              "surface": "かし",
+              "baseForm": "かす",
+              "pos": "動詞",
+              "conjForm": "連用形"
+            },
+            {
+              "surface": "て",
+              "pos": "助詞",
+              "pos2": "接続助詞"
+            }
+          ]
+        ]
+      },
+      {
+        "anyOf": [
+          [
+            {
+              "pos": [
+                "名詞",
+                "動詞",
+                "形容詞",
+                "連体詞"
+              ]
+            },
+            {
+              "gap": 6
+            },
+            {
+              "surface": "とか",
+              "pos": "助詞",
+              "pos2": "並立助詞"
+            }
+          ],
+          [
+            {
+              "pos": "記号",
+              "pos2": "読点"
+            },
+            {
+              "gap": 6
+            },
+            {
+              "surface": "とか",
+              "pos": "助詞",
+              "pos2": "並立助詞"
+            }
+          ]
+        ],
+        "optional": true
+      }
+    ],
+    "examples": [
+      "売店には絵葉書とか手ぬぐいとかが並んでいる。",
+      "休憩には麦茶とか、冷たい水とかを用意します。",
+      "箱には針とか糸とかボタンとかを入れた。",
+      "休日は釣りをするとか山を歩くとかして過ごす。",
+      "困ったら受付に聞くとか案内図を見るとかしてください。",
+      "会場は駅前とか港の近くとかが便利だ。",
+      "地図とか道に迷うと役立つ物とかを用意した。"
+    ],
+    "counterExamples": [
+      "昼は麺類とかを食べたい。",
+      "奥山とかいう人から連絡が来た。",
+      "来月は休館するとかいう話を耳にした。",
+      "道具が足りなかったがなんとか修理できた。",
+      "机には地図とかを置いたが、棚には図鑑とかを並べた。"
+    ]
+  },
+  {
+    "id": "sasete-kudasai",
+    "pattern": "～させてください",
+    "level": "N4",
+    "meaning": "\"please let me ~ / please make or let someone ~\"",
+    "explanation": "Uses the causative with てください to ask the listener to let the speaker act, or to make or let another person do something. Context identifies who is to act and whether the request is for permission or for someone to cause an action. させてくださいませんか phrases the request as a more deferential question.",
+    "subsumes": [
+      "te-kudasai"
+    ],
+    "steps": [
+      {
+        "pos": "動詞"
+      },
+      {
+        "baseForm": [
+          "せる",
+          "させる"
+        ],
+        "pos": "動詞",
+        "pos2": "接尾",
+        "conjForm": "連用形"
+      },
+      {
+        "surface": "て",
+        "pos": "助詞",
+        "pos2": "接続助詞"
+      },
+      {
+        "anyOf": [
+          [
+            {
+              "baseForm": "くださる",
+              "pos": "動詞",
+              "conjForm": "命令ｉ"
+            }
+          ],
+          [
+            {
+              "baseForm": "くださる",
+              "pos": "動詞",
+              "conjForm": "連用形"
+            },
+            {
+              "baseForm": "ます",
+              "pos": "助動詞",
+              "conjForm": "未然形"
+            },
+            {
+              "surface": "ん",
+              "pos": "助動詞"
+            },
+            {
+              "surface": "か",
+              "pos": "助詞"
+            }
+          ]
+        ]
+      }
+    ],
+    "examples": [
+      "展示の準備を私に手伝わせてください。",
+      "もう少しこの写真を見させてください。",
+      "最初に担当者へ事情を説明させてください。",
+      "足が痛いのでここに座らせてください。",
+      "新しい測定器を一度試させてくださいませんか。",
+      "交代の時刻までここで待たせてくださいませんか。",
+      "子供に野菜を食べさせてください。"
+    ],
+    "counterExamples": [
+      "母は弟に庭の草を抜かせた。",
+      "この件は私から説明させてもらえませんか。",
+      "先輩に同じ報告を三度も書かせられた。",
+      "こちらの欄に住所を書いてください。",
+      "入口で身分証を見せてください。"
     ]
   }
 ]

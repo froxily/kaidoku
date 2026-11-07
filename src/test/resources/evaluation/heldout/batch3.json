@@ -1,0 +1,1005 @@
+{
+  "evaluatedRules": [
+    "kai",
+    "interrogative-demo",
+    "to-to-dochira",
+    "to-omou",
+    "to-kiita",
+    "to-iwarete-iru",
+    "to-ittemo-ii",
+    "sa-nominal",
+    "ka-suru",
+    "fuu",
+    "zurai",
+    "de-dekiru",
+    "koto-ga-aru-sometimes",
+    "nado-nanka",
+    "ni-ki-ga-tsuku",
+    "nan-counter-ka",
+    "no-hitotsu",
+    "moshi",
+    "masu-you-ni",
+    "toka-toka",
+    "sasete-kudasai"
+  ],
+  "cases": [
+    {
+      "text": "もう夕飯は食べたかい？",
+      "expected": [
+        "kai"
+      ]
+    },
+    {
+      "text": "その靴は歩きやすいかい？",
+      "expected": [
+        "kai"
+      ]
+    },
+    {
+      "text": "明日もここへ来るのかい？",
+      "expected": [
+        "kai"
+      ]
+    },
+    {
+      "text": "君が新しい担当者かい？",
+      "expected": [
+        "kai"
+      ]
+    },
+    {
+      "text": "先月は二回、祖母を訪ねた。",
+      "expected": []
+    },
+    {
+      "text": "浜辺で小さな貝を拾った。",
+      "expected": []
+    },
+    {
+      "text": "会は三階の広間で開かれる。",
+      "expected": []
+    },
+    {
+      "text": "明日の朝は早いのか？",
+      "expected": []
+    },
+    {
+      "text": "この図書館は誰でも利用できます。",
+      "expected": [
+        "interrogative-demo"
+      ]
+    },
+    {
+      "text": "困ったら何でも聞いてね。",
+      "expected": [
+        "interrogative-demo"
+      ]
+    },
+    {
+      "text": "この小さな机はどこでも使える。",
+      "expected": [
+        "interrogative-demo"
+      ]
+    },
+    {
+      "text": "連絡はいつでも歓迎です。",
+      "expected": [
+        "interrogative-demo"
+      ]
+    },
+    {
+      "text": "並んだ鉛筆はどれでも一本持っていって。",
+      "expected": [
+        "interrogative-demo"
+      ]
+    },
+    {
+      "text": "赤と青なら、どちらでも構いません。",
+      "expected": [
+        "interrogative-demo"
+      ]
+    },
+    {
+      "text": "子供でもこの箱を運べる。",
+      "expected": []
+    },
+    {
+      "text": "でも、今日は店が休みだ。",
+      "expected": []
+    },
+    {
+      "text": "帰りにお茶でも飲みましょう。",
+      "expected": []
+    },
+    {
+      "text": "電車とバスと、どちらが早く着きますか？",
+      "expected": [
+        "to-to-dochira"
+      ]
+    },
+    {
+      "text": "桃と梨とどっちが好き？",
+      "expected": [
+        "to-to-dochira"
+      ]
+    },
+    {
+      "text": "春と秋では、どちらが雨が多いですか？",
+      "expected": [
+        "to-to-dochira"
+      ]
+    },
+    {
+      "text": "この道と川沿いの道とどちらが安全でしょうか？",
+      "expected": [
+        "to-to-dochira"
+      ]
+    },
+    {
+      "text": "次の休みはどちらへお出かけですか？",
+      "expected": []
+    },
+    {
+      "text": "市場で豆腐とねぎを買った。",
+      "expected": []
+    },
+    {
+      "text": "姉と弟が玄関で待っている。",
+      "expected": []
+    },
+    {
+      "text": "この案なら予算内に収まると思う。",
+      "expected": [
+        "to-omou"
+      ]
+    },
+    {
+      "text": "明日の会議は短く終わると思います。",
+      "expected": [
+        "to-omou"
+      ]
+    },
+    {
+      "text": "窓の外の音は雨だと思った。",
+      "expected": [
+        "to-omou"
+      ]
+    },
+    {
+      "text": "彼女は今でもその方法が正しいと思っている。",
+      "expected": [
+        "to-omou"
+      ]
+    },
+    {
+      "text": "私はその噂が本当だとは思わない。",
+      "expected": [
+        "to-omou"
+      ]
+    },
+    {
+      "text": "この色が一番似合うって思う。",
+      "expected": [
+        "to-omou"
+      ]
+    },
+    {
+      "text": "週末は部屋を片づけようと思う。",
+      "expected": []
+    },
+    {
+      "text": "古い写真を見て祖父を思い出した。",
+      "expected": []
+    },
+    {
+      "text": "相手への思いやりを忘れないで。",
+      "expected": []
+    },
+    {
+      "text": "駅前に新しい診療所ができたと聞いた。",
+      "expected": [
+        "to-kiita"
+      ]
+    },
+    {
+      "text": "来月から受付時間が変わると聞きました。",
+      "expected": [
+        "to-kiita"
+      ]
+    },
+    {
+      "text": "あの店は朝六時に開くって聞いた。",
+      "expected": [
+        "to-kiita"
+      ]
+    },
+    {
+      "text": "この池には昔、橋が架かっていたと聞いた。",
+      "expected": [
+        "to-kiita"
+      ]
+    },
+    {
+      "text": "帰りの電車で音楽を聞いた。",
+      "expected": []
+    },
+    {
+      "text": "交番で美術館への道を聞いた。",
+      "expected": []
+    },
+    {
+      "text": "隣の部屋から笑い声が聞こえた。",
+      "expected": []
+    },
+    {
+      "text": "この地域では昔から麦がよく育つと言われている。",
+      "expected": [
+        "to-iwarete-iru"
+      ]
+    },
+    {
+      "text": "その鳥は夜に活動すると言われています。",
+      "expected": [
+        "to-iwarete-iru"
+      ]
+    },
+    {
+      "text": "この泉の水には体を温める力があると言われてきた。",
+      "expected": [
+        "to-iwarete-iru"
+      ]
+    },
+    {
+      "text": "この島の名前は古い言葉に由来すると言われている。",
+      "expected": [
+        "to-iwarete-iru"
+      ]
+    },
+    {
+      "text": "先生に提出が遅いと言われた。",
+      "expected": []
+    },
+    {
+      "text": "父は明日は晴れると言っている。",
+      "expected": []
+    },
+    {
+      "text": "受付で「前へどうぞ」と言われて、前に出た。",
+      "expected": []
+    },
+    {
+      "text": "この通りは町の台所と言ってもいい。",
+      "expected": [
+        "to-ittemo-ii"
+      ]
+    },
+    {
+      "text": "彼の発見は研究の出発点と言ってもよい。",
+      "expected": [
+        "to-ittemo-ii"
+      ]
+    },
+    {
+      "text": "この小屋は私の第二の家と言ってもいい。",
+      "expected": [
+        "to-ittemo-ii"
+      ]
+    },
+    {
+      "text": "今月の売れ行きは記録的と言ってもよいでしょう。",
+      "expected": [
+        "to-ittemo-ii"
+      ]
+    },
+    {
+      "text": "料理をすると言っても、卵を焼く程度だ。",
+      "expected": []
+    },
+    {
+      "text": "ここで私の意見を言ってもいいですか？",
+      "expected": []
+    },
+    {
+      "text": "その変化は革命的と言っても過言ではない。",
+      "expected": []
+    },
+    {
+      "text": "棚の高さを測ってから箱を選んだ。",
+      "expected": [
+        "sa-nominal"
+      ]
+    },
+    {
+      "text": "広場の静かさに驚いた。",
+      "expected": [
+        "sa-nominal"
+      ]
+    },
+    {
+      "text": "失敗して初めて準備の大切さを知った。",
+      "expected": [
+        "sa-nominal"
+      ]
+    },
+    {
+      "text": "布の長さを記録してください。",
+      "expected": [
+        "sa-nominal"
+      ]
+    },
+    {
+      "text": "便利さを求めて道具を作った。",
+      "expected": [
+        "sa-nominal"
+      ]
+    },
+    {
+      "text": "心配しなくても僕が行くさ。",
+      "expected": []
+    },
+    {
+      "text": "山田さんは今、席を外しています。",
+      "expected": []
+    },
+    {
+      "text": "さっき郵便受けを確認した。",
+      "expected": []
+    },
+    {
+      "text": "市は古い資料を電子化する。",
+      "expected": [
+        "ka-suru"
+      ]
+    },
+    {
+      "text": "駅前の道路が昨年、一方通行化した。",
+      "expected": [
+        "ka-suru"
+      ]
+    },
+    {
+      "text": "工場では検査工程を自動化している。",
+      "expected": [
+        "ka-suru"
+      ]
+    },
+    {
+      "text": "人口の高齢化が進んだ町で、移動手段を見直す。",
+      "expected": []
+    },
+    {
+      "text": "町は空き家を宿泊施設として活用し、観光を活性化した。",
+      "expected": [
+        "ka-suru"
+      ]
+    },
+    {
+      "text": "弟は大学で化学を学んでいる。",
+      "expected": []
+    },
+    {
+      "text": "姉は鏡の前で化粧をしている。",
+      "expected": []
+    },
+    {
+      "text": "祭りは地域の文化を伝える。",
+      "expected": []
+    },
+    {
+      "text": "今夜は和風の献立にしよう。",
+      "expected": [
+        "fuu"
+      ]
+    },
+    {
+      "text": "旅館の庭を日本風に整えた。",
+      "expected": [
+        "fuu"
+      ]
+    },
+    {
+      "text": "昼食には洋風の煮込みを選んだ。",
+      "expected": [
+        "fuu"
+      ]
+    },
+    {
+      "text": "祖母は昔風のかばんを大切にしている。",
+      "expected": [
+        "fuu"
+      ]
+    },
+    {
+      "text": "駅前で中華風の料理を食べた。",
+      "expected": [
+        "fuu"
+      ]
+    },
+    {
+      "text": "午後から風が強くなった。",
+      "expected": []
+    },
+    {
+      "text": "こんなふうに紙を折ってください。",
+      "expected": []
+    },
+    {
+      "text": "台風が近づいている。",
+      "expected": []
+    },
+    {
+      "text": "静かな会場では質問しづらい。",
+      "expected": [
+        "zurai"
+      ]
+    },
+    {
+      "text": "彼には借りた本を返しづらかった。",
+      "expected": [
+        "zurai"
+      ]
+    },
+    {
+      "text": "周りの視線が気になって話しづらくて、黙ってしまった。",
+      "expected": [
+        "zurai"
+      ]
+    },
+    {
+      "text": "お世話になった人には断りづらい。",
+      "expected": [
+        "zurai"
+      ]
+    },
+    {
+      "text": "この字は暗い場所では読みにくい。",
+      "expected": []
+    },
+    {
+      "text": "今週は仕事がつらい。",
+      "expected": []
+    },
+    {
+      "text": "重い箱を二階まで運ぶのは大変だ。",
+      "expected": []
+    },
+    {
+      "text": "この匙は木でできている。",
+      "expected": [
+        "de-dekiru"
+      ]
+    },
+    {
+      "text": "紙でできた飾りが窓に揺れていた。",
+      "expected": [
+        "de-dekiru"
+      ]
+    },
+    {
+      "text": "この地方では麦から飲み物を作る。",
+      "expected": [
+        "de-dekiru"
+      ]
+    },
+    {
+      "text": "その菓子は豆から作られる。",
+      "expected": [
+        "de-dekiru"
+      ]
+    },
+    {
+      "text": "この端末で予約できる。",
+      "expected": []
+    },
+    {
+      "text": "友人が札幌から来た。",
+      "expected": []
+    },
+    {
+      "text": "会議室で大きな音がした。",
+      "expected": []
+    },
+    {
+      "text": "忙しい日は昼食を忘れることがある。",
+      "expected": [
+        "koto-ga-aru-sometimes"
+      ]
+    },
+    {
+      "text": "冬は川の水が凍ることもある。",
+      "expected": [
+        "koto-ga-aru-sometimes"
+      ]
+    },
+    {
+      "text": "疲れていると朝食を食べないことがある。",
+      "expected": [
+        "koto-ga-aru-sometimes"
+      ]
+    },
+    {
+      "text": "この路線では雪のために列車が遅れることがあります。",
+      "expected": [
+        "koto-ga-aru-sometimes"
+      ]
+    },
+    {
+      "text": "私は以前、沖縄へ行ったことがある。",
+      "expected": []
+    },
+    {
+      "text": "この窓は内側から開けることができる。",
+      "expected": []
+    },
+    {
+      "text": "忘れ物をしたことを母に話した。",
+      "expected": []
+    },
+    {
+      "text": "庭には梅や椿などが植えてある。",
+      "expected": [
+        "nado-nanka"
+      ]
+    },
+    {
+      "text": "休日は映画なんかを見て過ごす。",
+      "expected": [
+        "nado-nanka"
+      ]
+    },
+    {
+      "text": "細かい数字などは後で確かめよう。",
+      "expected": [
+        "nado-nanka"
+      ]
+    },
+    {
+      "text": "そんな噂なんかに負けないで。",
+      "expected": [
+        "nado-nanka"
+      ]
+    },
+    {
+      "text": "私なんてまだ新人です。",
+      "expected": []
+    },
+    {
+      "text": "机の下に何か落ちている。",
+      "expected": []
+    },
+    {
+      "text": "彼が来るなんて知らなかった。",
+      "expected": []
+    },
+    {
+      "text": "暗くなる前に空の変化に気がつく。",
+      "expected": [
+        "ni-ki-ga-tsuku"
+      ]
+    },
+    {
+      "text": "帰宅してから鍵の傷に気がついた。",
+      "expected": [
+        "ni-ki-ga-tsuku"
+      ]
+    },
+    {
+      "text": "彼女は庭の異変に気づいた。",
+      "expected": [
+        "ni-ki-ga-tsuku"
+      ]
+    },
+    {
+      "text": "窓が開いたままだったことに気がつく。",
+      "expected": [
+        "ni-ki-ga-tsuku"
+      ]
+    },
+    {
+      "text": "足元に気をつけて歩いてください。",
+      "expected": []
+    },
+    {
+      "text": "今日は何となくいいことがありそうな気がする。",
+      "expected": []
+    },
+    {
+      "text": "彼は周囲の音を気にせず眠った。",
+      "expected": []
+    },
+    {
+      "text": "その曲を何回か練習した。",
+      "expected": [
+        "nan-counter-ka"
+      ]
+    },
+    {
+      "text": "受付には何人か並んでいた。",
+      "expected": [
+        "nan-counter-ka"
+      ]
+    },
+    {
+      "text": "彼とは駅で何度か会った。",
+      "expected": [
+        "nan-counter-ka"
+      ]
+    },
+    {
+      "text": "修理には何日か必要です。",
+      "expected": [
+        "nan-counter-ka"
+      ]
+    },
+    {
+      "text": "旅行記を何冊か借りた。",
+      "expected": [
+        "nan-counter-ka"
+      ]
+    },
+    {
+      "text": "このボタンは何回押せばいいですか？",
+      "expected": []
+    },
+    {
+      "text": "昨日の集まりには何人来ましたか？",
+      "expected": []
+    },
+    {
+      "text": "展示は何日まで続きますか？",
+      "expected": []
+    },
+    {
+      "text": "散歩は私の好きな習慣の一つだ。",
+      "expected": [
+        "no-hitotsu"
+      ]
+    },
+    {
+      "text": "この橋は町の名所の一つです。",
+      "expected": [
+        "no-hitotsu"
+      ]
+    },
+    {
+      "text": "水不足はこの村の課題のひとつだ。",
+      "expected": [
+        "no-hitotsu"
+      ]
+    },
+    {
+      "text": "改善策の一つとして、受付に椅子を置いた。",
+      "expected": [
+        "no-hitotsu"
+      ]
+    },
+    {
+      "text": "そのパンを一つください。",
+      "expected": []
+    },
+    {
+      "text": "一つ目の角を左へ曲がる。",
+      "expected": []
+    },
+    {
+      "text": "箱の中にはりんごが一つ残っていた。",
+      "expected": []
+    },
+    {
+      "text": "もし雨が降ったら、試合は延期です。",
+      "expected": [
+        "moshi"
+      ]
+    },
+    {
+      "text": "もし席が空いていれば、窓際に座ろう。",
+      "expected": [
+        "moshi"
+      ]
+    },
+    {
+      "text": "もし明日が休みなら、海を見に行きたい。",
+      "expected": [
+        "moshi"
+      ]
+    },
+    {
+      "text": "もしも鍵をなくしたら、管理人に連絡してください。",
+      "expected": [
+        "moshi"
+      ]
+    },
+    {
+      "text": "もしかしたら彼はもう帰ったかもしれない。",
+      "expected": []
+    },
+    {
+      "text": "もしもし、田中さんのお宅ですか？",
+      "expected": []
+    },
+    {
+      "text": "時間があれば、この本を読んでください。",
+      "expected": []
+    },
+    {
+      "text": "明日の船が無事に着きますように。",
+      "expected": [
+        "masu-you-ni"
+      ]
+    },
+    {
+      "text": "これ以上、熱が上がりませんように。",
+      "expected": [
+        "masu-you-ni"
+      ]
+    },
+    {
+      "text": "みんなの願いがかないますように。",
+      "expected": [
+        "masu-you-ni"
+      ]
+    },
+    {
+      "text": "大切な手紙が雨にぬれませんように。",
+      "expected": [
+        "masu-you-ni"
+      ]
+    },
+    {
+      "text": "後ろまで聞こえるように大きな声で話した。",
+      "expected": []
+    },
+    {
+      "text": "毎朝、窓を開けるようにする。",
+      "expected": []
+    },
+    {
+      "text": "彼女の説明は歌のように軽やかだった。",
+      "expected": []
+    },
+    {
+      "text": "棚には辞書とか地図とかが並んでいる。",
+      "expected": [
+        "toka-toka"
+      ]
+    },
+    {
+      "text": "休みの日は泳ぐとか走るとかして過ごす。",
+      "expected": [
+        "toka-toka"
+      ]
+    },
+    {
+      "text": "庭でトマトとかなすとかを育てたい。",
+      "expected": [
+        "toka-toka"
+      ]
+    },
+    {
+      "text": "帰りに本屋とか花屋とかに寄ろう。",
+      "expected": [
+        "toka-toka"
+      ]
+    },
+    {
+      "text": "駅前に新しい店ができたとかいう話を聞いた。",
+      "expected": []
+    },
+    {
+      "text": "重い荷物をなんとか運び終えた。",
+      "expected": []
+    },
+    {
+      "text": "休日は美術館とかに行きたい。",
+      "expected": []
+    },
+    {
+      "text": "この件は私から説明させてください。",
+      "expected": [
+        "sasete-kudasai"
+      ]
+    },
+    {
+      "text": "明日の朝まで考えさせてくださいませんか？",
+      "expected": [
+        "sasete-kudasai"
+      ]
+    },
+    {
+      "text": "一度だけ、その楽器に触らせてください。",
+      "expected": [
+        "sasete-kudasai"
+      ]
+    },
+    {
+      "text": "体調が悪いので、今日は早く帰らせてください。",
+      "expected": [
+        "sasete-kudasai"
+      ]
+    },
+    {
+      "text": "監督は選手たちを外で走らせた。",
+      "expected": []
+    },
+    {
+      "text": "入り口で靴を脱いでください。",
+      "expected": []
+    },
+    {
+      "text": "次の会議に参加させてもらえませんか？",
+      "expected": []
+    },
+    {
+      "text": "朝の光が白い壁に映った。",
+      "expected": []
+    },
+    {
+      "text": "猫は窓辺で丸くなって眠っている。",
+      "expected": []
+    },
+    {
+      "text": "駅までの道に桜の花びらが散っていた。",
+      "expected": []
+    },
+    {
+      "text": "祖母から届いた手紙を机の引き出しにしまった。",
+      "expected": []
+    },
+    {
+      "text": "鍋のふたを開けると、湯気が立ち上った。",
+      "expected": []
+    },
+    {
+      "text": "彼は黙って椅子を窓際へ運んだ。",
+      "expected": []
+    },
+    {
+      "text": "庭の隅で小鳥が水を飲んでいる。",
+      "expected": []
+    },
+    {
+      "text": "月曜日の朝、電車が十分遅れた。",
+      "expected": []
+    },
+    {
+      "text": "古い時計は今も正確に動いている。",
+      "expected": []
+    },
+    {
+      "text": "夕方になると、この通りは車で混む。",
+      "expected": []
+    },
+    {
+      "text": "彼女は青い封筒に住所を書いた。",
+      "expected": []
+    },
+    {
+      "text": "氷が溶けて、コップの周りがぬれた。",
+      "expected": []
+    },
+    {
+      "text": "兄は休日に自転車を磨いている。",
+      "expected": []
+    },
+    {
+      "text": "遠くの山に薄い雲がかかっている。",
+      "expected": []
+    },
+    {
+      "text": "隣の部屋では子犬が遊んでいた。",
+      "expected": []
+    },
+    {
+      "text": "図書館の入り口に新しい掲示が貼られた。",
+      "expected": []
+    },
+    {
+      "text": "父は味噌汁に刻んだねぎを入れた。",
+      "expected": []
+    },
+    {
+      "text": "夜になると港の灯りが海に映る。",
+      "expected": []
+    },
+    {
+      "text": "今日はいつもより早く家を出た。",
+      "expected": []
+    },
+    {
+      "text": "机の上の花瓶には白い花がある。",
+      "expected": []
+    },
+    {
+      "text": "妹は駅で友達と待ち合わせた。",
+      "expected": []
+    },
+    {
+      "text": "雨上がりの空に虹が見えた。",
+      "expected": []
+    },
+    {
+      "text": "受付の横に傘を置いておきます。",
+      "expected": []
+    },
+    {
+      "text": "公園の池で鴨が泳いでいる。",
+      "expected": []
+    },
+    {
+      "text": "会議の後、資料を全員に配った。",
+      "expected": []
+    },
+    {
+      "text": "温かいスープを飲むと体が温まる。",
+      "expected": []
+    },
+    {
+      "text": "その店は日曜日に休業する。",
+      "expected": []
+    },
+    {
+      "text": "私は赤い糸でボタンを縫いつけた。",
+      "expected": []
+    },
+    {
+      "text": "子猫が毛布の下から顔を出した。",
+      "expected": []
+    },
+    {
+      "text": "列車の窓から田んぼが見えた。",
+      "expected": []
+    },
+    {
+      "text": "彼は昨夜遅くまで手紙を書いていた。",
+      "expected": []
+    },
+    {
+      "text": "朝食には焼きたてのパンを出した。",
+      "expected": []
+    },
+    {
+      "text": "玄関の電灯が突然消えた。",
+      "expected": []
+    },
+    {
+      "text": "この川は町の北側を流れている。",
+      "expected": []
+    },
+    {
+      "text": "新しい靴を履いて広場まで歩いた。",
+      "expected": []
+    },
+    {
+      "text": "彼女は答えを紙に書き、静かに渡した。",
+      "expected": []
+    },
+    {
+      "text": "畑では農家の人が野菜を収穫していた。",
+      "expected": []
+    },
+    {
+      "text": "午後の授業は三時に終わります。",
+      "expected": []
+    },
+    {
+      "text": "食後に温かい麦茶を飲んだ。",
+      "expected": []
+    },
+    {
+      "text": "昨夜の雨で道がぬかるんでいる。",
+      "expected": []
+    },
+    {
+      "text": "必要だと思わない物は買わない。",
+      "expected": [
+        "to-omou"
+      ]
+    },
+    {
+      "text": "豆腐は大豆からできている。",
+      "expected": [
+        "de-dekiru"
+      ]
+    }
+  ]
+}
