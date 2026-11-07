@@ -602,10 +602,7 @@
     "meaning": "~ is more ... than ~",
     "explanation": "Compares two things: the one marked with より is the baseline, and the one before のほうが comes out ahead. 電車よりバスのほうが安い is 'the bus is cheaper than the train'. The two halves can come in either order, and verbs take ほうが directly (読むより見るほうが楽しい).",
     "steps": [
-      { "anyOf": [
-        [ { "surface": "より", "pos": "助詞" }, { "pos2": "読点", "optional": true }, { "gap": 4 }, { "surface": ["ほう", "方"], "pos": "名詞", "pos2": "非自立" }, { "surface": "が", "pos": "助詞" } ],
-        [ { "surface": ["ほう", "方"], "pos": "名詞", "pos2": "非自立" }, { "surface": "が", "pos": "助詞" }, { "gap": 4 }, { "surface": "より", "pos": "助詞" } ]
-      ] }
+      {"anyOf": [[{"surface": "より", "pos": "助詞"}, {"pos2": "読点", "optional": true}, {"gap": 4}, {"surface": ["ほう", "方"], "pos": "名詞", "pos2": "非自立"}, {"surface": "が", "pos": "助詞"}], [{"surface": ["ほう", "方"], "pos": "名詞", "pos2": "非自立"}, {"surface": "が", "pos": "助詞"}, {"gap": 4}, {"surface": "より", "pos": "助詞"}], [{"pos": ["名詞", "動詞", "形容詞"]}, {"surface": ["な", "の"], "optional": true}, {"pos": "名詞", "optional": true}, {"surface": "より", "pos": "助詞"}, {"pos2": "読点", "optional": true}, {"gap": 4}, {"surface": ["ほう", "方"], "pos": "名詞", "pos2": "非自立"}, {"surface": "が", "pos": "助詞"}]]}
     ],
     "examples": [
       "電車よりバスのほうが安い。",
@@ -613,12 +610,17 @@
       "夏のほうが冬より好きだ。",
       "東京の方が大阪より大きいです。",
       "読むより見るほうが楽しい。",
-      "テレビを見るより、本を読んだほうがいい。"
+      "テレビを見るより、本を読んだほうがいい。",
+      "薄い辞書より厚い辞書のほうが便利だ。",
+      "薄い辞書より、厚い辞書のほうが便利だ。"
     ],
     "counterExamples": [
       "駅の方へ歩いた。",
       "昨日より寒い。",
       "あなたのほうがいいと思う。"
+    ],
+    "subsumes": [
+      "yori-comparison"
     ]
   },
   {
@@ -765,18 +767,22 @@
     "pattern": "疑問詞＋か",
     "level": "N5",
     "meaning": "someone / something / somewhere / sometime",
-    "explanation": "Adding か to a question word refers to an unspecified person, thing, place, or choice. いつか can refer to an unspecified time in the past or future, while なぜか gives an unknown reason. A question word plus か immediately before 知る or 分かる usually introduces an embedded question.",
+    "explanation": "Adding か to a question word refers to an unspecified person, thing, place or choice. いつか gives an unspecified time, while なぜか gives an unknown reason. Immediate 知る or 分かる instead suggests an embedded question. This rule also leaves forms before a comma unlabelled, conservatively avoiding short identity questions.",
     "subsumes": [],
     "steps": [
-      { "anyOf": [
-          [ { "surface": ["誰", "だれ", "何", "どこ", "どれ"], "pos": "名詞", "pos2": "代名詞" }, { "surface": "か", "pos": "助詞" } ],
-          [ { "surface": "なぜ", "pos": "副詞" }, { "surface": "か", "pos": "助詞" } ],
-          [ { "surface": "いつか", "pos": "名詞", "pos2": "副詞可能" } ],
-          [ { "surface": "なにか", "pos": "副詞" } ]
-        ] }
+      {"anyOf": [[{"surface": ["誰", "だれ", "何", "どこ", "どれ"], "pos": "名詞", "pos2": "代名詞"}, {"surface": "か", "pos": "助詞"}], [{"surface": "なぜ", "pos": "副詞"}, {"surface": "か", "pos": "助詞"}], [{"surface": "いつか", "pos": "名詞", "pos2": "副詞可能"}], [{"surface": "なにか", "pos": "副詞"}]]}
     ],
     "notFollowedBy": [
-      { "baseForm": ["分かる", "知る"], "pos": "動詞" }
+      {
+        "baseForm": [
+          "分かる",
+          "知る"
+        ],
+        "pos": "動詞"
+      },
+      {
+        "pos2": "読点"
+      }
     ],
     "examples": [
       "玄関で誰かが傘を畳んでいる。",
@@ -785,7 +791,8 @@
       "いつか夜行列車で北へ行きたい。",
       "三枚の写真からどれかを選んでください。",
       "なぜか今日は時計の音が大きく聞こえる。",
-      "これはいつか読んだ本だ。"
+      "これはいつか読んだ本だ。",
+      "誰かが何を忘れたか、まだ分からない。"
     ],
     "counterExamples": [
       "今夜の当番は何ですか。",
@@ -794,7 +801,8 @@
       "彼がどこに泊まるか知っていますか。",
       "工場の前で何人か待っていた。",
       "電話の相手が誰か分かりません。",
-      "それが誰か知っていますか。"
+      "それが誰か知っていますか。",
+      "入口の人が誰か、まだ分からない。"
     ]
   },
   {
@@ -1141,145 +1149,17 @@
     "pattern": "～より～（比較）",
     "level": "N5",
     "meaning": "more ~ than ~ / prefer ~ to ~",
-    "explanation": "より marks the reference point in a comparison, while the following description says how the other item differs or which one is preferred. The description may be past or negative, and comparisons with ほうが have a separate explanation. Formal より can mean 'from', while adverbial より means 'more' without naming a comparison point.",
+    "explanation": "より marks the reference point for a difference or preference. Compared nouns may have an adjective or noun + の modifier, and the predicate may be past, polite or negative. The highlight ends at the predicate, including its inflections, even when it modifies a following noun. ほうが comparisons have a separate explanation. Formal より meaning 'from' and adverbial より are separate uses.",
     "subsumes": [],
     "steps": [
-      {
-        "anyOf": [
-          [
-            {
-              "pos": "名詞",
-              "pos2": [
-                "一般",
-                "固有名詞",
-                "代名詞",
-                "副詞可能",
-                "接尾"
-              ]
-            }
-          ],
-          [
-            {
-              "pos": "動詞",
-              "conjForm": "基本形"
-            }
-          ]
-        ]
-      },
-      {
-        "surface": "より",
-        "pos": "助詞",
-        "pos2": "格助詞"
-      },
-      {
-        "pos": "記号",
-        "pos2": "読点",
-        "optional": true
-      },
-      {
-        "anyOf": [
-          [
-            {
-              "pos": "形容詞"
-            },
-            {
-              "anyOf": [
-                [
-                  {
-                    "baseForm": "ある",
-                    "pos": "動詞"
-                  },
-                  {
-                    "baseForm": "ます",
-                    "pos": "助動詞"
-                  },
-                  {
-                    "surface": "ん",
-                    "pos": "助動詞"
-                  }
-                ]
-              ],
-              "optional": true
-            }
-          ],
-          [
-            {
-              "pos": "名詞",
-              "pos2": "形容動詞語幹"
-            },
-            {
-              "baseForm": [
-                "だ",
-                "です"
-              ],
-              "pos": "助動詞",
-              "optional": true
-            }
-          ],
-          [
-            {
-              "pos": "名詞",
-              "pos2": [
-                "一般",
-                "固有名詞",
-                "代名詞",
-                "副詞可能",
-                "接尾"
-              ]
-            },
-            {
-              "surface": [
-                "が",
-                "に"
-              ],
-              "pos": "助詞",
-              "pos2": "格助詞"
-            },
-            {
-              "anyOf": [
-                [
-                  {
-                    "pos": "形容詞"
-                  },
-                  {
-                    "anyOf": [
-                      [
-                        {
-                          "baseForm": "ある",
-                          "pos": "動詞"
-                        },
-                        {
-                          "baseForm": "ます",
-                          "pos": "助動詞"
-                        },
-                        {
-                          "surface": "ん",
-                          "pos": "助動詞"
-                        }
-                      ]
-                    ],
-                    "optional": true
-                  }
-                ],
-                [
-                  {
-                    "pos": "名詞",
-                    "pos2": "形容動詞語幹"
-                  },
-                  {
-                    "baseForm": [
-                      "だ",
-                      "です"
-                    ],
-                    "pos": "助動詞",
-                    "optional": true
-                  }
-                ]
-              ]
-            }
-          ]
-        ]
-      }
+      {"pos": ["名詞", "動詞", "形容詞"]},
+      {"surface": ["な", "の"], "optional": true},
+      {"pos": "名詞", "optional": true},
+      {"surface": "より", "pos2": "格助詞"},
+      {"pos2": "読点", "optional": true},
+      {"anyOf": [[{"pos": ["名詞", "形容詞"], "notBaseForm": ["ほう", "方"]}, {"surface": ["な", "の"], "optional": true}, {"pos": "名詞", "notBaseForm": ["ほう", "方"], "optional": true}, {"surface": ["が", "に"], "pos2": "格助詞"}]], "optional": true},
+      {"pos": ["名詞", "形容詞"], "pos2": ["自立", "非自立", "形容動詞語幹"]},
+      {"anyOf": [[{"baseForm": ["だ", "です"]}], [{"baseForm": "ある"}, {"baseForm": "ます"}, {"surface": "ん"}], [{"surface": "じゃ"}, {"baseForm": "ない"}]], "optional": true}
     ],
     "notPrecededBy": [
       [
@@ -1543,7 +1423,16 @@
       "今年の盆地は去年より暑い。",
       "石の皿は木の皿より重かった。",
       "北の村は南の町より静かです。",
-      "今日は先週より風が強くありません。"
+      "今日は先週より風が強くありません。",
+      "丸い皿より四角い皿が好きだ。",
+      "丸い皿より、四角い皿が好きだ。",
+      "狭い部屋より広い部屋がいいです。",
+      "狭い部屋より、広い部屋がいいです。",
+      "刺繍はせっかちな姉より器用な妹が上手だ。",
+      "刺繍はせっかちな姉より、器用な妹が上手だ。",
+      "私より背が高い人を探している。",
+      "甘い菓子より塩味の菓子が好きだ。",
+      "木の皿より石の皿が重い。"
     ],
     "counterExamples": [
       "革靴より長靴のほうが雨の日には便利だ。",
@@ -1552,7 +1441,9 @@
       "長靴のほうが、革靴より雨の日には便利だ。",
       "臨時の窓口は午前十時より受付を開始します。",
       "当館の貸出手続きは来月より変更になります。",
-      "布のほうが古い革より柔らかい。"
+      "布のほうが古い革より柔らかい。",
+      "薄い辞書より厚い辞書のほうが便利だ。",
+      "薄い辞書より、厚い辞書のほうが便利だ。"
     ]
   }
 ]
