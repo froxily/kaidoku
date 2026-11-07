@@ -219,6 +219,7 @@ To add a rule: dump the tokens of its example sentences with `/api/tokens` first
 | `KuromojiTokenizerTest` | 7 | Offsets cover the whole text, exact token output, thread safety |
 | `RuleConsistencyTest` | 3 | Cross-rule checks (below) |
 | `EvaluationTest` | 3 | Accuracy on the evaluation set (below) |
+| `ExpansionEvaluationTest` | 3 | reports precision and recall of newly added rules on separate held-out sets (evaluation/heldout/), without a floor |
 | `PatternMatcherPerformanceTest` | 1 | Twenty 10,000-character analyses within a time budget |
 | `KaidokuE2eTest` (`-Pe2e`) | 8 | In a real browser: highlighting, cards, level filter, overlaps, hiding nested patterns, mobile layout, invalid input |
 
