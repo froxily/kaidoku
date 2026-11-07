@@ -230,8 +230,13 @@ public class PatternMatcher {
 
     private static BitSet consume(Step step, List<Token> tokens, int start, BitSet offsets) {
         BitSet next = new BitSet();
+        String firstBaseForm = step.sameAsFirst() ? tokens.get(start).baseForm() : null;
+        if (step.sameAsFirst() && (firstBaseForm == null || firstBaseForm.isBlank() || "*".equals(firstBaseForm))) {
+            return next;
+        }
         for (int offset = offsets.nextSetBit(0); offset >= 0 && start + offset < tokens.size(); offset = offsets.nextSetBit(offset + 1)) {
-            if (step.matches(tokens.get(start + offset))) {
+            Token token = tokens.get(start + offset);
+            if (step.matches(token) && (!step.sameAsFirst() || firstBaseForm.equals(token.baseForm()))) {
                 next.set(offset + 1);
             }
         }

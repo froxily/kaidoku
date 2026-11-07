@@ -70,7 +70,7 @@ class PatternMatcherTest {
 
     @Test
     void triesRulesWithoutAnyIndexableAnchorAtEveryToken() {
-        Step anyConjugation = new Step(null, null, null, null, null, List.of("*"), false, null, null);
+        Step anyConjugation = new Step(null, null, null, null, null, List.of("*"), null, null, null, false, false, null, null);
         List<Rule> rules = List.of(rule("r", anyConjugation, surface("た")));
 
         assertThat(texts(rules, "x", "y", "た")).containsExactly("yた");
@@ -81,6 +81,201 @@ class PatternMatcherTest {
         List<Rule> rules = List.of(rule("r", anyOf(List.of(surface("a")), List.of(baseForm("a")), List.of(pos("名詞")))));
 
         assertThat(texts(rules, "a")).containsExactly("a");
+    }
+
+    @Test
+    void baseFormSuffixMatchesAnyListedEnding() {
+        List<Rule> rules = List.of(rule("r", suffixes(List.of("がる", "たい"), null, null)));
+
+        assertThat(texts(rules, "怖がっ/怖がる/動詞")).containsExactly("怖がっ");
+        assertThat(texts(rules, "読みたい/読みたい/動詞")).containsExactly("読みたい");
+        assertThat(texts(rules, "がる/がる/動詞")).containsExactly("がる");
+        assertThat(texts(rules, "がる人/がる人/動詞")).isEmpty();
+        assertThat(texts(rules, "読ん/読む/動詞")).isEmpty();
+    }
+
+    @Test
+    void surfaceSuffixMatchesAnyListedEnding() {
+        List<Rule> rules = List.of(rule("r", suffixes(null, List.of("っ", "ん"), null)));
+
+        assertThat(texts(rules, "帰っ/帰る/動詞")).containsExactly("帰っ");
+        assertThat(texts(rules, "読ん/読む/動詞")).containsExactly("読ん");
+        assertThat(texts(rules, "っぽい/っぽい/動詞")).isEmpty();
+        assertThat(texts(rules, "帰り/帰る/動詞")).isEmpty();
+    }
+
+    @Test
+    void suffixAndExactConstraintsAllApply() {
+        Step step = new Step(List.of("cutting", "cut"), List.of("cut", "put", "cutting"), List.of("動詞"), null,
+                null, null, List.of("ut"), List.of("ing"), null, false, false, null, null);
+        List<Rule> rules = List.of(rule("r", step));
+
+        assertThat(texts(rules, "cutting/cut/動詞")).containsExactly("cutting");
+        assertThat(texts(rules, "cutting/put/動詞")).containsExactly("cutting");
+        assertThat(texts(rules, "putting/cut/動詞")).isEmpty();
+        assertThat(texts(rules, "cutting/shut/動詞")).isEmpty();
+        assertThat(texts(rules, "cut/cut/動詞")).isEmpty();
+        assertThat(texts(rules, "cutting/cutting/動詞")).isEmpty();
+        assertThat(texts(rules, "cutting/cut/名詞")).isEmpty();
+    }
+
+    @Test
+    void baseFormExclusionsOverrideSuffixAndExactMatches() {
+        Step step = new Step(null, List.of("帰る", "走る", "戻る", "持ち帰る"), List.of("動詞"), null, null, null,
+                List.of("る"), List.of("っ"), List.of("帰る", "走る"), false, false, null, null);
+        List<Rule> rules = List.of(rule("r", step));
+
+        assertThat(texts(rules, "帰っ/帰る/動詞")).isEmpty();
+        assertThat(texts(rules, "走っ/走る/動詞")).isEmpty();
+        assertThat(texts(rules, "戻っ/戻る/動詞")).containsExactly("戻っ");
+        assertThat(texts(rules, "持ち帰っ/持ち帰る/動詞")).containsExactly("持ち帰っ");
+    }
+
+    @Test
+    void posAndExclusionsMatchWithoutOtherPositiveConstraints() {
+        List<Rule> rules = List.of(rule("r", suffixes(null, null, List.of("帰る"))));
+
+        assertThat(texts(rules, "前", "戻っ/戻る/動詞")).containsExactly("戻っ");
+        assertThat(texts(rules, "帰っ/帰る/動詞")).isEmpty();
+        assertThat(texts(rules, "戻っ/戻る/名詞")).isEmpty();
+    }
+
+    @Test
+    void firstSuffixStepIsFoundThroughItsPosAnchor() {
+        List<Rule> rules = List.of(rule("r", suffixes(List.of("る"), List.of("っ"), null), surface("た")));
+
+        assertThat(match(rules, "前", "帰っ/帰る/動詞", "た"))
+                .extracting(Match::start, Match::end, Match::text)
+                .containsExactly(tuple(1, 4, "帰った"));
+        assertThat(texts(rules, "帰っ/帰る/名詞", "た")).isEmpty();
+    }
+
+    @Test
+    void suffixStepsInsideFirstAnyOfAreFoundThroughTheirPosAnchors() {
+        List<Rule> rules = List.of(rule("r", anyOf(
+                List.of(suffixes(List.of("る"), null, null)),
+                List.of(suffixes(null, List.of("ん"), null)))));
+
+        assertThat(texts(rules, "前", "帰っ/帰る/動詞")).containsExactly("帰っ");
+        assertThat(texts(rules, "前", "読ん/読む/動詞")).containsExactly("読ん");
+    }
+
+    @Test
+    void sameAsFirstMatchesBaseFormsAcrossAGap() {
+        List<Rule> rules = List.of(rule("r", surface("a"), gap(2), sameAsFirst()));
+
+        assertThat(texts(rules, "a/shared", "b/shared")).containsExactly("ab");
+        assertThat(texts(rules, "a/shared", "x/other", "b/shared", "c/shared")).containsExactly("axb");
+        assertThat(texts(rules, "a/shared", "x/other", "b/different")).isEmpty();
+    }
+
+    @Test
+    void sameAsFirstInsideAnyOfUsesTheRootStart() {
+        List<Rule> rules = List.of(rule("r", surface("a"), anyOf(
+                List.of(sameAsFirst()),
+                List.of(surface("b"), gap(2), sameAsFirst()))));
+
+        assertThat(texts(rules, "a/shared", "c/shared")).containsExactly("ac");
+        assertThat(texts(rules, "a/shared", "b/branch", "x/other", "c/shared")).containsExactly("abxc");
+        assertThat(texts(rules, "a/shared", "b/branch", "c/branch")).isEmpty();
+    }
+
+    @Test
+    void sameAsFirstInsideDeeplyNestedAlternativesUsesNonZeroRootStart() {
+        List<Rule> rules = List.of(rule("r", anyOf(
+                List.of(surface("a"), anyOf(
+                        List.of(surface("b"), anyOf(
+                                List.of(sameAsFirst()),
+                                List.of(surface("c"), sameAsFirst()))))),
+                List.of(surface("z"), sameAsFirst()))));
+
+        assertThat(match(rules, "prefix/other", "a/shared", "b/branch", "c/inner", "d/shared"))
+                .extracting(Match::start, Match::end, Match::text)
+                .containsExactly(tuple(6, 10, "abcd"));
+        assertThat(texts(rules, "prefix/other", "a/shared", "b/branch", "d/shared")).containsExactly("abd");
+        assertThat(texts(rules, "prefix/other", "a/shared", "b/branch", "c/inner", "d/branch")).isEmpty();
+        assertThat(texts(rules, "prefix/other", "a/shared", "b/branch", "c/inner", "d/inner")).isEmpty();
+        assertThat(texts(rules, "prefix/other", "a/shared", "b/branch", "c/inner", "d/other")).isEmpty();
+    }
+
+    @Test
+    void optionalStepBetweenRootAndSameAsFirstCanBeSkippedOrConsumed() {
+        List<Rule> rules = List.of(rule("r", surface("a"), optional(surface("b")), sameAsFirst()));
+
+        assertThat(texts(rules, "prefix/other", "a/shared", "c/shared")).containsExactly("ac");
+        assertThat(texts(rules, "prefix/other", "a/shared", "b/middle", "c/shared")).containsExactly("abc");
+        assertThat(texts(rules, "prefix/other", "a/shared", "c/other")).isEmpty();
+        assertThat(texts(rules, "prefix/other", "a/shared", "b/middle", "c/middle")).isEmpty();
+    }
+
+    @Test
+    void sameAsFirstRejectsUnknownOrBlankBaseForms() {
+        List<Rule> rules = List.of(rule("r", surface("a"), sameAsFirst()));
+
+        assertThat(texts(rules, "a/*", "b/*")).isEmpty();
+        assertThat(texts(rules, "a/*", "b/known")).isEmpty();
+        assertThat(texts(rules, "a/known", "b/*")).isEmpty();
+        assertThat(texts(rules, "a//名詞", "b//名詞")).isEmpty();
+        assertThat(texts(rules, "a/ /名詞", "b/ /名詞")).isEmpty();
+        assertThat(texts(rules, "a/known", "b/ /名詞")).isEmpty();
+        assertThat(texts(rules, "a/ /名詞", "b/known")).isEmpty();
+    }
+
+    @Test
+    void sameAsFirstUsesANonZeroMatchStart() {
+        List<Rule> rules = List.of(rule("r", surface("a"), gap(1), sameAsFirst()));
+
+        assertThat(match(rules, "prefix/other", "a/shared", "x/middle", "b/shared"))
+                .extracting(Match::start, Match::end, Match::text)
+                .containsExactly(tuple(6, 9, "axb"));
+        assertThat(texts(rules, "prefix/other", "a/shared", "x/middle", "b/other")).isEmpty();
+    }
+
+    @Test
+    void sameAsFirstAlsoRequiresTheOtherTokenConstraints() {
+        Step repeated = new Step(null, null, List.of("動詞"), null, null, null,
+                List.of("る"), List.of("っ"), List.of("帰る"), true, false, null, null);
+        List<Rule> rules = List.of(rule("r", surface("a"), repeated));
+
+        assertThat(texts(rules, "a/戻る", "戻っ/戻る/動詞")).containsExactly("a戻っ");
+        assertThat(texts(rules, "a/帰る", "帰っ/帰る/動詞")).isEmpty();
+        assertThat(texts(rules, "a/戻る", "戻り/戻る/動詞")).isEmpty();
+        assertThat(texts(rules, "a/戻る", "戻っ/戻る/名詞")).isEmpty();
+    }
+
+    @Test
+    void optionalStepsPreserveSuffixExclusionAndSameAsFirstConstraints() {
+        Step repeated = new Step(null, null, List.of("動詞"), null, null, null,
+                List.of("る"), List.of("っ"), List.of("帰る"), true, false, null, null);
+        List<Rule> rules = List.of(rule("r", surface("a"), optional(repeated), surface("c")));
+
+        assertThat(texts(rules, "a/戻る", "c")).containsExactly("ac");
+        assertThat(texts(rules, "a/戻る", "戻っ/戻る/動詞", "c")).containsExactly("a戻っc");
+        assertThat(texts(rules, "a/戻る", "走っ/走る/動詞", "c")).isEmpty();
+        assertThat(texts(rules, "a/帰る", "帰っ/帰る/動詞", "c")).isEmpty();
+        assertThat(texts(rules, "a/戻る", "戻り/戻る/動詞", "c")).isEmpty();
+        assertThat(texts(rules, "a/読む", "読っ/読む/動詞", "c")).isEmpty();
+    }
+
+    @Test
+    void suffixExclusionAndSameAsFirstCombineWithFollowedByAndWordCompletion() {
+        Step repeated = new Step(null, null, List.of("動詞"), null, null, null,
+                List.of("る"), List.of("っ"), List.of("帰る"), true, false, null, null);
+        List<Rule> rules = List.of(followedBy(baseForm("た"), "r",
+                suffixes(List.of("る"), List.of("っ"), List.of("帰る")), surface("て"), repeated));
+
+        assertThat(match(rules, "前", "戻っ/戻る/動詞", "て", "戻っ/戻る/動詞/連用タ接続",
+                "た/た/助動詞/基本形/特殊・タ", "。"))
+                .extracting(Match::start, Match::end, Match::text)
+                .containsExactly(tuple(1, 7, "戻って戻った"));
+        assertThat(texts(rules, "戻っ/戻る/動詞", "て", "戻っ/戻る/動詞/連用タ接続",
+                "て/て/助詞/*/*/接続助詞", "。")).isEmpty();
+        assertThat(texts(rules, "帰っ/帰る/動詞", "て", "帰っ/帰る/動詞/連用タ接続",
+                "た/た/助動詞/基本形/特殊・タ")).isEmpty();
+        assertThat(texts(rules, "戻っ/戻る/動詞", "て", "走っ/走る/動詞/連用タ接続",
+                "た/た/助動詞/基本形/特殊・タ")).isEmpty();
+        assertThat(texts(rules, "戻っ/戻る/動詞", "て", "戻り/戻る/動詞/連用形",
+                "た/た/助動詞/基本形/特殊・タ")).isEmpty();
     }
 
     @Test
@@ -309,6 +504,22 @@ class PatternMatcherTest {
         assertThat(texts(rules, "a")).containsExactly("a");
     }
 
+    @Test
+    void contextStepsApplySuffixAndExclusionConstraints() {
+        Step context = suffixes(List.of("る"), List.of("っ"), List.of("帰る"));
+        List<Rule> followed = List.of(followedBy(context, "r", surface("a")));
+        List<Rule> notFollowed = List.of(notFollowedBy(List.of(context), "r", surface("a")));
+        List<Rule> notPreceded = List.of(notPrecededBy(List.of(context), "r", surface("a")));
+
+        assertThat(texts(followed, "a", "戻っ/戻る/動詞")).containsExactly("a");
+        assertThat(texts(followed, "a", "帰っ/帰る/動詞")).isEmpty();
+        assertThat(texts(followed, "a", "戻り/戻る/動詞")).isEmpty();
+        assertThat(texts(notFollowed, "a", "戻っ/戻る/動詞")).isEmpty();
+        assertThat(texts(notFollowed, "a", "帰っ/帰る/動詞")).containsExactly("a");
+        assertThat(texts(notPreceded, "戻っ/戻る/動詞", "a")).isEmpty();
+        assertThat(texts(notPreceded, "帰っ/帰る/動詞", "a")).containsExactly("a");
+    }
+
     private static List<String> texts(List<Rule> rules, String... specs) {
         return match(rules, specs).stream().map(Match::text).toList();
     }
@@ -357,31 +568,41 @@ class PatternMatcherTest {
     }
 
     private static Step surface(String... values) {
-        return new Step(List.of(values), null, null, null, null, null, false, null, null);
+        return new Step(List.of(values), null, null, null, null, null, null, null, null, false, false, null, null);
     }
 
     private static Step baseForm(String... values) {
-        return new Step(null, List.of(values), null, null, null, null, false, null, null);
+        return new Step(null, List.of(values), null, null, null, null, null, null, null, false, false, null, null);
     }
 
     private static Step pos2(String... values) {
-        return new Step(null, null, null, List.of(values), null, null, false, null, null);
+        return new Step(null, null, null, List.of(values), null, null, null, null, null, false, false, null, null);
     }
 
     private static Step pos(String... values) {
-        return new Step(null, null, List.of(values), null, null, null, false, null, null);
+        return new Step(null, null, List.of(values), null, null, null, null, null, null, false, false, null, null);
+    }
+
+    private static Step suffixes(List<String> baseFormSuffix, List<String> surfaceSuffix, List<String> notBaseForm) {
+        return new Step(null, null, List.of("動詞"), null, null, null, baseFormSuffix, surfaceSuffix, notBaseForm,
+                false, false, null, null);
+    }
+
+    private static Step sameAsFirst() {
+        return new Step(null, null, null, null, null, null, null, null, null, true, false, null, null);
     }
 
     private static Step optional(Step step) {
-        return new Step(step.surface(), step.baseForm(), step.pos(), step.pos2(), step.conjType(), step.conjForm(), true, step.anyOf(), step.gap());
+        return new Step(step.surface(), step.baseForm(), step.pos(), step.pos2(), step.conjType(), step.conjForm(),
+                step.baseFormSuffix(), step.surfaceSuffix(), step.notBaseForm(), step.sameAsFirst(), true, step.anyOf(), step.gap());
     }
 
     @SafeVarargs
     private static Step anyOf(List<Step>... alternatives) {
-        return new Step(null, null, null, null, null, null, false, List.of(alternatives), null);
+        return new Step(null, null, null, null, null, null, null, null, null, false, false, List.of(alternatives), null);
     }
 
     private static Step gap(int maxSkipped) {
-        return new Step(null, null, null, null, null, null, false, null, maxSkipped);
+        return new Step(null, null, null, null, null, null, null, null, null, false, false, null, maxSkipped);
     }
 }

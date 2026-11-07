@@ -87,15 +87,15 @@ public final class RuleRepository {
             require(rule.level() != null, rule, "level is required");
             require(isPresent(rule.meaning()), rule, "meaning is required");
             require(isPresent(rule.explanation()), rule, "explanation is required");
-            validateSequence(rule, rule.steps());
+            validateSequence(rule, rule.steps(), true);
             require(rule.followedBy().stream().allMatch(RuleRepository::isTokenStep),
-                    rule, "followedBy steps need token constraints and cannot be optional, a gap or use anyOf");
+                    rule, "followedBy steps need valid token constraints and cannot be optional, a gap or use anyOf or sameAsFirst");
             for (Step step : rule.notFollowedBy()) {
                 require(isTokenStep(step),
-                        rule, "notFollowedBy steps need token constraints and cannot be optional, a gap or use anyOf");
+                        rule, "notFollowedBy steps need valid token constraints and cannot be optional, a gap or use anyOf or sameAsFirst");
             }
             require(rule.notPrecededBy().stream().allMatch(sequence -> !sequence.isEmpty() && sequence.stream().allMatch(RuleRepository::isTokenStep)),
-                    rule, "notPrecededBy sequences must not be empty, and their steps need token constraints and cannot be optional, a gap or use anyOf");
+                    rule, "notPrecededBy sequences must not be empty, and their steps need valid token constraints and cannot be optional, a gap or use anyOf or sameAsFirst");
             require(rule.examples() != null && rule.examples().size() >= MIN_EXAMPLES, rule,
                     "needs at least " + MIN_EXAMPLES + " examples");
             require(rule.counterExamples() != null && rule.counterExamples().size() >= MIN_COUNTER_EXAMPLES, rule,
@@ -108,29 +108,65 @@ public final class RuleRepository {
         }
     }
 
-    private static void validateSequence(Rule rule, List<Step> steps) {
+    private static void validateSequence(Rule rule, List<Step> steps, boolean atRootStart) {
         require(steps != null && !steps.isEmpty(), rule, "step sequences must not be empty");
-        require(!steps.getFirst().optional(), rule, "step sequences must not start with an optional step");
         require(!steps.getFirst().isGap() && !steps.getLast().isGap(), rule, "step sequences must not start or end with a gap");
         for (Step step : steps) {
             List<List<String>> constraints = step.constraints();
-            long kinds = Stream.of(!constraints.isEmpty(), step.isAlternation(), step.isGap()).filter(Boolean::booleanValue).count();
+            long kinds = Stream.of(!constraints.isEmpty() || step.sameAsFirst(), step.isAlternation(), step.isGap())
+                    .filter(Boolean::booleanValue).count();
             require(kinds == 1, rule, "each step needs exactly one of token constraints, anyOf or gap");
             require(constraints.stream().noneMatch(List::isEmpty), rule, "constraint lists must not be empty");
+            require(hasValidEntries(step.baseFormSuffix()) && hasValidEntries(step.surfaceSuffix()) && hasValidEntries(step.notBaseForm()),
+                    rule, "suffix and exclusion constraints must not contain blank entries");
+            require(hasRequiredPos(step), rule, "suffix constraints require pos");
+            if (!step.isGap() && !step.isAlternation()) {
+                require(hasPositiveConstraints(step), rule, "token steps need a positive constraint");
+                require(!atRootStart || !step.sameAsFirst(), rule, "sameAsFirst cannot be used on the first rule step");
+            }
             if (step.isGap()) {
                 require(step.gap() >= 1 && step.gap() <= MAX_GAP, rule, "gap must be between 1 and " + MAX_GAP);
                 require(!step.optional(), rule, "a gap cannot be optional");
             }
             if (step.isAlternation()) {
                 require(!step.anyOf().isEmpty(), rule, "anyOf must not be empty");
-                step.anyOf().forEach(alternative -> validateSequence(rule, alternative));
+                for (List<Step> alternative : step.anyOf()) {
+                    validateSequence(rule, alternative, atRootStart);
+                }
+            }
+            if (!step.optional() && !step.isGap()) {
+                atRootStart = false;
             }
         }
+        require(!steps.getFirst().optional(), rule, "step sequences must not start with an optional step");
     }
 
     private static boolean isTokenStep(Step step) {
-        return !step.isAlternation() && !step.isGap() && !step.optional()
-                && !step.constraints().isEmpty() && step.constraints().stream().noneMatch(List::isEmpty);
+        return !step.isAlternation() && !step.isGap() && !step.optional() && !step.sameAsFirst()
+                && hasPositiveConstraints(step) && step.constraints().stream().noneMatch(List::isEmpty)
+                && hasValidEntries(step.baseFormSuffix()) && hasValidEntries(step.surfaceSuffix())
+                && hasValidEntries(step.notBaseForm()) && hasRequiredPos(step);
+    }
+
+    private static boolean hasPositiveConstraints(Step step) {
+        return step.surface() != null || step.baseForm() != null || step.pos() != null || step.pos2() != null
+                || step.conjType() != null || step.conjForm() != null || step.baseFormSuffix() != null
+                || step.surfaceSuffix() != null || step.sameAsFirst();
+    }
+
+    private static boolean hasRequiredPos(Step step) {
+        return step.baseFormSuffix() == null && step.surfaceSuffix() == null || step.pos() != null;
+    }
+
+    private static boolean hasValidEntries(List<String> values) {
+        if (values != null) {
+            for (String value : values) {
+                if (!isPresent(value)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private static boolean isPresent(String value) {

@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -34,6 +35,7 @@ class RuleRepositoryTest {
         assertThat(rule.steps().getFirst().surface()).containsExactly("a");
         assertThat(rule.steps().getFirst().pos()).containsExactly("名詞", "動詞");
         assertThat(rule.steps().getFirst().optional()).isFalse();
+        assertThat(rule.steps().getFirst().sameAsFirst()).isFalse();
         assertThat(rule.subsumes()).isEmpty();
         assertThat(rule.notFollowedBy()).isEmpty();
     }
@@ -68,6 +70,126 @@ class RuleRepositoryTest {
 
         assertThat(rule.notPrecededBy()).extracting(List::size).containsExactly(2, 1);
         assertThat(rule.notPrecededBy().getFirst().get(1).baseForm()).containsExactly("y");
+    }
+
+    @Test
+    void readsSuffixAndExclusionConstraints() {
+        String steps = """
+                [{"pos": "動詞", "baseFormSuffix": ["る", "う"], "surfaceSuffix": ["っ", "ん"], "notBaseForm": ["帰る"]}]
+                """;
+
+        Rule rule = repository(rule("r", steps, EXAMPLES)).find("r").orElseThrow();
+
+        assertThat(rule.steps().getFirst().baseFormSuffix()).containsExactly("る", "う");
+        assertThat(rule.steps().getFirst().surfaceSuffix()).containsExactly("っ", "ん");
+        assertThat(rule.steps().getFirst().notBaseForm()).containsExactly("帰る");
+    }
+
+    @Test
+    void acceptsExclusionsWithExactConstraintsWithoutPos() {
+        String steps = """
+                [{"surface": "a", "notBaseForm": ["b"]}]
+                """;
+
+        Rule rule = repository(rule("r", steps, EXAMPLES)).find("r").orElseThrow();
+
+        assertThat(rule.steps().getFirst().notBaseForm()).containsExactly("b");
+    }
+
+    @Test
+    void acceptsExclusionsWithPosAlone() {
+        String steps = """
+                [{"pos": "動詞", "notBaseForm": ["帰る"]}]
+                """;
+
+        Rule rule = repository(rule("r", steps, EXAMPLES)).find("r").orElseThrow();
+
+        assertThat(rule.steps().getFirst().pos()).containsExactly("動詞");
+        assertThat(rule.steps().getFirst().notBaseForm()).containsExactly("帰る");
+    }
+
+    @Test
+    void acceptsSameAsFirstAfterGapsAndInsideAlternatives() {
+        String steps = """
+                [{"surface": "a"}, {"gap": 2}, {"anyOf": [
+                    [{"sameAsFirst": true}],
+                    [{"surface": "b"}, {"sameAsFirst": true, "optional": true}]
+                ]}, {"sameAsFirst": true}]
+                """;
+
+        Rule rule = repository(rule("r", steps, EXAMPLES)).find("r").orElseThrow();
+
+        assertThat(rule.steps().get(2).anyOf().getFirst().getFirst().sameAsFirst()).isTrue();
+        assertThat(rule.steps().get(2).anyOf().get(1).get(1).sameAsFirst()).isTrue();
+        assertThat(rule.steps().getLast().sameAsFirst()).isTrue();
+    }
+
+    @Test
+    void acceptsSameAsFirstInNestedAlternativesAfterRootToken() {
+        String steps = """
+                [{"anyOf": [
+                    [{"surface": "a"}, {"anyOf": [[{"anyOf": [[{"sameAsFirst": true}]]}]]}],
+                    [{"surface": "b"}, {"surface": "c", "optional": true}, {"sameAsFirst": true}]
+                ]}]
+                """;
+
+        Rule rule = repository(rule("r", steps, EXAMPLES)).find("r").orElseThrow();
+        List<List<Step>> alternatives = rule.steps().getFirst().anyOf();
+
+        assertThat(alternatives.getFirst().get(1).anyOf().getFirst().getFirst()
+                .anyOf().getFirst().getFirst().sameAsFirst()).isTrue();
+        assertThat(alternatives.get(1).getLast().sameAsFirst()).isTrue();
+    }
+
+    static Stream<String> sameAsFirstAtRootStart() {
+        return Stream.of(
+                """
+                [{"anyOf": [[{"surface": "a"}], [{"sameAsFirst": true}]]}]
+                """,
+                """
+                [{"anyOf": [[{"surface": "a"}], [{"anyOf": [[{"anyOf": [
+                    [{"surface": "b"}], [{"sameAsFirst": true}]
+                ]}]]}]]}]
+                """,
+                """
+                [{"surface": "a", "optional": true}, {"sameAsFirst": true}]
+                """,
+                """
+                [{"surface": "a", "optional": true}, {"surface": "b", "optional": true},
+                    {"anyOf": [[{"sameAsFirst": true}]]}]
+                """,
+                """
+                [{"anyOf": [[{"surface": "a"}]], "optional": true}, {"sameAsFirst": true}]
+                """,
+                """
+                [{"anyOf": [[{"anyOf": [[{"surface": "a", "optional": true},
+                    {"anyOf": [[{"sameAsFirst": true}]]}]]}]]}]
+                """);
+    }
+
+    @ParameterizedTest
+    @MethodSource("sameAsFirstAtRootStart")
+    void rejectsSameAsFirstBeforeRootToken(String steps) {
+        assertThatThrownBy(() -> repository(rule("r", steps, EXAMPLES)))
+                .isInstanceOf(InvalidRuleException.class)
+                .hasMessageContaining("sameAsFirst cannot be used on the first rule step");
+    }
+
+    @Test
+    void acceptsSuffixAndExclusionConstraintsInAllContexts() {
+        String steps = """
+                [{"pos": "動詞", "baseFormSuffix": ["る"], "surfaceSuffix": ["っ"], "notBaseForm": ["帰る"]}]
+                """.strip();
+        String tail = EXAMPLES + ", \"followedBy\": " + steps + ", \"notFollowedBy\": " + steps
+                + ", \"notPrecededBy\": [" + steps + "]";
+
+        Rule rule = repository(rule("r", STEPS, tail)).find("r").orElseThrow();
+
+        for (Step step : List.of(rule.followedBy().getFirst(), rule.notFollowedBy().getFirst(), rule.notPrecededBy().getFirst().getFirst())) {
+            assertThat(step.baseFormSuffix()).containsExactly("る");
+            assertThat(step.surfaceSuffix()).containsExactly("っ");
+            assertThat(step.notBaseForm()).containsExactly("帰る");
+        }
     }
 
     static Stream<Arguments> invalidRules() {
@@ -107,8 +229,48 @@ class RuleRepositoryTest {
                 Arguments.of(rule("r", "[{\"surface\": \"a\"}, {\"gap\": 2, \"surface\": \"x\"}, {\"surface\": \"b\"}]", EXAMPLES), "exactly one of token constraints, anyOf or gap"));
     }
 
+    static Stream<Arguments> invalidNewRules() {
+        List<Arguments> cases = new ArrayList<>();
+        for (String field : List.of("baseFormSuffix", "surfaceSuffix", "notBaseForm")) {
+            for (String value : List.of("[]", "[\"\"]", "[\"   \"]", "[null]")) {
+                String step = "{\"pos\": \"動詞\", \"%s\": %s}".formatted(field, value);
+                cases.add(Arguments.of(rule("r", "[" + step + "]", EXAMPLES),
+                        value.equals("[]") ? "constraint lists must not be empty" : "must not contain blank entries"));
+                addInvalidContexts(cases, step);
+            }
+            String constraint = "\"%s\": [\"x\"]".formatted(field);
+            String anyOf = "[{\"anyOf\": [[{\"surface\": \"a\"}]], " + constraint + "}]";
+            String gap = "[{\"surface\": \"a\"}, {\"gap\": 1, " + constraint + "}, {\"surface\": \"b\"}]";
+            cases.add(Arguments.of(rule("r", anyOf, EXAMPLES), "exactly one of token constraints, anyOf or gap"));
+            cases.add(Arguments.of(rule("r", gap, EXAMPLES), "exactly one of token constraints, anyOf or gap"));
+            if (!field.equals("notBaseForm")) {
+                String step = "{\"surface\": \"a\", " + constraint + "}";
+                cases.add(Arguments.of(rule("r", "[" + step + "]", EXAMPLES), "suffix constraints require pos"));
+                addInvalidContexts(cases, step);
+            }
+        }
+        String exclusionOnly = "{\"notBaseForm\": [\"a\"]}";
+        cases.add(Arguments.of(rule("r", "[" + exclusionOnly + "]", EXAMPLES), "token steps need a positive constraint"));
+        addInvalidContexts(cases, exclusionOnly);
+        cases.add(Arguments.of(rule("r", "[{\"sameAsFirst\": true}]", EXAMPLES), "sameAsFirst cannot be used on the first rule step"));
+        cases.add(Arguments.of(rule("r", "[{\"surface\": \"a\", \"sameAsFirst\": true}]", EXAMPLES), "sameAsFirst cannot be used on the first rule step"));
+        cases.add(Arguments.of(rule("r", "[{\"surface\": \"a\"}, {\"anyOf\": [[{\"surface\": \"b\"}]], \"sameAsFirst\": true}]", EXAMPLES),
+                "exactly one of token constraints, anyOf or gap"));
+        cases.add(Arguments.of(rule("r", "[{\"surface\": \"a\"}, {\"gap\": 1, \"sameAsFirst\": true}, {\"surface\": \"b\"}]", EXAMPLES),
+                "exactly one of token constraints, anyOf or gap"));
+        addInvalidContexts(cases, "{\"surface\": \"a\", \"sameAsFirst\": true}");
+        return cases.stream();
+    }
+
+    private static void addInvalidContexts(List<Arguments> cases, String step) {
+        for (String context : List.of("followedBy", "notFollowedBy", "notPrecededBy")) {
+            String steps = context.equals("notPrecededBy") ? "[[" + step + "]]" : "[" + step + "]";
+            cases.add(Arguments.of(rule("r", STEPS, EXAMPLES + ", \"" + context + "\": " + steps), context));
+        }
+    }
+
     @ParameterizedTest(name = "{1}")
-    @MethodSource("invalidRules")
+    @MethodSource({"invalidRules", "invalidNewRules"})
     void rejectsInvalidRules(String rules, String reason) {
         assertThatThrownBy(() -> repository(rules))
                 .isInstanceOf(InvalidRuleException.class)

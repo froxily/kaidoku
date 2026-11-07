@@ -172,8 +172,8 @@ flowchart LR
 ```
 
 1. **Tokenize.** Kuromoji splits the text into tokens with surface form, base form, part of speech, conjugation, reading and offsets. It sits behind a small `JapaneseTokenizer` interface, so another analyzer can replace it.
-2. **Index.** Each rule is indexed by the surface form, base form or part of speech of its first step, so at each token only the rules that could start there are tried.
-3. **Match.** A rule is a sequence of steps. A step constrains one token with exact values, offers alternative sub-sequences (`anyOf`), or skips a bounded number of tokens (`gap`) for split patterns. A gap is lazy, so しか pairs with the first ない after it, and it never crosses 。、, brackets, line breaks or ！？. Rules can also require the next token (`followedBy`, used to tell sentence-final なきゃ from the conditional), reject certain next tokens (`notFollowedBy`), or reject certain preceding tokens (`notPrecededBy`, which keeps ～ていく off どうやって行きますか). The longest match wins.
+2. **Index.** Each rule is indexed by the surface form, base form or part of speech of its first step, so at each token only the rules that could start there are tried. Suffix values never become index keys; a first step with only POS and suffix constraints uses its POS anchor.
+3. **Match.** A rule is a sequence of steps. A token step combines exact values, suffixes and exclusions, and `sameAsFirst` can require its base form to repeat the match's first token. Other steps offer alternative sub-sequences (`anyOf`) or skip a bounded number of tokens (`gap`) for split patterns. A gap is lazy, so しか pairs with the first ない after it, and it never crosses 。、, brackets, line breaks or ！？. Rules can also require the next token (`followedBy`, used to tell sentence-final なきゃ from the conditional), reject certain next tokens (`notFollowedBy`), or reject certain preceding tokens (`notPrecededBy`, which keeps ～ていく off どうやって行きますか). The longest match wins.
 4. **Complete the word.** The span extends over the rest of the conjugated word: endings such as た, ます, ない, たい and ん, a て that completes a te-form, and ませんでした.
 5. **Subsume and sort.** A match inside a longer match of a rule that declares `subsumes` (or of the same rule) is dropped, and the rest come back in text order.
 
@@ -203,6 +203,8 @@ A real rule from `src/main/resources/patterns/n3.json`, with the explanation sho
 }
 ```
 
+Token constraints use OR within a list and AND across fields. `baseFormSuffix` and `surfaceSuffix` list allowed endings and require `pos`; `notBaseForm` lists forbidden base forms, overrides positive matches, and needs a positive constraint alongside it. These lists must be nonempty with no blank entries and belong on token steps, including context steps. `sameAsFirst: true` requires the base form at the root match start, even across a gap or inside an alternative; blank and `*` base forms fail. It may stand alone on a token step, but cannot appear on any token step that can consume the rule's first token (including inside leading alternatives), on an `anyOf` or `gap` step itself, or in context steps.
+
 To add a rule: dump the tokens of its example sentences with `/api/tokens` first (tokenization often surprises you: in では the で is the copula だ), write the steps against that output with at least two examples and one near-miss, then run `./mvnw test` and review the snapshot diff it reports before accepting it with `-Dcrosscheck.update=true`.
 
 ## Quality
@@ -212,9 +214,9 @@ To add a rule: dump the tokens of its example sentences with `/api/tokens` first
 | Test class | Tests | What it covers |
 |---|---|---|
 | `PatternExamplesTest` | 1,216 | Every rule's examples match it, and every counter-example doesn't |
-| `RuleRepositoryTest` | 39 | Rule loading and each fail-fast validation |
+| `RuleRepositoryTest` | 124 | Rule loading and each fail-fast validation |
 | `MatchSpanTest` | 27 | Exact highlight spans on real sentences |
-| `PatternMatcherTest` | 33 | Optional steps, `anyOf`, gaps, longest match, overlaps, subsumption, offsets, word completion, `followedBy`, `notFollowedBy`, `notPrecededBy` |
+| `PatternMatcherTest` | 50 | Optional steps, `anyOf`, gaps, longest match, overlaps, subsumption, offsets, word completion, `followedBy`, `notFollowedBy`, `notPrecededBy` |
 | `AnalyzeControllerTest`, `TokenControllerTest`, `PatternControllerTest`, `RequestBodySizeLimitTest` | 24 | API contract, validation, limits and error format |
 | `KuromojiTokenizerTest` | 7 | Offsets cover the whole text, exact token output, thread safety |
 | `RuleConsistencyTest` | 3 | Cross-rule checks (below) |
