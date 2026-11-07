@@ -15,7 +15,7 @@ Paste any Japanese text, such as a news article, a manga page, a subtitle line o
 
 | | |
 |---|---|
-| Grammar patterns | **199** (24 N5 · 68 N4 · 107 N3), covering every in-scope N5 and N4 point of an openly licensed JLPT grammar checklist and 58 of its 62 N3 points ([coverage](#coverage)) |
+| Grammar patterns | **199** (24 N5 · 68 N4 · 107 N3), covering every in-scope N5 and N4 point of an openly licensed JLPT grammar checklist and 54 of its 62 N3 points fully ([coverage](#coverage)) |
 | Tests | **1,343** unit and integration tests + **8** browser tests, run in CI on every push to `main` |
 | Accuracy | **0.991 precision / 0.989 recall** on 655 evaluation sentences kept separate from the rules' own examples; the blind first runs scored 0.973 / 0.984 and 0.987 / 0.971 ([methodology](#evaluation)) |
 | Speed | about **24 ms** to analyze 10,000 characters of grammar-dense text ([details](#performance)) |
@@ -75,9 +75,9 @@ The checklist is the N5, N4 and N3 grammar lists of the Wikibooks [JLPT Guide](h
 |---|---|---|---|
 | N5 | 40 | 29 | 29 |
 | N4 | 50 | 50 | 50 |
-| N3 | 62 | 62 | 58 |
+| N3 | 62 | 62 | 54 (+2 partial) |
 
-The four N3 gaps are explained under [Limitations](#limitations). Other rules cover common N4 and N3 points the list leaves out, such as ～につれて, ～わけにはいかない, ～くせに and ～ばかりか.
+The N3 gaps are explained under [Limitations](#limitations); an earlier version of this README counted 58, which overstated it: ～ぐらい meaning 'about' and なかなか meaning 'quite' were never covered, and つもりで and ～ば～ほど are only partly matched. Other rules cover common N4 and N3 points the list leaves out, such as ～につれて, ～わけにはいかない, ～くせに and ～ばかりか.
 
 ## Quick start
 
@@ -270,7 +270,7 @@ Your numbers will vary with the machine and its load.
 
 - **JLPT levels are unofficial.** The JLPT hasn't published official grammar lists since 2010, so the levels follow commonly used N5–N3 study lists.
 - **Split patterns are bounded.** A gap spans at most a few tokens (set per rule, at most 8) and stops at punctuation, so a pattern spread over a long clause, or across a comma the rule doesn't expect, is missed.
-- **Four checklist points aren't covered.** ～たものだ ('used to') has the same tokens as 'a thing that was ~'; かえって ('on the contrary') is also how kana 帰って is tagged; kana なれる in ～になれる is also 慣れる; and ～には～の～がある has no reliable token signature yet.
+- **Eight N3 checklist points aren't fully covered yet.** ～ぐらい ('about') and なかなか ('quite') have no rule yet, つもりで and ～ば～ほど are only partly matched (～ば～ほど doesn't check that the word repeats), and four are hard to tell apart from tokens: ～たものだ ('used to') has the same tokens as 'a thing that was ~'; かえって ('on the contrary') is also how kana 帰って is tagged; kana なれる in ～になれる is also 慣れる; and ～には～の～がある has no reliable token signature yet.
 - **Some readings can't be told apart from tokens alone.** The card says so instead of guessing, but a few cases still produce false positives (see [Evaluation](#evaluation)). A few rules list single-word forms by hand (っぽい adjectives, some ～方 and ～たて words), so unlisted words are missed.
 - **Bare なきゃ / なくちゃ is only matched at the end of a sentence.** Mid-sentence, the same form usually means 'if (you) don't'.
 - **Inline furigana breaks tokenization.** Text copied with readings mixed in (気象庁きしょうちょう) confuses the tokenizer, so copy it without furigana.

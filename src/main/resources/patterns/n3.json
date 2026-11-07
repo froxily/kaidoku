@@ -50,7 +50,10 @@
       ] },
       { "surface": ["こと", "事"], "pos": "名詞", "pos2": "非自立" },
       { "surface": "に", "pos": "助詞" },
-      { "baseForm": "なる", "pos": "動詞" }
+      { "baseForm": "なる", "pos": "動詞" },
+      { "anyOf": [
+        [ { "surface": "て", "pos": "助詞", "pos2": "接続助詞" }, { "baseForm": "いる", "pos": "動詞", "pos2": "非自立" } ]
+      ], "optional": true }
     ],
     "examples": [
       "来年結婚することになる。",
@@ -58,12 +61,15 @@
       "転勤する事になった。",
       "会議は中止することになりました。",
       "今年は旅行に行かないことになった。",
-      "ここでは靴を脱ぐことになっている。"
+      "ここでは靴を脱ぐことになっている。",
+      "この工場では作業前に手を洗うことになっている。",
+      "来月から私は夜の便を担当することになっています。"
     ],
     "counterExamples": [
       "毎朝走ることにした。",
       "日本に行ったことがある。",
-      "大変なことになった。"
+      "大変なことになった。",
+      "私は毎晩日記を書くことにした。"
     ]
   },
   {
@@ -246,23 +252,26 @@
     "explanation": "After a noun, ばかり says that one thing is done or found over and over, often with a critical tone. てばかりいる criticises someone for doing nothing but one activity. After a number it means 'about' instead.",
     "steps": [
       { "anyOf": [
-        [ { "pos": "名詞", "pos2": ["一般", "固有名詞", "代名詞", "サ変接続"] } ],
-        [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" } ],
-        [ { "pos": "動詞", "conjForm": "基本形" } ]
-      ] },
-      { "surface": "ばかり", "pos": "助詞" }
+        [ { "pos": "名詞", "pos2": ["一般", "固有名詞", "代名詞", "サ変接続"] }, { "surface": "ばかり", "pos": "助詞" }, { "surface": "で", "baseForm": "だ", "pos": "助動詞", "optional": true } ],
+        [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" }, { "surface": "ばかり", "pos": "助詞" }, { "baseForm": "いる", "pos": "動詞", "optional": true } ],
+        [ { "pos": "動詞", "conjForm": "基本形" }, { "surface": "ばかり", "pos": "助詞" } ]
+      ] }
     ],
     "examples": [
       "肉ばかり食べている。",
       "弟はゲームばかりしています。",
       "遊んでばかりいないで勉強しなさい。",
       "文句ばかり言う。",
-      "泣くばかりだった。"
+      "泣くばかりだった。",
+      "休日はソファーで寝てばかりいる。",
+      "最近、弟は漫画を読んでばかりいます。",
+      "冷蔵庫の中は飲み物ばかりで、夕飯に使える物がない。"
     ],
     "counterExamples": [
       "一時間ばかり待った。",
       "日本に来たばかりです。",
-      "十分ばかり休憩した。"
+      "十分ばかり休憩した。",
+      "バスを二十分ばかり待ちました。"
     ]
   },
   {
@@ -270,9 +279,10 @@
     "pattern": "～ところだ",
     "level": "N3",
     "meaning": "about to ~ / in the middle of ~ / just did ~",
-    "explanation": "ところ points to a moment in time, and the verb form decides which one: dictionary form means about to start, ている means in the middle of it, and the past form means it has just finished.",
+    "explanation": "ところ points to a moment in time, and the verb form decides which one: dictionary form means about to start, ている means in the middle of it, and the past form means it has just finished. Dictionary form plus ところだった / ところでした can also mean 'nearly did ~': something was about to happen but was avoided.",
     "steps": [
       { "anyOf": [
+        [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" }, { "baseForm": "いる", "pos": "動詞", "pos2": "非自立", "conjForm": "基本形" } ],
         [ { "pos": "動詞", "conjForm": "基本形" } ],
         [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ]
       ] },
@@ -283,12 +293,16 @@
       "これから出かけるところだ。",
       "今ご飯を食べているところです。",
       "ちょうど今帰ってきたところだ。",
-      "電話しようと思っていたところだった。"
+      "電話しようと思っていたところだった。",
+      "今、棚のほこりを拭いているところです。",
+      "今、短い詩を読んでいるところです。",
+      "あと一歩で用水路に落ちるところだった。"
     ],
     "counterExamples": [
       "静かなところに住みたい。",
       "今のところ大丈夫だ。",
-      "ところで、明日は暇？"
+      "ところで、明日は暇？",
+      "坂を上ったところに小さな茶屋がある。"
     ]
   },
   {
@@ -797,15 +811,37 @@
     "pattern": "～べきだ",
     "level": "N3",
     "meaning": "should ~ / ought to ~",
-    "explanation": "After a dictionary-form verb, べき states what is right or necessary as a general principle or strong advice. べきではない says something should not be done. する often becomes すべき.",
+    "explanation": "After a dictionary-form verb, べき states what is right or necessary as a general principle or strong advice. べきではない / べきじゃない express that something should not be done. する often becomes すべき.",
     "steps": [
       { "pos": "動詞" },
-      { "baseForm": "べし", "pos": "助動詞" }
+      { "baseForm": "べし", "pos": "助動詞" },
+      { "anyOf": [
+        [ { "baseForm": ["だ", "です"], "pos": "助動詞" } ],
+        [
+          { "anyOf": [
+            [ { "surface": "で", "baseForm": "だ", "pos": "助動詞" }, { "surface": "は", "pos": "助詞" } ],
+            [ { "surface": "じゃ", "pos": "助詞" } ]
+          ] },
+          { "baseForm": "ない" }
+        ],
+        [
+          { "anyOf": [
+            [ { "surface": "で", "baseForm": "だ", "pos": "助動詞" }, { "surface": "は", "pos": "助詞" } ],
+            [ { "surface": "じゃ", "pos": "助詞" } ]
+          ] },
+          { "baseForm": "ある", "pos": "動詞" },
+          { "baseForm": "ます", "pos": "助動詞" },
+          { "surface": "ん" }
+        ]
+      ], "optional": true }
     ],
     "examples": [
       "もっと早く行くべきだ。",
       "そんなことは言うべきではない。",
-      "約束は守るべきです。"
+      "約束は守るべきです。",
+      "そんな危ない近道を選ぶべきじゃない。",
+      "この記録を勝手に捨てるべきではありません。",
+      "事故の原因はもっと詳しく調べるべきだった。"
     ],
     "counterExamples": [
       "もっと早く行ったほうがいい。"
@@ -908,7 +944,7 @@
     "pattern": "～ようとする",
     "level": "N3",
     "meaning": "try to ~ / be about to ~",
-    "explanation": "The volitional form plus とする describes an attempt, often one that fails or is interrupted (寝ようとしても眠れない), or the moment just before an action (出ようとした時, 'just as I was about to leave').",
+    "explanation": "The volitional form plus とする describes an attempt, often one that fails or is interrupted (寝ようとしても眠れない), or the moment just before an action (出ようとした時, 'just as I was about to leave'). With an intentional action, ようとしない often means someone refuses to do it or will not even try.",
     "subsumes": ["volitional"],
     "steps": [
       { "pos": "動詞", "conjForm": "未然ウ接続" },
@@ -1061,7 +1097,10 @@
     "explanation": "さえ followed by a ば or たら condition says that this single condition is all it takes: お金さえあれば means 'as long as I have money'. After a verb stem the form is 飲みさえすれば. Without a condition after it, さえ means 'even' (子供でさえ分かる), which is a different use.",
     "subsumes": ["ba-conditional", "tara", "sae"],
     "steps": [
-      { "surface": "さえ", "pos": "助詞" },
+      { "anyOf": [
+        [ { "surface": "で", "pos": "助詞" }, { "surface": "さえ", "pos": "助詞" } ],
+        [ { "surface": "さえ", "pos": "助詞" } ]
+      ] },
       { "gap": 3 },
       { "anyOf": [
         [ { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": "仮定形" }, { "surface": "ば", "pos": "助詞" } ],
@@ -1074,7 +1113,8 @@
       "あなたさえよければ、一緒に行きましょう。",
       "これさえ覚えておけば大丈夫だ。",
       "天気さえよかったら、出かけたのに。",
-      "雨さえ降らなければ、試合はできる。"
+      "雨さえ降らなければ、試合はできる。",
+      "電話でさえ話せれば、それで十分だ。"
     ],
     "counterExamples": [
       "子供でさえ分かる。",
@@ -1421,13 +1461,18 @@
     "meaning": "even ~",
     "explanation": "さえ marks an extreme case to show how far something goes: 子供でさえ分かる is 'even a child understands it'. It often comes with a negative (寝る時間さえない, 'I don't even have time to sleep'). With a ば condition after it, see ～さえ～ば.",
     "steps": [
-      { "surface": "さえ", "pos": "助詞" }
+      { "anyOf": [
+        [ { "surface": "で", "pos": "助詞" }, { "surface": "さえ", "pos": "助詞" } ],
+        [ { "surface": "さえ", "pos": "助詞" } ]
+      ] }
     ],
     "examples": [
       "子供でさえ分かる。",
       "忙しくて、寝る時間さえない。",
       "名前さえ知らなかった。",
-      "彼は漢字さえ書けない。"
+      "彼は漢字さえ書けない。",
+      "経験豊かな船長でさえ、この潮の流れは読めなかった。",
+      "小さな物音でさえ、今夜は気になって眠れない。"
     ],
     "counterExamples": [
       "冴えない顔をしている。",
@@ -1483,24 +1528,38 @@
     "pattern": "～ように",
     "level": "N3",
     "meaning": "so that ~ / in order that ~",
-    "explanation": "ように after a plain verb (often a potential or negative one) states the goal an action aims at: 聞こえるように大きな声で話す is 'speak loudly so that people can hear'. With 言う or 頼む it reports a request (やめるように言われた, 'I was told to stop').",
+    "explanation": "ように after a plain verb (often a potential or negative one) states the goal an action aims at: 聞こえるように大きな声で話す is 'speak loudly so that people can hear'. With 言う, 言われる, 頼む or 伝える it reports an instruction or request (やめるように言われた, 'I was told to stop').",
     "steps": [
       { "anyOf": [
         [ { "pos": "動詞", "conjForm": "基本形" } ],
         [ { "baseForm": "ない", "conjForm": "基本形" } ]
       ] },
       { "surface": "よう", "pos": "名詞", "pos2": "非自立" },
-      { "surface": "に", "pos": "助詞" }
+      { "surface": "に", "pos": "助詞" },
+      { "anyOf": [
+        [
+          { "baseForm": ["言う", "頼む", "伝える"], "pos": "動詞" },
+          { "baseForm": ["れる", "られる"], "pos": "動詞", "pos2": "接尾", "optional": true },
+          { "anyOf": [
+            [ { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" }, { "baseForm": "いる", "pos": "動詞", "pos2": "非自立" } ]
+          ], "optional": true }
+        ]
+      ], "optional": true }
     ],
     "examples": [
       "後ろの人にも聞こえるように、大きな声で話してください。",
       "風邪をひかないように、気をつけて。",
       "医者にたばこをやめるように言われた。",
-      "忘れないようにメモしておく。"
+      "忘れないようにメモしておく。",
+      "生徒たちに廊下を走らないように言いました。",
+      "隣の人に窓を閉めるように頼んだ。",
+      "留守番の弟に火を使わないように伝えました。",
+      "窓を閉めるように伝えられた。"
     ],
     "counterExamples": [
       "鳥のように飛びたい。",
-      "毎日運動するようにしている。"
+      "毎日運動するようにしている。",
+      "その雲は船のように見えた。"
     ]
   },
   {
@@ -2175,20 +2234,27 @@
     "pattern": "～から～にかけて",
     "level": "N3",
     "meaning": "from ~ through ~ (a span of time or area)",
-    "explanation": "Marks a rough span of time or space without sharp edges: 東京から大阪にかけて雨が降る is 'it will rain across the area from Tokyo to Osaka'. Compared with から～まで, the boundaries are looser.",
+    "explanation": "Marks a rough span of time or space without sharp edges: 東京から大阪にかけて雨が降る is 'it will rain across the area from Tokyo to Osaka'. Compared with から～まで, the boundaries are looser. A time noun can also take にかけて without から, as in 週末にかけて ('towards and into the weekend').",
     "steps": [
-      { "surface": "から", "pos": "助詞", "pos2": "格助詞" },
-      { "gap": 3 },
-      { "surface": ["にかけて", "にかけ"], "pos": "助詞" }
+      { "anyOf": [
+        [ { "surface": "から", "pos": "助詞", "pos2": "格助詞" }, { "gap": 3 }, { "surface": ["にかけて", "にかけ"], "pos": "助詞" } ],
+        [ { "pos": "名詞", "pos2": "副詞可能" }, { "surface": ["にかけて", "にかけ"], "pos": "助詞" } ],
+        [ { "surface": ["連休", "夏休み"], "pos": "名詞", "pos2": "一般" }, { "surface": ["にかけて", "にかけ"], "pos": "助詞" } ]
+      ] }
     ],
     "examples": [
       "東京から大阪にかけて雨が降る。",
       "月曜日から水曜日にかけて休みます。",
-      "夜から朝にかけて雪が降った。"
+      "夜から朝にかけて雪が降った。",
+      "週末にかけて、山沿いでは雪が増える。",
+      "夜にかけて、港の風が強まる見込みです。",
+      "連休にかけて、宿の予約が取りにくくなる。",
+      "夏休みにかけて観光客が増える。"
     ],
     "counterExamples": [
       "東京から大阪まで新幹線で行った。",
-      "壁に絵をかけて飾った。"
+      "壁に絵をかけて飾った。",
+      "濡れた上着を椅子にかけて乾かした。"
     ]
   },
   {
@@ -2306,23 +2372,36 @@
     "pattern": "～ばかりか",
     "level": "N3",
     "meaning": "not only ~ but also ...",
-    "explanation": "ばかりか adds a second, often more surprising point to the first: 彼は英語ばかりか中国語も話せる is 'he speaks not only English but Chinese too'. The second part usually has も or まで.",
+    "explanation": "ばかりか adds a second, often more surprising point to the first: 彼は英語ばかりか中国語も話せる is 'he speaks not only English but Chinese too'. The second part usually has も or まで. ばかりでなく has the same 'not only ~ but also' meaning.",
     "subsumes": ["bakari"],
     "steps": [
       { "anyOf": [
         [ { "pos": "名詞" } ],
-        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ]
+        [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+        [ { "baseForm": ["た", "だ"], "conjType": "特殊・タ", "conjForm": "基本形" } ],
+        [ { "baseForm": "ない", "conjForm": "基本形" } ],
+        [ { "surface": "な", "baseForm": "だ", "pos": "助動詞", "conjForm": "体言接続" } ]
       ] },
       { "surface": "ばかり", "pos": "助詞" },
-      { "surface": "か", "pos": "助詞" }
+      { "anyOf": [
+        [ { "surface": "か", "pos": "助詞" } ],
+        [ { "surface": "で", "baseForm": "だ", "pos": "助動詞" }, { "surface": "なく", "baseForm": "ない", "conjForm": "連用テ接続" } ]
+      ] }
     ],
     "examples": [
       "彼は英語ばかりか中国語も話せる。",
       "雨ばかりか風も強くなってきた。",
-      "彼女は勉強ができるばかりか、スポーツも得意だ。"
+      "彼女は勉強ができるばかりか、スポーツも得意だ。",
+      "この宿は駅に近いばかりでなく、朝食もおいしい。",
+      "あの職人は家具ばかりでなく、木のおもちゃも作る。",
+      "彼女は歌うばかりでなく、伴奏も一人でできる。",
+      "彼は約束を破ったばかりでなく、謝りもしなかった。",
+      "彼は約束を守らないばかりでなく、他人にも迷惑をかける。",
+      "この箱は丈夫なばかりでなく、軽い。"
     ],
     "counterExamples": [
-      "テレビばかり見ている。"
+      "テレビばかり見ている。",
+      "留守中の猫は寝てばかりいる。"
     ]
   },
   {
@@ -2330,20 +2409,26 @@
     "pattern": "～ということだ",
     "level": "N3",
     "meaning": "I hear that ~ / that means ~",
-    "explanation": "At the end of a sentence, ということだ reports something heard from others (明日は休みだということだ, 'apparently tomorrow is a holiday') or sums up what something amounts to (つまり中止ということですね, 'so that means it's cancelled').",
+    "explanation": "At the end of a sentence, ということだ reports something heard from others (明日は休みだということだ, 'apparently tomorrow is a holiday') or sums up what something amounts to (つまり中止ということですね, 'so that means it's cancelled'). とのことだ / とのことです is another way to relay what someone has said.",
     "subsumes": ["to-iu"],
     "steps": [
-      { "surface": "という", "pos": "助詞" },
+      { "anyOf": [
+        [ { "surface": "という", "pos": "助詞" } ],
+        [ { "surface": "と", "pos": "助詞", "pos2": "格助詞" }, { "surface": "の", "pos": "助詞", "pos2": "連体化" } ]
+      ] },
       { "surface": ["こと", "事"], "pos": "名詞", "pos2": "非自立" },
       { "baseForm": ["だ", "です"], "pos": "助動詞" }
     ],
     "examples": [
       "明日は休みだということだ。",
       "つまり、中止ということですね。",
-      "彼は来月結婚するということです。"
+      "彼は来月結婚するということです。",
+      "主催者からの連絡では、集合場所は北口とのことだ。",
+      "店員の話では、この布は水洗いできるとのことです。"
     ],
     "counterExamples": [
-      "日本語が難しいということが分かった。"
+      "日本語が難しいということが分かった。",
+      "新しい橋ができるということを広報で知った。"
     ]
   },
   {
@@ -2374,20 +2459,26 @@
     "pattern": "～に代わって",
     "level": "N3",
     "meaning": "in place of ~ / on behalf of ~",
-    "explanation": "に代わって says that one person or thing takes the place of another: 社長に代わって挨拶します is 'I'll give the speech on behalf of the president'.",
+    "explanation": "に代わって says that one person or thing takes the place of another: 社長に代わって挨拶します is 'I'll give the speech on behalf of the president'. に代わり / にかわり is the connective form with the same meaning, often used in formal writing.",
     "steps": [
-      { "surface": "に", "pos": "助詞" },
-      { "baseForm": ["代わる", "かわる", "替わる", "代る"], "conjForm": "連用タ接続" },
-      { "surface": "て" }
+      { "anyOf": [
+        [ { "surface": "に", "pos": "助詞", "pos2": "格助詞" }, { "baseForm": ["代わる", "かわる", "替わる", "代る"], "conjForm": "連用タ接続" }, { "surface": "て" } ],
+        [ { "pos": "名詞", "pos2": ["一般", "固有名詞", "代名詞", "サ変接続", "接尾"] }, { "surface": "に", "pos": "助詞", "pos2": "格助詞" }, { "baseForm": ["代わる", "かわる", "替わる", "代る"], "conjForm": "連用形" } ]
+      ] }
     ],
     "examples": [
       "社長に代わって挨拶します。",
       "父にかわって私が行きます。",
-      "最近は手紙に代わってメールが使われる。"
+      "最近は手紙に代わってメールが使われる。",
+      "部長に代わり、私が契約内容を説明します。",
+      "受付担当にかわり、警備員が来客を案内した。",
+      "社長にかわり、私がご挨拶します。"
     ],
     "counterExamples": [
       "席を代わってください。",
-      "母の代わりに来た。"
+      "母の代わりに来た。",
+      "祖母の代わりに、叔母が買い物へ行った。",
+      "彼の態度は急にかわりました。"
     ]
   },
   {

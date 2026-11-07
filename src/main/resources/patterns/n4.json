@@ -376,10 +376,13 @@
     "pattern": "～そうだ (looks like)",
     "level": "N4",
     "meaning": "looks like ~ / seems about to ~",
-    "explanation": "Attached to a verb stem or an adjective stem, そう describes the speaker's impression from what they can see: おいしそう ('looks tasty'), 降りそう ('looks like it will fall'). いい and ない become よさそう and なさそう.",
+    "explanation": "Attached to a verb stem or an adjective stem, そう describes the speaker's impression from what they can see: おいしそう ('looks tasty'), 降りそう ('looks like it will fall'). いい and ない become よさそう and なさそう. そうな modifies a noun, while そうに describes the manner of an action.",
     "steps": [
       { "surface": "そう", "pos": "名詞", "pos2": "接尾" },
-      { "baseForm": ["だ", "です"], "optional": true }
+      { "anyOf": [
+        [ { "baseForm": ["だ", "です"] } ],
+        [ { "surface": "に", "pos": "助詞", "pos2": "副詞化" } ]
+      ], "optional": true }
     ],
     "examples": [
       "雨が降りそうだ。",
@@ -388,11 +391,14 @@
       "難しそうに見える。",
       "今にも泣きそうになった。",
       "この店は高そう。",
-      "天気がよさそうだ。"
+      "天気がよさそうだ。",
+      "焼きたてのおいしそうなパンが棚に並んでいる。",
+      "このかばんは重そうに見える。"
     ],
     "counterExamples": [
       "雨が降るそうだ。",
-      "そうですね。"
+      "そうですね。",
+      "工事は来月終わるそうです。"
     ]
   },
   {
@@ -589,7 +595,7 @@
     "pattern": "～てくれる",
     "level": "N4",
     "meaning": "(someone) does ~ for me / us",
-    "explanation": "The て-form plus くれる says someone does something that benefits the speaker or the speaker's side. てくださる is the respectful version. The request form ください has its own entry.",
+    "explanation": "The て-form plus くれる says someone does something that benefits the speaker or the speaker's side. てくださる is the respectful version. The request form ください has its own entry. てくれない？ is a casual request asking someone to do something for the speaker ('could you ~?').",
     "steps": [
       { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
       { "anyOf": [
@@ -613,7 +619,7 @@
     "pattern": "～てもらう",
     "level": "N4",
     "meaning": "have someone do ~ (for me)",
-    "explanation": "The て-form plus もらう means the speaker receives the favour of someone doing something; the person who does it is marked with に. ていただく is the humble version, and てもらえる / ていただける ask whether it is possible.",
+    "explanation": "The て-form plus もらう means the speaker receives the favour of someone doing something; the person who does it is marked with に. ていただく is the humble version, and てもらえる / ていただける ask whether it is possible. The negative question てもらえない？ is also used to make a request ('could you ~?').",
     "steps": [
       { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
       { "baseForm": ["もらう", "いただく", "もらえる", "いただける"], "pos": "動詞", "pos2": "非自立" }
@@ -1512,11 +1518,13 @@
     "pattern": "～間 / ～間に",
     "level": "N4",
     "meaning": "while ~ / during the time that ~",
-    "explanation": "間 (あいだ) after a verb or adjective marks a stretch of time. Without に, the other action fills the whole stretch (待っている間、本を読んでいた); with に, it happens at some point inside it (母が寝ている間に料理を作った).",
+    "explanation": "間 (あいだ) marks a stretch of time after a verb or adjective; a time or event noun uses の間. Without に, the other action fills the whole stretch (待っている間、本を読んでいた); with に, it happens at some point inside it (母が寝ている間に料理を作った).",
     "steps": [
       { "anyOf": [
         [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
-        [ { "baseForm": "ない", "conjForm": "基本形" } ]
+        [ { "baseForm": "ない", "conjForm": "基本形" } ],
+        [ { "pos": "名詞", "pos2": "副詞可能" }, { "surface": "の", "pos": "助詞", "pos2": "連体化" } ],
+        [ { "surface": ["食事", "会議", "授業", "試験", "出発", "旅行", "夕飯", "朝食", "昼食", "夕食", "夏休み", "昼休み", "連休", "休憩", "留守", "滞在"], "pos": "名詞" }, { "surface": "の", "pos": "助詞", "pos2": "連体化" } ]
       ] },
       { "surface": ["間", "あいだ"], "pos": "名詞" },
       { "surface": "に", "pos": "助詞", "optional": true }
@@ -1525,11 +1533,18 @@
       "母が寝ている間に、料理を作った。",
       "待っている間、本を読んでいました。",
       "日本にいる間に富士山に登りたい。",
-      "子供が小さい間は、家で仕事をした。"
+      "子供が小さい間は、家で仕事をした。",
+      "夏休みの間、毎朝裏山を歩いた。",
+      "会議の間に、宅配便が届いた。",
+      "休憩のあいだに、売店で切符を買った。",
+      "夕飯の間、ラジオを聞いた。",
+      "食事の間は静かにしてください。"
     ],
     "counterExamples": [
       "駅と家の間に公園がある。",
-      "間違えました。"
+      "間違えました。",
+      "間もなく観覧車の運転が終わります。",
+      "玄関と受付の間に椅子を置いた。"
     ]
   },
   {
@@ -1643,7 +1658,7 @@
     "pattern": "～ばいい / ～たらいい",
     "level": "N4",
     "meaning": "should ~ / all you need to do is ~",
-    "explanation": "A condition followed by いい says what would be enough, or what the right move is: どうすればいいですか is 'what should I do?' and 先生に聞けばいい is 'just ask the teacher'. ～たらいい works the same way with たら.",
+    "explanation": "A condition followed by いい says what would be enough, or what the right move is: どうすればいいですか is 'what should I do?' and 先生に聞けばいい is 'just ask the teacher'. ～たらいい works the same way with たら. ～たらいい can also express a wish or hope ('I wish ~' / 'I hope ~'), especially with な or のに.",
     "subsumes": ["ba-conditional", "tara"],
     "steps": [
       { "anyOf": [

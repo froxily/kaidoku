@@ -177,21 +177,36 @@
     "pattern": "～前に",
     "level": "N5",
     "meaning": "before ~",
-    "explanation": "A verb in dictionary form plus 前に places an action before another one. The verb stays in dictionary form even when the sentence is in the past. (Noun + の前に is left out because it also means 'in front of'.)",
+    "explanation": "A verb in dictionary form plus 前に / まえに places an action before another one. The verb stays in dictionary form even when the sentence is in the past. Time and event nouns take の前に / のまえに to place an action before that time or event.",
     "steps": [
-      { "pos": "動詞", "conjForm": "基本形" },
-      { "surface": "前", "pos": "名詞" },
+      { "anyOf": [
+        [ { "pos": "動詞", "conjForm": "基本形" } ],
+        [ { "pos": "名詞", "pos2": "副詞可能" }, { "surface": "の", "pos": "助詞", "pos2": "連体化" } ],
+        [ { "surface": ["食事", "会議", "授業", "試験", "出発", "旅行", "夕飯", "朝食", "昼食", "夕食", "夏休み", "昼休み", "連休", "休憩", "留守", "滞在"], "pos": "名詞" }, { "surface": "の", "pos": "助詞", "pos2": "連体化" } ]
+      ] },
+      { "anyOf": [
+        [ { "surface": "前", "pos": "名詞" } ],
+        [ { "surface": "まえ" } ]
+      ] },
       { "surface": "に", "pos": "助詞" }
     ],
     "examples": [
       "寝る前に歯を磨く。",
       "出かける前に電話してください。",
       "日本に来る前に、少し勉強しました。",
-      "寝る前には歯を磨きましょう。"
+      "寝る前には歯を磨きましょう。",
+      "寝るまえに、玄関の鍵を確かめる。",
+      "試験の前に、時計の電池を交換した。",
+      "夕食のまえに、犬を散歩に連れていく。",
+      "夕飯の前に薬を飲んだ。",
+      "会議の前に資料を読む。",
+      "授業の前に、教室の窓を開けた。"
     ],
     "counterExamples": [
       "駅の前に銀行がある。",
-      "三年前に日本に来た。"
+      "三年前に日本に来た。",
+      "二年前にこの自転車を買った。",
+      "受付の前に立ってください。"
     ]
   },
   {
@@ -396,9 +411,12 @@
     "pattern": "しか～ない",
     "level": "N5",
     "meaning": "only ~ / nothing but ~",
-    "explanation": "しか picks out the one thing left once everything else is excluded, and the verb after it is always negative: 肉しか食べない is literally 'I don't eat anything except meat', i.e. 'I only eat meat'. Compared with だけ, it stresses that the amount is small or falls short.",
+    "explanation": "しか picks out the one thing left once everything else is excluded, and the verb after it is always negative: 肉しか食べない is literally 'I don't eat anything except meat', i.e. 'I only eat meat'. Compared with だけ, it stresses that the amount is small or falls short. だけしか adds emphasis to this restriction and also requires a negative ending.",
     "steps": [
-      { "surface": "しか", "pos": "助詞" },
+      { "anyOf": [
+        [ { "surface": "だけ", "pos": "助詞" }, { "surface": "しか", "pos": "助詞" } ],
+        [ { "surface": "しか", "pos": "助詞" } ]
+      ] },
       { "gap": 5 },
       { "anyOf": [
         [ { "baseForm": ["ない", "ぬ", "ん"], "pos": ["助動詞", "形容詞"] } ],
@@ -412,12 +430,16 @@
       "これしかありません。",
       "一つしか残っていない。",
       "千円しか持っていませんでした。",
-      "あの人の名前しか知らん。"
+      "あの人の名前しか知らん。",
+      "財布には百円だけしかない。",
+      "昨日はスープだけしか飲まなかった。",
+      "最初の一行だけしか読めませんでした。"
     ],
     "counterExamples": [
       "しかし、雨が降ってきた。",
       "鹿が森にいる。",
-      "しかも安い。"
+      "しかも安い。",
+      "必要な工具だけ机に並べた。"
     ]
   },
   {
@@ -606,6 +628,10 @@
     "meaning": "of all ~, ~ is the most ...",
     "explanation": "Picks the top item from a group: the group comes before の中で and the winner before が一番. 果物の中でりんごが一番好きです is 'of all fruit, I like apples best'. In questions the winner is a question word such as どれ, 何 or 誰.",
     "steps": [
+      { "anyOf": [
+        [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ],
+        [ { "surface": ["この", "その", "あの"], "pos": "連体詞" } ]
+      ] },
       { "surface": ["中", "なか"], "pos": "名詞", "pos2": "非自立" },
       { "surface": "で", "pos": "助詞" },
       { "gap": 4 },
@@ -615,11 +641,16 @@
       "果物の中でりんごが一番好きです。",
       "この三つの中でどれがいちばん安いですか。",
       "クラスの中で一番背が高いのは誰ですか。",
-      "日本料理の中で何が一番おいしいですか。"
+      "日本料理の中で何が一番おいしいですか。",
+      "この四枚の写真の中でどれが一番鮮明ですか。",
+      "三つの案のなかでこれがいちばん実行しやすい。",
+      "あの中でどれが一番安いですか？",
+      "その中で何が一番好き？"
     ],
     "counterExamples": [
       "箱の中で猫が寝ている。",
-      "一番好きな色は青です。"
+      "一番好きな色は青です。",
+      "今回の展示で一番人気なのは木彫りの鳥です。"
     ]
   }
 ]
