@@ -652,5 +652,312 @@
       "一番好きな色は青です。",
       "今回の展示で一番人気なのは木彫りの鳥です。"
     ]
+  },
+  {
+    "id": "kedo",
+    "pattern": "～けど / ～けれど / ～けれども / だけど / ～が",
+    "level": "N5",
+    "meaning": "but ~ / although ~; a softer way to leave a thought open",
+    "explanation": "Links a statement to a contrasting point, using けど, けれど, けれども, or が. Leaving the second part unsaid can soften a request or invite a response, and だけど or けれども can also begin a new sentence.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+          [ { "surface": ["けど", "けれど", "けれども", "が"], "pos": "助詞", "pos2": "接続助詞" } ],
+          [ { "surface": ["だけど", "けれども"], "pos": "接続詞" } ]
+        ] }
+    ],
+    "notFollowedBy": [
+      { "baseForm": "ない", "pos": "形容詞" }
+    ],
+    "examples": [
+      "新しい自転車は軽いけど、坂道では疲れる。",
+      "何度も説明したけれど、まだ伝わっていない。",
+      "この宿は静かだけれども、駅から少し遠い。",
+      "だけど、今日は自分で料理したい。",
+      "けれども、予約の変更はできません。",
+      "この傘は小さいが、かばんに入れやすい。",
+      "明日の会議には出ますが、途中で失礼します。",
+      "入口で少し待っていただきたいんですけど。",
+      "まだ返事は来ていないけど、もう少し待とう。",
+      "雨でしょうが、行きます。"
+    ],
+    "counterExamples": [
+      "台所から猫が出てきた。",
+      "姉は古い映画が好きだ。",
+      "でも、今日は自分で料理したい。",
+      "傘を持っていたのに、全身ぬれてしまった。",
+      "電車が止まったので、歩いて帰った。",
+      "毎日暇でしょうがない。",
+      "相手の番号が分からず、連絡しようがない。"
+    ]
+  },
+  {
+    "id": "dake",
+    "pattern": "～だけ",
+    "level": "N5",
+    "meaning": "only ~ / just ~",
+    "explanation": "Limits what is being discussed to one thing, amount, or action. It can follow a noun, a number, or a verb, and particles such as が and を can come after it.",
+    "subsumes": [],
+    "steps": [
+      { "surface": "だけ", "pos": "助詞", "pos2": "副助詞" }
+    ],
+    "notFollowedBy": [
+      { "surface": "で", "baseForm": "だ" },
+      { "surface": "じゃ" },
+      { "baseForm": "ます" }
+    ],
+    "notPrecededBy": [
+      [ { "surface": "どれ", "pos": "名詞", "pos2": "代名詞" } ]
+    ],
+    "examples": [
+      "今朝は果物だけ食べた。",
+      "見学者は二人だけだった。",
+      "私は案内を読むだけだ。",
+      "この扉だけが開いていた。",
+      "青い部品だけを箱に戻してください。",
+      "あとは駅で切符を買うだけです。",
+      "これだけあれば十分だ。"
+    ],
+    "counterExamples": [
+      "確認しただけで、変更はしていない。",
+      "彼は説明するだけでなく、実演もしてくれた。",
+      "あの店は安いだけではなく、配達も速い。",
+      "荷物はできるだけ軽くしてください。",
+      "出席者は二人だった。",
+      "この道順は地図を見るだけで分かる。",
+      "その説明は後でしていただけませんか。",
+      "どれだけ待っても来ない。"
+    ]
+  },
+  {
+    "id": "verb-made",
+    "pattern": "（動詞）～まで",
+    "level": "N5",
+    "meaning": "until ~ happens",
+    "explanation": "A dictionary-form verb before まで names the event that ends a period of waiting or continuing an action. The action lasts up to that point; までに instead sets a deadline for finishing something.",
+    "subsumes": [],
+    "steps": [
+      { "pos": "動詞", "conjForm": "基本形" },
+      { "surface": "まで", "pos": "助詞", "pos2": "副助詞" }
+    ],
+    "notFollowedBy": [
+      { "surface": ["に", "も"], "pos": "助詞" },
+      { "baseForm": "する", "pos": "動詞" }
+    ],
+    "examples": [
+      "橋が開くまで、川岸で待ちましょう。",
+      "お湯が沸くまで野菜を切っていた。",
+      "迎えが来るまで受付で本を読みます。",
+      "子供が寝るまで、隣で本を読んでいた。",
+      "修理が完了するまで、この扉は使えません。"
+    ],
+    "counterExamples": [
+      "この道は港まで続いている。",
+      "図書室には六時までいました。",
+      "駅に着くまでに切符を用意しておく。",
+      "普段は静かな祖父まで声を上げて笑った。",
+      "言うまでもなく、健康は大切だ。",
+      "彼は借金するまでして車を買った。"
+    ]
+  },
+  {
+    "id": "interrogative-ka",
+    "pattern": "疑問詞＋か",
+    "level": "N5",
+    "meaning": "someone / something / somewhere / sometime",
+    "explanation": "Adding か to a question word refers to an unspecified person, thing, place, or choice. いつか can refer to an unspecified time in the past or future, while なぜか gives an unknown reason. A question word plus か immediately before 知る or 分かる usually introduces an embedded question.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+          [ { "surface": ["誰", "だれ", "何", "どこ", "どれ"], "pos": "名詞", "pos2": "代名詞" }, { "surface": "か", "pos": "助詞" } ],
+          [ { "surface": "なぜ", "pos": "副詞" }, { "surface": "か", "pos": "助詞" } ],
+          [ { "surface": "いつか", "pos": "名詞", "pos2": "副詞可能" } ],
+          [ { "surface": "なにか", "pos": "副詞" } ]
+        ] }
+    ],
+    "notFollowedBy": [
+      { "baseForm": ["分かる", "知る"], "pos": "動詞" }
+    ],
+    "examples": [
+      "玄関で誰かが傘を畳んでいる。",
+      "帰り道で何か温かい物を買おう。",
+      "この箱の鍵をどこかに置き忘れた。",
+      "いつか夜行列車で北へ行きたい。",
+      "三枚の写真からどれかを選んでください。",
+      "なぜか今日は時計の音が大きく聞こえる。",
+      "これはいつか読んだ本だ。"
+    ],
+    "counterExamples": [
+      "今夜の当番は何ですか。",
+      "明日の受付には誰が来ますか。",
+      "夕食に何を作るか、まだ決めていない。",
+      "彼がどこに泊まるか知っていますか。",
+      "工場の前で何人か待っていた。",
+      "電話の相手が誰か分かりません。",
+      "それが誰か知っていますか。"
+    ]
+  },
+  {
+    "id": "interrogative-mo-nai",
+    "pattern": "疑問詞＋も～ない",
+    "level": "N5",
+    "meaning": "no one / nothing / nowhere",
+    "explanation": "A question word with も and a negative predicate rules out every member of that group. With a place, に or へ comes before も, and polite negatives such as ません work in the same way.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+          [ { "surface": ["誰", "何"], "pos": "名詞", "pos2": "代名詞" } ],
+          [ { "surface": "どこ", "pos": "名詞", "pos2": "代名詞" }, { "surface": ["に", "へ"], "pos": "助詞", "pos2": "格助詞" } ]
+        ] },
+      { "surface": "も", "pos": "助詞", "pos2": "係助詞" },
+      { "anyOf": [
+          [ { "baseForm": "ない" } ],
+          [
+            { "pos": ["動詞", "名詞", "連体詞", "副詞", "形容詞"] },
+            { "gap": 7 },
+            { "baseForm": "ない" }
+          ],
+          [
+            { "pos": ["動詞", "名詞", "連体詞", "副詞", "形容詞"] },
+            { "gap": 7 },
+            { "baseForm": "ます", "pos": "助動詞", "conjForm": "未然形" },
+            { "surface": "ん", "pos": "助動詞" }
+          ]
+        ] }
+    ],
+    "examples": [
+      "受付には誰もいない。",
+      "冷蔵庫には何も残っていない。",
+      "休日はどこにも出かけない。",
+      "強風のため、どこへも行けなかった。",
+      "招待状を送ったのに誰も来ません。",
+      "緊張して昼は何も食べなかった。",
+      "昨夜は誰も戻りませんでした。",
+      "古い引き出しを探しても何も見つかりません。",
+      "誰もこの部屋には入っていない。"
+    ],
+    "counterExamples": [
+      "この村の昔話は誰もが知っている。",
+      "朝はいつも同じバスに乗ります。",
+      "冷たい飲み物なら何でも飲みます。",
+      "いつも時間に間に合わない。",
+      "誰もが笑っているが、私は笑えない。",
+      "何もかも箱に詰めた。",
+      "誰もが来るとは限らない。"
+    ]
+  },
+  {
+    "id": "wa-dou-desu-ka",
+    "pattern": "～はどうですか / ～はどう？ / ～はいかがですか",
+    "level": "N5",
+    "meaning": "how is ~? / how about ~?",
+    "explanation": "Puts a topic before は and asks how it is, or offers it as a suggestion. どう？ is casual, while どうでしょうか and いかがですか make the question more considerate.",
+    "subsumes": ["deshou"],
+    "steps": [
+      { "surface": "は", "pos": "助詞", "pos2": "係助詞" },
+      { "anyOf": [
+          [ { "surface": "どう", "pos": "副詞" }, { "surface": "です", "baseForm": "です" }, { "surface": "か", "pos": "助詞" } ],
+          [ { "surface": "どう", "pos": "副詞" }, { "surface": "でしょ", "baseForm": "です" }, { "surface": "う" }, { "surface": "か", "pos": "助詞" } ],
+          [ { "surface": "いかが", "pos": "名詞" }, { "surface": "です", "baseForm": "です" }, { "surface": "か", "pos": "助詞" } ],
+          [ { "surface": "どう", "pos": "副詞" } ]
+        ] }
+    ],
+    "followedBy": [
+      { "pos": "記号", "pos2": ["句点", "括弧閉", "読点"] },
+      { "surface": ["？", "?", "！", "!"] },
+      { "pos": "助詞", "pos2": "終助詞" },
+      { "surface": "と", "pos": "助詞", "pos2": "格助詞" }
+    ],
+    "examples": [
+      "夕食はどうですか。",
+      "新しい研究室はどう？",
+      "来月の土曜日はどうでしょうか。",
+      "食後のお茶はいかがですか。",
+      "帰りはどう?",
+      "この案はどうですかね。"
+    ],
+    "counterExamples": [
+      "一度係員に相談したらどうですか。",
+      "どうして窓を閉めたのですか。",
+      "雨の日はどうやって通学しますか。",
+      "来週の予約はどうして取り消したのですか。",
+      "この道具はどう使いますか。"
+    ]
+  },
+  {
+    "id": "wo-kudasai",
+    "pattern": "～をください",
+    "level": "N5",
+    "meaning": "please give me ~",
+    "explanation": "Requests the object marked with を, with an optional quantity such as 三つ or a number followed by a counter between を and ください. くださいませんか turns it into a gentler question asking whether the listener would provide it.",
+    "subsumes": ["masen-ka", "sonkeigo-verbs"],
+    "steps": [
+      { "surface": "を", "pos": "助詞", "pos2": "格助詞" },
+      { "anyOf": [
+          [ { "surface": ["一つ", "ひとつ", "二つ", "三つ"], "pos": "名詞" } ],
+          [
+            { "pos": "名詞", "pos2": "数" },
+            { "pos": "名詞", "pos2": "数", "optional": true },
+            { "pos": "名詞", "pos2": "数", "optional": true },
+            { "pos": "名詞", "pos2": "数", "optional": true },
+            { "pos": "名詞", "pos2": "数", "optional": true },
+            { "pos": "名詞", "pos2": "数", "optional": true },
+            { "pos": "名詞", "pos2": "数", "optional": true },
+            { "pos": "名詞", "pos2": "数", "optional": true },
+            { "pos": "名詞", "pos2": "接尾" }
+          ]
+        ], "optional": true },
+      { "anyOf": [
+          [ { "baseForm": ["くださる", "下さる"], "pos": "動詞", "pos2": "自立", "conjForm": "命令ｉ" } ],
+          [ { "baseForm": "くださる", "pos": "動詞", "pos2": "自立", "conjForm": "連用形" }, { "baseForm": "ます", "pos": "助動詞", "conjForm": "未然形" }, { "surface": "ん", "pos": "助動詞" }, { "surface": "か", "pos": "助詞" } ]
+        ] }
+    ],
+    "examples": [
+      "その赤い封筒をください。",
+      "温かいスープを一つください。",
+      "窓側の席の券をくださいませんか。",
+      "透明な袋を二枚ください。",
+      "この切手を五枚ください。",
+      "地元の地図を下さい。",
+      "切符を三つください。",
+      "はがきを二十枚ください。"
+    ],
+    "counterExamples": [
+      "封筒の裏に住所を書いてください。",
+      "この椅子を運んでくださいませんか。",
+      "先生が記念のしおりをくださった。",
+      "部長が新しい資料をくださいました。",
+      "入口で少しお待ちください。",
+      "変更があればご連絡ください。"
+    ]
+  },
+  {
+    "id": "ichiban",
+    "pattern": "一番～ / いちばん～",
+    "level": "N5",
+    "meaning": "the most ~ / the best ~",
+    "explanation": "Places one quality at the top of the relevant group or range of choices. 一番 comes before an adjective or a description such as 好き or 上手; the comparison group can be understood from context.",
+    "subsumes": [],
+    "steps": [
+      { "surface": ["一番", "いちばん"], "pos": "名詞", "pos2": "副詞可能" },
+      { "anyOf": [
+          [ { "pos": "形容詞" } ],
+          [ { "pos": "名詞", "pos2": "形容動詞語幹" } ]
+        ] }
+    ],
+    "examples": [
+      "この展望台が町で一番高い。",
+      "私は秋の早朝が一番好きです。",
+      "三人の中では姉が一番上手だ。",
+      "この毛布がいちばん暖かい。",
+      "今日の試合は最後の場面がいちばん面白かった。",
+      "この道が一番近くて歩きやすい。"
+    ],
+    "counterExamples": [
+      "一番目の引き出しに鍵があります。",
+      "夕方の快速は一番線から発車します。",
+      "出席番号一番の生徒が窓を開けた。",
+      "この温泉が最も有名だ。"
+    ]
   }
 ]

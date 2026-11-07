@@ -1714,5 +1714,434 @@
       "客が帰ると店内は静かになりました。",
       "休憩の飲み物はお茶にする。"
     ]
+  },
+  {
+    "id": "baai",
+    "pattern": "～場合（は）",
+    "level": "N4",
+    "meaning": "in the case of ~ / if ~ happens",
+    "explanation": "Sets out a situation and explains what applies if that situation occurs. Nouns connect with の, な-adjectives with な, and verbs or い-adjectives attach directly; は or には can mark the situation as the topic.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+          [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ],
+          [ { "pos": ["動詞", "形容詞"], "conjForm": "基本形" } ],
+          [ { "baseForm": ["た", "ない"], "pos": "助動詞", "conjForm": "基本形" } ],
+          [ { "surface": "な", "baseForm": "だ" } ]
+        ] },
+      { "surface": "場合", "pos": "名詞", "pos2": "副詞可能" },
+      { "anyOf": [
+          [ { "surface": "は", "pos": "助詞", "pos2": "係助詞" } ],
+          [ { "surface": "に", "pos": "助詞", "pos2": "格助詞" }, { "surface": "は", "pos": "助詞", "pos2": "係助詞" } ]
+        ], "optional": true }
+    ],
+    "examples": [
+      "大雪の場合は、路線バスが運休します。",
+      "故障の場合には、赤いランプが点灯します。",
+      "返事が遅れる場合は、先に電話をください。",
+      "気温が低い場合、植物を室内に入れてください。",
+      "操作が複雑な場合は、説明会を開きます。",
+      "参加できなかった場合は、後で録画を見られます。"
+    ],
+    "counterExamples": [
+      "乗り換えるときは、荷物を忘れないでください。",
+      "地震のときは、机の下に隠れてください。",
+      "大雪なら、路線バスは運休します。",
+      "予約が取れたら、宿の名前を教えてください。"
+    ]
+  },
+  {
+    "id": "dake-de",
+    "pattern": "～だけで",
+    "level": "N4",
+    "meaning": "just by ~ / with only ~",
+    "explanation": "Presents one action or a limited resource as enough to bring about the result. A verb before だけで gives the action, while a noun can name the people, tools, or amount needed.",
+    "subsumes": ["dake"],
+    "steps": [
+      { "surface": "だけ", "pos": "助詞", "pos2": "副助詞" },
+      { "surface": "で", "pos": "助詞", "pos2": "格助詞" }
+    ],
+    "examples": [
+      "この絵は輪郭を見るだけで動物の種類が分かる。",
+      "祖母の声を聞くだけで落ち着く。",
+      "この机は一人だけで運べます。",
+      "手元の道具だけで棚を直した。",
+      "百円だけでこの遊びを楽しめる。",
+      "地図を一度見ただけで道を覚えた。"
+    ],
+    "counterExamples": [
+      "あの人は歌うだけでなく、曲も作る。",
+      "この店は昼だけではなく、夜も営業している。",
+      "私は入口で待つだけです。",
+      "予備の鍵だけを持っていこう。",
+      "できるだけ小さく折ってください。",
+      "記録用紙は二枚だけだった。"
+    ]
+  },
+  {
+    "id": "hitsuyou",
+    "pattern": "～が必要だ / ～必要がある / ～必要はない",
+    "level": "N4",
+    "meaning": "need ~ / need to ~ / there is no need to ~",
+    "explanation": "が必要だ says that something is required, while a verb followed by 必要がある says an action needs to be done. 必要はない, 必要がない, and 必要ではない or casual 必要じゃない remove that requirement; polite and past endings work too.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+          [
+            { "surface": "が", "pos": "助詞", "pos2": "格助詞" },
+            { "surface": "必要", "pos": "名詞", "pos2": "形容動詞語幹" },
+            { "anyOf": [
+                [ { "baseForm": ["だ", "です"], "pos": "助動詞" } ],
+                [
+                  { "anyOf": [
+                      [ { "surface": "で", "baseForm": "だ" }, { "surface": "は", "pos": "助詞", "pos2": "係助詞" } ],
+                      [ { "surface": "じゃ", "pos": "助詞", "pos2": "副助詞" } ]
+                    ] },
+                  { "anyOf": [
+                      [ { "baseForm": "ない" } ],
+                      [ { "baseForm": "ある", "pos": "動詞" }, { "baseForm": "ます", "pos": "助動詞", "conjForm": "未然形" }, { "surface": "ん", "pos": "助動詞" } ]
+                    ] }
+                ]
+              ] }
+          ],
+          [ { "surface": "必要", "pos": "名詞", "pos2": "形容動詞語幹" }, { "surface": "が", "pos": "助詞", "pos2": "格助詞" }, { "baseForm": ["ある", "ない"] } ],
+          [
+            { "surface": "必要", "pos": "名詞", "pos2": "形容動詞語幹" },
+            { "surface": "は", "pos": "助詞", "pos2": "係助詞" },
+            { "anyOf": [
+                [ { "baseForm": "ない" } ],
+                [ { "baseForm": "ある", "pos": "動詞" }, { "baseForm": "ます", "pos": "助動詞", "conjForm": "未然形" }, { "surface": "ん", "pos": "助動詞" } ]
+              ] }
+          ]
+        ] }
+    ],
+    "examples": [
+      "この実験には保護眼鏡が必要だ。",
+      "入館には写真付きの証明書が必要です。",
+      "屋根を直す必要がある。",
+      "出発前に全員で経路を確かめる必要があります。",
+      "その欄に年齢を書く必要はない。",
+      "同じ説明を二度する必要がない。",
+      "その時は予備の電池が必要でした。",
+      "資料を集める必要があって、図書館に通っている。",
+      "雨具が必要じゃない。",
+      "雨具が必要ではない。",
+      "雨具が必要ではありません。"
+    ],
+    "counterExamples": [
+      "必要な道具を倉庫から出してください。",
+      "必要な書類は封筒に入っています。",
+      "今夜は残業しなくてもいい。",
+      "今から慌てることはない。"
+    ]
+  },
+  {
+    "id": "ga-suru",
+    "pattern": "音・匂い・味など＋がする",
+    "level": "N4",
+    "meaning": "hear / smell / taste / feel ~",
+    "explanation": "Pairs a sensation with がする to say that it is perceived, such as a sound, smell, taste, voice, or chill. The final verb changes for tense, politeness, or negation just as する normally does.",
+    "subsumes": [],
+    "steps": [
+      { "surface": ["音", "匂い", "におい", "味", "声", "感じ", "寒気"], "pos": "名詞", "pos2": "一般" },
+      { "surface": "が", "pos": "助詞", "pos2": "格助詞" },
+      { "baseForm": "する", "pos": "動詞" }
+    ],
+    "examples": [
+      "階段の方から小さな音がする。",
+      "焼いたパンの匂いがします。",
+      "箱を開けたら、木のにおいがした。",
+      "この飲み物は少し苦い味がする。",
+      "裏庭から子供の声がしました。",
+      "新しい床は足が沈む感じがする。",
+      "窓を閉めても寒気がする。",
+      "今日は台所から焦げた匂いがしない。",
+      "廊下で音がして、思わず振り返った。",
+      "この水には変な味がしません。"
+    ],
+    "counterExamples": [
+      "今夜は雪になる気がする。",
+      "机で妹が勉強をする。",
+      "この電話は私がする。",
+      "部屋には花の香りがある。"
+    ]
+  },
+  {
+    "id": "made-ni",
+    "pattern": "～までに",
+    "level": "N4",
+    "meaning": "by ~ / no later than ~",
+    "explanation": "Sets the latest time or event by which an action should be completed. A clock time, a day, or a verb can name the deadline, while まで without に describes how long something continues.",
+    "subsumes": [],
+    "steps": [
+      { "surface": "まで", "pos": "助詞", "pos2": "副助詞" },
+      { "surface": "に", "pos": "助詞", "pos2": "格助詞" }
+    ],
+    "notPrecededBy": [
+      [ { "surface": "参考", "pos": "名詞", "pos2": "サ変接続" } ]
+    ],
+    "examples": [
+      "午後四時までに注文を確定してください。",
+      "来週までに試作品を届けます。",
+      "母が戻るまでに食器を片付けよう。",
+      "開店するまでに床を拭いておきます。",
+      "迎えが来るまでに着替えてください。",
+      "子供が寝るまでに、明日の準備を終えた。"
+    ],
+    "counterExamples": [
+      "午後四時まで店番をします。",
+      "母が戻るまで食事を待った。",
+      "このバスは灯台まで行きます。",
+      "普段は静かな叔父まで拍手していた。",
+      "仕上がるまで、箱を開けないでください。",
+      "参考までに資料を送ります。"
+    ]
+  },
+  {
+    "id": "koro",
+    "pattern": "～頃 / ～ごろ / ～ころ",
+    "level": "N4",
+    "meaning": "around ~ / the time when ~",
+    "explanation": "Gives an approximate time or recalls the period when a situation held. It follows a time expression directly, connects a noun with の or a な-adjective with な, or comes after a verb or い-adjective describing that period.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+          [ { "pos": "名詞", "pos2": ["接尾", "一般", "副詞可能"] }, { "surface": ["頃", "ごろ", "ころ"], "pos": "名詞", "pos2": ["接尾", "非自立"] } ],
+          [ { "surface": "の", "pos": "助詞", "pos2": "連体化" }, { "surface": ["頃", "ころ"], "pos": "名詞", "pos2": "非自立" } ],
+          [ { "pos": ["動詞", "形容詞", "助動詞"], "conjForm": "基本形" }, { "surface": ["頃", "ころ"], "pos": "名詞", "pos2": "非自立" } ],
+          [ { "pos": "名詞", "pos2": "形容動詞語幹" }, { "surface": "な", "baseForm": "だ", "pos": "助動詞" }, { "surface": ["頃", "ころ"], "pos": "名詞", "pos2": "非自立" } ]
+        ] }
+    ],
+    "notFollowedBy": [
+      { "surface": "合い", "baseForm": "合う", "pos": "動詞" }
+    ],
+    "examples": [
+      "明日は二時ごろに荷物が届きます。",
+      "店を出たのは七時頃だった。",
+      "私は子供の頃、よく川で石を拾った。",
+      "祖父は若い頃、船の修理をしていた。",
+      "学生のころは夜遅くまで図書館にいた。",
+      "桜が咲く頃に、この橋を渡りたい。",
+      "この町に来たころは、道に迷ってばかりいた。",
+      "十一時ころに休憩を取りましょう。",
+      "彼がまだ元気な頃によく会いました。"
+    ],
+    "counterExamples": [
+      "鍋の火を止める頃合いを見計らった。",
+      "ちょうどよい頃合いに係員が戻った。",
+      "今朝は三時に目が覚めた。",
+      "この作業は一時間ぐらいかかる。"
+    ]
+  },
+  {
+    "id": "yotei",
+    "pattern": "～予定だ / ～予定です",
+    "level": "N4",
+    "meaning": "plan to ~ / be scheduled to ~",
+    "explanation": "States an arranged plan or schedule rather than a prediction about what will probably happen. A verb names the planned action, or の connects a noun naming the time or arrangement. Past endings describe an earlier plan; 予定ではない or casual 予定じゃない denies that something is planned.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+          [ { "pos": "動詞", "conjForm": "基本形" } ],
+          [ { "baseForm": "ない", "pos": "助動詞", "conjForm": "基本形" } ],
+          [ { "surface": "の", "pos": "助詞", "pos2": "連体化" } ]
+        ] },
+      { "surface": "予定", "pos": "名詞", "pos2": "サ変接続" },
+      { "anyOf": [
+          [ { "baseForm": ["だ", "です"], "pos": "助動詞" } ],
+          [
+            { "anyOf": [
+                [ { "surface": "で", "pos": ["助詞", "助動詞"] }, { "surface": "は", "pos": "助詞", "pos2": "係助詞" } ],
+                [ { "surface": "じゃ", "pos": "助詞", "pos2": "副助詞" } ]
+              ] },
+            { "anyOf": [
+                [ { "baseForm": "ない" } ],
+                [ { "baseForm": "ある", "pos": "動詞" }, { "baseForm": "ます", "pos": "助動詞", "conjForm": "未然形" }, { "surface": "ん", "pos": "助動詞" } ]
+              ] }
+          ]
+        ] }
+    ],
+    "examples": [
+      "明日は港の倉庫を見学する予定だ。",
+      "新しい売店は来月開く予定です。",
+      "昨日は自転車で帰る予定だった。",
+      "最初は午後に説明を始める予定でした。",
+      "配達は金曜日の予定です。",
+      "冬休みには遠出しない予定です。",
+      "来週出張する予定じゃない。",
+      "来週出張する予定ではありません。"
+    ],
+    "counterExamples": [
+      "この週末は予定がある。",
+      "受付の横に予定表を貼りました。",
+      "夏の旅行の予定を立てている。",
+      "急な来客で午後の予定が変わった。",
+      "来年は海辺で働くつもりです。",
+      "会場は九時に開くはずだ。"
+    ]
+  },
+  {
+    "id": "gozaimasu",
+    "pattern": "ございます / でございます",
+    "level": "N4",
+    "meaning": "there is ~ / is ~ (very polite)",
+    "explanation": "ございます is a formal, courteous equivalent of あります, and でございます serves the role of です. It takes polite negative and past endings and also appears in expressions of thanks such as ありがとうございます.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+          [ { "surface": "で", "pos": ["助詞", "助動詞"] }, { "surface": "は", "pos": "助詞", "optional": true }, { "baseForm": "ござる", "pos": ["動詞", "助動詞"] }, { "baseForm": "ます", "pos": "助動詞" } ],
+          [ { "baseForm": "ござる", "pos": ["動詞", "助動詞"] }, { "baseForm": "ます", "pos": "助動詞" } ]
+        ] }
+    ],
+    "examples": [
+      "売店は中庭にもございます。",
+      "申し訳ありませんが、空いた席はございません。",
+      "先ほど入口にお忘れ物がございました。",
+      "こちらが本日の案内係でございます。",
+      "昨日の担当は私でございました。",
+      "この度はご注文ありがとうございます。"
+    ],
+    "counterExamples": [
+      "売店は中庭にもあります。",
+      "こちらが本日の案内係です。",
+      "この部屋には誰もおりません。",
+      "箱の中に予備の鍵がありました。"
+    ]
+  },
+  {
+    "id": "sonkeigo-verbs",
+    "pattern": "いらっしゃる / おっしゃる / なさる / 召し上がる / くださる",
+    "level": "N4",
+    "meaning": "respectful verbs for another person's actions",
+    "explanation": "These special verbs respectfully describe another person coming or being somewhere, speaking, doing something, eating, or giving. Their endings still change for politeness, tense, and negation, while ご覧になる and requests with ください have separate explanations.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+          [ { "baseForm": ["いらっしゃる", "おっしゃる", "なさる", "召し上がる"], "pos": "動詞", "pos2": "自立" } ],
+          [ { "baseForm": "くださる", "pos": "動詞", "pos2": "自立", "conjForm": ["基本形", "連用形", "連用タ接続", "未然形", "仮定形"] } ]
+        ] }
+    ],
+    "examples": [
+      "明日もこちらにいらっしゃるそうです。",
+      "お客様はまだいらっしゃいません。",
+      "部長は来月転勤するとおっしゃった。",
+      "週末はどのような運動をなさいますか。",
+      "焼きたてのパンを召し上がってください。",
+      "お客様は辛い物を召し上がらない。",
+      "先生が旅行先の絵葉書をくださいました。"
+    ],
+    "counterExamples": [
+      "支配人が荷物を運んでくださった。",
+      "隣の人が荷物を運んでくれた。",
+      "次のページを開いてください。",
+      "社長は壁の写真をご覧になりました。",
+      "弟は果物を食べ、母は掃除をすると言った。"
+    ]
+  },
+  {
+    "id": "te-oru",
+    "pattern": "～ておる / ～ております",
+    "level": "N4",
+    "meaning": "be doing ~ / have done ~ (humble or formal)",
+    "explanation": "Uses おる after a verb in the て-form to express an ongoing action or resulting state, often humbly in formal speech. ております and でおります are common polite forms; plain ておる also occurs in regional or older speech.",
+    "subsumes": [],
+    "steps": [
+      { "surface": ["て", "で"], "pos": "助詞", "pos2": "接続助詞" },
+      { "baseForm": "おる", "pos": "動詞", "pos2": ["自立", "非自立"] }
+    ],
+    "examples": [
+      "私は支店で在庫を確認しております。",
+      "昨夜は会場の入口で待っておりました。",
+      "担当者は奥で資料を読んでおります。",
+      "その件については前から知っておる。",
+      "こちらではまだ予約を受け付けておりません。",
+      "昨夜はまだ荷物が届いておりませんでした。",
+      "番号を控えており、照会はすぐにできます。",
+      "祖父は毎朝この道を歩いておった。"
+    ],
+    "counterExamples": [
+      "私は支店で在庫を確認しています。",
+      "担当者は奥で資料を読んでいる。",
+      "明日は一日こちらにおります。",
+      "叔父は今も山の家に居る。",
+      "あの子は裏庭におる。",
+      "この紙を半分に折ってください。"
+    ]
+  },
+  {
+    "id": "o-kudasai",
+    "pattern": "お～ください / ご～ください",
+    "level": "N4",
+    "meaning": "please do ~ (polite)",
+    "explanation": "Makes a courteous request with お before a verb stem or ご before an action noun, followed by ください. It is common in announcements, instructions, and polite service, as in asking someone to wait, enter, or get in touch.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+          [ { "surface": "お", "pos": "接頭詞" }, { "pos": "動詞", "conjForm": "連用形" } ],
+          [ { "surface": "ご", "pos": "接頭詞" }, { "pos": "名詞", "pos2": "サ変接続" } ],
+          [ { "surface": ["お待ち", "お知らせ"], "pos": "名詞", "pos2": "サ変接続" } ],
+          [ { "surface": "ご覧", "pos": "名詞", "pos2": "動詞非自立的" } ]
+        ] },
+      { "baseForm": "くださる", "pos": "動詞", "pos2": ["非自立", "自立"], "conjForm": "命令ｉ" }
+    ],
+    "examples": [
+      "ご希望の時間をお選びください。",
+      "扉が開きましたので、どうぞお入りください。",
+      "氏名をお書きください。",
+      "段差がありますので、足元にご注意ください。",
+      "到着が遅れる場合は、受付までご連絡ください。",
+      "詳細は同封の案内をご確認ください。",
+      "変更があれば、すぐにお知らせください。",
+      "正面の案内図をご覧ください。"
+    ],
+    "counterExamples": [
+      "廊下で静かに待ってください。",
+      "案内の裏側を読んでくださいませんか。",
+      "席の番号が分かる紙をください。",
+      "お茶を二つください。",
+      "お客様は窓際でお待ちになっています。",
+      "受付に変更をお知らせします。"
+    ]
+  },
+  {
+    "id": "kana-kashira",
+    "pattern": "～かな / ～かなあ / ～かしら",
+    "level": "N4",
+    "meaning": "I wonder ~",
+    "explanation": "Marks a question the speaker is considering aloud. かな can be drawn out as かなあ, while かしら has a similar wondering tone; の can come before either ending. A sentence-final particle can follow, and と can quote the thought within a sentence.",
+    "subsumes": [],
+    "steps": [
+      { "anyOf": [
+          [ { "surface": "の", "pos": "名詞", "pos2": "非自立" }, { "surface": "か", "pos": "助詞" }, { "surface": ["な", "なあ", "なぁ"], "pos": "助詞", "pos2": "終助詞" } ],
+          [ { "surface": "か", "pos": "助詞" }, { "surface": ["な", "なあ", "なぁ"], "pos": "助詞", "pos2": "終助詞" } ],
+          [ { "surface": "の", "pos": "名詞", "pos2": "非自立" }, { "surface": "かしら", "pos": "助詞", "pos2": "終助詞" } ],
+          [ { "surface": "かしら", "pos": "助詞", "pos2": "終助詞" } ]
+        ] }
+    ],
+    "followedBy": [
+      { "pos": "記号", "pos2": ["句点", "括弧閉", "読点"] },
+      { "surface": ["？", "?", "！", "!"] },
+      { "pos": "助詞", "pos2": "終助詞" },
+      { "surface": "と", "pos": "助詞", "pos2": "格助詞" }
+    ],
+    "examples": [
+      "あの店は日曜日も開いているかな？",
+      "この鍵で裏口も開くかなあ。",
+      "もう最終のバスは出たかしら。",
+      "弟はまだ図書館にいるのかな。",
+      "会議室はここでいいのかしら。",
+      "来月はもっと静かになるかなぁ。",
+      "明日は晴れるかしらね。",
+      "明日は晴れるかなと思った。",
+      "雨かな、雪かな。"
+    ],
+    "counterExamples": [
+      "駅の売店はもう閉まっていますか。",
+      "夜の海はきれいだな。",
+      "約束の時刻を忘れるな。",
+      "かな文字で宛名を書いてください。",
+      "彼は一座のかしらとして舞台に立った。",
+      "今日は帰るか、残るかを決めよう。"
+    ]
   }
 ]

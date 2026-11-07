@@ -37,7 +37,7 @@ class AnalyzeControllerTest {
     @Test
     void dropsSubsumedMatches() {
         assertThat(analyze(json("明日までに出さなければならない。"))).hasStatusOk().bodyJson()
-                .extractingPath("$.matches[*].ruleId").asArray().containsExactly("nakereba-naranai");
+                .extractingPath("$.matches[*].ruleId").asArray().containsExactly("made-ni", "nakereba-naranai");
     }
 
     @Test
