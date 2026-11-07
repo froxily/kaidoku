@@ -959,5 +959,600 @@
       "出席番号一番の生徒が窓を開けた。",
       "この温泉が最も有名だ。"
     ]
+  },
+  {
+    "id": "kurai-approx",
+    "pattern": "（数量）くらい / ぐらい・（時刻）ごろ",
+    "level": "N5",
+    "meaning": "about / approximately (an amount or time)",
+    "explanation": "After a number or counter, くらい and ぐらい give a rough quantity rather than an exact count. ごろ, 頃 and ころ give an approximate time. Without a quantity, くらい and ぐらい can express degree or comparison, while 頃 after a clause or a noun with の refers to the period when something happened.",
+    "subsumes": [
+      "koro"
+    ],
+    "steps": [
+      {
+        "pos": "名詞",
+        "pos2": "数"
+      },
+      {
+        "pos": "名詞",
+        "pos2": "数",
+        "optional": true
+      },
+      {
+        "pos": "名詞",
+        "pos2": "数",
+        "optional": true
+      },
+      {
+        "pos": "名詞",
+        "pos2": "接尾",
+        "optional": true
+      },
+      {
+        "anyOf": [
+          [
+            {
+              "surface": [
+                "くらい",
+                "ぐらい"
+              ],
+              "pos": "助詞",
+              "pos2": "副助詞"
+            }
+          ],
+          [
+            {
+              "surface": [
+                "ごろ",
+                "頃",
+                "ころ"
+              ],
+              "pos": "名詞",
+              "pos2": [
+                "接尾",
+                "非自立"
+              ]
+            }
+          ]
+        ]
+      }
+    ],
+    "examples": [
+      "見学者は十人くらい集まりそうです。",
+      "この模型を組み立てるのに三時間ぐらいかかった。",
+      "修理には一週間ぐらい必要だと言われた。",
+      "明日は二時ごろに荷物が届きます。",
+      "店を出たのは七時頃だった。",
+      "十一時ころに休憩を取りましょう。"
+    ],
+    "counterExamples": [
+      "あの滝の音は耳をふさぎたいくらい大きかった。",
+      "叔母くらい手際よく包める人は珍しい。",
+      "学生の頃は古いラジオを集めていた。"
+    ]
+  },
+  {
+    "id": "ni-suru-choice",
+    "pattern": "（名詞）にする / にします",
+    "level": "N5",
+    "meaning": "choose ~ / decide on ~",
+    "explanation": "A noun followed by にする identifies the option someone settles on, such as an item, a date or a seat. The same noun construction can assign a role or resulting state, so context determines whether it is a choice or a change; adjective changes and decisions with ことにする have separate explanations. Fixed expressions such as 気にする, 大事にする, 楽しみにする, 耳にする, 口にする and 手にする do not express this choice; にしては, にしても and 別にして also have other meanings.",
+    "subsumes": [],
+    "steps": [
+      {
+        "surface": "に",
+        "pos": "助詞",
+        "pos2": "格助詞"
+      },
+      {
+        "surface": "は",
+        "pos": "助詞",
+        "pos2": "係助詞",
+        "optional": true
+      },
+      {
+        "baseForm": "する",
+        "pos": "動詞"
+      },
+      {
+        "surface": "て",
+        "pos": "助詞",
+        "pos2": "接続助詞",
+        "optional": true
+      }
+    ],
+    "examples": [
+      "昼の飲み物はコーヒーにする。",
+      "持ち帰りの袋はこれにします。",
+      "雨なら撮影は日曜日にしよう。",
+      "次の会場は何にしますか。",
+      "夕食は麺にして早めに出よう。",
+      "帰りの便は最終便にしませんでした。"
+    ],
+    "counterExamples": [
+      "発表中は廊下を静かにする。",
+      "鏡の表面をきれいにしました。",
+      "明日から階段を使うことにする。",
+      "来月は休館するとかいう話を耳にした。",
+      "子供にしては上手だ。",
+      "冗談にしても、ひどすぎる。"
+    ],
+    "notPrecededBy": [
+      [
+        {
+          "pos": [
+            "動詞",
+            "形容詞",
+            "助動詞",
+            "助詞",
+            "副詞",
+            "連体詞",
+            "記号",
+            "接続詞",
+            "感動詞",
+            "フィラー",
+            "その他"
+          ]
+        }
+      ],
+      [
+        {
+          "pos": "名詞",
+          "pos2": [
+            "サ変接続",
+            "形容動詞語幹",
+            "非自立",
+            "数",
+            "ナイ形容詞語幹",
+            "特殊",
+            "引用文字列",
+            "動詞非自立的"
+          ]
+        }
+      ],
+      [
+        {
+          "surface": [
+            "気",
+            "大事",
+            "楽しみ",
+            "耳",
+            "口",
+            "手",
+            "別"
+          ],
+          "pos": "名詞"
+        }
+      ]
+    ],
+    "notFollowedBy": [
+      {
+        "surface": [
+          "は",
+          "も"
+        ],
+        "pos": "助詞"
+      }
+    ]
+  },
+  {
+    "id": "yori-comparison",
+    "pattern": "～より～（比較）",
+    "level": "N5",
+    "meaning": "more ~ than ~ / prefer ~ to ~",
+    "explanation": "より marks the reference point in a comparison, while the following description says how the other item differs or which one is preferred. The description may be past or negative, and comparisons with ほうが have a separate explanation. Formal より can mean 'from', while adverbial より means 'more' without naming a comparison point.",
+    "subsumes": [],
+    "steps": [
+      {
+        "anyOf": [
+          [
+            {
+              "pos": "名詞",
+              "pos2": [
+                "一般",
+                "固有名詞",
+                "代名詞",
+                "副詞可能",
+                "接尾"
+              ]
+            }
+          ],
+          [
+            {
+              "pos": "動詞",
+              "conjForm": "基本形"
+            }
+          ]
+        ]
+      },
+      {
+        "surface": "より",
+        "pos": "助詞",
+        "pos2": "格助詞"
+      },
+      {
+        "pos": "記号",
+        "pos2": "読点",
+        "optional": true
+      },
+      {
+        "anyOf": [
+          [
+            {
+              "pos": "形容詞"
+            },
+            {
+              "anyOf": [
+                [
+                  {
+                    "baseForm": "ある",
+                    "pos": "動詞"
+                  },
+                  {
+                    "baseForm": "ます",
+                    "pos": "助動詞"
+                  },
+                  {
+                    "surface": "ん",
+                    "pos": "助動詞"
+                  }
+                ]
+              ],
+              "optional": true
+            }
+          ],
+          [
+            {
+              "pos": "名詞",
+              "pos2": "形容動詞語幹"
+            },
+            {
+              "baseForm": [
+                "だ",
+                "です"
+              ],
+              "pos": "助動詞",
+              "optional": true
+            }
+          ],
+          [
+            {
+              "pos": "名詞",
+              "pos2": [
+                "一般",
+                "固有名詞",
+                "代名詞",
+                "副詞可能",
+                "接尾"
+              ]
+            },
+            {
+              "surface": [
+                "が",
+                "に"
+              ],
+              "pos": "助詞",
+              "pos2": "格助詞"
+            },
+            {
+              "anyOf": [
+                [
+                  {
+                    "pos": "形容詞"
+                  },
+                  {
+                    "anyOf": [
+                      [
+                        {
+                          "baseForm": "ある",
+                          "pos": "動詞"
+                        },
+                        {
+                          "baseForm": "ます",
+                          "pos": "助動詞"
+                        },
+                        {
+                          "surface": "ん",
+                          "pos": "助動詞"
+                        }
+                      ]
+                    ],
+                    "optional": true
+                  }
+                ],
+                [
+                  {
+                    "pos": "名詞",
+                    "pos2": "形容動詞語幹"
+                  },
+                  {
+                    "baseForm": [
+                      "だ",
+                      "です"
+                    ],
+                    "pos": "助動詞",
+                    "optional": true
+                  }
+                ]
+              ]
+            }
+          ]
+        ]
+      }
+    ],
+    "notPrecededBy": [
+      [
+        {
+          "surface": [
+            "ほう",
+            "方"
+          ],
+          "pos": "名詞",
+          "pos2": "非自立"
+        },
+        {
+          "surface": "が",
+          "pos": "助詞"
+        }
+      ],
+      [
+        {
+          "surface": [
+            "ほう",
+            "方"
+          ],
+          "pos": "名詞",
+          "pos2": "非自立"
+        },
+        {
+          "surface": "が",
+          "pos": "助詞"
+        },
+        {
+          "pos": "記号",
+          "pos2": "読点"
+        }
+      ],
+      [
+        {
+          "surface": "と",
+          "pos": "助詞"
+        }
+      ],
+      [
+        {
+          "surface": [
+            "ほう",
+            "方"
+          ],
+          "pos": "名詞",
+          "pos2": "非自立"
+        },
+        {
+          "surface": "が",
+          "pos": "助詞"
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        }
+      ],
+      [
+        {
+          "surface": [
+            "ほう",
+            "方"
+          ],
+          "pos": "名詞",
+          "pos2": "非自立"
+        },
+        {
+          "surface": "が",
+          "pos": "助詞"
+        },
+        {
+          "pos": "記号",
+          "pos2": "読点"
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        }
+      ],
+      [
+        {
+          "surface": [
+            "ほう",
+            "方"
+          ],
+          "pos": "名詞",
+          "pos2": "非自立"
+        },
+        {
+          "surface": "が",
+          "pos": "助詞"
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        }
+      ],
+      [
+        {
+          "surface": [
+            "ほう",
+            "方"
+          ],
+          "pos": "名詞",
+          "pos2": "非自立"
+        },
+        {
+          "surface": "が",
+          "pos": "助詞"
+        },
+        {
+          "pos": "記号",
+          "pos2": "読点"
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        }
+      ],
+      [
+        {
+          "surface": [
+            "ほう",
+            "方"
+          ],
+          "pos": "名詞",
+          "pos2": "非自立"
+        },
+        {
+          "surface": "が",
+          "pos": "助詞"
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        }
+      ],
+      [
+        {
+          "surface": [
+            "ほう",
+            "方"
+          ],
+          "pos": "名詞",
+          "pos2": "非自立"
+        },
+        {
+          "surface": "が",
+          "pos": "助詞"
+        },
+        {
+          "pos": "記号",
+          "pos2": "読点"
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        },
+        {
+          "pos": [
+            "名詞",
+            "形容詞",
+            "動詞",
+            "助動詞",
+            "助詞",
+            "連体詞"
+          ]
+        }
+      ]
+    ],
+    "examples": [
+      "この灯台は岬の塔より高い。",
+      "私は梨より柿が好きだ。",
+      "今年の盆地は去年より暑い。",
+      "石の皿は木の皿より重かった。",
+      "北の村は南の町より静かです。",
+      "今日は先週より風が強くありません。"
+    ],
+    "counterExamples": [
+      "革靴より長靴のほうが雨の日には便利だ。",
+      "革靴より、長靴のほうが雨の日には便利だ。",
+      "長靴のほうが革靴より雨の日には便利だ。",
+      "長靴のほうが、革靴より雨の日には便利だ。",
+      "臨時の窓口は午前十時より受付を開始します。",
+      "当館の貸出手続きは来月より変更になります。",
+      "布のほうが古い革より柔らかい。"
+    ]
   }
 ]
