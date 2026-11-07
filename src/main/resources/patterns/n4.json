@@ -2777,7 +2777,7 @@
     "pattern": "～でできている / ～からできている / ～から作る",
     "level": "N4",
     "meaning": "\"made of / made from ~\"",
-    "explanation": "Names the material something consists of or the ingredients it is produced from. でできている and でできた describe its composition, while から作る and から作られる describe making it from a source material. With で, the same token pattern can also describe where something was completed or came into being, so context is needed to distinguish a location from a material.",
+    "explanation": "Names what something is made of or produced from. でできている and でできた describe what it consists of, while から作る and から作られる describe making it from a raw material. で can also mark where something was finished or came into being, so context decides between a material and a place.",
     "subsumes": [],
     "steps": [
       {
@@ -3709,7 +3709,7 @@
     "pattern": "（辞書形）な",
     "level": "N4",
     "meaning": "don't ~! (a blunt prohibition)",
-    "explanation": "Putting な directly after a dictionary-form verb can firmly forbid that action, with an optional final particle such as よ. The same dictionary-form verb + な can express surprise or admiration, as in よく食べるな, so tone and context matter. This rule skips a verb immediately preceded by the adverb よく; other exclamations may still be ambiguous. なさい and かな serve different purposes.",
+    "explanation": "A dictionary-form verb followed directly by な forbids the action firmly, often with a final よ: 走るな！ ('Don't run!'). The same form can also express surprise or admiration, as in よく食べるな ('you sure eat a lot'), so tone and context matter. なさい and かな are different expressions.",
     "subsumes": [],
     "steps": [
       {
@@ -3876,7 +3876,7 @@
     "pattern": "～のは～だ / ～のは～です",
     "level": "N4",
     "meaning": "the one / thing / reason that ~ is ~ / doing ~ is ~",
-    "explanation": "の turns a preceding clause into the topic marked by は. The predicate can identify a person, thing, place or reason, including a focused reason with のは～からだ, or evaluate the activity itself, as in ～するのは失礼だ. This rule covers both the identifying cleft and the nominalized topic followed by an evaluation; possessive の meaning 'mine' or 'his' is a different use.",
+    "explanation": "の turns a clause into the topic marked by は, and the rest of the sentence identifies or evaluates it: 好きなのは秋だ ('what I like is autumn'), 遅れたのは雨のせいだ, 人の話を聞くのは大切だ. のは～からだ focuses on a reason. Possessive の meaning 'mine' or 'his' (私のは赤い) is a different use.",
     "subsumes": [],
     "steps": [
       {"anyOf": [[{"pos": ["動詞", "形容詞"], "conjForm": "基本形"}], [{"pos": "助動詞", "conjType": "特殊・タ", "conjForm": "基本形"}], [{"baseForm": ["ない", "たい", "ぬ"], "pos": "助動詞", "conjForm": "基本形"}], [{"surface": "な", "baseForm": "だ", "pos": "助動詞", "conjForm": "体言接続"}]]},
@@ -4045,7 +4045,7 @@
     "pattern": "～なくて",
     "level": "N4",
     "meaning": "because not ~ / not ~ and ...",
-    "explanation": "なくて connects a negative fact to what follows, often explaining a feeling or a difficulty. It can also simply join related negative descriptions, so the causal reading depends on context; ないで, なくても and なくては belong to other constructions. This includes negative な-adjectives with じゃなくて or ではなくて. Those forms can also mean 'not A but B', and the token forms alone do not separate that correction from a cause.",
+    "explanation": "なくて links a negative fact to what follows, often explaining a feeling or a difficulty: お金がなくて、買えなかった. It can also just join two negative descriptions, so whether it gives a cause depends on context. With nouns and な-adjectives (じゃなくて, ではなくて) it can also mean 'not A but B'. ないで, なくても and なくては are other constructions.",
     "subsumes": [],
     "steps": [
       {
@@ -4490,7 +4490,7 @@
     "pattern": "（名詞）でも（提案）",
     "level": "N4",
     "meaning": "~ or something / how about ~",
-    "explanation": "でも after a noun offers an easygoing example of something to do, have or try, including a place for an activity. It can accompany an invitation, volitional verb, request, どうですか or いかがですか. A short modifier or two-token compound can precede でも. Uses meaning 'even', question-word choices, repeated alternatives and sentence-initial 'but' are separate.",
+    "explanation": "でも after a noun offers a casual example of something to do, have or try, without insisting on it: お茶でも飲みませんか ('how about some tea or something?'). It often comes with an invitation, a volitional verb, a request, どうですか or いかがですか. でも meaning 'even', question word + でも, repeated でも～でも and sentence-initial 'but' are different uses.",
     "subsumes": [],
     "steps": [
       {"pos": ["名詞", "形容詞"], "pos2": ["一般", "固有名詞", "サ変接続", "副詞可能", "接尾", "形容動詞語幹", "自立"]},

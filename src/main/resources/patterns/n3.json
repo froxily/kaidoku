@@ -905,7 +905,7 @@
     "pattern": "～出す",
     "level": "N3",
     "meaning": "suddenly start ~ing",
-    "explanation": "A verb stem plus 出す or だす marks an action or change beginning abruptly, such as bursting into tears or starting to move. Fused compounds are limited to selected forms with this use; taking something out or transferring it is a different meaning. 吹き出す is excluded because the tokenizer cannot distinguish bursting into laughter from blowing outward.",
+    "explanation": "A verb stem plus 出す or だす marks an action or change that starts suddenly, such as bursting into tears (泣き出す) or starting to run (走り出す). Many other compounds with 出す mean taking something out or sending it away (取り出す, 貸し出す), which is a different meaning. 吹き出す can mean bursting out laughing or spouting out, so it is left to context.",
     "steps": [
       { "anyOf": [
         [ { "pos": "動詞", "conjForm": "連用形" }, { "baseForm": ["出す", "だす"], "pos": "動詞", "pos2": "非自立" } ],
@@ -3923,7 +3923,7 @@
     "pattern": "～に当たる / ～に当たります / ～に当たり",
     "level": "N3",
     "meaning": "corresponds to / is equivalent to ~",
-    "explanation": "Identifies a quantity, role, place, or family relationship as its counterpart or equivalent, with に当たり linking the statement to another clause. Fractions may contain several numeric tokens; the highlighted phrase contains the equivalent noun or quantity and に当たる. Quantity and cost suffixes are restricted to avoid prize ranks such as 等, and literal hitting, winning, and occasion-setting に当たって are separate uses.",
+    "explanation": "Says that a quantity, role, place or family member corresponds to something else: 一里は約四キロに当たる, 父の兄に当たる人. に当たり links the statement to another clause. 当たる on its own also means 'hit' or 'win a prize' (くじに当たる), and にあたって means 'on the occasion of'; those are different uses.",
     "subsumes": [],
     "steps": [
       { "anyOf": [
@@ -4330,7 +4330,7 @@
     "pattern": "なかなか～ / なかなかの～",
     "level": "N3",
     "meaning": "quite ~ / rather impressive ~",
-    "explanation": "With a completed affirmative description, なかなか expresses a stronger or better impression than expected. なかなかの before a noun can similarly mark something as impressive. This rule requires an affirmative sentence ending and leaves negative predicates to なかなか～ない.",
+    "explanation": "With an affirmative description, なかなか says something is better or more than expected: なかなかおいしい ('pretty tasty'). なかなかの before a noun works the same way (なかなかの人物). With a negative, なかなか～ない means 'not easily', which is a different pattern.",
     "subsumes": [],
     "steps": [
       { "surface": "なかなか", "pos": "副詞" },
@@ -4392,7 +4392,7 @@
     "pattern": "～たものだ / ～たもんだ",
     "level": "N3",
     "meaning": "used to ~ / recollecting past experiences",
-    "explanation": "A past verb with ものだ recalls a repeated action or experience when a cue such as 昔, よく, ころ, 時代, or たび makes the recollection clear. ものです is polite, もん is conversational, and negative past verbs recall what people did not do. Without a recollection cue, this rule leaves the identical literal object construction unlabelled.",
+    "explanation": "A past verb with ものだ looks back fondly on something that used to happen regularly, usually with a cue such as 昔, よく, 子供のころ or 学生時代. ものです is polite and もんだ is casual, and a negative past recalls what people used to not do. Without such a cue, ～たものだ can simply mean 'it is a thing that was ~', so only clear recollections are marked.",
     "subsumes": [],
     "steps": [
       { "surface": ["昔", "よく", "ころ", "時代", "たび"] },
@@ -4530,7 +4530,7 @@
     "pattern": "かえって / 却って",
     "level": "N3",
     "meaning": "on the contrary / rather",
-    "explanation": "Introduces a result that goes against what someone expected or intended, often when an attempted improvement makes matters worse. Kana かえって can also be 帰って (going home), so it is skipped after a destination such as 家に or へ and before a motion verb such as きた; kanji 却って is always this adverb.",
+    "explanation": "Introduces a result that goes against what someone expected or intended, often when an attempt to improve things makes them worse: 薬を飲んだら、かえって悪くなった. Kana かえって can also be 帰って ('went home'), so it is not marked after a destination such as 家に or へ or before a motion verb such as きた; kanji 却って is always this adverb.",
     "subsumes": [],
     "steps": [
       { "surface": ["かえって", "却って"], "pos": "副詞" }

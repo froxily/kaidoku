@@ -767,7 +767,7 @@
     "pattern": "疑問詞＋か",
     "level": "N5",
     "meaning": "someone / something / somewhere / sometime",
-    "explanation": "Adding か to a question word refers to an unspecified person, thing, place or choice. いつか gives an unspecified time, while なぜか gives an unknown reason. Immediate 知る or 分かる instead suggests an embedded question. This rule also leaves forms before a comma unlabelled, conservatively avoiding short identity questions.",
+    "explanation": "Adding か to a question word makes an indefinite word: 誰か ('someone'), 何か ('something'), どこか ('somewhere'), いつか ('some day'), なぜか ('for some reason'). When the question word starts a whole embedded question, as in 誰が来るか分からない, it is a different pattern.",
     "subsumes": [],
     "steps": [
       {"anyOf": [[{"surface": ["誰", "だれ", "何", "どこ", "どれ"], "pos": "名詞", "pos2": "代名詞"}, {"surface": "か", "pos": "助詞"}], [{"surface": "なぜ", "pos": "副詞"}, {"surface": "か", "pos": "助詞"}], [{"surface": "いつか", "pos": "名詞", "pos2": "副詞可能"}], [{"surface": "なにか", "pos": "副詞"}]]}
@@ -1149,7 +1149,7 @@
     "pattern": "～より～（比較）",
     "level": "N5",
     "meaning": "more ~ than ~ / prefer ~ to ~",
-    "explanation": "より marks the reference point for a difference or preference. Compared nouns may have an adjective or noun + の modifier, and the predicate may be past, polite or negative. The highlight ends at the predicate, including its inflections, even when it modifies a following noun. ほうが comparisons have a separate explanation. Formal より meaning 'from' and adverbial より are separate uses.",
+    "explanation": "より marks the thing being compared against: 東京より大阪が好きだ, 私より背が高い. The compared nouns can have their own modifiers, and the predicate can be past, polite or negative. ～より～のほうが has its own explanation, and formal より meaning 'from' (十時より開始) is a different use.",
     "subsumes": [],
     "steps": [
       {"pos": ["名詞", "動詞", "形容詞"]},
