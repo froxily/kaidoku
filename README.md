@@ -117,7 +117,7 @@ Run the tests:
 ./mvnw verify -Pe2e
 ```
 
-The second command adds the browser tests. They use an installed Edge by default (`-De2e.browser.channel=chrome` for Chrome) and never download a browser. For a scripted walkthrough and how to record a demo GIF, see [docs/DEMO.md](docs/DEMO.md).
+The second command runs the 8 browser tests on their own (the `e2e` profile selects only them). They use an installed Edge by default (`-De2e.browser.channel=chrome` for Chrome) and never download a browser. For a scripted walkthrough and how to record a demo GIF, see [docs/DEMO.md](docs/DEMO.md).
 
 ## API
 
@@ -177,7 +177,7 @@ flowchart LR
 4. **Complete the word.** The span extends over the rest of the conjugated word: endings such as た, ます, ない, たい and ん, a て that completes a te-form, and ませんでした.
 5. **Subsume and sort.** A match inside a longer match of a rule that declares `subsumes` (or of the same rule) is dropped, and the rest come back in text order.
 
-A real rule from `src/main/resources/patterns/n3.json`, with the explanation shortened:
+A real rule from `src/main/resources/patterns/n3.json`, with its explanation and examples shortened:
 
 ```json
 {
@@ -222,7 +222,7 @@ To add a rule: dump the tokens of its example sentences with `/api/tokens` first
 | `RuleConsistencyTest` | 3 | Cross-rule checks (below) |
 | `EvaluationTest` | 3 | Accuracy on the evaluation set (below) |
 | `ExpansionEvaluationTest` | 3 | reports precision and recall of newly added rules on separate held-out sets (evaluation/heldout/), without a floor |
-| `PatternMatcherPerformanceTest` | 1 | Twenty 10,000-character analyses within a time budget |
+| `PatternMatcherPerformanceTest` | 1 | Twenty analyses of a text just under the 10,000-character limit within a time budget |
 | `KaidokuE2eTest` (`-Pe2e`) | 8 | In a real browser: highlighting, cards, level filter, overlaps, hiding nested patterns, mobile layout, invalid input |
 
 GitHub Actions runs three jobs on every push to `main` and every pull request: the test suite, the browser tests (in Chrome), and a Docker build that starts the container and checks it answers correctly as a non-root user.
@@ -275,7 +275,7 @@ The table records the first run on a pre-registered held-out set for each batch:
 | 8 | 9 | 139 | 1.000 | 0.866 |
 | 9 | 4 | 66 | 1.000 | 0.969 |
 
-Batch 4 recall was 0.923 after one label error was corrected. All six batch 7 false positives came from ambiguous rules that were then restricted. The combined first run covered 1,443 sentences and scored **0.991 precision / 0.944 recall / 0.967 F1**. The current result, after fixes and therefore **not blind**, is **1.000 precision / 0.975 recall / 0.987 F1**, with 1,425 of 1,442 sentences exact. `ExpansionEvaluationTest` reports these held-out results without a floor.
+Batch 2 had 196 sentences at its first run; one was removed afterwards because it repeated a regression-set sentence, which leaves 195 (and 1,442 in total). Batch 4 recall was 0.923 after one label error was corrected. All six batch 7 false positives came from ambiguous rules that were then restricted. The combined first run covered 1,443 sentences and scored **0.991 precision / 0.944 recall / 0.967 F1**. The current result, after fixes and therefore **not blind**, is **1.000 precision / 0.975 recall / 0.987 F1**, with 1,425 of 1,442 sentences exact. `ExpansionEvaluationTest` reports these held-out results without a floor.
 
 A spot check on 120 new natural sentences and 253 plain-prose sentences found no notable false positives from the new rules.
 
