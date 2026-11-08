@@ -11,8 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PatternMatcher {
 
@@ -70,7 +68,9 @@ public class PatternMatcher {
             tryCandidates(byPos2.get(token.pos2()), text, tokens, i, lastTried, literals, matches);
             tryCandidates(unanchored, text, tokens, i, lastTried, literals, matches);
         }
-        return withoutSubsumed(matches).stream().sorted(ORDER).toList();
+        List<Match> visible = withoutSubsumed(matches);
+        visible.sort(ORDER);
+        return List.copyOf(visible);
     }
 
     private void tryCandidates(List<Integer> candidates, String text, List<Token> tokens, int first,
@@ -449,14 +449,86 @@ public class PatternMatcher {
         return next;
     }
 
-    private List<Match> withoutSubsumed(List<Match> matches) {
-        Map<String, List<Match>> byRule = matches.stream().collect(Collectors.groupingBy(match -> match.rule().id()));
-        return matches.stream().filter(match -> !isSubsumed(match, byRule)).toList();
+    List<Match> withoutSubsumed(List<Match> matches) {
+        Map<String, List<Match>> groups = new HashMap<>();
+        for (Match match : matches) {
+            groups.computeIfAbsent(match.rule().id(), id -> new ArrayList<>()).add(match);
+        }
+        Map<String, SpanIndex> byRule = new HashMap<>();
+        for (Map.Entry<String, List<Match>> group : groups.entrySet()) {
+            byRule.put(group.getKey(), new SpanIndex(group.getValue()));
+        }
+        List<Match> visible = new ArrayList<>(matches.size());
+        for (Match match : matches) {
+            if (!isSubsumed(match, byRule)) {
+                visible.add(match);
+            }
+        }
+        return visible;
     }
 
-    private boolean isSubsumed(Match inner, Map<String, List<Match>> byRule) {
-        return Stream.concat(Stream.of(inner.rule().id()), subsumers.getOrDefault(inner.rule().id(), Set.of()).stream())
-                .flatMap(outer -> byRule.getOrDefault(outer, List.of()).stream())
-                .anyMatch(outer -> outer != inner && outer.start() <= inner.start() && inner.end() <= outer.end());
+    private boolean isSubsumed(Match inner, Map<String, SpanIndex> byRule) {
+        if (byRule.get(inner.rule().id()).contains(inner)) {
+            return true;
+        }
+        Set<String> outerRules = subsumers.get(inner.rule().id());
+        if (outerRules != null) {
+            for (String outerRule : outerRules) {
+                SpanIndex outer = byRule.get(outerRule);
+                if (outer != null && outer.contains(inner)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static final class SpanIndex {
+        private final List<Match> matches;
+        private final Match[] furthest;
+        private final Match[] secondFurthest;
+
+        private SpanIndex(List<Match> matches) {
+            matches.sort(ORDER);
+            this.matches = matches;
+            furthest = new Match[matches.size()];
+            secondFurthest = new Match[matches.size()];
+            Match first = null;
+            Match second = null;
+            for (int index = 0; index < matches.size(); index++) {
+                Match match = matches.get(index);
+                if (match != first && match != second) {
+                    if (first == null || match.end() > first.end()) {
+                        second = first;
+                        first = match;
+                    } else if (second == null || match.end() > second.end()) {
+                        second = match;
+                    }
+                }
+                furthest[index] = first;
+                secondFurthest[index] = second;
+            }
+        }
+
+        private boolean contains(Match inner) {
+            int low = 0;
+            int high = matches.size();
+            while (low < high) {
+                int middle = low + ((high - low) >>> 1);
+                if (matches.get(middle).start() <= inner.start()) {
+                    low = middle + 1;
+                } else {
+                    high = middle;
+                }
+            }
+            if (low == 0) {
+                return false;
+            }
+            Match outer = furthest[low - 1];
+            if (outer == inner) {
+                outer = secondFurthest[low - 1];
+            }
+            return outer != null && inner.end() <= outer.end();
+        }
     }
 }

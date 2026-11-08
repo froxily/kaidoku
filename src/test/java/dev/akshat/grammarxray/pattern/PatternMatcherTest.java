@@ -6,7 +6,12 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -608,6 +613,90 @@ class PatternMatcherTest {
     }
 
     @Test
+    void keepsManyDisjointMatchesOfTheSameRule() {
+        Rule rule = rule("r", surface("誰か"));
+        String[] specs = new String[5000];
+        Arrays.fill(specs, "誰か");
+        List<Match> expected = new ArrayList<>();
+        for (int index = 0; index < specs.length; index++) {
+            expected.add(new Match(rule, 2 * index, 2 * index + 2, "誰か"));
+        }
+
+        assertThat(match(List.of(rule), specs)).containsExactlyElementsOf(expected);
+    }
+
+    @Test
+    void keepsOnlyOutermostNestedMatchesOfTheSameRule() {
+        List<Rule> rules = List.of(rule("r", surface("a"), gap(3), surface("b")));
+
+        assertThat(match(rules, "a", "a", "a", "b", "a", "a", "b"))
+                .extracting(Match::start, Match::end, Match::text)
+                .containsExactly(tuple(0, 4, "aaab"), tuple(4, 7, "aab"));
+    }
+
+    @Test
+    void dropsEqualSpanMatchesOnlyForDeclaredSubsumers() {
+        List<Rule> rules = List.of(
+                rule("outer", List.of("inner"), surface("a"), surface("b")),
+                rule("inner", surface("a"), surface("b")),
+                rule("other", surface("a"), surface("b")));
+
+        assertThat(match(rules, "a", "b"))
+                .extracting(m -> m.rule().id(), Match::start, Match::end, Match::text)
+                .containsExactly(tuple("other", 0, 2, "ab"), tuple("outer", 0, 2, "ab"));
+    }
+
+    @Test
+    void subsumptionExcludesTheSameObjectButIncludesEqualDistinctObjects() {
+        Rule rule = rule("r", surface("a"));
+        PatternMatcher matcher = new PatternMatcher(List.of(rule));
+        Match match = new Match(rule, 0, 1, "a");
+
+        assertThat(matcher.withoutSubsumed(List.of(match, match))).containsExactly(match, match);
+        assertThat(matcher.withoutSubsumed(List.of(match, new Match(rule, 0, 1, "a")))).isEmpty();
+    }
+
+    @Test
+    void indexedSubsumptionEqualsTheOldQuadraticLogic() {
+        Random random = new Random(0x5ab5_2026L);
+        for (int iteration = 0; iteration < 500; iteration++) {
+            int ruleCount = 1 + random.nextInt(8);
+            List<Rule> rules = new ArrayList<>();
+            for (int outer = 0; outer < ruleCount; outer++) {
+                List<String> subsumes = new ArrayList<>();
+                for (int inner = 0; inner < ruleCount; inner++) {
+                    if (outer != inner && random.nextInt(6) == 0) {
+                        subsumes.add("r" + inner);
+                    }
+                }
+                rules.add(rule("r" + outer, subsumes, surface("a")));
+            }
+            List<Match> matches = new ArrayList<>();
+            int matchCount = random.nextInt(120);
+            for (int index = 0; index < matchCount; index++) {
+                if (!matches.isEmpty() && random.nextInt(8) == 0) {
+                    matches.add(matches.get(random.nextInt(matches.size())));
+                } else if (!matches.isEmpty() && random.nextInt(8) == 0) {
+                    Match match = matches.get(random.nextInt(matches.size()));
+                    matches.add(new Match(match.rule(), match.start(), match.end(), match.text()));
+                } else {
+                    Rule rule = rules.get(random.nextInt(rules.size()));
+                    int start = random.nextInt(100);
+                    matches.add(new Match(rule, start, start + 1 + random.nextInt(20), "m" + index));
+                }
+            }
+            Collections.shuffle(matches, random);
+            List<Match> expected = withoutSubsumedQuadratically(rules, matches);
+            List<Match> actual = new PatternMatcher(rules).withoutSubsumed(matches);
+
+            assertThat(actual).as("iteration %s", iteration).containsExactlyElementsOf(expected);
+            for (int index = 0; index < expected.size(); index++) {
+                assertThat(actual.get(index)).isSameAs(expected.get(index));
+            }
+        }
+    }
+
+    @Test
     void keepsSubsumedMatchThatOnlyPartlyOverlaps() {
         List<Rule> rules = List.of(
                 rule("outer", List.of("inner"), surface("a"), surface("b")),
@@ -810,6 +899,32 @@ class PatternMatcherTest {
         assertThat(texts(notFollowed, "a", "帰っ/帰る/動詞")).containsExactly("a");
         assertThat(texts(notPreceded, "戻っ/戻る/動詞", "a")).isEmpty();
         assertThat(texts(notPreceded, "帰っ/帰る/動詞", "a")).containsExactly("a");
+    }
+
+    private static List<Match> withoutSubsumedQuadratically(List<Rule> rules, List<Match> matches) {
+        Map<String, Set<String>> subsumers = new HashMap<>();
+        for (Rule outer : rules) {
+            for (String inner : outer.subsumes()) {
+                subsumers.computeIfAbsent(inner, id -> new HashSet<>()).add(outer.id());
+            }
+        }
+        List<Match> visible = new ArrayList<>();
+        for (Match inner : matches) {
+            boolean subsumed = false;
+            Set<String> outerRules = subsumers.getOrDefault(inner.rule().id(), Set.of());
+            for (Match outer : matches) {
+                if (outer != inner
+                        && (outer.rule().id().equals(inner.rule().id()) || outerRules.contains(outer.rule().id()))
+                        && outer.start() <= inner.start() && inner.end() <= outer.end()) {
+                    subsumed = true;
+                    break;
+                }
+            }
+            if (!subsumed) {
+                visible.add(inner);
+            }
+        }
+        return visible;
     }
 
     private static Rule triedEverywhere(Rule rule) {
