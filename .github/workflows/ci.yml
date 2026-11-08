@@ -66,3 +66,28 @@ jobs:
             | python3 -c 'import sys, json; ids = [m["ruleId"] for m in json.load(sys.stdin)["matches"]]; print(ids); assert "wake-dewa-nai" in ids'
           test "$(docker exec kaidoku id -u)" != "0"
           docker rm -f kaidoku
+
+  publish:
+    needs: [test, e2e, docker]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
+      SOURCE: ${{ github.server_url }}/${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Log in to GHCR
+        env:
+          REGISTRY_USER: ${{ github.actor }}
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "$REGISTRY_TOKEN" | docker login ghcr.io -u "$REGISTRY_USER" --password-stdin
+      - name: Build and push image
+        run: |
+          docker build --label "org.opencontainers.image.source=$SOURCE" --label "org.opencontainers.image.revision=$GITHUB_SHA" -t "$IMAGE" .
+          docker push "$IMAGE"
+      - name: Log out of GHCR
+        if: always()
+        run: docker logout ghcr.io
