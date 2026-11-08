@@ -4,10 +4,13 @@ import dev.akshat.grammarxray.tokenizer.Token;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.tuple;
 
 class PatternMatcherTest {
@@ -19,6 +22,240 @@ class PatternMatcherTest {
         assertThat(texts(rules, "a", "c")).containsExactly("ac");
         assertThat(texts(rules, "a", "b", "c")).containsExactly("abc");
         assertThat(texts(rules, "a", "x", "c")).isEmpty();
+    }
+
+    @Test
+    void optionalLeadingStepsCanBeSkippedOrConsumed() {
+        List<Rule> rules = List.of(rule("r", optional(surface("a")), optional(surface("b")), surface("c")));
+
+        assertThat(texts(rules, "x", "a", "b", "c")).containsExactly("abc");
+        assertThat(texts(rules, "x", "a", "c")).containsExactly("ac");
+        assertThat(texts(rules, "x", "b", "c")).containsExactly("bc");
+        assertThat(texts(rules, "x", "c")).containsExactly("c");
+        assertThat(texts(rules, "x", "a", "b")).isEmpty();
+    }
+
+    @Test
+    void optionalLeadingAnyOfCanBeSkippedOrConsumed() {
+        List<Rule> rules = List.of(rule("r", optional(anyOf(List.of(surface("a")), List.of(surface("b")))), surface("c")));
+
+        assertThat(texts(rules, "x", "a", "c")).containsExactly("ac");
+        assertThat(texts(rules, "x", "b", "c")).containsExactly("bc");
+        assertThat(texts(rules, "x", "c")).containsExactly("c");
+    }
+
+    @Test
+    void nestedLeadingAnyOfChecksAllStarterConstraints() {
+        List<Rule> rules = List.of(rule("r", anyOf(
+                List.of(anyOf(List.of(suffixes(List.of("る"), List.of("っ"), List.of("帰る"))), List.of(baseForm("なる")))),
+                List.of(surface("a"))), surface("た")));
+
+        assertThat(texts(rules, "x", "戻っ/戻る/動詞", "た")).containsExactly("戻った");
+        assertThat(texts(rules, "x", "なっ/なる", "た")).containsExactly("なった");
+        assertThat(texts(rules, "x", "a", "た")).containsExactly("aた");
+        assertThat(texts(rules, "帰っ/帰る/動詞", "た")).isEmpty();
+        assertThat(texts(rules, "戻り/戻る/動詞", "た")).isEmpty();
+        assertThat(texts(rules, "戻っ/戻る/名詞", "た")).isEmpty();
+    }
+
+    @Test
+    void leadingAnyOfAlternativeCanSkipItsOptionalFirstStep() {
+        List<Rule> rules = List.of(rule("r", anyOf(
+                List.of(optional(surface("a")), surface("b")),
+                List.of(surface("x"))), surface("c")));
+
+        assertThat(texts(rules, "y", "a", "b", "c")).containsExactly("abc");
+        assertThat(texts(rules, "y", "b", "c")).containsExactly("bc");
+        assertThat(texts(rules, "y", "x", "c")).containsExactly("xc");
+        assertThat(texts(rules, "y", "c")).isEmpty();
+    }
+
+    @Test
+    void nullableLeadingAnyOfContinuesIntoTheContainingSequence() {
+        for (Step alternative : List.of(surface("b"), optional(surface("b")))) {
+            List<Rule> rules = List.of(rule("r", anyOf(
+                    List.of(anyOf(List.of(optional(surface("a"))))),
+                    List.of(alternative)), optional(surface("c")), surface("d")));
+
+            assertThat(texts(rules, "x", "a", "c", "d")).containsExactly("acd");
+            assertThat(texts(rules, "x", "b", "d")).containsExactly("bd");
+            assertThat(texts(rules, "x", "c", "d")).containsExactly("cd");
+            assertThat(texts(rules, "x", "d")).containsExactly("d");
+        }
+    }
+
+    @Test
+    void anchorsOnPos2WithoutRequiringPos1() {
+        List<Rule> rules = List.of(rule("r", pos2("数", "numeric"), surface("に")));
+
+        assertThat(texts(rules, "x", "二/二/名詞/*/*/数", "に")).containsExactly("二に");
+        assertThat(texts(rules, "x", "2/2/動詞/*/*/numeric", "に")).containsExactly("2に");
+        assertThat(texts(rules, "x", "二/二/名詞/*/*/一般", "に")).isEmpty();
+    }
+
+    @Test
+    void deduplicatesPos2AndOtherLeadingAnchors() {
+        List<Rule> rules = List.of(rule("r", anyOf(
+                List.of(surface("a")), List.of(baseForm("a")), List.of(pos("名詞")), List.of(pos2("数")))));
+
+        assertThat(texts(rules, "a/a/名詞/*/*/数")).containsExactly("a");
+    }
+
+    @Test
+    void nullableRulesKeepTheirNonEmptyMatches() {
+        List<Rule> rules = List.of(rule("r", optional(surface("a")), optional(surface("b"))));
+
+        assertThat(texts(rules, "x", "a", "b")).containsExactly("ab");
+        assertThat(texts(rules, "x", "b")).containsExactly("b");
+        assertThat(texts(rules, "x")).isEmpty();
+        assertThat(texts(rules)).isEmpty();
+    }
+
+    @Test
+    void unknownStartersKeepMatchesAtUnanchoredTokens() {
+        for (List<Step> sequence : List.of(
+                List.of(gap(1), surface("c")),
+                List.of(optional(surface("a")), gap(1), surface("c")),
+                List.of(anyOf(List.of(surface("a")), List.of(gap(1), surface("c")))),
+                List.of(sameAsFirst(), surface("c")))) {
+            List<Rule> rules = List.of(rule("r", sequence.toArray(Step[]::new)));
+
+            assertThat(texts(rules, "x/known", "c")).containsExactly("xc");
+        }
+    }
+
+    @Test
+    void requiredLiteralsInsideNestedAnyOfPreserveAllBranches() {
+        List<Rule> rules = List.of(rule("r", pos("名詞"), anyOf(
+                List.of(pos("名詞"), anyOf(List.of(surface("上")), List.of(baseForm("見える")))),
+                List.of(pos("名詞"), baseForm("当たる")))));
+
+        assertThat(texts(rules, "x/x/助詞", "a", "b", "上")).containsExactly("ab上");
+        assertThat(texts(rules, "x/x/助詞", "a", "b", "見え/見える/動詞")).containsExactly("ab見え");
+        assertThat(texts(rules, "x/x/助詞", "a", "b", "当たっ/当たる/動詞")).containsExactly("ab当たっ");
+        assertThat(texts(rules, "a", "b", "c")).isEmpty();
+    }
+
+    @Test
+    void anAlternativeWithoutALiteralDisablesTheLiteralRequirement() {
+        List<Rule> rules = List.of(rule("r", pos("名詞"), anyOf(
+                List.of(surface("上")),
+                List.of(anyOf(List.of(baseForm("見える")), List.of(pos("動詞")))))));
+
+        assertThat(texts(rules, "a", "走っ/走る/動詞")).containsExactly("a走っ");
+        assertThat(texts(rules, "a", "見え/見える/動詞")).containsExactly("a見え");
+        assertThat(texts(rules, "a", "上")).containsExactly("a上");
+    }
+
+    @Test
+    void optionalLiteralStepsNeverSupplyARequirement() {
+        for (Step step : List.of(optional(surface("上")), optional(anyOf(
+                List.of(surface("上")), List.of(baseForm("当たる")))))) {
+            List<Rule> rules = List.of(rule("r", pos("名詞"), step, pos("動詞")));
+
+            assertThat(texts(rules, "a", "走っ/走る/動詞")).containsExactly("a走っ");
+            assertThat(texts(rules, "a", "上/上/助詞", "走っ/走る/動詞")).containsExactly("a上走っ");
+        }
+    }
+
+    @Test
+    void literalRequirementsIgnoreContextSteps() {
+        List<Rule> rules = List.of(
+                followedBy(surface("上"), "followed", pos("名詞"), pos("動詞")),
+                notFollowedBy(List.of(surface("上")), "not-followed", pos("名詞"), pos("動詞")),
+                notPrecededBy(List.of(surface("上")), "not-preceded", pos("名詞"), pos("動詞")));
+        for (Rule rule : rules) {
+            assertThat(texts(List.of(rule), "a", "走っ/走る/動詞")).containsExactly("a走っ");
+        }
+        assertThat(texts(List.of(rules.getFirst()), "a", "走っ/走る/動詞", "上/上/助詞")).containsExactly("a走っ");
+    }
+
+    @Test
+    void literalWindowsIncludeMaximumGapAndOptionalAlternativeSpans() {
+        for (Rule rule : List.of(
+                rule("r", pos("名詞"), gap(2), surface("上")),
+                rule("r", pos("名詞"), optional(anyOf(List.of(pos("動詞")), List.of(pos("動詞"), pos("動詞")))), surface("上")))) {
+            List<Rule> rules = List.of(rule);
+
+            assertThat(texts(rules, "a", "x/x/動詞", "y/y/動詞", "上/上/助詞")).containsExactly("axy上");
+            assertThat(texts(rules, "a", "x/x/動詞", "y/y/動詞", "z/z/動詞", "上/上/助詞")).isEmpty();
+            assertThat(texts(rules, "a", "上/上/助詞", "x/x/動詞", "y/y/動詞", "上/上/助詞")).containsExactly("a上");
+            assertThat(texts(rules, "a", "上/上/助詞", "x/x/動詞", "b", "上/上/助詞")).containsExactly("a上", "b上");
+        }
+    }
+
+    @Test
+    void sharedLiteralRequirementsKeepEachRulesWindow() {
+        List<Rule> rules = List.of(
+                rule("short", pos("名詞"), gap(1), surface("上")),
+                rule("long", pos("名詞"), gap(2), surface("上")));
+
+        assertThat(match(rules, "a", "x/x/動詞", "y/y/動詞", "上/上/助詞"))
+                .extracting(m -> m.rule().id(), Match::text).containsExactly(tuple("long", "axy上"));
+    }
+
+    @Test
+    void prefilterResultsEqualRulesTriedAtEveryToken() {
+        Step conjugation = new Step(null, null, null, null, null, List.of("*"), null, null, null, false, false, null, null);
+        List<Rule> rules = List.of(
+                rule("optional", optional(surface("a")), optional(surface("b")), surface("c")),
+                rule("optional-anyof", optional(anyOf(List.of(surface("a")), List.of(pos2("数")))), surface("c")),
+                rule("nested", anyOf(List.of(anyOf(List.of(pos2("数")), List.of(baseForm("v"))))), surface("c")),
+                rule("optional-alternative", anyOf(List.of(optional(surface("a")), surface("b")), List.of(pos2("数"))), surface("c")),
+                rule("nullable-alternative", anyOf(List.of(optional(surface("a"))), List.of(surface("b"))), surface("c")),
+                rule("nullable-rule", optional(surface("a"))),
+                rule("nullable-nested", anyOf(List.of(anyOf(List.of(optional(surface("a"))))), List.of(optional(surface("b"))))),
+                rule("suffix", suffixes(List.of("る"), List.of("っ"), List.of("帰る")), surface("c")),
+                rule("unanchored", conjugation, surface("c")),
+                rule("required-nested", pos("名詞"), anyOf(
+                        List.of(pos("助詞"), anyOf(List.of(surface("上")), List.of(baseForm("見える")))),
+                        List.of(baseForm("当たる")))),
+                rule("optional-literal", pos("名詞"), optional(surface("上")), pos("動詞")),
+                rule("literal-free-alternative", pos("名詞"), anyOf(List.of(surface("上")), List.of(pos("動詞")))),
+                rule("bounded-literal", pos("名詞"), gap(2), surface("上")),
+                rule("gap", surface("a"), gap(2), sameAsFirst()),
+                rule("unknown", anyOf(List.of(surface("a")), List.of(gap(1), surface("c")))),
+                rule("outer", List.of("optional"), surface("a"), surface("b"), surface("c")),
+                followedBy(surface("!"), "followed", pos("名詞"), surface("c")),
+                notFollowedBy(List.of(surface("!")), "not-followed", surface("b"), surface("c")),
+                notPrecededBy(List.of(surface("x")), "not-preceded", surface("c")));
+        PatternMatcher indexed = new PatternMatcher(rules);
+        PatternMatcher everywhere = new PatternMatcher(rules.stream().map(PatternMatcherTest::triedEverywhere).toList());
+        List<List<String>> inputs = new ArrayList<>(List.of(
+                List.<String>of(),
+                List.of("x", "a", "b", "c", "!", "c", "a", "c", "b", "c"),
+                List.of("x", "二/二/名詞/*/*/数", "c", "!", "V/v/動詞", "c", "二/二/名詞/*/*/一般", "c"),
+                List.of("戻っ/戻る/動詞", "c", "帰っ/帰る/動詞", "c", "戻り/戻る/動詞", "c"),
+                List.of("prefix/other", "a/shared", "x/other", "b/shared", "c", "a/*", "b/*"),
+                List.of("戻っ/戻る/動詞/連用タ接続", "c/c/助動詞/基本形/特殊・タ", "。"),
+                List.of("空", "が/が/助詞", "見え/見える/動詞", "。/。/記号/*/*/句点"),
+                List.of("役", "当たっ/当たる/動詞", "空", "が/が/助詞", "上"),
+                List.of("犬", "走っ/走る/動詞", "猫", "上/上/助詞", "歩く/歩く/動詞"),
+                List.of("a", "x/x/動詞", "y/y/動詞", "上/上/助詞", "b", "上/上/助詞"),
+                List.of("上/上/助詞", "a", "x/x/動詞", "y/y/動詞", "z/z/動詞", "上/上/助詞")));
+        List<String> alphabet = List.of("a", "b", "c", "x");
+        int combinations = 1;
+        for (int length = 1; length <= 4; length++) {
+            combinations *= alphabet.size();
+            for (int encoded = 0; encoded < combinations; encoded++) {
+                List<String> specs = new ArrayList<>();
+                int remaining = encoded;
+                for (int index = 0; index < length; index++) {
+                    specs.add(alphabet.get(remaining % alphabet.size()));
+                    remaining /= alphabet.size();
+                }
+                inputs.add(specs);
+            }
+        }
+
+        for (List<String> specs : inputs) {
+            List<Token> tokens = tokens(specs.toArray(String[]::new));
+            String text = tokens.stream().map(Token::surface).collect(Collectors.joining());
+            assertThat(indexed.match(text, tokens)).as("tokens: %s", specs)
+                    .extracting(m -> m.rule().id(), Match::start, Match::end, Match::text)
+                    .containsExactlyElementsOf(everywhere.match(text, tokens).stream()
+                            .map(m -> tuple(m.rule().id(), m.start(), m.end(), m.text())).toList());
+        }
     }
 
     @Test
@@ -81,6 +318,61 @@ class PatternMatcherTest {
         List<Rule> rules = List.of(rule("r", anyOf(List.of(surface("a")), List.of(baseForm("a")), List.of(pos("名詞")))));
 
         assertThat(texts(rules, "a")).containsExactly("a");
+    }
+
+    @Test
+    void longValueListsPreserveMatchingAndListSemantics() {
+        List<String> values = new ArrayList<>();
+        for (int index = 0; index < 256; index++) {
+            values.add("value" + index + "x");
+        }
+        values.add(values.getLast());
+        List<String> exclusions = new ArrayList<>(values.subList(0, 255));
+        List<String> endings = List.of("x");
+        Step step = new Step(values, values, values, values, values, values, endings, endings, exclusions,
+                false, false, null, null);
+        String accepted = values.getLast();
+        Token matching = new Token(accepted, accepted, accepted, accepted, "*", accepted, accepted, "*", 0, accepted.length());
+        Token excluded = new Token(accepted, exclusions.getLast(), accepted, accepted, "*", accepted, accepted, "*", 0, accepted.length());
+
+        assertThat(step.matches(matching)).isTrue();
+        assertThat(step.matches(excluded)).isFalse();
+        for (int index = 0; index < 6; index++) {
+            String[] fields = {accepted, accepted, accepted, accepted, accepted, accepted};
+            fields[index] = "missing";
+            Token mismatch = new Token(fields[0], fields[1], fields[2], fields[3], "*", fields[4], fields[5], "*", 0, accepted.length());
+            assertThat(step.matches(mismatch)).as("constraint %s", index).isFalse();
+        }
+        assertThat(step.surface()).isEqualTo(values).hasSameHashCodeAs(values).hasToString(values.toString());
+        assertThat(values).isEqualTo(step.surface());
+        assertThat(step.notBaseForm()).containsExactlyElementsOf(exclusions);
+        assertThat(step.baseFormSuffix()).isSameAs(endings);
+        assertThat(step.surfaceSuffix()).isSameAs(endings);
+        assertThatThrownBy(() -> step.surface().set(0, "changed")).isInstanceOf(UnsupportedOperationException.class);
+
+        values.clear();
+        exclusions.clear();
+        assertThat(step.matches(matching)).isTrue();
+        assertThat(step.matches(excluded)).isFalse();
+    }
+
+    @Test
+    void valueLookupsHandleNullTokenFields() {
+        Token token = new Token(null, null, null, null, null, null, null, null, 0, 0);
+        assertThat(surface("known").baseForm()).isNull();
+        for (boolean includesNull : List.of(false, true)) {
+            List<String> values = includesNull ? Arrays.asList("known", null) : List.of("known");
+            for (int index = 0; index < 7; index++) {
+                List<List<String>> constraints = new ArrayList<>(Collections.nCopies(7, null));
+                constraints.set(index, values);
+                Step step = new Step(constraints.get(0), constraints.get(1), constraints.get(2), constraints.get(3),
+                        constraints.get(4), constraints.get(5), null, null, constraints.get(6), false, false, null, null);
+
+                assertThat(step.constraints()).containsExactly(values);
+                assertThat(step.matches(token)).as("constraint %s with null=%s", index, includesNull)
+                        .isEqualTo(includesNull != (index == 6));
+            }
+        }
     }
 
     @Test
@@ -518,6 +810,13 @@ class PatternMatcherTest {
         assertThat(texts(notFollowed, "a", "帰っ/帰る/動詞")).containsExactly("a");
         assertThat(texts(notPreceded, "戻っ/戻る/動詞", "a")).isEmpty();
         assertThat(texts(notPreceded, "帰っ/帰る/動詞", "a")).containsExactly("a");
+    }
+
+    private static Rule triedEverywhere(Rule rule) {
+        Step anyToken = new Step(null, null, null, null, null, null, null, null, null, false, false, null, null);
+        return new Rule(rule.id(), rule.pattern(), rule.level(), rule.meaning(), rule.explanation(), rule.subsumes(),
+                List.of(anyOf(rule.steps(), List.of(anyToken, pos()))), rule.followedBy(), rule.notFollowedBy(),
+                rule.notPrecededBy(), rule.examples(), rule.counterExamples());
     }
 
     private static List<String> texts(List<Rule> rules, String... specs) {

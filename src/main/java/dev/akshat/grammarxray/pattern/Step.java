@@ -2,14 +2,28 @@ package dev.akshat.grammarxray.pattern;
 
 import dev.akshat.grammarxray.tokenizer.Token;
 
+import java.util.AbstractList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.RandomAccess;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public record Step(List<String> surface, List<String> baseForm, List<String> pos, List<String> pos2,
                    List<String> conjType, List<String> conjForm, List<String> baseFormSuffix,
                    List<String> surfaceSuffix, List<String> notBaseForm, boolean sameAsFirst,
                    boolean optional, List<List<Step>> anyOf, Integer gap) {
+
+    public Step {
+        surface = indexed(surface);
+        baseForm = indexed(baseForm);
+        pos = indexed(pos);
+        pos2 = indexed(pos2);
+        conjType = indexed(conjType);
+        conjForm = indexed(conjForm);
+        notBaseForm = indexed(notBaseForm);
+    }
 
     public boolean isAlternation() {
         return anyOf != null;
@@ -41,12 +55,11 @@ public record Step(List<String> surface, List<String> baseForm, List<String> pos
     }
 
     private static boolean contains(List<String> values, String value) {
-        for (int index = 0; index < values.size(); index++) {
-            if (Objects.equals(values.get(index), value)) {
-                return true;
-            }
-        }
-        return false;
+        return values.contains(value);
+    }
+
+    private static List<String> indexed(List<String> values) {
+        return values == null || values instanceof ValueList ? values : new ValueList(values);
     }
 
     private static boolean endsWithAny(List<String> suffixes, String value) {
@@ -61,5 +74,33 @@ public record Step(List<String> surface, List<String> baseForm, List<String> pos
             }
         }
         return false;
+    }
+
+    private static final class ValueList extends AbstractList<String> implements RandomAccess {
+        private final String[] elements;
+        private final Set<String> lookup;
+
+        private ValueList(List<String> values) {
+            elements = values.toArray(String[]::new);
+            lookup = HashSet.newHashSet(elements.length);
+            for (String element : elements) {
+                lookup.add(element);
+            }
+        }
+
+        @Override
+        public String get(int index) {
+            return elements[index];
+        }
+
+        @Override
+        public int size() {
+            return elements.length;
+        }
+
+        @Override
+        public boolean contains(Object value) {
+            return lookup.contains(value);
+        }
     }
 }
