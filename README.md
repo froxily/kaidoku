@@ -16,7 +16,7 @@ Paste any Japanese text, such as a news article, a manga page, a subtitle line o
 | | |
 |---|---|
 | Grammar patterns | **341** (36 N5 · 118 N4 · 187 N3), covering every in-scope N5 and N4 point and all 62 N3 points of an openly licensed JLPT grammar checklist, with restrictions ([coverage](#coverage)) |
-| Tests | **3,318** unit and integration tests + **8** browser tests, run in CI on every push to `main` |
+| Tests | **3,323** unit and integration tests + **8** browser tests, run in CI on every push to `main` |
 | Accuracy | **0.992 precision / 0.989 recall** on 655 regression sentences for the original 199 rules; a first run on a pre-registered held-out set for the 142 new rules scored 0.991 / 0.944 ([methodology](#evaluation)) |
 | Speed | about **24 ms** to analyze 10,000 characters of grammar-dense text ([details](#performance)) |
 | Stack | Java 21, Spring Boot 4.1, Kuromoji (IPADIC), vanilla JS, Docker, GitHub Actions, Playwright |
@@ -216,7 +216,7 @@ To add a rule: dump the tokens of its example sentences with `/api/tokens` first
 | `PatternExamplesTest` | 3,058 | Every rule's examples match it, and every counter-example doesn't |
 | `RuleRepositoryTest` | 124 | Rule loading and each fail-fast validation |
 | `MatchSpanTest` | 27 | Exact highlight spans on real sentences |
-| `PatternMatcherTest` | 68 | Optional steps, `anyOf`, gaps, longest match, overlaps, subsumption, offsets, word completion, suffixes, exclusions, `sameAsFirst`, `followedBy`, `notFollowedBy`, `notPrecededBy`, and that the candidate prefilters never change a result |
+| `PatternMatcherTest` | 73 | Optional steps, `anyOf`, gaps, longest match, overlaps, subsumption, offsets, word completion, suffixes, exclusions, `sameAsFirst`, `followedBy`, `notFollowedBy`, `notPrecededBy`, and that the candidate prefilters and subsumption index never change a result |
 | `AnalyzeControllerTest`, `TokenControllerTest`, `PatternControllerTest`, `RequestBodySizeLimitTest` | 24 | API contract, validation, limits and error format |
 | `KuromojiTokenizerTest` | 7 | Offsets cover the whole text, exact token output, thread safety |
 | `RuleConsistencyTest` | 3 | Cross-rule checks (below) |
@@ -281,15 +281,15 @@ A spot check on 120 new natural sentences and 253 plain-prose sentences found no
 
 ## Performance
 
-Measured on one laptop (Intel Core i5-12450H, 12 threads) with JDK 21, as the median of 100 runs after JVM warm-up, with other programs running. The dense input is 9,990 characters built by packing example sentences together, far denser in grammar than real prose: 6,291 tokens and 963 matches. The two prose inputs are about 9,000 characters of ordinary noun-heavy and verb-heavy text with few grammar points.
+Measured on one laptop (Intel Core i5-12450H, 12 threads) with JDK 21, as the median of 100 runs after JVM warm-up. The dense input is 9,990 characters built by packing example sentences together, far denser in grammar than real prose: 6,291 tokens and 963 matches. The two prose inputs are about 9,000 characters of ordinary noun-heavy and verb-heavy text with few grammar points.
 
 | Input | Tokenize (Kuromoji) | Match (341 rules) | Match p90 |
 |---|---|---|---|
-| Dense (9,990 chars) | 12.8 ms | 19.3 ms | 23.3 ms |
-| Noun-heavy prose (8,916 chars) | 9.7 ms | 9.8 ms | 12.5 ms |
-| Verb-heavy prose (9,260 chars) | 10.2 ms | 17.6 ms | 22.0 ms |
+| Dense (9,990 chars) | 9.4 ms | 13.2 ms | 14.7 ms |
+| Noun-heavy prose (8,916 chars) | 7.2 ms | 5.9 ms | 6.7 ms |
+| Verb-heavy prose (9,260 chars) | 6.9 ms | 11.2 ms | 12.7 ms |
 
-Without the two prefilters, the same 341 rules took about 60–64 ms per input on the same machine and load. Your numbers will vary with the machine and its load.
+Without the two prefilters, the same 341 rules took over three times as long on the same machine and load. A worst case of 10,000 characters repeating one pattern (5,000 matches) matches in about 14 ms. Your numbers will vary with the machine and its load.
 
 ## Limitations
 
