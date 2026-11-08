@@ -5,6 +5,8 @@
 [![CI](https://github.com/froxily/kaidoku/actions/workflows/ci.yml/badge.svg)](https://github.com/froxily/kaidoku/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
+**Live demo: [kaidoku.lemonrock-d6e24592.malaysiawest.azurecontainerapps.io](https://kaidoku.lemonrock-d6e24592.malaysiawest.azurecontainerapps.io/)**. It runs on Azure Container Apps and scales to zero when idle, so the first visit after a quiet spell takes about 15 seconds to wake up.
+
 Paste any Japanese text, such as a news article, a manga page, a subtitle line or an email, and Kaidoku highlights the grammar patterns it recognises. Each one is colour-coded by JLPT level (N5–N3), and clicking a highlight explains the pattern.
 
 *Kaidoku* (解読) is Japanese for "deciphering". It is a **rule-based Java 21 / Spring Boot service, not an LLM**. Kuromoji splits the text into morphemes, and a small matching engine runs 341 hand-written JSON grammar rules over the token stream. The same input always gives the same output, it works offline, and every rule is backed by tests.
