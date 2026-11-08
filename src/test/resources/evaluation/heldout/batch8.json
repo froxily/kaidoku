@@ -15,830 +15,691 @@
       "text": "読みかけの手紙を机の引き出しにしまった。",
       "expected": [
         "kakeru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "何か言いかけて、彼女は首を振りました。",
       "expected": [
         "kakeru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "食べかけの桃に小さな虫が止まっている。",
       "expected": [
         "kakeru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "水槽の魚が死にかけていたので、水を替えた。",
       "expected": [
         "kakeru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "昔の約束を忘れかけていました。",
       "expected": [
         "kakeru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "この模型はまだ作りかけだ。",
       "expected": [
         "kakeru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "スープが冷めかけていますから、先にどうぞ。",
       "expected": [
         "kakeru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "図書館で隣の席の人に話しかけられた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "祖父は窓辺の椅子に腰かけた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "母は遠くに住む弟に電話をかけた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "残っていた絵の具を全部使い切った。",
       "expected": [
         "kiru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "彼女は分厚い伝記を三日で読み切りました。",
       "expected": [
         "kiru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "こんなに大きなケーキは一人では食べきれない。",
       "expected": [
         "kiru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "引っ越しの後で疲れ切っています。",
       "expected": [
         "kiru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "夜空には数えきれないほどの星が見えた。",
       "expected": [
         "kiru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "証拠が足りないので、彼の勘違いだとは言い切れません。",
       "expected": [
         "kiru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "最後の坂を走りきると、海が見えた。",
       "expected": [
         "kiru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "祖母は庭で摘んだ花の茎を切った。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "思い切って古い友人に連絡しました。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "子どもたちは遠足の準備に張り切っている。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "犬が浅い川に飛び込んだ。",
       "expected": [
         "komu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "予定表に出発時刻を書き込みました。",
       "expected": [
         "komu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "彼は窓の外を見ながら考え込んでいる。",
       "expected": [
         "komu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "鍵をなくしたと思い込んでいたが、鞄に入っていた。",
       "expected": [
         "komu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "その質問を聞くと、父は黙り込んだ。",
       "expected": [
         "komu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "試合に負けて落ち込んでいました。",
       "expected": [
         "komu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "小さな箱に服を詰めこまないでください。",
       "expected": [
         "komu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "雨の朝はこの路線の電車が込んでいる。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "祭りの日は駅前の道が混んでいました。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "昼の食堂は思ったより混まなかった。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "宛先を間違えたので、封筒を書き直す。",
       "expected": [
         "naosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "最初から計算をやり直しました。",
       "expected": [
         "naosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "その条件について、もう一度考え直してください。",
       "expected": [
         "naosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "出発する前に持ち物を見直した。",
       "expected": [
         "naosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "説明書を読み直したら、原因が分かった。",
       "expected": [
         "naosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "彼は納得できず、文章を何度も書きなおしている。",
       "expected": [
         "naosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "時間が足りず、設計をやり直せませんでした。",
       "expected": [
         "naosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "父は止まった柱時計を直した。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "風邪を早く治すために、今夜は寝ます。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "壊れた扇風機がようやく直った。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "二人は予算について静かに話し合った。",
       "expected": [
         "au"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "近所の人たちは雪かきのときに助け合います。",
       "expected": [
         "au"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "猫と犬がしばらく見つめ合っていた。",
       "expected": [
         "au"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "分からない言葉は隣の人と教え合いましょう。",
       "expected": [
         "au"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "私たちは旅先の小さな港で知り合いました。",
       "expected": [
         "au"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "意見が違っても、互いの事情を認めあえるはずだ。",
       "expected": [
         "au"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "忙しくて、家族と十分に話し合えませんでした。",
       "expected": [
         "au"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "この帽子は私には少し大きくて、サイズが合わない。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "その青い上着はあなたによく似合います。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "雨が強くなり、最終バスに間に合わなかった。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "兄は大学時代からその人と付き合っている。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "彼女は半年かけて初めての小説を書き上げた。",
       "expected": [
         "ageru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "職人たちが木の橋を作り上げました。",
       "expected": [
         "ageru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "祖父母は五人の子どもを育て上げた。",
       "expected": [
         "ageru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "夕食が出来上がるまで、庭で遊んでいて。",
       "expected": [
         "ageru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "いい香りがして、パンが焼き上がりました。",
       "expected": [
         "ageru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "注文した背広は来週仕上がるそうです。",
       "expected": [
         "ageru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "原稿を書き上げてから、友人に感想を聞いた。",
       "expected": [
         "ageru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "締め切りまでに報告書を書き上げられませんでした。",
       "expected": [
         "ageru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "質問のある人は手を上げてください。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "弟の誕生日に古い地図をあげました。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "子どもが空の風船を見上げている。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "祖母は椅子からゆっくり立ち上がった。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "彼は難しい役目を最後までやり通した。",
       "expected": [
         "toosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "昨夜、その長い手紙を読み通しました。",
       "expected": [
         "toosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "彼女は雨の中をゴールまで走り通した。",
       "expected": [
         "toosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "祖母は家族との約束を生涯守り通した。",
       "expected": [
         "toosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "そんな大きな秘密を隠し通せないと思う。",
       "expected": [
         "toosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "反対されても、彼は自分の意見を押し通した。",
       "expected": [
         "toosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "痛みをこらえて踊り通しました。",
       "expected": [
         "toosu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "係の人は客を奥の部屋に通した。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "針の穴に赤い糸を通してください。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "霧が濃く、先の見通しが悪い。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "窓を開けっぱなしで寝たら、部屋が冷えた。",
       "expected": [
         "ppanashi"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "誰かが台所の電気をつけっぱなしにしている。",
       "expected": [
         "ppanashi"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "道具を出しっぱなしだと、足を引っかけるよ。",
       "expected": [
         "ppanashi"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "式では二時間立ちっぱなしで疲れました。",
       "expected": [
         "ppanashi"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "このチームには去年から負けっぱなしだ。",
       "expected": [
         "ppanashi"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "蛇口をひねったまま、水を流しっ放しにしないでください。",
       "expected": [
         "ppanashi"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "ドアを閉め忘れて、留守の間ずっと開けっ放しだった。",
       "expected": [
         "ppanashi"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "祖父が子どものころの話を聞かせてくれた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "かごの中の鳥を庭で放した。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "その番組は来月の初めに放送されます。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "雨だったので、一日中家で絵を描いていた。",
       "expected": [
         "chuu-juu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "この島では一年中暖かい風が吹く。",
       "expected": [
         "chuu-juu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "その写真は世界中の人々に知られている。",
       "expected": [
         "chuu-juu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "祭りの朝は町中に太鼓の音が響いた。",
       "expected": [
         "chuu-juu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "夏休み中に祖父の畑を手伝いました。",
       "expected": [
         "chuu-juu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "部長は会議中ですので、後ほどお電話ください。",
       "expected": [
         "chuu-juu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "橋は工事中のため、車では渡れません。",
       "expected": [
         "chuu-juu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "資料を今週中に送っていただけますか。",
       "expected": [
         "chuu-juu"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "箱の中に青い貝殻が一つ入っていた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "妹は来年、中学校に入学する。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "雨のため、屋外の演奏会は中止になった。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "駅へ向かう途中で財布を拾った。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "朝の台所に焼いた芋の香りが広がった。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "この布は水にぬれると色が濃くなる。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "明日は少し早めに駅へ行きます。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "庭の隅で白い花が三輪咲いていた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "叔父は古い自転車で海辺まで出かけた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "その答えを聞いて、私は安心しました。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "鍋に豆と水を入れ、弱い火で煮る。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "窓の外では雀が何羽か鳴いている。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "この坂を下ると小さな郵便局があります。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "昨夜の雨で川の水が少し増えた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "彼女は新しい靴を履いて鏡の前に立った。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "お茶が熱いので、ゆっくり飲んでください。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "弟は楽器の練習を終えると、すぐに眠った。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "遠くの山にはまだ雪が残っています。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "猫は日当たりのよい場所で丸くなった。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "この店の味噌は地元の大豆から作られる。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "私は地図を片手に細い路地を歩いた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "夕方になると、港には漁船が戻ってくる。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "彼の声はざわめきのせいでよく聞こえなかった。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "今朝は忙しくて、朝食を食べませんでした。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "木の葉が一枚、静かな池に落ちた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "この道は車が少なく、散歩に向いている。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "先生は黒板に大きな円を描きました。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "冷蔵庫には牛乳と卵が残っている。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "星が見える。風も穏やかだ。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "この短い本なら一晩で読み切れる。",
       "expected": [
         "kiru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "この量なら一人で食べきれる。",
       "expected": [
         "kiru"
-      ],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      ]
     },
     {
       "text": "係員が乗客に注意を呼びかけた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "先生は生徒に「どう思いますか」と問いかけた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "父は眼鏡をかけて新聞を読んだ。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "長い文章を三つの段落に区切った。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "用件を伝えてから電話を切った。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "彼は正直な人です。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "彼とは気が合う。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "駅前の喫茶店で待ち合わせをした。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "二人で重い箱を持ち上げた。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "弟は布団からゆっくり起き上がった。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "来月から電気料金が値上げされる。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "この通りには古い店が多い。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "地下室では携帯電話が通じない。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "引っ越しを機に古い家具を手放した。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "公園の中心に大きな池がある。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "会議の最中に急に停電した。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     },
     {
       "text": "中くらいの箱を一つください。",
-      "expected": [],
-      "reviewed": "terra-generated; sol-reviewed; claude-adjudicated"
+      "expected": []
     }
   ]
 }
