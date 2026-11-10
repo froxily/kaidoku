@@ -2,54 +2,107 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kaidoku (解読): Japanese Grammar Analysis Engine</title>
-  <meta name="description" content="Rule-based Japanese grammar analyzer that detects and explains JLPT N5–N3 grammar patterns in any text.">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kaidoku 解読 · Japanese reading companion</title>
+  <meta name="description" content="Break down Japanese grammar in any text, and learn the N5–N3 kanji and vocabulary you need to read it.">
+  <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111217" media="(prefers-color-scheme: dark)">
+  <script src="/js/theme.js"></script>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <script type="module" src="/js/shell.js"></script>
 </head>
-<body>
-  <header>
-    <h1>Kaidoku <span lang="ja">解読</span></h1>
-    <p>Japanese Grammar Analysis Engine. Paste Japanese text to highlight the grammar patterns in it, colour-coded by JLPT level.</p>
+<body data-section="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/"><span class="brand-mark" lang="ja" aria-hidden="true">解</span><span>Kaidoku</span></a>
+      <nav class="primary-nav" aria-label="Main">
+        <a href="/grammar" data-nav="grammar">Grammar</a>
+        <a href="/kanji" data-nav="kanji">Kanji</a>
+        <a href="/vocab" data-nav="vocab">Vocabulary</a>
+      </nav>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle data-mode="system" aria-label="Theme: match system">
+        <svg class="icon icon-system" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"/></svg>
+        <svg class="icon icon-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+        <svg class="icon icon-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <section class="input" aria-label="Input">
-      <label for="text">Japanese text</label>
-      <textarea id="text" rows="6" lang="ja" placeholder="例：日本に来たばかりの頃は、漢字が読めなくて困っていた。"></textarea>
-      <div class="controls">
-        <button id="analyze" type="button">Analyze</button>
-        <button id="sample" type="button" class="secondary">Load example</button>
-        <span id="count" class="count"></span>
-        <fieldset id="levels">
-          <legend>Show</legend>
-          <label><input type="checkbox" value="N5" checked> <span class="badge N5">N5</span></label>
-          <label><input type="checkbox" value="N4" checked> <span class="badge N4">N4</span></label>
-          <label><input type="checkbox" value="N3" checked> <span class="badge N3">N3</span></label>
-        </fieldset>
-        <label class="toggle"><input type="checkbox" id="outermost"> Hide nested patterns</label>
-      </div>
-      <p id="error" class="error" role="alert" hidden></p>
+  <main id="main" tabindex="-1">
+    <section class="wrap hero" aria-labelledby="hero-title">
+      <p class="eyebrow">Japanese reading companion · JLPT N5–N3</p>
+      <h1 id="hero-title">Read Japanese with the structure in plain sight.</h1>
+      <p class="lede">Kaidoku <span lang="ja">解読</span> breaks down the grammar in any text you paste, and teaches the kanji and vocabulary you need to read it on your own.</p>
     </section>
 
-    <div class="results">
-      <section aria-label="Highlighted text">
-        <div id="output" class="output" lang="ja"><span class="placeholder">Highlighted text appears here. Click a highlight to see what it means.</span></div>
-      </section>
-      <aside>
-        <section id="card" class="card" aria-live="polite" hidden></section>
-        <section class="found">
-          <h2 id="found-title">Patterns found</h2>
-          <ul id="found"></ul>
-        </section>
-      </aside>
-    </div>
+    <section class="wrap modules" aria-label="Choose what to study">
+      <a class="module-card" href="/grammar" data-module="grammar">
+        <div class="module-visual visual-grammar" aria-hidden="true">
+          <p lang="ja">日本に来<mark class="lvl-N3">たばかり</mark>だが、漢字が読める<mark class="lvl-N4">ようになった</mark>。</p>
+        </div>
+        <div class="module-body">
+          <p class="module-index">01</p>
+          <h2>Grammar Pattern Breakdown</h2>
+          <p>Paste any Japanese text. 341 rules highlight every pattern they recognise, colour-coded by level, each with a short explanation.</p>
+          <ul class="module-meta" aria-label="Contents">
+            <li>341 patterns</li><li>Any text</li><li>No sign-up</li>
+          </ul>
+          <span class="module-cta">Analyze text <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a class="module-card" href="/kanji" data-module="kanji">
+        <div class="module-visual visual-kanji" aria-hidden="true">
+          <span class="glyph" lang="ja">日</span>
+          <dl lang="ja">
+            <div><dt>音</dt><dd>ニチ · ジツ</dd></div>
+            <div><dt>訓</dt><dd>ひ · か</dd></div>
+          </dl>
+        </div>
+        <div class="module-body">
+          <p class="module-index">02</p>
+          <h2>Kanji Learning</h2>
+          <p>640 kanji in short lessons, most common first, with readings, meanings, stroke counts and the words that use each one.</p>
+          <ul class="module-meta" aria-label="Contents">
+            <li>640 kanji</li><li>Lessons</li><li>Searchable library</li>
+          </ul>
+          <span class="module-cta">Study kanji <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a class="module-card" href="/vocab" data-module="vocab">
+        <div class="module-visual visual-vocab" aria-hidden="true">
+          <ruby lang="ja">会う<rt>あう</rt></ruby>
+          <p>to meet</p>
+        </div>
+        <div class="module-body">
+          <p class="module-index">03</p>
+          <h2>Vocabulary Learning</h2>
+          <p>2,963 words in lessons grouped by word class (verbs, adjectives, nouns and more), with readings, meanings and their kanji.</p>
+          <ul class="module-meta" aria-label="Contents">
+            <li>2,963 words</li><li>Lessons</li><li>Searchable library</li>
+          </ul>
+          <span class="module-cta">Study vocabulary <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </section>
   </main>
 
-  <footer>
-    <p>JLPT levels are approximate. The JLPT has not published official grammar lists since 2010, so levels follow commonly used N5–N3 study lists.</p>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>JLPT levels are approximate. The JLPT publishes no official grammar, kanji or vocabulary lists, so levels follow community study lists.</p>
+      <p>Contains data from <a href="https://github.com/evanclan/OpenJLPT">OpenJLPT</a> (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>), which uses JMdict and KANJIDIC2 (EDRDG), Jonathan Waller's JLPT lists, and Tatoeba. <a href="/learning/OpenJLPT-NOTICE.txt">Data notice</a> · <a href="https://github.com/froxily/kaidoku">Source code (MIT)</a></p>
+    </div>
   </footer>
 
-  <script src="app.js"></script>
+  <nav class="tabbar" aria-label="Main">
+    <a href="/" data-nav="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1H15v-6H9v6H4.5a1 1 0 0 1-1-1z"/></svg>Home</a>
+    <a href="/grammar" data-nav="grammar"><span class="tab-glyph" lang="ja" aria-hidden="true">文</span>Grammar</a>
+    <a href="/kanji" data-nav="kanji"><span class="tab-glyph" lang="ja" aria-hidden="true">字</span>Kanji</a>
+    <a href="/vocab" data-nav="vocab"><span class="tab-glyph" lang="ja" aria-hidden="true">語</span>Words</a>
+  </nav>
 </body>
 </html>

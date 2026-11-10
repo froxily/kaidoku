@@ -38,3 +38,7 @@ CLAUDE.md
 CLAUDE.local.md
 HANDOFF.md
 docs-local/
+
+### Local agent instructions and session handoffs ###
+AGENTS.md
+SESSION_*_HANDOFF.md

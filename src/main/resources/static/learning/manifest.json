@@ -1,0 +1,53 @@
+{
+  "artifacts": {
+    "OpenJLPT-LICENSE.txt": {
+      "bytes": 20138,
+      "sha256": "28a9529c7d0bb4dc51f4bf5c116a3d16ef247a052f7591466768ddf563fd1cf5"
+    },
+    "OpenJLPT-NOTICE.txt": {
+      "bytes": 3456,
+      "sha256": "a2e6f45517bb1a1c047628991832244916888a4ced3aa26adeafb89705588557"
+    },
+    "kanji.json": {
+      "bytes": 555853,
+      "sha256": "b096e7700865bf7f3d180182da594e2ee2d19412128dd6295ec0408b67a231ae"
+    },
+    "links.json": {
+      "bytes": 952173,
+      "sha256": "a81141f0a1cbeafb82c5161ce031a259f9eaae22757d58805f913a770f71933e"
+    },
+    "questions.json": {
+      "bytes": 1787043,
+      "sha256": "d2992ee2b6efa000832e9af48ac36a9f6eb431f4bc62838576a83b355173d49f"
+    },
+    "vocab.json": {
+      "bytes": 1091006,
+      "sha256": "1600b4e62b1cfe941e86f5be113c7788f86b1ba7bd7576bce4cc7d1e2dcc33cd"
+    }
+  },
+  "attribution": "Contains data from OpenJLPT (CC BY-SA 4.0), which uses JMdict and KANJIDIC2 (EDRDG), Jonathan Waller's JLPT lists, and Tatoeba.",
+  "counts": {
+    "kanji": 640,
+    "question_types": {
+      "kanji_on_reading": 632,
+      "vocab_reading": 2294
+    },
+    "questions": 2926,
+    "vocab": 2963
+  },
+  "dataset_version": "5e55150ef8c2657d1ecf6dd54e66e7eb17c5de0615607127e9968f0f80fe407b",
+  "grammar_included": false,
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "policy": "conservative-reading-practice-v1",
+  "schema_version": "2.0.0",
+  "scope": "kanji_vocabulary_source_checked_reading_practice",
+  "source_audit_status": "FAIL",
+  "source_license": "CC BY-SA 4.0",
+  "source_revision": "0d1d3410bec90bd4098a7c72de820543cb4f707c",
+  "status": "PASS",
+  "withheld": [
+    "all vocabulary example sentences pending bilingual review",
+    "all meaning MCQs pending semantic review",
+    "ambiguous reading MCQs"
+  ]
+}

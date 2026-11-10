@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Grammar Pattern Breakdown · Kaidoku 解読</title>
+  <meta name="description" content="Rule-based Japanese grammar analyzer that detects and explains JLPT N5–N3 grammar patterns in any text.">
+  <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111217" media="(prefers-color-scheme: dark)">
+  <script src="/js/theme.js"></script>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/grammar.css">
+  <script type="module" src="/js/shell.js"></script>
+</head>
+<body data-section="grammar">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/"><span class="brand-mark" lang="ja" aria-hidden="true">解</span><span>Kaidoku</span></a>
+      <nav class="primary-nav" aria-label="Main">
+        <a href="/grammar" data-nav="grammar">Grammar</a>
+        <a href="/kanji" data-nav="kanji">Kanji</a>
+        <a href="/vocab" data-nav="vocab">Vocabulary</a>
+      </nav>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle data-mode="system" aria-label="Theme: match system">
+        <svg class="icon icon-system" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"/></svg>
+        <svg class="icon icon-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+        <svg class="icon icon-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" tabindex="-1">
+    <div class="page-head">
+      <p class="eyebrow">Module 01</p>
+      <h1>Grammar Pattern Breakdown</h1>
+      <p>Paste Japanese text to highlight the grammar patterns in it, colour-coded by JLPT level. Select a highlight to see what it means.</p>
+    </div>
+
+    <section class="input panel" aria-label="Input">
+      <label for="text">Japanese text</label>
+      <textarea id="text" rows="6" lang="ja" placeholder="例：日本に来たばかりの頃は、漢字が読めなくて困っていた。"></textarea>
+      <div class="controls">
+        <button id="analyze" type="button" class="btn">Analyze</button>
+        <button id="sample" type="button" class="btn btn-secondary">Load example</button>
+        <span id="count" class="count"></span>
+        <fieldset id="levels">
+          <legend>Show</legend>
+          <label><input type="checkbox" value="N5" checked> <span class="badge N5">N5</span></label>
+          <label><input type="checkbox" value="N4" checked> <span class="badge N4">N4</span></label>
+          <label><input type="checkbox" value="N3" checked> <span class="badge N3">N3</span></label>
+        </fieldset>
+        <label class="toggle"><input type="checkbox" id="outermost"> Hide nested patterns</label>
+      </div>
+      <p id="error" class="error" role="alert" hidden></p>
+    </section>
+
+    <div class="results">
+      <section aria-label="Highlighted text">
+        <div id="output" class="output" lang="ja"><span class="placeholder" lang="en">Highlighted text appears here. Select a highlight to see what it means.</span></div>
+      </section>
+      <aside>
+        <section id="card" class="card" aria-live="polite" hidden></section>
+        <section class="found">
+          <h2 id="found-title">Patterns found</h2>
+          <ul id="found"></ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>JLPT levels are approximate. The JLPT has not published official grammar lists since 2010, so levels follow commonly used N5–N3 study lists.</p>
+      <p><a href="https://github.com/froxily/kaidoku">Source code (MIT)</a></p>
+    </div>
+  </footer>
+
+  <nav class="tabbar" aria-label="Main">
+    <a href="/" data-nav="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1H15v-6H9v6H4.5a1 1 0 0 1-1-1z"/></svg>Home</a>
+    <a href="/grammar" data-nav="grammar"><span class="tab-glyph" lang="ja" aria-hidden="true">文</span>Grammar</a>
+    <a href="/kanji" data-nav="kanji"><span class="tab-glyph" lang="ja" aria-hidden="true">字</span>Kanji</a>
+    <a href="/vocab" data-nav="vocab"><span class="tab-glyph" lang="ja" aria-hidden="true">語</span>Words</a>
+  </nav>
+
+  <script src="/js/grammar.js"></script>
+</body>
+</html>

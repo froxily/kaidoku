@@ -57,6 +57,8 @@ class PatternControllerTest {
     @Test
     void servesStaticPage() {
         assertThat(mvc.get().uri("/index.html")).hasStatusOk().bodyText().contains("Kaidoku");
-        assertThat(List.of("/app.js", "/style.css")).allSatisfy(path -> assertThat(mvc.get().uri(path)).hasStatusOk());
+        assertThat(mvc.get().uri("/grammar.html")).hasStatusOk().bodyText().contains("id=\"analyze\"");
+        assertThat(List.of("/js/grammar.js", "/css/grammar.css", "/learn.html", "/js/learn/main.js", "/css/tokens.css"))
+                .allSatisfy(path -> assertThat(mvc.get().uri(path)).hasStatusOk());
     }
 }

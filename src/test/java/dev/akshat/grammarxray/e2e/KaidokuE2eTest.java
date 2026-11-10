@@ -59,7 +59,7 @@ class KaidokuE2eTest {
     void openPage() {
         context = browser.newContext();
         page = context.newPage();
-        page.navigate("http://localhost:" + port);
+        page.navigate("http://localhost:" + port + "/grammar");
     }
 
     @AfterEach

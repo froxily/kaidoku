@@ -1,0 +1,88 @@
+:root {
+  color-scheme: light dark;
+
+  --bg: light-dark(#f6f4ef, #111217);
+  --surface: light-dark(#ffffff, #191b22);
+  --surface-2: light-dark(#f1eee7, #20232c);
+  --surface-3: light-dark(#e9e5dc, #292d38);
+  --ink: light-dark(#1b1c21, #edece8);
+  --ink-2: light-dark(#474a53, #c0c0c7);
+  --ink-3: light-dark(#62656f, #9d9ea8);
+  --line: light-dark(#e2ddd3, #2b2e38);
+  --line-strong: light-dark(#cbc4b6, #3d4150);
+  --accent: light-dark(#2e3d8f, #a7b4ff);
+  --accent-hover: light-dark(#24317a, #c2cbff);
+  --accent-ink: light-dark(#ffffff, #10131c);
+  --accent-soft: light-dark(#e7eaf7, #232a4a);
+  --vermilion: light-dark(#b23a1f, #ff9c80);
+  --error: light-dark(#b3261e, #ff8a80);
+  --error-soft: light-dark(#fbe9e7, #3a1f1d);
+
+  --n5: light-dark(#2d6f3b, #85d197);
+  --n4: light-dark(#2853ad, #97b6ff);
+  --n3: light-dark(#a84c0d, #f5ab6e);
+  --n5-bg: light-dark(#dcefdf, #1f3626);
+  --n4-bg: light-dark(#dde7f8, #1f2c47);
+  --n3-bg: light-dark(#fbe3cf, #432d1b);
+  --badge-fg: light-dark(#ffffff, #111217);
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Yu Gothic UI", "Meiryo", "Noto Sans JP", sans-serif;
+  --font-jp: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", "Noto Sans JP", "Noto Sans CJK JP", sans-serif;
+  --font-display: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", "Noto Serif CJK JP", serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+
+  --text-xs: .75rem;
+  --text-sm: .875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: clamp(1.5rem, 1.3rem + .8vw, 1.875rem);
+  --text-2xl: clamp(1.875rem, 1.5rem + 1.6vw, 2.75rem);
+  --text-glyph: clamp(4.5rem, 3.5rem + 5vw, 7.5rem);
+  --leading-tight: 1.25;
+  --leading: 1.6;
+  --leading-jp: 1.9;
+
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.5rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+  --gutter: clamp(1rem, .6rem + 1.6vw, 2rem);
+  --content-max: 1160px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px light-dark(rgb(27 28 33 / .06), rgb(0 0 0 / .4));
+  --shadow-md: 0 1px 2px light-dark(rgb(27 28 33 / .05), rgb(0 0 0 / .35)), 0 8px 24px -12px light-dark(rgb(27 28 33 / .18), rgb(0 0 0 / .6));
+  --shadow-lg: 0 2px 4px light-dark(rgb(27 28 33 / .05), rgb(0 0 0 / .35)), 0 24px 48px -24px light-dark(rgb(27 28 33 / .28), rgb(0 0 0 / .7));
+
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+
+  --header-h: 60px;
+  --tabbar-h: 64px;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur: 0ms;
+  }
+}

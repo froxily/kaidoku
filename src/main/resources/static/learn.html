@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kaidoku 解読</title>
+  <meta name="description" content="Learn the JLPT N5–N3 kanji and vocabulary with lessons and a searchable library.">
+  <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111217" media="(prefers-color-scheme: dark)">
+  <script src="/js/theme.js"></script>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/learn.css">
+  <link rel="modulepreload" href="/js/learn/data.js">
+  <link rel="modulepreload" href="/js/learn/views.js">
+  <script type="module" src="/js/shell.js"></script>
+  <script type="module" src="/js/learn/main.js"></script>
+</head>
+<body data-section="learn">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/"><span class="brand-mark" lang="ja" aria-hidden="true">解</span><span>Kaidoku</span></a>
+      <nav class="primary-nav" aria-label="Main">
+        <a href="/grammar" data-nav="grammar">Grammar</a>
+        <a href="/kanji" data-nav="kanji">Kanji</a>
+        <a href="/vocab" data-nav="vocab">Vocabulary</a>
+      </nav>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle data-mode="system" aria-label="Theme: match system">
+        <svg class="icon icon-system" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"/></svg>
+        <svg class="icon icon-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+        <svg class="icon icon-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" tabindex="-1">
+    <div id="view" class="view">
+      <div class="view-loading" aria-hidden="true">
+        <div class="skeleton sk-title"></div>
+        <div class="skeleton sk-line"></div>
+        <div class="skeleton sk-block"></div>
+      </div>
+    </div>
+    <noscript><p class="notice">The learning modules need JavaScript.</p></noscript>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>The JLPT does not publish official vocabulary or kanji lists. Level assignments are community estimates based on Jonathan Waller's lists and are not an official guarantee.</p>
+      <p>Contains data from <a href="https://github.com/evanclan/OpenJLPT">OpenJLPT</a> (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>), which uses JMdict and KANJIDIC2 (EDRDG), Jonathan Waller's JLPT lists, and Tatoeba. Readings and meanings are as given by these sources and have not been independently edited. <a href="/learning/OpenJLPT-NOTICE.txt">Data notice</a> · <a href="https://github.com/froxily/kaidoku">Source code (MIT)</a></p>
+    </div>
+  </footer>
+
+  <nav class="tabbar" aria-label="Main">
+    <a href="/" data-nav="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1H15v-6H9v6H4.5a1 1 0 0 1-1-1z"/></svg>Home</a>
+    <a href="/grammar" data-nav="grammar"><span class="tab-glyph" lang="ja" aria-hidden="true">文</span>Grammar</a>
+    <a href="/kanji" data-nav="kanji"><span class="tab-glyph" lang="ja" aria-hidden="true">字</span>Kanji</a>
+    <a href="/vocab" data-nav="vocab"><span class="tab-glyph" lang="ja" aria-hidden="true">語</span>Words</a>
+  </nav>
+</body>
+</html>
