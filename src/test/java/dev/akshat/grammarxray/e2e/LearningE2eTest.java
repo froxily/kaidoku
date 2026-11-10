@@ -102,9 +102,9 @@ class LearningE2eTest {
     void walksThroughTheFirstKanjiLesson() {
         open("/kanji");
         page.locator(".lesson-card").first().click();
-        assertThat(page.locator("h1")).hasText("Kanji lesson 1");
+        assertThat(page.locator("h1")).hasText("Kanji set 1");
 
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Start lesson")).click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Study cards")).click();
         assertThat(page.locator(".study .glyph-title")).hasText("日");
         assertThat(page).hasURL(Pattern.compile(".*/kanji/lesson/kanji-n5-1\\?card=1$"));
 
@@ -118,11 +118,11 @@ class LearningE2eTest {
 
     @Test
     void finishesALessonAndOffersTheNextOne() {
-        open("/vocab/lesson/vocab-n5-1?card=12");
+        open("/vocab/lesson/vocab-n5-1?card=15");
         page.locator("[data-role='next']").click();
 
-        assertThat(page.locator("h1")).hasText("Lesson complete");
-        assertThat(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Next lesson")))
+        assertThat(page.locator("h1")).hasText("Cards complete");
+        assertThat(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Next set")))
                 .hasAttribute("href", "/vocab/lesson/vocab-n5-2");
     }
 
@@ -136,6 +136,44 @@ class LearningE2eTest {
         assertThat(page.locator("h1.word-title")).containsText("食");
         assertThat(page.locator(".meanings li").first()).hasText("to eat");
         assertThat(page).hasURL(Pattern.compile(".*/vocab/[0-9a-f]{10}$"));
+    }
+
+    @Test
+    void convertsRomajiToKana() {
+        open("/kanji/library");
+
+        Object converted = page.evaluate("""
+                async () => {
+                  const { romajiToKana } = await import('/js/learn/romaji.js');
+                  return ['nichi', 'toukyou', 'tōkyō', 'shinbun', 'shimbun', "kon'ya", 'konya',
+                    'kitte', 'matcha', 'jisho', 'fuji', 'hello world', '123', 'kyou', 'zasshi']
+                    .map(romajiToKana);
+                }
+                """);
+        org.assertj.core.api.Assertions.assertThat(converted).isEqualTo(java.util.Arrays.asList(
+                "にち", "とうきょう", "とうきょう", "しんぶん", "しんぶん", "こんや", "こにゃ",
+                "きって", "まっちゃ", "じしょ", "ふじ", null, null, "きょう", "ざっし"));
+    }
+
+    @Test
+    void searchesKanjiByRomaji() {
+        open("/kanji/library");
+        page.locator("#library-search").fill("nichi");
+        assertThat(page.locator(".tile-glyph").first()).hasText("日");
+
+        page.locator("#library-search").fill("mizu");
+        assertThat(page.locator(".tile-glyph").filter(new com.microsoft.playwright.Locator.FilterOptions()
+                .setHasText(Pattern.compile("^水$")))).isVisible();
+    }
+
+    @Test
+    void searchesVocabularyByMacronRomaji() {
+        open("/vocab/library");
+        page.locator("#library-search").fill("benkyō");
+        assertThat(page.locator(".word-row .word-text").first()).containsText("勉強");
+
+        page.locator("#library-search").fill("ōkii");
+        assertThat(page.locator(".word-row .word-text").first()).hasText("大きい");
     }
 
     @Test

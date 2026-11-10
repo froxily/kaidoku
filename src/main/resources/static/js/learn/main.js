@@ -1,6 +1,7 @@
 import { markNav } from '../shell.js';
 import { KINDS } from './data.js';
 import { errorView, homeView, kanjiDetailView, lessonView, libraryView, notFoundView, vocabDetailView } from './views.js';
+import { quizView } from './quiz-view.js';
 
 const view = document.getElementById('view');
 const main = document.getElementById('main');
@@ -17,7 +18,10 @@ function route(url) {
   } catch {
     return { render: notFoundView, kind: 'kanji' };
   }
-  const [kind, section, id] = parts;
+  const [kind, section, id, mode] = parts;
+  if (section === 'quiz' && KINDS.includes(kind) && parts.length === 4) {
+    return { render: quizView, kind, params: { scope: id, mode } };
+  }
   if (!KINDS.includes(kind) || parts.length > 3) {
     return { render: notFoundView, kind: KINDS.includes(kind) ? kind : 'kanji' };
   }
@@ -65,7 +69,7 @@ async function render() {
   window.scrollTo({ top: history.state?.scroll ?? 0 });
   if (!initial) {
     const keep = focusHref && view.querySelector(`a[href="${CSS.escape(focusHref)}"]`);
-    (keep || view.querySelector('h1') || main).focus({ preventScroll: true });
+    (keep || view.querySelector('[data-autofocus]') || view.querySelector('h1') || main).focus({ preventScroll: true });
   }
   initial = false;
   focusHref = null;

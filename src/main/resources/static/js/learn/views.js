@@ -1,12 +1,13 @@
 import { badge, h, icon, ICONS, jp } from './dom.js';
 import { dataset, LEVELS, lessons, links, search, toHiragana } from './data.js';
 import { count, isKanaOnly, itemNoun, kindName, posLabels } from './format.js';
+import { QUIZ_SIZE, readingQuestions } from './quiz.js';
 
 const PAGE = 60;
 const LESSON_WORDS = 4;
 const DESCRIPTIONS = {
-  kanji: 'Short lessons ordered from the most common kanji, with readings, meanings and the words that use each one.',
-  vocab: 'Lessons grouped by word class, with readings, meanings and the kanji inside each word.'
+  kanji: 'Study sets of ten, starting from the most common kanji. Learn with cards, then test readings and meanings.',
+  vocab: 'Study sets of about fifteen words per level. Learn with cards, then test readings and meanings.'
 };
 
 function storedLevel(kind) {
@@ -39,11 +40,11 @@ function pageHead(eyebrow, title, description, ...extra) {
 
 function subnav(kind, active) {
   return h('nav', { class: 'segmented subnav', 'aria-label': `${kindName(kind)} sections` },
-      h('a', { href: `/${kind}`, 'aria-current': active === 'lessons' ? 'page' : null, text: 'Lessons' }),
+      h('a', { href: `/${kind}`, 'aria-current': active === 'lessons' ? 'page' : null, text: 'Study sets' }),
       h('a', { href: `/${kind}/library`, 'aria-current': active === 'library' ? 'page' : null, text: 'Library' }));
 }
 
-function crumb(href, text) {
+export function crumb(href, text) {
   return h('a', { class: 'crumb', href }, icon(ICONS.back), text);
 }
 
@@ -74,7 +75,7 @@ function kanjiInWord(word, kanji, link) {
       .filter(item => item && !seen.has(item.id) && seen.add(item.id));
 }
 
-function wordTitle(word, tag = 'h1') {
+export function wordTitle(word, tag = 'h1') {
   const props = { lang: 'ja', class: 'word-title', tabindex: '-1' };
   if (word.word === word.reading || isKanaOnly(word.word)) {
     return h(tag, { ...props, text: word.word });
@@ -104,7 +105,7 @@ function chips(values, className = 'chip') {
   return h('ul', { class: 'chips' }, values.map(value => h('li', { class: className, text: value })));
 }
 
-function readingRows(item) {
+export function readingRows(item) {
   return h('dl', { class: 'readings' },
       h('div', {}, h('dt', { lang: 'ja', title: "On'yomi", text: '音' }),
           h('dd', { lang: 'ja', text: item.onyomi_display.join('、') || '—' })),
@@ -170,9 +171,7 @@ function lessonCard(kind, lesson, data) {
       ? jp('span', items.map(item => item.character).join(''), { class: 'lesson-glyphs' })
       : jp('span', items.slice(0, 5).map(item => item.word).join('・') + (items.length > 5 ? '…' : ''), { class: 'lesson-words' });
   return h('li', {}, h('a', { class: 'lesson-card', href: `/${kind}/lesson/${lesson.id}` },
-      h('span', { class: 'lesson-title' },
-          kind === 'vocab' ? h('span', { class: 'lesson-number', text: String(lesson.number).padStart(2, '0') }) : null,
-          lesson.title),
+      h('span', { class: 'lesson-title', text: lesson.title }),
       preview,
       h('span', { class: 'lesson-count', text: itemNoun(kind, items.length) })));
 }
@@ -184,29 +183,27 @@ export async function homeView({ kind, query }) {
   const levelLessons = plan.byLevel.get(level);
   const total = levelLessons.reduce((sum, lesson) => sum + lesson.itemIds.length, 0);
 
-  let body;
-  if (kind === 'kanji') {
-    body = h('ol', { class: 'lesson-grid' }, levelLessons.map(lesson => lessonCard(kind, lesson, data)));
-  } else {
-    const groups = new Map();
-    levelLessons.forEach(lesson => groups.set(lesson.category, [...(groups.get(lesson.category) ?? []), lesson]));
-    body = h('div', { class: 'lesson-groups' }, [...groups.values()].map(group => {
-      const words = group.reduce((sum, lesson) => sum + lesson.itemIds.length, 0);
-      const title = group[0].title.replace(/\s\d+$/, '');
-      return h('section', { class: 'lesson-group', 'aria-label': title },
-          h('div', { class: 'group-head' }, h('h2', { text: title }), h('p', { text: `${count(group.length, 'lesson')} · ${itemNoun(kind, words)}` })),
-          h('ol', { class: 'lesson-grid' }, group.map(lesson => lessonCard(kind, lesson, data))));
-    }));
-  }
+  const scope = level.toLowerCase();
+  const levelQuiz = h('section', { class: 'level-quiz', 'aria-labelledby': 'level-quiz-title' },
+      h('div', {},
+          h('h2', { id: 'level-quiz-title', text: `Quiz the whole of ${level}` }),
+          h('p', { class: 'muted', text: `${QUIZ_SIZE} random items from all ${itemNoun(kind, total)}.` })),
+      h('div', { class: 'level-quiz-actions' },
+          h('a', { class: 'btn btn-secondary', href: `/${kind}/quiz/${scope}/reading` }, 'Reading quiz'),
+          h('a', { class: 'btn btn-secondary', href: `/${kind}/quiz/${scope}/meaning` }, 'Meaning check')));
+  const body = h('div', {},
+      levelQuiz,
+      h('h2', { class: 'sets-title', text: `${level} study sets` }),
+      h('ol', { class: 'lesson-grid' }, levelLessons.map(lesson => lessonCard(kind, lesson, data))));
 
   return {
-    title: `${kindName(kind)} lessons`,
+    title: `${kindName(kind)} study sets`,
     node: h('div', {},
         pageHead(kind === 'kanji' ? 'Module 02' : 'Module 03', `${kindName(kind)} Learning`, DESCRIPTIONS[kind],
             subnav(kind, 'lessons')),
         h('div', { class: 'toolbar' },
             levelTabs(kind, level),
-            h('p', { class: 'toolbar-note', text: `${itemNoun(kind, total)} · ${count(levelLessons.length, 'lesson')}` })),
+            h('p', { class: 'toolbar-note', text: `${itemNoun(kind, total)} · ${count(levelLessons.length, 'set')}` })),
         body)
   };
 }
@@ -222,7 +219,7 @@ export async function libraryView({ kind, query, signal }) {
   const input = h('input', {
     type: 'search', id: 'library-search', class: 'search-input', value: text, autocomplete: 'off',
     spellcheck: 'false', enterkeyhint: 'search',
-    placeholder: kind === 'kanji' ? 'Kanji, reading or meaning' : 'Word, reading, romaji or meaning'
+    placeholder: kind === 'kanji' ? 'Kanji, reading (kana or romaji) or meaning' : 'Word, reading, romaji or meaning'
   });
   const status = h('p', { class: 'result-count', role: 'status' });
   const results = h('ul', { class: kind === 'kanji' ? 'kanji-grid' : 'word-list' });
@@ -400,11 +397,14 @@ export async function lessonView({ kind, params, query, signal }) {
     return notFoundView({ kind });
   }
   const items = lesson.itemIds.map(id => data.byId.get(id));
+  const questionCount = (await readingQuestions(kind, items)).size;
   const siblings = plan.byLevel.get(lesson.level);
   const index = siblings.indexOf(lesson);
   const nextLesson = siblings[index + 1];
-  const label = kind === 'kanji' ? `Kanji ${lesson.title.toLowerCase()}` : lesson.title;
+  const label = `${kind === 'kanji' ? 'Kanji' : 'Vocabulary'} ${lesson.title.toLowerCase()}`;
   const lessonsHref = `/${kind}?level=${lesson.level}`;
+  const quizHref = mode => `/${kind}/quiz/${lesson.id}/${mode}`;
+  const without = items.length - questionCount;
   const card = query.get('card');
   const requested = Number.parseInt(card ?? '', 10);
   let step = card === 'done' ? items.length
@@ -439,18 +439,38 @@ export async function lessonView({ kind, params, query, signal }) {
     return kind === 'kanji' ? item.character : item.word;
   }
 
+  function activities() {
+    return h('ul', { class: 'activities' },
+        h('li', {}, h('button', { type: 'button', class: 'activity', on: { click: () => go(0) } },
+            h('span', { class: 'activity-name', text: 'Study cards' }),
+            h('span', { class: 'activity-note', text: `Go through ${itemNoun(kind, items.length)} at your own pace` }),
+            icon(ICONS.arrow))),
+        h('li', {}, questionCount
+            ? h('a', { class: 'activity', href: quizHref('reading') },
+                h('span', { class: 'activity-name', text: 'Reading quiz' }),
+                h('span', { class: 'activity-note', text: `${count(questionCount, 'question')}, multiple choice` }),
+                icon(ICONS.arrow))
+            : h('div', { class: 'activity is-disabled' },
+                h('span', { class: 'activity-name', text: 'Reading quiz' }),
+                h('span', { class: 'activity-note', text: 'No approved reading questions in this set' }))),
+        h('li', {}, h('a', { class: 'activity', href: quizHref('meaning') },
+            h('span', { class: 'activity-name', text: 'Meaning check' }),
+            h('span', { class: 'activity-note', text: `Recall each meaning, then mark what you knew` }),
+            icon(ICONS.arrow))));
+  }
+
   function intro() {
     return h('div', { class: 'lesson-intro' },
-        crumb(lessonsHref, `${lesson.level} lessons`),
+        crumb(lessonsHref, `${lesson.level} study sets`),
         h('div', { class: 'page-head' },
-            h('p', { class: 'eyebrow', text: `${lesson.level} · Lesson ${index + 1} of ${siblings.length}` }),
+            h('p', { class: 'eyebrow', text: `${lesson.level} · Set ${index + 1} of ${siblings.length}` }),
             heading(label),
-            h('p', { text: `${itemNoun(kind, items.length)} to study. Go through them one at a time, at your own pace.` })),
+            h('p', { text: without
+                ? `${itemNoun(kind, items.length)}. ${itemNoun(kind, without)} ${without === 1 ? 'has' : 'have'} no approved reading question (${kind === 'vocab' ? 'kana-only or more than one accepted reading' : 'not covered by the release'}), so ${without === 1 ? 'it appears' : 'they appear'} only in the cards and meaning check.`
+                : `${itemNoun(kind, items.length)}.` })),
         h('ul', { class: kind === 'kanji' ? 'preview-glyphs' : 'chips preview-words', lang: 'ja' },
             items.map(item => h('li', { class: kind === 'kanji' ? null : 'chip', text: itemLabel(item) }))),
-        h('div', { class: 'lesson-actions' },
-            h('button', { type: 'button', class: 'btn', on: { click: () => go(0) } }, 'Start lesson', icon(ICONS.arrow)),
-            h('a', { class: 'btn btn-quiet', href: lessonsHref, text: 'All lessons' })));
+        activities());
   }
 
   function studyCard() {
@@ -472,7 +492,7 @@ export async function lessonView({ kind, params, query, signal }) {
     const fill = h('span', {});
     fill.style.width = `${((step + 1) / items.length) * 100}%`;
     return h('div', {
-      class: 'progress', role: 'progressbar', 'aria-label': 'Lesson progress',
+      class: 'progress', role: 'progressbar', 'aria-label': 'Card progress',
       'aria-valuemin': '0', 'aria-valuemax': String(items.length), 'aria-valuenow': String(step + 1)
     }, fill);
   }
@@ -481,16 +501,17 @@ export async function lessonView({ kind, params, query, signal }) {
     return h('div', { class: 'lesson-done' },
         h('div', { class: 'done-mark', 'aria-hidden': 'true' }, icon(ICONS.check)),
         h('div', { class: 'page-head centered' },
-            h('p', { class: 'eyebrow', text: `${lesson.level} · Lesson ${index + 1} of ${siblings.length}` }),
-            heading('Lesson complete'),
-            h('p', { text: `You went through ${itemNoun(kind, items.length)}.` })),
+            h('p', { class: 'eyebrow', text: `${lesson.level} · Set ${index + 1} of ${siblings.length}` }),
+            heading('Cards complete'),
+            h('p', { text: `You went through ${itemNoun(kind, items.length)}. Test yourself next.` })),
         h('ul', { class: kind === 'kanji' ? 'preview-glyphs' : 'chips preview-words' },
             items.map(item => h('li', { class: kind === 'kanji' ? null : 'chip' },
                 h('a', { href: kind === 'kanji' ? `/kanji/${encodeURIComponent(item.id)}` : `/vocab/${item.id}`, lang: 'ja', text: itemLabel(item) })))),
         h('div', { class: 'lesson-actions centered' },
-            nextLesson ? h('a', { class: 'btn', href: `/${kind}/lesson/${nextLesson.id}` }, 'Next lesson', icon(ICONS.arrow)) : null,
+            questionCount ? h('a', { class: 'btn', href: quizHref('reading') }, 'Reading quiz', icon(ICONS.arrow)) : null,
+            h('a', { class: `btn ${questionCount ? 'btn-secondary' : ''}`, href: quizHref('meaning') }, 'Meaning check'),
             h('button', { type: 'button', class: 'btn btn-secondary', on: { click: () => go(0) } }, icon(ICONS.replay), 'Study again'),
-            h('a', { class: 'btn btn-quiet', href: lessonsHref, text: 'All lessons' })));
+            nextLesson ? h('a', { class: 'btn btn-quiet', href: `/${kind}/lesson/${nextLesson.id}` }, 'Next set', icon(ICONS.next)) : null));
   }
 
   function render() {
@@ -512,7 +533,7 @@ export async function lessonView({ kind, params, query, signal }) {
   }, { signal });
   render();
 
-  return { title: `${label} · ${lesson.level} ${kindName(kind)}`, node: root };
+  return { title: `${label} · ${lesson.level}`, node: root };
 }
 
 export function notFoundView({ kind }) {

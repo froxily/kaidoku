@@ -41,11 +41,18 @@ class LearningControllerTest {
     }
 
     @Test
-    void listsVocabLessonsWithCategories() {
+    void listsVocabLessonsAcrossLevels() {
         var json = assertThat(mvc.get().uri("/api/learning/vocab/lessons")).hasStatusOk().bodyJson();
 
-        json.extractingPath("$[0].category").isEqualTo("verbs");
         json.extractingPath("$[*].level").asArray().contains("N5", "N4", "N3");
+    }
+
+    @Test
+    void listsVocabSetsForOneLevel() {
+        var json = assertThat(mvc.get().uri("/api/learning/vocab/lessons?level=N5")).hasStatusOk().bodyJson();
+
+        json.extractingPath("$[*].level").asArray().containsOnly("N5");
+        json.extractingPath("$[0].title").isEqualTo("Set 1");
     }
 
     @Test

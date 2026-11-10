@@ -17,6 +17,8 @@
   --vermilion: light-dark(#b23a1f, #ff9c80);
   --error: light-dark(#b3261e, #ff8a80);
   --error-soft: light-dark(#fbe9e7, #3a1f1d);
+  --success: light-dark(#1d6b39, #7ed99a);
+  --success-soft: light-dark(#e4f3e8, #17301f);
 
   --n5: light-dark(#2d6f3b, #85d197);
   --n4: light-dark(#2853ad, #97b6ff);

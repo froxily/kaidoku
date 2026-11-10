@@ -198,6 +198,7 @@ public final class LearningCatalog {
     private static void validateQuestions(QuestionDocument document, Map<String, Kanji> kanji, Map<String, Vocab> vocab) {
         require(document.questions() != null && !document.questions().isEmpty(), "questions.json: no questions");
         index("questions.json", document.questions(), Question::id);
+        Map<String, Set<String>> readingsByForm = vocabReadingsByForm(vocab.values());
         Map<String, Integer> counts = new HashMap<>();
         for (Question question : document.questions()) {
             String where = "questions.json " + question.id();
@@ -212,9 +213,74 @@ public final class LearningCatalog {
             boolean sourceKnown = question.type().equals("vocab_reading")
                     ? vocab.containsKey(question.sourceId()) : kanji.containsKey(question.sourceId());
             require(sourceKnown, where + ": unknown source " + question.sourceId());
+            if (question.type().equals("vocab_reading")) {
+                Vocab source = vocab.get(question.sourceId());
+                require(Map.of("word", source.word()).equals(question.prompt()), where + ": prompt does not match source word");
+                Set<String> readings = readingsByForm.get(source.word());
+                require(readings.contains(normalizeVocabReading(question.answer())), where + ": answer is not a reading");
+                for (int i = 0; i < options.size(); i++) {
+                    if (i != question.answerIndex()) {
+                        require(!readings.contains(normalizeVocabReading(options.get(i))),
+                                where + ": ambiguous option " + options.get(i));
+                    }
+                }
+            } else {
+                Kanji source = kanji.get(question.sourceId());
+                require(Map.of("character", source.character()).equals(question.prompt()),
+                        where + ": prompt does not match source character");
+                Set<String> onReadings = source.onyomi().stream().map(LearningCatalog::normalizeKanjiReading)
+                        .collect(Collectors.toSet());
+                require(onReadings.contains(normalizeKanjiReading(question.answer())), where + ": answer is not an on-reading");
+                Set<String> allReadings = new HashSet<>(onReadings);
+                source.kunyomi().stream().map(LearningCatalog::normalizeKanjiReading).forEach(allReadings::add);
+                for (int i = 0; i < options.size(); i++) {
+                    if (i != question.answerIndex()) {
+                        require(!allReadings.contains(normalizeKanjiReading(options.get(i))),
+                                where + ": ambiguous option " + options.get(i));
+                    }
+                }
+            }
             counts.merge(question.type(), 1, Integer::sum);
         }
         require(counts.equals(document.counts()), "questions.json: counts " + counts + " differ from declared " + document.counts());
+    }
+
+    private static Map<String, Set<String>> vocabReadingsByForm(Collection<Vocab> vocab) {
+        Map<String, Set<String>> readingsByForm = new HashMap<>();
+        for (Vocab word : vocab) {
+            Set<String> readings = new HashSet<>();
+            readings.add(normalizeVocabReading(word.reading()));
+            if (word.otherReadings() != null) {
+                word.otherReadings().stream().map(LearningCatalog::normalizeVocabReading).forEach(readings::add);
+            }
+            readingsByForm.computeIfAbsent(word.word(), key -> new HashSet<>()).addAll(readings);
+            if (word.otherForms() != null) {
+                for (String form : word.otherForms()) {
+                    readingsByForm.computeIfAbsent(form, key -> new HashSet<>()).addAll(readings);
+                }
+            }
+        }
+        return readingsByForm;
+    }
+
+    private static String normalizeVocabReading(String reading) {
+        return convertKana(reading, 0x30a1, 0x30f6, -0x60);
+    }
+
+    private static String normalizeKanjiReading(String reading) {
+        int dot = reading.indexOf('.');
+        String base = dot < 0 ? reading : reading.substring(0, dot);
+        return convertKana(base.replace("-", ""), 0x3041, 0x3096, 0x60);
+    }
+
+    private static String convertKana(String reading, int first, int last, int offset) {
+        StringBuilder converted = new StringBuilder(reading.length());
+        for (int i = 0; i < reading.length();) {
+            int codePoint = reading.codePointAt(i);
+            converted.appendCodePoint(codePoint >= first && codePoint <= last ? codePoint + offset : codePoint);
+            i += Character.charCount(codePoint);
+        }
+        return converted.toString();
     }
 
     private static void requireNoExamples(String file, Map<String, Object> metadata) {

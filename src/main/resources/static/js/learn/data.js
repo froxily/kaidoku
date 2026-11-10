@@ -1,3 +1,5 @@
+import { romajiVariants } from './romaji.js';
+
 export const LEVELS = ['N5', 'N4', 'N3'];
 export const KINDS = ['kanji', 'vocab'];
 
@@ -60,7 +62,7 @@ export async function lessons(kind) {
   return { list, byId: new Map(list.map(lesson => [lesson.id, lesson])), byLevel };
 }
 
-function score(item, query) {
+function scoreKeys(item, query) {
   let best = Infinity;
   for (const key of item.keys) {
     if (key === query) {
@@ -72,6 +74,11 @@ function score(item, query) {
       best = Math.min(best, 4);
     }
   }
+  return best;
+}
+
+function score(item, query, kanaQueries) {
+  let best = Math.min(scoreKeys(item, query), ...kanaQueries.map(kana => scoreKeys(item, kana)));
   for (const gloss of item.glosses) {
     if (gloss === query || gloss === `to ${query}`) {
       best = Math.min(best, 1);
@@ -93,8 +100,9 @@ export function search(items, rawQuery, level) {
   if (!query) {
     return pool;
   }
+  const kanaQueries = /^[a-zāīūēōâîûêô'\s-]+$/.test(query) ? romajiVariants(rawQuery) : [];
   return pool
-      .map(item => ({ item, score: score(item, query) }))
+      .map(item => ({ item, score: score(item, query, kanaQueries) }))
       .filter(result => result.score !== Infinity)
       .sort((a, b) => a.score - b.score
           || LEVELS.indexOf(a.item.level) - LEVELS.indexOf(b.item.level)

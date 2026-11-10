@@ -63,13 +63,16 @@ class LearningCatalogTest {
     @ParameterizedTest
     @EnumSource(LearningKind.class)
     void lessonsAreNumberedPerLevelAndStayWithinTheTargetSize(LearningKind kind) {
-        int target = kind == LearningKind.KANJI ? LessonPlanner.KANJI_LESSON_SIZE : LessonPlanner.VOCAB_LESSON_SIZE;
+        int target = kind == LearningKind.KANJI ? LessonPlanner.KANJI_SET_SIZE : LessonPlanner.VOCAB_SET_SIZE;
         for (Level level : List.of(Level.N5, Level.N4, Level.N3)) {
             List<Lesson> lessons = catalog.lessons(kind, level);
             assertThat(lessons).isNotEmpty().allMatch(lesson -> lesson.level() == level && lesson.kind() == kind);
             assertThat(lessons).extracting(Lesson::number)
                     .containsExactlyElementsOf(IntStream.rangeClosed(1, lessons.size()).boxed().toList());
-            assertThat(lessons).allSatisfy(lesson -> assertThat(lesson.itemIds()).hasSizeBetween(target / 2, target));
+            assertThat(lessons).allSatisfy(lesson -> {
+                assertThat(lesson.title()).isEqualTo("Set " + lesson.number());
+                assertThat(lesson.itemIds()).hasSizeBetween(target / 2, target);
+            });
         }
     }
 
@@ -82,15 +85,21 @@ class LearningCatalogTest {
     }
 
     @Test
-    void vocabLessonsAreGroupedByWordClass() {
+    void vocabSetsKeepSourceOrder() {
+        Lesson first = catalog.lessons(LearningKind.VOCAB, Level.N5).getFirst();
+
+        assertThat(first.itemIds()).startsWith("ada066edfd");
+    }
+
+    @Test
+    void vocabSetsUseBalancedTargetSizes() {
         List<Lesson> lessons = catalog.lessons(LearningKind.VOCAB, Level.N5);
 
-        assertThat(lessons.getFirst().category()).isEqualTo("verbs");
-        assertThat(lessons.getFirst().title()).isEqualTo("Verbs 1");
-        assertThat(lessons.getFirst().itemIds()).contains("ada066edfd");
-        assertThat(lessons).extracting(Lesson::category).isSortedAccordingTo((a, b) ->
-                LessonPlanner.Category.valueOf(a.toUpperCase().replace('-', '_'))
-                        .compareTo(LessonPlanner.Category.valueOf(b.toUpperCase().replace('-', '_'))));
+        assertThat(lessons).hasSize(45);
+        assertThat(lessons.getFirst().id()).isEqualTo("vocab-n5-1");
+        assertThat(lessons.getFirst().title()).isEqualTo("Set 1");
+        assertThat(lessons.getFirst().itemIds()).hasSize(15);
+        assertThat(lessons).extracting(lesson -> lesson.itemIds().size()).containsOnly(14, 15);
     }
 
     @Test
@@ -101,16 +110,6 @@ class LearningCatalogTest {
         assertThat(LessonPlanner.balancedChunks(items.subList(0, 20), 10)).extracting(List::size).containsExactly(10, 10);
         assertThat(LessonPlanner.balancedChunks(items.subList(0, 1), 10)).extracting(List::size).containsExactly(1);
         assertThat(LessonPlanner.balancedChunks(List.of(), 10)).isEmpty();
-    }
-
-    @Test
-    void wordClassFollowsThePartOfSpeechTags() {
-        assertThat(LessonPlanner.Category.of(List.of("v5u", "vi"))).isEqualTo(LessonPlanner.Category.VERBS);
-        assertThat(LessonPlanner.Category.of(List.of("n", "vs", "vt"))).isEqualTo(LessonPlanner.Category.NOUNS);
-        assertThat(LessonPlanner.Category.of(List.of("adj-i"))).isEqualTo(LessonPlanner.Category.I_ADJECTIVES);
-        assertThat(LessonPlanner.Category.of(List.of("adj-na", "n"))).isEqualTo(LessonPlanner.Category.NA_ADJECTIVES);
-        assertThat(LessonPlanner.Category.of(List.of("adv", "adv-to"))).isEqualTo(LessonPlanner.Category.ADVERBS);
-        assertThat(LessonPlanner.Category.of(List.of("exp"))).isEqualTo(LessonPlanner.Category.EXPRESSIONS);
     }
 
     @Test
@@ -138,9 +137,9 @@ class LearningCatalogTest {
         Map<String, byte[]> bytes = new HashMap<>();
         fixture().forEach((name, json) -> bytes.put(name, json.getBytes(StandardCharsets.UTF_8)));
 
-        assertThatThrownBy(() -> LearningCatalog.parse(bytes, "test", Map.of("kanji", 640, "vocab", 1, "questions", 1)))
+        assertThatThrownBy(() -> LearningCatalog.parse(bytes, "test", Map.of("kanji", 640, "vocab", 1, "questions", 2)))
                 .isInstanceOf(InvalidLearningDataException.class).hasMessageContaining("counts differ");
-        assertThatCode(() -> LearningCatalog.parse(bytes, "test", Map.of("kanji", 1, "vocab", 1, "questions", 1)))
+        assertThatCode(() -> LearningCatalog.parse(bytes, "test", Map.of("kanji", 1, "vocab", 1, "questions", 2)))
                 .doesNotThrowAnyException();
     }
 
@@ -152,6 +151,80 @@ class LearningCatalogTest {
     @Test
     void rejectsAnswerIndexThatDoesNotPointAtTheAnswer() {
         assertRejected(questions(json -> json.replace("\"answer_index\":0", "\"answer_index\":1")), "answer_index");
+    }
+
+    @Test
+    void rejectsKanjiKunReadingAsDistractor() {
+        assertRejected(questions(json -> json.replace("\"ゴ\"", "\"ヒ\"")), "q1: ambiguous option");
+    }
+
+    @Test
+    void rejectsVocabHomographReadingAsDistractor() {
+        Map<String, String> files = vocab(json -> json
+                .replace("\"N5\":1", "\"N5\":2")
+                .replace("\"total\":1", "\"total\":2")
+                .replace("\"jmdict_id\":1}", """
+                        "jmdict_id":1},{"id":"v2","word":"日","reading":"か",\
+                        "reading_hiragana":"か","reading_katakana":"カ","romaji":"ka","meanings":["day"],\
+                        "pos":["n"],"level":"N5","jmdict_id":2}"""));
+        files.computeIfPresent("links.json", (name, json) -> json
+                .replace("\"vocab_to_kanji\":{", "\"vocab_to_kanji\":{\"v2\":[{\"kanji\":\"日\",\"positions\":[0]}],")
+                .replace("\"kanji_to_vocab\":{\"日\":[", """
+                        "kanji_to_vocab":{"日":[{"vocab_id":"v2","relation":"headword","source_form":"日","positions":[0]},"""));
+
+        assertRejected(files, "q2: ambiguous option");
+
+        files.computeIfPresent("vocab.json", (name, json) -> json.replace("\"id\":\"v2\",\"word\":\"日\"",
+                "\"id\":\"v2\",\"word\":\"か\",\"other_forms\":[\"日\"]"));
+        files.computeIfPresent("links.json", (name, json) -> json
+                .replace("\"v2\":[{\"kanji\":\"日\",\"positions\":[0]}]", "\"v2\":[]")
+                .replace("\"vocab_id\":\"v2\",\"relation\":\"headword\"", "\"vocab_id\":\"v2\",\"relation\":\"other_form\""));
+
+        assertRejected(files, "q2: ambiguous option");
+    }
+
+    @Test
+    void rejectsVocabAnswerThatIsNotAReading() {
+        assertRejected(questions(json -> json
+                .replace("\"options\":[\"ひ\",\"か\"]", "\"options\":[\"ご\",\"か\"]")
+                .replace("\"answer\":\"ひ\"", "\"answer\":\"ご\"")), "q2: answer is not a reading");
+    }
+
+    @Test
+    void rejectsKanjiAnswerThatIsNotAnOnReading() {
+        assertRejected(questions(json -> json.replace("\"ニチ\"", "\"ヒ\"")), "q1: answer is not an on-reading");
+    }
+
+    @Test
+    void rejectsQuestionPromptsThatDoNotExactlyMatchTheirSource() {
+        assertRejected(questions(json -> json.replace("\"prompt\":{\"word\":\"日\"}",
+                "\"prompt\":{\"word\":\"月\"}")), "q2: prompt");
+        assertRejected(questions(json -> json.replace("\"prompt\":{\"word\":\"日\"}",
+                "\"prompt\":{\"word\":\"日\",\"reading\":\"ひ\"}")), "q2: prompt");
+        assertRejected(questions(json -> json.replace("\"prompt\":{\"character\":\"日\"}",
+                "\"prompt\":{\"character\":\"月\"}")), "q1: prompt");
+        assertRejected(questions(json -> json.replace("\"prompt\":{\"character\":\"日\"}",
+                "\"prompt\":{\"character\":\"日\",\"reading\":\"ニチ\"}")), "q1: prompt");
+    }
+
+    @Test
+    void acceptsVocabAnswerInKatakana() {
+        assertThatCode(() -> parse(questions(json -> json.replace("\"ひ\"", "\"ヒ\""))))
+                .doesNotThrowAnyException();
+    }
+
+    @Test
+    void rejectsAlternativeVocabReadingAsDistractor() {
+        assertRejected(vocab(json -> json.replace("\"jmdict_id\":1", "\"jmdict_id\":1,\"other_readings\":[\"カ\"]")),
+                "q2: ambiguous option");
+    }
+
+    @Test
+    void normalizesKanjiReadingPrefixesAndOkurigana() {
+        assertThatCode(() -> parse(kanji(json -> json.replace("\"onyomi\":[\"ニチ\"]", "\"onyomi\":[\"-にち.び\"]"))))
+                .doesNotThrowAnyException();
+        assertRejected(kanji(json -> json.replace("\"kunyomi\":[\"ひ\"]", "\"kunyomi\":[\"-ご.す\"]")),
+                "q1: ambiguous option");
     }
 
     @Test
@@ -284,10 +357,14 @@ class LearningCatalogTest {
                 "kanji_to_vocab":{"日":[{"vocab_id":"v1","relation":"headword","source_form":"日","positions":[0]}]},\
                 "kanji_external_words":{"日":[{"word":"日没","level":"N1"}]},"orphan_kanji":[]}""");
         files.put("questions.json", """
-                {"schema_version":"2.0.0","source_revision":"r","policy":"p","counts":{"kanji_on_reading":1},\
+                {"schema_version":"2.0.0","source_revision":"r","policy":"p","counts":{"kanji_on_reading":1,"vocab_reading":1},\
                 "questions":[{"id":"q1","type":"kanji_on_reading","level":"N5","instruction":"i",\
-                "prompt":{"character":"日"},"options":["ニチ","ヒ"],"answer_index":0,"answer":"ニチ",\
-                "distractors":["ヒ"],"source_id":"日","verified":true,\
+                "prompt":{"character":"日"},"options":["ニチ","ゴ"],"answer_index":0,"answer":"ニチ",\
+                "distractors":["ゴ"],"source_id":"日","verified":true,\
+                "verification":"single_answer_against_all_pinned_source_readings"},\
+                {"id":"q2","type":"vocab_reading","level":"N5","instruction":"i",\
+                "prompt":{"word":"日"},"options":["ひ","か"],"answer_index":0,"answer":"ひ",\
+                "distractors":["か"],"source_id":"v1","verified":true,\
                 "verification":"single_answer_against_all_pinned_source_readings"}]}""");
         return files;
     }
