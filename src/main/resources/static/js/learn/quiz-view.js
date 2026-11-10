@@ -372,6 +372,7 @@ function runQuiz({ kind, mode, scope, pool, total, signal, scopeId }) {
             h('h1', { tabindex: '-1', text: 'Results' })),
         h('div', { class: 'panel score-panel' },
             h('p', { class: 'score' }, h('strong', { text: String(totals.correct) }), ` / ${totals.total}`),
+            scoreBar(totals.percent),
             h('p', { class: 'score-note', text: `${totals.percent}% right${missed.length ? ` · ${missed.length} to review` : ' · nothing to review'}` }),
             h('p', { class: 'muted', text: missed.length
                 ? 'Missed items come back for review in about ten minutes; the rest are scheduled further out.'
@@ -393,6 +394,12 @@ function runQuiz({ kind, mode, scope, pool, total, signal, scopeId }) {
         h('details', { class: 'detail-section all-results' },
             h('summary', { text: `All ${round.results.length} answers` }),
             h('ul', { class: 'result-list' }, round.results.map(resultRow))));
+  }
+
+  function scoreBar(percent) {
+    const fill = h('span', {});
+    fill.style.width = `${percent}%`;
+    return h('div', { class: 'score-bar', 'aria-hidden': 'true' }, fill);
   }
 
   function emptyState() {

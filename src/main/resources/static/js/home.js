@@ -1,5 +1,9 @@
+import { INTRO } from './intro-config.js';
+import { playIntro } from './intro.js';
 import { isDue } from './learn/srs.js';
 import { progressStore } from './learn/store.js';
+
+playIntro(INTRO);
 
 const store = await progressStore();
 const now = Date.now();

@@ -42,3 +42,5 @@ docs-local/
 ### Local agent instructions and session handoffs ###
 AGENTS.md
 SESSION_*_HANDOFF.md
+*_ROADMAP.md
+*_FINAL_HANDOFF.md

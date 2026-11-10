@@ -31,6 +31,7 @@
   --font-sans: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Yu Gothic UI", "Meiryo", "Noto Sans JP", sans-serif;
   --font-jp: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", "Noto Sans JP", "Noto Sans CJK JP", sans-serif;
   --font-display: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", "Noto Serif CJK JP", serif;
+  --font-heading: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", Georgia, serif;
   --font-mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
 
   --text-xs: .75rem;
@@ -66,6 +67,7 @@
   --shadow-md: 0 1px 2px light-dark(rgb(27 28 33 / .05), rgb(0 0 0 / .35)), 0 8px 24px -12px light-dark(rgb(27 28 33 / .18), rgb(0 0 0 / .6));
   --shadow-lg: 0 2px 4px light-dark(rgb(27 28 33 / .05), rgb(0 0 0 / .35)), 0 24px 48px -24px light-dark(rgb(27 28 33 / .28), rgb(0 0 0 / .7));
 
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
   --dur-fast: 120ms;
   --dur: 200ms;
   --ease: cubic-bezier(.2, .7, .2, 1);

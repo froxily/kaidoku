@@ -16,11 +16,37 @@ body {
   color: var(--ink);
   font: var(--text-base)/var(--leading) var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
 }
 
 :lang(ja) {
   font-family: var(--font-jp);
   line-height: var(--leading-jp);
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  font-feature-settings: "palt" 0;
+}
+
+ruby {
+  ruby-align: center;
+  ruby-position: over;
+}
+
+rt {
+  font-family: var(--font-jp);
+  font-size: .5em;
+  font-weight: 500;
+  letter-spacing: .04em;
+  line-height: 1.2;
+  user-select: none;
 }
 
 h1, h2, h3, p, ul, ol, dl, dd, figure {
@@ -31,6 +57,12 @@ h1, h2, h3 {
   line-height: var(--leading-tight);
   letter-spacing: -.01em;
   text-wrap: balance;
+}
+
+h1:not(:lang(ja)) {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -.015em;
 }
 
 p {
@@ -52,8 +84,15 @@ button, input, select, textarea {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid transparent;
   outline-offset: 2px;
+  box-shadow: var(--focus-ring);
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline-color: Highlight;
+  }
 }
 
 [hidden] {
@@ -318,7 +357,17 @@ main:focus {
 
 .page-head h1 {
   font-size: var(--text-2xl);
-  font-weight: 700;
+}
+
+.view > * {
+  animation: view-in var(--dur) var(--ease) both;
+}
+
+@keyframes view-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
 }
 
 .page-head p {
@@ -404,7 +453,7 @@ main:focus {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .skeleton {
+  .skeleton, .view > * {
     animation: none;
   }
 }

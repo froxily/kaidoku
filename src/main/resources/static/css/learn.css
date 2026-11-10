@@ -808,3 +808,54 @@
     font-size: 2rem;
   }
 }
+
+.hero-glyph, .study-kanji .study-glyph {
+  position: relative;
+}
+
+.detail-hero:not(.word-hero) .hero-glyph::before, .study-kanji .study-glyph::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: min(74%, 13.5rem);
+  aspect-ratio: 1;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(var(--line-strong), var(--line-strong)) center / 1px 100% no-repeat,
+    linear-gradient(var(--line-strong), var(--line-strong)) center / 100% 1px no-repeat;
+  opacity: .55;
+  pointer-events: none;
+}
+
+.hero-glyph .glyph-title, .study-kanji .glyph-title {
+  position: relative;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.status-grid > * {
+  margin: 0;
+}
+
+@media (max-width: 859px) {
+  .status-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 719px) {
+  .detail-hero:not(.word-hero) .hero-glyph, .study-kanji .study-glyph {
+    min-height: 12rem;
+  }
+
+  .detail-hero:not(.word-hero) .hero-glyph::before, .study-kanji .study-glyph::before {
+    width: 9.5rem;
+  }
+}

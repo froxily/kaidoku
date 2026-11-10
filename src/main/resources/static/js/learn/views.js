@@ -224,7 +224,7 @@ function reviewPanel(kind, level, progress, data, readingIds, now) {
           : 'Take a reading quiz or meaning check. Everything you answer is scheduled here for review.';
   return h('section', { class: 'review-panel', 'aria-labelledby': 'review-title' },
       h('div', {},
-          h('h2', { id: 'review-title', text: 'Review' }),
+          h('h2', { id: 'review-title', class: 'card-kicker', text: 'Review' }),
           h('p', { class: 'muted', role: 'status', text })),
       h('div', { class: 'level-quiz-actions' },
           here.length ? h('a', { class: 'btn', href: `/${kind}/review?level=${level}` }, `Review ${level} (${here.length})`) : null,
@@ -292,7 +292,8 @@ export async function homeView({ kind, query }) {
   const levelItems = data.items.filter(item => item.level === level).map(item => ({ id: item.id, hasReading: readingIds.has(item.id) }));
   const reading = trackProgress(progress, kind, levelItems, 'reading');
   const meaning = trackProgress(progress, kind, levelItems, 'meaning');
-  const levelProgress = h('section', { class: 'level-progress', 'aria-label': `${level} progress` },
+  const levelProgress = h('section', { class: 'level-progress', 'aria-labelledby': 'level-progress-title' },
+      h('h2', { id: 'level-progress-title', class: 'card-kicker', text: `${level} progress` }),
       h('div', { class: 'progress-row' },
           h('span', { class: 'progress-label', text: 'Reading' }),
           meter(reading.learned, reading.total, `${level} reading: ${reading.learned} of ${reading.total} learned`),
@@ -313,8 +314,7 @@ export async function homeView({ kind, query }) {
           h('a', { class: 'btn btn-secondary', href: `/${kind}/quiz/${scope}/meaning` }, 'Meaning check')));
   const body = h('div', {},
       ...storageNotices(progress.store, version.changed),
-      reviewPanel(kind, level, progress, data, readingIds, now),
-      levelProgress,
+      h('div', { class: 'status-grid' }, reviewPanel(kind, level, progress, data, readingIds, now), levelProgress),
       levelQuiz,
       h('h2', { class: 'sets-title', text: `${level} study sets` }),
       h('ol', { class: 'lesson-grid' }, levelLessons.map(lesson => lessonCard(kind, lesson, data, progress, readingIds))),

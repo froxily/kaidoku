@@ -307,12 +307,27 @@
 
 .score strong {
   color: var(--ink);
-  font-size: clamp(2.5rem, 2rem + 2vw, 3.5rem);
-  font-weight: 700;
+  font: 600 clamp(2.75rem, 2.1rem + 2.4vw, 4rem)/1 var(--font-heading);
+  letter-spacing: -.02em;
 }
 
 .score-note {
   color: var(--ink-2);
+}
+
+.score-bar {
+  width: min(100%, 22rem);
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--surface-3);
+}
+
+.score-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--success);
 }
 
 .score-panel .lesson-actions {
@@ -425,16 +440,26 @@
 
 .review-panel {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: var(--space-3) var(--space-5);
-  margin-bottom: var(--space-4);
-  padding: var(--space-4) var(--space-5);
-  border: 1px solid var(--line-strong);
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--surface);
   box-shadow: var(--shadow-sm);
+}
+
+.review-panel .muted {
+  font-size: var(--text-base);
+}
+
+.card-kicker {
+  color: var(--ink-3);
+  font: 600 var(--text-xs)/1.4 var(--font-sans);
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }
 
 .review-panel h2 {
@@ -443,9 +468,21 @@
 
 .level-progress {
   display: grid;
-  gap: var(--space-2);
-  margin-bottom: var(--space-5);
-  padding: 0 var(--space-1);
+  align-content: start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.level-progress h2 {
+  font-size: var(--text-md);
+}
+
+.progress-help {
+  font-size: var(--text-xs);
 }
 
 .progress-row {
