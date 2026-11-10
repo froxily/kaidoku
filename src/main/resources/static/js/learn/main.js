@@ -1,7 +1,7 @@
 import { markNav } from '../shell.js';
 import { KINDS } from './data.js';
 import { errorView, homeView, kanjiDetailView, lessonView, libraryView, notFoundView, vocabDetailView } from './views.js';
-import { quizView } from './quiz-view.js';
+import { quizView, reviewView } from './quiz-view.js';
 
 const view = document.getElementById('view');
 const main = document.getElementById('main');
@@ -27,6 +27,9 @@ function route(url) {
   }
   if (!section) {
     return { render: homeView, kind };
+  }
+  if (section === 'review' && parts.length === 2) {
+    return { render: reviewView, kind };
   }
   if (section === 'library' && parts.length === 2) {
     return { render: libraryView, kind };
@@ -67,9 +70,12 @@ async function render() {
   }
   view.removeAttribute('aria-busy');
   window.scrollTo({ top: history.state?.scroll ?? 0 });
+  const auto = view.querySelector('[data-autofocus]');
   if (!initial) {
     const keep = focusHref && view.querySelector(`a[href="${CSS.escape(focusHref)}"]`);
-    (keep || view.querySelector('[data-autofocus]') || view.querySelector('h1') || main).focus({ preventScroll: true });
+    (keep || auto || view.querySelector('h1') || main).focus({ preventScroll: true });
+  } else if (auto && matchMedia('(hover: hover)').matches) {
+    auto.focus({ preventScroll: true });
   }
   initial = false;
   focusHref = null;

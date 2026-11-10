@@ -387,6 +387,165 @@
   cursor: pointer;
 }
 
+.meter {
+  display: block;
+  height: 4px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--surface-3);
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--success);
+}
+
+.lesson-card .meter {
+  margin-top: var(--space-1);
+}
+
+.set-flag {
+  display: inline-grid;
+  place-items: center;
+  margin-left: auto;
+  color: var(--success);
+}
+
+.set-flag svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.review-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+  margin-bottom: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.review-panel h2 {
+  font-size: var(--text-md);
+}
+
+.level-progress {
+  display: grid;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+  padding: 0 var(--space-1);
+}
+
+.progress-row {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.progress-label {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.progress-value {
+  color: var(--ink-3);
+  font: 600 var(--text-xs)/1 var(--font-mono);
+}
+
+.set-progress {
+  max-width: 28rem;
+  margin-top: var(--space-5);
+}
+
+.notice {
+  margin-bottom: var(--space-3);
+}
+
+.data-panel {
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+}
+
+.data-status {
+  min-height: 1.5em;
+  margin-top: var(--space-3);
+}
+
+.recall {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.recall-label {
+  font-weight: 650;
+}
+
+.recall-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  font-size: var(--text-md);
+}
+
+.recall-input:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.recall-input[aria-invalid="true"] {
+  border-color: var(--error);
+}
+
+.recall-error {
+  color: var(--error);
+  font-size: var(--text-sm);
+}
+
+.recall-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.your-recall {
+  color: var(--ink-2);
+}
+
+.your-recall q {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.review-empty {
+  padding-top: var(--space-10);
+}
+
+.module-due {
+  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: 650;
+}
+
 @media (max-width: 719px) {
   .options {
     grid-template-columns: minmax(0, 1fr);
@@ -416,5 +575,13 @@
   .result-row .result-mark {
     grid-column: 2;
     grid-row: 1 / span 2;
+  }
+
+  .progress-row {
+    grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+  }
+
+  .recall-actions .btn {
+    flex: 1;
   }
 }

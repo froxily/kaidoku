@@ -147,18 +147,21 @@ class QuizE2eTest {
         int total = Integer.parseInt(page.locator(".lesson-counter").textContent().split("/")[1].trim());
         assertThat(page.locator(".feedback")).hasCount(0);
 
-        page.keyboard().press("Space");
+        page.locator("#recall").fill("to meet");
+        page.keyboard().press("Enter");
         assertThat(page.locator(".feedback .summary-meaning")).isVisible();
         assertThat(page.locator(".option")).hasCount(0);
         page.keyboard().press("2");
         for (int i = 1; i < total; i++) {
-            page.locator("[data-role='reveal']").click();
+            page.locator("#recall").fill("my guess");
+            page.locator("[data-role='check']").click();
             page.locator("[data-role='known']").click();
         }
 
         assertThat(page.locator(".score")).hasText((total - 1) + " / " + total);
-        assertThat(page.locator("#missed-title")).hasText("Still to learn");
+        assertThat(page.locator("#missed-title")).hasText("Mistakes to review");
         assertThat(page.locator("section:has(#missed-title) .result-row")).hasCount(1);
+        assertThat(page.locator("section:has(#missed-title) .result-row q")).hasText("to meet");
     }
 
     @Test

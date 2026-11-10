@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/quiz.css">
   <script type="module" src="/js/shell.js"></script>
+  <script type="module" src="/js/home.js"></script>
 </head>
 <body data-section="home">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -69,6 +71,7 @@
           <ul class="module-meta" aria-label="Contents">
             <li>640 kanji</li><li>Lessons</li><li>Searchable library</li>
           </ul>
+          <p class="module-due" data-due="kanji" hidden></p>
           <span class="module-cta">Study kanji <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
@@ -85,6 +88,7 @@
           <ul class="module-meta" aria-label="Contents">
             <li>2,963 words</li><li>Lessons</li><li>Searchable library</li>
           </ul>
+          <p class="module-due" data-due="vocab" hidden></p>
           <span class="module-cta">Study vocabulary <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>

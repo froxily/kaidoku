@@ -2,6 +2,9 @@ import { badge, h, icon, ICONS, jp } from './dom.js';
 import { dataset, LEVELS, lessons, links, search, toHiragana } from './data.js';
 import { count, isKanaOnly, itemNoun, kindName, posLabels } from './format.js';
 import { QUIZ_SIZE, readingQuestions } from './quiz.js';
+import { checkContentVersion, describeWhen, dueEntries, itemTracks, learnedCount, loadProgress, MASTERY_LABELS, nextDue, trackRecord } from './progress.js';
+import { mastery } from './srs.js';
+import { progressStore } from './store.js';
 
 const PAGE = 60;
 const LESSON_WORDS = 4;
@@ -165,23 +168,140 @@ function levelTabs(kind, level) {
       LEVELS.map(each => h('a', { href: `/${kind}?level=${each}`, 'aria-current': each === level ? 'true' : null, text: each })));
 }
 
-function lessonCard(kind, lesson, data) {
+function meter(learned, total, label) {
+  const fill = h('span', {});
+  fill.style.width = `${total ? (learned / total) * 100 : 0}%`;
+  return h('span', {
+    class: 'meter', role: 'meter', 'aria-label': label,
+    'aria-valuemin': '0', 'aria-valuemax': String(total), 'aria-valuenow': String(learned)
+  }, fill);
+}
+
+function lessonCard(kind, lesson, data, progress, readingIds) {
   const items = lesson.itemIds.map(id => data.byId.get(id));
   const preview = kind === 'kanji'
       ? jp('span', items.map(item => item.character).join(''), { class: 'lesson-glyphs' })
       : jp('span', items.slice(0, 5).map(item => item.word).join('・') + (items.length > 5 ? '…' : ''), { class: 'lesson-words' });
+  const { learned, total } = learnedCount(progress, kind, lesson.itemIds, readingIds);
+  const set = progress.sets.get(lesson.id);
+  const started = learned > 0 || set;
   return h('li', {}, h('a', { class: 'lesson-card', href: `/${kind}/lesson/${lesson.id}` },
-      h('span', { class: 'lesson-title', text: lesson.title }),
+      h('span', { class: 'lesson-title' }, lesson.title,
+          set?.cardsCompletedAt ? h('span', { class: 'set-flag', title: 'Cards studied' }, icon(ICONS.check), h('span', { class: 'visually-hidden', text: ' (cards studied)' })) : null),
       preview,
-      h('span', { class: 'lesson-count', text: itemNoun(kind, items.length) })));
+      h('span', { class: 'lesson-count', text: started ? `${learned} of ${total} learned · ${itemNoun(kind, items.length)}` : itemNoun(kind, items.length) }),
+      meter(learned, total, `${lesson.title}: ${learned} of ${total} learned`)));
+}
+
+function storageNotices(store, versionChanged) {
+  return [
+    store.persistent ? null : h('p', { class: 'notice error', role: 'status',
+      text: 'Progress can’t be saved in this browser (storage is blocked or unavailable, for example in a private window). You can still study, but answers are kept only until you close this tab.' }),
+    store.skipped ? h('p', { class: 'notice', role: 'status',
+      text: 'Some saved progress could not be read and was ignored. The rest of your progress is intact.' }) : null,
+    versionChanged ? h('p', { class: 'notice', role: 'status',
+      text: 'The study content was updated. Your progress is kept; entries that no longer exist are hidden.' }) : null
+  ];
+}
+
+function trackProgress(progress, kind, items, track) {
+  const relevant = items.filter(item => track === 'meaning' || item.hasReading);
+  const states = relevant.map(item => mastery(trackRecord(progress, kind, track, item.id)));
+  return {
+    learned: states.filter(state => state === 'review' || state === 'mastered').length,
+    learning: states.filter(state => state === 'learning').length,
+    total: relevant.length
+  };
+}
+
+function reviewPanel(kind, level, progress, data, readingIds, now) {
+  const all = dueEntries(progress, data, readingIds, now);
+  const here = dueEntries(progress, data, readingIds, now, level);
+  const soonest = nextDue(progress, data, now);
+  const text = all.length
+      ? `${count(all.length, 'review')} due now${here.length !== all.length ? `, ${here.length} in ${level}` : ''}.`
+      : soonest !== null ? `Nothing due. Next review ${describeWhen(soonest, now)}.`
+          : 'Take a reading quiz or meaning check. Everything you answer is scheduled here for review.';
+  return h('section', { class: 'review-panel', 'aria-labelledby': 'review-title' },
+      h('div', {},
+          h('h2', { id: 'review-title', text: 'Review' }),
+          h('p', { class: 'muted', role: 'status', text })),
+      h('div', { class: 'level-quiz-actions' },
+          here.length ? h('a', { class: 'btn', href: `/${kind}/review?level=${level}` }, `Review ${level} (${here.length})`) : null,
+          all.length > here.length ? h('a', { class: `btn ${here.length ? 'btn-secondary' : ''}`, href: `/${kind}/review` }, `Review all (${all.length})`) : null));
+}
+
+function dataPanel(store) {
+  const status = h('p', { class: 'muted data-status', role: 'status' });
+  const file = h('input', { type: 'file', accept: 'application/json,.json', class: 'visually-hidden', id: 'import-file', tabindex: '-1' });
+  const refresh = () => window.dispatchEvent(new PopStateEvent('popstate', { state: history.state }));
+  file.addEventListener('change', async () => {
+    const chosen = file.files?.[0];
+    file.value = '';
+    if (!chosen) {
+      return;
+    }
+    try {
+      const data = JSON.parse(await chosen.text());
+      const result = await store.importData(data, Date.now());
+      status.textContent = `Restored ${count(result.imported, 'record')}${result.skipped ? `; ${result.skipped} invalid ${result.skipped === 1 ? 'entry was' : 'entries were'} skipped` : ''}. Newer progress already in this browser was kept.`;
+      setTimeout(refresh, 1200);
+    } catch (error) {
+      status.textContent = error instanceof SyntaxError || /Kaidoku progress file/.test(error.message)
+          ? 'That file is not a Kaidoku progress backup. Nothing was changed.'
+          : 'The backup could not be restored. Nothing was changed.';
+    }
+  });
+  return h('section', { class: 'data-panel detail-section', 'aria-labelledby': 'data-title' },
+      h('div', { class: 'section-head' },
+          h('h2', { id: 'data-title', text: 'Your progress data' }),
+          h('p', { text: 'Stored only in this browser, for kanji and vocabulary together. Back it up to a file to keep it safe or move it to another device.' })),
+      h('div', { class: 'lesson-actions' },
+          h('button', { type: 'button', class: 'btn btn-secondary', dataset: { role: 'export' }, on: { click: async () => {
+            const data = await store.exportData(Date.now());
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = h('a', { href: url, download: `kaidoku-progress-${new Date().toISOString().slice(0, 10)}.json` });
+            document.body.append(link);
+            link.click();
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            status.textContent = `Saved a backup with ${count(data.progress.length, 'review record')}.`;
+          } } }, 'Back up to file'),
+          h('button', { type: 'button', class: 'btn btn-secondary', dataset: { role: 'import' }, on: { click: () => file.click() } }, 'Restore from file'),
+          h('button', { type: 'button', class: 'btn btn-quiet', dataset: { role: 'reset' }, on: { click: async () => {
+            if (!window.confirm('Delete all saved kanji and vocabulary progress in this browser? Back it up first if you might want it later. This cannot be undone.')) {
+              return;
+            }
+            await store.reset();
+            status.textContent = 'Progress cleared.';
+            setTimeout(refresh, 800);
+          } } }, 'Reset progress')),
+      file,
+      status);
 }
 
 export async function homeView({ kind, query }) {
   const level = LEVELS.includes(query.get('level')) ? query.get('level') : storedLevel(kind);
   rememberLevel(kind, level);
-  const [data, plan] = await Promise.all([dataset(kind), lessons(kind)]);
+  const [data, plan, progress, version] = await Promise.all([dataset(kind), lessons(kind), loadProgress(kind), checkContentVersion()]);
+  const readingIds = new Set((await readingQuestions(kind, data.items)).keys());
   const levelLessons = plan.byLevel.get(level);
   const total = levelLessons.reduce((sum, lesson) => sum + lesson.itemIds.length, 0);
+  const now = Date.now();
+  const levelItems = data.items.filter(item => item.level === level).map(item => ({ id: item.id, hasReading: readingIds.has(item.id) }));
+  const reading = trackProgress(progress, kind, levelItems, 'reading');
+  const meaning = trackProgress(progress, kind, levelItems, 'meaning');
+  const levelProgress = h('section', { class: 'level-progress', 'aria-label': `${level} progress` },
+      h('div', { class: 'progress-row' },
+          h('span', { class: 'progress-label', text: 'Reading' }),
+          meter(reading.learned, reading.total, `${level} reading: ${reading.learned} of ${reading.total} learned`),
+          h('span', { class: 'progress-value', text: `${reading.learned} / ${reading.total}${reading.learning ? ` · ${reading.learning} in progress` : ''}` })),
+      h('div', { class: 'progress-row' },
+          h('span', { class: 'progress-label', text: 'Meaning' }),
+          meter(meaning.learned, meaning.total, `${level} meaning: ${meaning.learned} of ${meaning.total} learned`),
+          h('span', { class: 'progress-value', text: `${meaning.learned} / ${meaning.total}${meaning.learning ? ` · ${meaning.learning} in progress` : ''}` })),
+      h('p', { class: 'muted progress-help', text: 'An item counts as learned after two successful reviews on different days.' }));
 
   const scope = level.toLowerCase();
   const levelQuiz = h('section', { class: 'level-quiz', 'aria-labelledby': 'level-quiz-title' },
@@ -192,9 +312,13 @@ export async function homeView({ kind, query }) {
           h('a', { class: 'btn btn-secondary', href: `/${kind}/quiz/${scope}/reading` }, 'Reading quiz'),
           h('a', { class: 'btn btn-secondary', href: `/${kind}/quiz/${scope}/meaning` }, 'Meaning check')));
   const body = h('div', {},
+      ...storageNotices(progress.store, version.changed),
+      reviewPanel(kind, level, progress, data, readingIds, now),
+      levelProgress,
       levelQuiz,
       h('h2', { class: 'sets-title', text: `${level} study sets` }),
-      h('ol', { class: 'lesson-grid' }, levelLessons.map(lesson => lessonCard(kind, lesson, data))));
+      h('ol', { class: 'lesson-grid' }, levelLessons.map(lesson => lessonCard(kind, lesson, data, progress, readingIds))),
+      dataPanel(progress.store));
 
   return {
     title: `${kindName(kind)} study sets`,
@@ -288,6 +412,21 @@ export async function libraryView({ kind, query, signal }) {
   };
 }
 
+async function progressSection(kind, item) {
+  const [progress, questions] = await Promise.all([loadProgress(kind), readingQuestions(kind, [item])]);
+  const now = Date.now();
+  const rows = itemTracks(item.id, new Set(questions.keys())).map(track => {
+    const record = trackRecord(progress, kind, track, item.id);
+    const state = mastery(record);
+    const when = record && state !== 'new' ? ` · next review ${describeWhen(record.dueAt, now)}` : '';
+    return h('div', {}, h('dt', { text: track === 'reading' ? 'Reading' : 'Meaning' }),
+        h('dd', { text: `${MASTERY_LABELS[state]}${when}${record?.reps ? ` · ${record.correct} of ${record.reps} right` : ''}` }));
+  });
+  return h('section', { class: 'detail-section', 'aria-labelledby': 'progress-title' },
+      h('div', { class: 'section-head' }, h('h2', { id: 'progress-title', text: 'Your progress' })),
+      h('dl', { class: 'facts progress-facts' }, rows));
+}
+
 export async function kanjiDetailView({ params }) {
   const [kanji, vocab, link] = await Promise.all([dataset('kanji'), dataset('vocab'), links()]);
   const item = kanji.byId.get(params.id);
@@ -296,6 +435,7 @@ export async function kanjiDetailView({ params }) {
   }
   const words = wordsForKanji(item.id, vocab, link);
   const external = link.kanji_external_words[item.id] ?? [];
+  const yours = await progressSection('kanji', item);
   const facts = [
     ['Strokes', String(item.strokes)],
     ['School grade', gradeLabel(item.grade)],
@@ -317,6 +457,7 @@ export async function kanjiDetailView({ params }) {
                     h('div', {}, h('dt', { text: term }), h('dd', { lang: term === 'Radical' ? 'ja' : null, text: value })))),
                 item.nanori?.length ? h('details', { class: 'nanori' },
                     h('summary', { text: 'Name readings (nanori)' }), jp('p', item.nanori.join('、'))) : null)),
+        yours,
         h('section', { class: 'detail-section', 'aria-labelledby': 'words-title' },
             h('div', { class: 'section-head' },
                 h('h2', { id: 'words-title' }, 'Words with ', jp('span', item.character)),
@@ -338,6 +479,7 @@ export async function vocabDetailView({ params }) {
     return notFoundView({ kind: 'vocab' });
   }
   const parts = kanjiInWord(item, kanji, link);
+  const yours = await progressSection('vocab', item);
   const alternatives = [
     item.other_forms?.length ? ['Also written', item.other_forms.join('、')] : null,
     item.other_readings?.length ? ['Also read', item.other_readings.join('、')] : null
@@ -354,6 +496,7 @@ export async function vocabDetailView({ params }) {
                 h('ol', { class: 'meanings' }, item.meanings.map(meaning => h('li', { text: meaning }))),
                 alternatives.length ? h('dl', { class: 'facts' }, alternatives.map(([term, value]) =>
                     h('div', {}, h('dt', { text: term }), jp('dd', value)))) : null)),
+        yours,
         h('section', { class: 'detail-section', 'aria-labelledby': 'kanji-title' },
             h('div', { class: 'section-head' },
                 h('h2', { id: 'kanji-title', text: 'Kanji in this word' }),
@@ -397,7 +540,10 @@ export async function lessonView({ kind, params, query, signal }) {
     return notFoundView({ kind });
   }
   const items = lesson.itemIds.map(id => data.byId.get(id));
-  const questionCount = (await readingQuestions(kind, items)).size;
+  const [questions, progress] = await Promise.all([readingQuestions(kind, items), loadProgress(kind)]);
+  const questionCount = questions.size;
+  let setRecord = progress.sets.get(lesson.id) ?? null;
+  const setLearned = learnedCount(progress, kind, lesson.itemIds, new Set(questions.keys()));
   const siblings = plan.byLevel.get(lesson.level);
   const index = siblings.indexOf(lesson);
   const nextLesson = siblings[index + 1];
@@ -439,23 +585,28 @@ export async function lessonView({ kind, params, query, signal }) {
     return kind === 'kanji' ? item.character : item.word;
   }
 
+  function scoreNote(track) {
+    const result = setRecord?.[track];
+    return result?.last && result?.best ? `Last ${result.last.correct}/${result.last.total} · best ${result.best.correct}/${result.best.total}` : null;
+  }
+
   function activities() {
     return h('ul', { class: 'activities' },
         h('li', {}, h('button', { type: 'button', class: 'activity', on: { click: () => go(0) } },
             h('span', { class: 'activity-name', text: 'Study cards' }),
-            h('span', { class: 'activity-note', text: `Go through ${itemNoun(kind, items.length)} at your own pace` }),
+            h('span', { class: 'activity-note', text: setRecord?.cardsCompletedAt ? `Studied · ${itemNoun(kind, items.length)}` : `Go through ${itemNoun(kind, items.length)} at your own pace` }),
             icon(ICONS.arrow))),
         h('li', {}, questionCount
             ? h('a', { class: 'activity', href: quizHref('reading') },
                 h('span', { class: 'activity-name', text: 'Reading quiz' }),
-                h('span', { class: 'activity-note', text: `${count(questionCount, 'question')}, multiple choice` }),
+                h('span', { class: 'activity-note', text: scoreNote('reading') ?? `${count(questionCount, 'question')}, multiple choice` }),
                 icon(ICONS.arrow))
             : h('div', { class: 'activity is-disabled' },
                 h('span', { class: 'activity-name', text: 'Reading quiz' }),
                 h('span', { class: 'activity-note', text: 'No approved reading questions in this set' }))),
         h('li', {}, h('a', { class: 'activity', href: quizHref('meaning') },
             h('span', { class: 'activity-name', text: 'Meaning check' }),
-            h('span', { class: 'activity-note', text: `Recall each meaning, then mark what you knew` }),
+            h('span', { class: 'activity-note', text: scoreNote('meaning') ?? 'Recall each meaning, then grade yourself' }),
             icon(ICONS.arrow))));
   }
 
@@ -470,6 +621,10 @@ export async function lessonView({ kind, params, query, signal }) {
                 : `${itemNoun(kind, items.length)}.` })),
         h('ul', { class: kind === 'kanji' ? 'preview-glyphs' : 'chips preview-words', lang: 'ja' },
             items.map(item => h('li', { class: kind === 'kanji' ? null : 'chip', text: itemLabel(item) }))),
+        h('div', { class: 'progress-row set-progress' },
+            h('span', { class: 'progress-label', text: 'Learned' }),
+            meter(setLearned.learned, setLearned.total, `${label}: ${setLearned.learned} of ${setLearned.total} learned`),
+            h('span', { class: 'progress-value', text: `${setLearned.learned} / ${setLearned.total}` })),
         activities());
   }
 
@@ -497,7 +652,19 @@ export async function lessonView({ kind, params, query, signal }) {
     }, fill);
   }
 
+  function markCardsDone() {
+    if (setRecord?.cardsCompletedAt) {
+      return;
+    }
+    const now = Date.now();
+    progressStore()
+        .then(store => store.updateSet(kind, lesson.id, lesson.level, set => ({ ...set, cardsCompletedAt: set.cardsCompletedAt ?? now }), now))
+        .then(saved => { setRecord = saved; })
+        .catch(() => {});
+  }
+
   function done() {
+    markCardsDone();
     return h('div', { class: 'lesson-done' },
         h('div', { class: 'done-mark', 'aria-hidden': 'true' }, icon(ICONS.check)),
         h('div', { class: 'page-head centered' },
