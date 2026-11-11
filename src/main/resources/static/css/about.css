@@ -1,0 +1,47 @@
+.about {
+  max-width: 52rem;
+}
+
+.about-section {
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--line);
+}
+
+.about-section h2 {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-lg);
+}
+
+.about-list {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.about-list dt {
+  font-weight: 650;
+}
+
+.about-list dd {
+  margin: var(--space-1) 0 0;
+  color: var(--ink-2);
+}
+
+.about-points {
+  display: grid;
+  gap: var(--space-3);
+  padding-left: 1.25rem;
+  color: var(--ink-2);
+}
+
+.attribution {
+  margin-bottom: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.about code {
+  font: .85em var(--font-mono);
+  overflow-wrap: anywhere;
+}

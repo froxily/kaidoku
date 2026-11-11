@@ -1,8 +1,16 @@
 const SEEN_KEY = 'kaidoku.introSeen';
 
+function defaultStorage() {
+  try {
+    return globalThis.localStorage ?? null;
+  } catch {
+    return null;
+  }
+}
+
 function readSeen(storage) {
   try {
-    return Number(storage.getItem(SEEN_KEY)) || 0;
+    return Number(storage?.getItem(SEEN_KEY)) || 0;
   } catch {
     return 0;
   }
@@ -10,7 +18,7 @@ function readSeen(storage) {
 
 function markSeen(storage, version) {
   try {
-    storage.setItem(SEEN_KEY, String(version));
+    storage?.setItem(SEEN_KEY, String(version));
   } catch {
   }
 }
@@ -45,7 +53,7 @@ function buildMedia(config) {
   return null;
 }
 
-export function shouldPlay(config, { storage = globalThis.localStorage, reducedMotion = false } = {}) {
+export function shouldPlay(config, { storage = defaultStorage(), reducedMotion = false } = {}) {
   return Boolean(config?.enabled) && !reducedMotion && Number.isInteger(config.version)
       && readSeen(storage) < config.version && buildable(config);
 }
@@ -55,9 +63,12 @@ function buildable(config) {
 }
 
 export function playIntro(config, options = {}) {
-  const storage = options.storage ?? globalThis.localStorage;
-  const reducedMotion = options.reducedMotion ?? matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!shouldPlay(config, { storage, reducedMotion })) {
+  if (!config?.enabled) {
+    return Promise.resolve('not-shown');
+  }
+  const storage = options.storage ?? defaultStorage();
+  const reducedMotion = options.reducedMotion ?? globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+  if (!storage || !shouldPlay(config, { storage, reducedMotion })) {
     return Promise.resolve('not-shown');
   }
   return new Promise(resolve => {
@@ -88,7 +99,12 @@ export function playIntro(config, options = {}) {
       siblings.forEach(node => { node.inert = false; });
       document.documentElement.classList.remove('intro-active');
       overlay.classList.add('is-leaving');
+      let removed = false;
       const remove = () => {
+        if (removed) {
+          return;
+        }
+        removed = true;
         overlay.remove();
         previousFocus?.focus?.({ preventScroll: true });
         resolve(outcome);
@@ -110,7 +126,8 @@ export function playIntro(config, options = {}) {
 
     skip.addEventListener('click', () => finish('skipped'));
     media.addEventListener('ended', () => finish('played'));
-    media.addEventListener('error', () => finish('failed'), true);
+    const sources = media.querySelectorAll('source');
+    (sources.length ? sources[sources.length - 1] : media).addEventListener('error', () => finish('failed'));
     document.addEventListener('keydown', onKey, true);
     siblings.forEach(node => { node.inert = true; });
     document.documentElement.classList.add('intro-active');

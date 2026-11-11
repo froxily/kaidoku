@@ -233,7 +233,7 @@ function reviewPanel(kind, level, progress, data, readingIds, now) {
 
 function dataPanel(store) {
   const status = h('p', { class: 'muted data-status', role: 'status' });
-  const file = h('input', { type: 'file', accept: 'application/json,.json', class: 'visually-hidden', id: 'import-file', tabindex: '-1' });
+  const file = h('input', { type: 'file', accept: 'application/json,.json', class: 'visually-hidden', id: 'import-file', tabindex: '-1', 'aria-label': 'Choose a Kaidoku progress backup file' });
   const refresh = () => window.dispatchEvent(new PopStateEvent('popstate', { state: history.state }));
   file.addEventListener('change', async () => {
     const chosen = file.files?.[0];

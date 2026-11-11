@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>About · Kaidoku 解読</title>
+  <meta name="description" content="What Kaidoku is, where its learning data comes from, the licences it uses, and how your progress is stored.">
+  <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111217" media="(prefers-color-scheme: dark)">
+  <script src="/js/theme.js"></script>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/about.css">
+  <script type="module" src="/js/shell.js"></script>
+</head>
+<body data-section="about">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/"><span class="brand-mark" lang="ja" aria-hidden="true">解</span><span>Kaidoku</span></a>
+      <nav class="primary-nav" aria-label="Main">
+        <a href="/grammar" data-nav="grammar">Grammar</a>
+        <a href="/kanji" data-nav="kanji">Kanji</a>
+        <a href="/vocab" data-nav="vocab">Vocabulary</a>
+      </nav>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle data-mode="system" aria-label="Theme: match system">
+        <svg class="icon icon-system" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"/></svg>
+        <svg class="icon icon-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+        <svg class="icon icon-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="wrap about" tabindex="-1">
+    <div class="page-head">
+      <p class="eyebrow">About</p>
+      <h1>About Kaidoku <span lang="ja">解読</span></h1>
+      <p><span lang="ja">解読</span> (<i>kaidoku</i>) means “deciphering”. Kaidoku is an open-source companion for reading Japanese at JLPT N5–N3: it breaks down the grammar in any text, and teaches the kanji and vocabulary you need to read it.</p>
+    </div>
+
+    <section class="about-section" aria-labelledby="modules-title">
+      <h2 id="modules-title">Three modules</h2>
+      <dl class="about-list">
+        <div>
+          <dt>Grammar Pattern Breakdown</dt>
+          <dd>A rule-based analyzer, not an AI model: 341 hand-written grammar rules run over the output of the Kuromoji morphological analyzer, so the same text always gets the same result. It runs on the server and needs an internet connection.</dd>
+        </div>
+        <div>
+          <dt>Kanji Learning</dt>
+          <dd>640 kanji in study sets of ten, most common first, with study cards, reading quizzes, meaning checks and spaced review. Works offline once you have opened it.</dd>
+        </div>
+        <div>
+          <dt>Vocabulary Learning</dt>
+          <dd>2,963 words in study sets of about fifteen per level, with the same cards, quizzes and review. Works offline once you have opened it.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="about-section" aria-labelledby="data-title">
+      <h2 id="data-title">Learning data and its licence</h2>
+      <p class="attribution">Contains data from <a href="https://github.com/evanclan/OpenJLPT">OpenJLPT</a> (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>), which uses JMdict and KANJIDIC2 (EDRDG), Jonathan Waller's JLPT lists, and Tatoeba.</p>
+      <ul class="about-points">
+        <li>The kanji and vocabulary data is a derived work of OpenJLPT, pinned to revision <code>0d1d3410bec90bd4098a7c72de820543cb4f707c</code>, and is shared under CC BY-SA 4.0. Read the <a href="/learning/OpenJLPT-LICENSE.txt">licence text</a> and the <a href="/learning/OpenJLPT-NOTICE.txt">upstream notice</a>.</li>
+        <li>Readings and meanings are exactly as given by these sources. They have not been independently edited by a lexicographer.</li>
+        <li>Example sentences are not shown, and meanings are self-checked rather than multiple choice, because both are still waiting for an independent bilingual review.</li>
+        <li>The JLPT does not publish official vocabulary or kanji lists. Level assignments are community estimates based on Jonathan Waller's lists and are not an official guarantee. Grammar levels follow commonly used N5–N3 study lists for the same reason.</li>
+      </ul>
+    </section>
+
+    <section class="about-section" aria-labelledby="privacy-title">
+      <h2 id="privacy-title">Your progress stays with you</h2>
+      <ul class="about-points">
+        <li>There are no accounts, analytics, cookies or advertising.</li>
+        <li>Quiz answers and review schedules are stored only in this browser (IndexedDB). They never leave your device unless you download a backup yourself.</li>
+        <li>A missed item comes back after ten minutes; a correct one after a day, then at growing intervals of up to a year. An item counts as learned after two successful reviews on different days.</li>
+        <li>Text you paste into the grammar analyzer is sent to the server only to be analysed. It is not stored.</li>
+      </ul>
+    </section>
+
+    <section class="about-section" aria-labelledby="software-title">
+      <h2 id="software-title">Source code and software</h2>
+      <ul class="about-points">
+        <li>Kaidoku's source code is open source under the MIT licence: <a href="https://github.com/froxily/kaidoku">github.com/froxily/kaidoku</a>.</li>
+        <li>It is built with Spring Boot (Apache 2.0) and Kuromoji with the IPADIC dictionary (Apache 2.0; the dictionary carries its own permissive licence). The full list is in the repository's <code>THIRD_PARTY_NOTICES</code> file.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>JLPT levels are approximate. The JLPT publishes no official grammar, kanji or vocabulary lists, so levels follow community study lists.</p>
+      <p><a href="/about">About and licences</a> · <a href="https://github.com/froxily/kaidoku">Source code (MIT)</a></p>
+    </div>
+  </footer>
+
+  <nav class="tabbar" aria-label="Main">
+    <a href="/" data-nav="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1H15v-6H9v6H4.5a1 1 0 0 1-1-1z"/></svg>Home</a>
+    <a href="/grammar" data-nav="grammar"><span class="tab-glyph" lang="ja" aria-hidden="true">文</span>Grammar</a>
+    <a href="/kanji" data-nav="kanji"><span class="tab-glyph" lang="ja" aria-hidden="true">字</span>Kanji</a>
+    <a href="/vocab" data-nav="vocab"><span class="tab-glyph" lang="ja" aria-hidden="true">語</span>Words</a>
+  </nav>
+</body>
+</html>

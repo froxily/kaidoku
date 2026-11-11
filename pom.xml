@@ -64,6 +64,18 @@
 			<version>1.64.0</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.deque.html.axe-core</groupId>
+			<artifactId>playwright</artifactId>
+			<version>4.10.1</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.microsoft.playwright</groupId>
+					<artifactId>playwright</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 	</dependencies>
 
 	<build>

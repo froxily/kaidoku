@@ -1,0 +1,74 @@
+Kaidoku third-party notices
+===========================
+
+Kaidoku's own source code is licensed under the MIT licence (see LICENSE).
+This file lists the third-party data and software that Kaidoku ships or depends on.
+
+
+Learning data (src/main/resources/static/learning/)
+---------------------------------------------------
+
+Contains data from OpenJLPT (CC BY-SA 4.0), which uses JMdict and KANJIDIC2
+(EDRDG), Jonathan Waller's JLPT lists, and Tatoeba.
+
+- OpenJLPT, https://github.com/evanclan/OpenJLPT
+  Pinned revision 0d1d3410bec90bd4098a7c72de820543cb4f707c (v0.3.0).
+  Licence: Creative Commons Attribution-ShareAlike 4.0 International.
+  Full licence text: src/main/resources/static/learning/OpenJLPT-LICENSE.txt
+  Upstream notice:   src/main/resources/static/learning/OpenJLPT-NOTICE.txt
+
+- JMdict and KANJIDIC2, Electronic Dictionary Research and Development Group
+  (EDRDG), https://www.edrdg.org/edrdg/licence.html
+  Licence: Creative Commons Attribution-ShareAlike 4.0.
+
+- Jonathan Waller's JLPT lists, https://www.tanos.co.uk/jlpt/
+  Licence: Creative Commons Attribution (as stated by the pinned OpenJLPT notice).
+
+- Tatoeba, https://tatoeba.org (Creative Commons Attribution 2.0 FR).
+  No Tatoeba example sentences are shipped in this release.
+
+The files under src/main/resources/static/learning/ are a derived dataset and
+are distributed under CC BY-SA 4.0. They are separate from the MIT-licensed code.
+Changes from the upstream source: search fields and stable kanji ids were
+added; vocabulary example sentences and meaning multiple-choice questions were
+withheld pending independent review; only reading questions verified to have a
+single correct answer were kept.
+
+
+Grammar checklist
+-----------------
+
+The N5–N3 coverage checklist is the grammar pages of the Wikibooks "JLPT Guide"
+(compiled by Jonathan Waller), CC BY-SA 4.0. Only pattern names and levels
+were used as a checklist; no explanations or examples were copied, and the
+list itself is not included.
+
+
+Software dependencies (runtime)
+-------------------------------
+
+- Spring Boot and Spring Framework, https://spring.io
+  Licence: Apache License 2.0.
+
+- Jackson, https://github.com/FasterXML/jackson
+  Licence: Apache License 2.0.
+
+- Apache Tomcat (embedded), https://tomcat.apache.org
+  Licence: Apache License 2.0.
+
+- Kuromoji with the IPADIC dictionary (com.atilika.kuromoji:kuromoji-ipadic 0.9.0),
+  https://github.com/atilika/kuromoji
+  Licence: Apache License 2.0. The bundled IPADIC dictionary is distributed
+  under its own permissive licence (copyright Nara Institute of Science and
+  Technology), reproduced in the kuromoji-ipadic jar.
+
+
+Software dependencies (tests only, not shipped)
+-----------------------------------------------
+
+- JUnit 5, AssertJ, Spring Boot test starters: Eclipse Public License 2.0 /
+  Apache License 2.0.
+- Playwright for Java, https://playwright.dev
+  Licence: Apache License 2.0.
+- axe-core (via com.deque.html.axe-core:playwright), https://github.com/dequelabs/axe-core
+  Licence: Mozilla Public License 2.0.

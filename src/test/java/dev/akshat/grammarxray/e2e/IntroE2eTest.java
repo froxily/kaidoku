@@ -115,6 +115,21 @@ class IntroE2eTest {
     }
 
     @Test
+    void dashboardStillWorksWhenStorageAccessThrows() {
+        context = browser.newContext();
+        context.addInitScript("Object.defineProperty(window, 'localStorage', { get() { throw new DOMException('denied', 'SecurityError'); } });");
+        page = context.newPage();
+        java.util.List<String> errors = new java.util.ArrayList<>();
+        page.onPageError(errors::add);
+        page.navigate("http://localhost:" + port + "/");
+
+        assertThat(page.locator(".module-card")).hasCount(3);
+        page.waitForFunction("async () => { const { playIntro } = await import('/js/intro.js'); return (await playIntro({ enabled: true, version: 1, type: 'image', sources: [{ src: 'x.png' }] })) === 'not-shown'; }");
+        assertThat(page.locator(".intro")).hasCount(0);
+        org.assertj.core.api.Assertions.assertThat(errors).isEmpty();
+    }
+
+    @Test
     void introIsNotShownWhenReducedMotionIsRequested() {
         open(new Browser.NewContextOptions().setReducedMotion(ReducedMotion.REDUCE));
         page.evaluate(PLAY, 60000);
