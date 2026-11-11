@@ -23,7 +23,7 @@ Kaidoku has three parts:
 |---|---|
 | Grammar patterns | **341** (36 N5 · 118 N4 · 187 N3), covering every in-scope N5 and N4 point and all 62 N3 points of an openly licensed JLPT grammar checklist, with restrictions ([coverage](#coverage)) |
 | Learning data | **640** kanji, **2,963** words and **2,926** reading questions from [OpenJLPT](https://github.com/evanclan/OpenJLPT) (CC BY-SA 4.0), validated at startup ([details](#kanji-and-vocabulary)) |
-| Tests | **3,374** unit and integration tests + **69** browser tests, run in CI on every push to `main` |
+| Tests | **3,374** unit and integration tests + **72** browser tests, run in CI on every push to `main` |
 | Accuracy | **0.992 precision / 0.989 recall** on 655 regression sentences for the original 199 rules; a first run on a pre-registered held-out set for the 142 new rules scored 0.991 / 0.944 ([methodology](#evaluation)) |
 | Speed | about **24 ms** to analyze 10,000 characters of grammar-dense text ([details](#performance)) |
 | Stack | Java 21, Spring Boot 4.1, Kuromoji (IPADIC), vanilla JS (ES modules, no build step), IndexedDB, service worker, Docker, GitHub Actions, Playwright, axe-core |
@@ -138,7 +138,7 @@ Run the tests:
 ./mvnw verify -Pe2e
 ```
 
-The second command runs the 69 browser tests on their own (the `e2e` profile selects only them). They use an installed Edge by default (`-De2e.browser.channel=chrome` for Chrome) and never download a browser. For a scripted walkthrough and how to record a demo GIF, see [docs/DEMO.md](docs/DEMO.md).
+The second command runs the 72 browser tests on their own (the `e2e` profile selects only them). They use an installed Edge by default (`-De2e.browser.channel=chrome` for Chrome) and never download a browser. For a scripted walkthrough and how to record a demo GIF, see [docs/DEMO.md](docs/DEMO.md).
 
 ## API
 

@@ -110,6 +110,46 @@ class AccessibilityE2eTest {
                 new Screen("not found", "/kanji/nope/extra/path", "h1", p -> { }));
     }
 
+    @ParameterizedTest(name = "{0} at {1} px wide")
+    @CsvSource({"/kanji?level=N5, 320, 1, [data-role='export']", "/vocab/quiz/vocab-n5-1/reading, 320, 1, .option >> nth=3",
+            "/kanji/review, 640, 2, footer a >> nth=0"})
+    void keyboardFocusIsNotHiddenBehindTheTabBar(String path, int width, int scale, String target) {
+        context = browser.newContext(new Browser.NewContextOptions()
+                .setViewportSize(width, 450).setDeviceScaleFactor(scale));
+        page = context.newPage();
+        page.navigate("http://localhost:" + port + path);
+        assertThat(page.locator(target)).isVisible();
+        page.waitForLoadState(com.microsoft.playwright.options.LoadState.NETWORKIDLE);
+        for (int i = 0; i < 20 && !Boolean.TRUE.equals(page.evaluate("""
+                () => new Promise(resolve => {
+                  const height = document.documentElement.scrollHeight;
+                  setTimeout(() => resolve(document.documentElement.scrollHeight === height), 300);
+                })
+                """)); i++) {
+        }
+        page.locator(target).evaluate("""
+                el => {
+                  window.scrollBy(0, el.getBoundingClientRect().top - (innerHeight - 40));
+                  let previous = null;
+                  for (const candidate of document.querySelectorAll('a[href], button:not([disabled]), input:not([type=hidden]):not([tabindex="-1"])')) {
+                    if (candidate === el) break;
+                    if (candidate.offsetParent !== null) previous = candidate;
+                  }
+                  previous.focus({ preventScroll: true });
+                }
+                """);
+        page.keyboard().press("Tab");
+        List<?> focus = (List<?>) page.evaluate("""
+                () => {
+                  const el = document.activeElement;
+                  const r = el.getBoundingClientRect();
+                  const hit = document.elementFromPoint(r.left + Math.min(r.width / 2, 8), r.top + r.height / 2);
+                  return [el.textContent.trim().slice(0, 20), el === hit || el.contains(hit)];
+                }
+                """);
+        org.assertj.core.api.Assertions.assertThat(focus.get(1)).as("focused %s is visible", focus.get(0)).isEqualTo(true);
+    }
+
     @org.junit.jupiter.api.Test
     void keyboardFocusIsDrawnAsAnUnclippedOutline() {
         context = browser.newContext(new Browser.NewContextOptions().setViewportSize(1280, 900));

@@ -456,6 +456,14 @@ main:focus {
 }
 
 @media (max-width: 719px) {
+  html {
+    scroll-padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + var(--space-2));
+  }
+
+  html:has(.lesson-nav, .quiz-actions) {
+    scroll-padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 6rem);
+  }
+
   body {
     padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
   }
