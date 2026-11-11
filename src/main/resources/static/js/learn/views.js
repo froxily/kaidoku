@@ -242,8 +242,13 @@ function dataPanel(store) {
       return;
     }
     try {
+      const generation = await store.generation();
       const data = JSON.parse(await chosen.text());
-      const result = await store.importData(data, Date.now());
+      const result = await store.importData(data, Date.now(), { generation });
+      if (result === null) {
+        status.textContent = 'Progress was reset in another tab while the backup was loading. Nothing was restored; choose the file again.';
+        return;
+      }
       status.textContent = `Restored ${count(result.imported, 'record')}${result.skipped ? `; ${result.skipped} invalid ${result.skipped === 1 ? 'entry was' : 'entries were'} skipped` : ''}. Newer progress already in this browser was kept.`;
       setTimeout(refresh, 1200);
     } catch (error) {
@@ -303,7 +308,7 @@ export async function homeView({ kind, query }) {
           h('span', { class: 'progress-label', text: 'Meaning' }),
           meter(meaning.learned, meaning.total, `${level} meaning: ${meaning.learned} of ${meaning.total} learned`),
           h('span', { class: 'progress-value', text: `${meaning.learned} / ${meaning.total}${meaning.learning ? ` · ${meaning.learning} in progress` : ''}` })),
-      h('p', { class: 'muted progress-help', text: 'An item counts as learned after two successful reviews on different days.' }));
+      h('p', { class: 'muted progress-help', text: 'Each reading or meaning track counts as learned after two correct answers in a row, including practice.' }));
 
   const scope = level.toLowerCase();
   const levelQuiz = h('section', { class: 'level-quiz', 'aria-labelledby': 'level-quiz-title' },

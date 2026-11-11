@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -97,6 +98,16 @@ class StudyProgressE2eTest {
 
     private long recordCount(String kind) {
         return ((Number) page.evaluate("async kind => (await (await import('/js/learn/store.js')).progressStore()).records(kind).then(r => r.length)", kind)).longValue();
+    }
+
+    private void waitUntil(String predicate) {
+        long deadline = System.currentTimeMillis() + 30_000;
+        while (!Boolean.TRUE.equals(page.evaluate(predicate))) {
+            if (System.currentTimeMillis() > deadline) {
+                throw new AssertionError("Timed out waiting for " + predicate);
+            }
+            page.waitForTimeout(100);
+        }
     }
 
     @Test
@@ -195,7 +206,7 @@ class StudyProgressE2eTest {
             page.keyboard().press(String.valueOf(((Number) choices.get(0)).intValue()));
             page.locator("[data-role='next']").click();
         }
-        page.waitForFunction("async () => (await (await (await import('/js/learn/store.js')).progressStore()).records('kanji')).length === 3");
+        waitUntil("async () => (await (await (await import('/js/learn/store.js')).progressStore()).records('kanji')).length === 3");
 
         Page other = context.newPage();
         other.navigate("http://localhost:" + port + "/kanji?level=N5");
@@ -224,7 +235,7 @@ class StudyProgressE2eTest {
 
         page.getByText("Retry all").click();
         answerAll(true);
-        page.waitForFunction("async () => (await (await (await import('/js/learn/store.js')).progressStore()).records('kanji')).length === 8");
+        waitUntil("async () => (await (await (await import('/js/learn/store.js')).progressStore()).records('kanji')).length === 8");
         assertThat(page.locator(".save-notice")).isHidden();
     }
 
@@ -250,6 +261,43 @@ class StudyProgressE2eTest {
     }
 
     @Test
+    void dashboardRechecksHiddenReviewsAfterImportingABackup() {
+        page.clock().install();
+        open("/grammar");
+        page.evaluate("""
+                async () => {
+                  const store = await (await import('/js/learn/store.js')).progressStore();
+                  await store.grade({ kind: 'vocab', track: 'meaning', id: 'ada066edfd', level: 'N5' }, 'again', Date.now());
+                }
+                """);
+        page.clock().fastForward("11:00");
+        open("/");
+        assertThat(page.locator("[data-due='vocab']")).hasText("1 review due");
+
+        Map<?, ?> result = (Map<?, ?>) page.evaluate("""
+                async () => {
+                  const store = await (await import('/js/learn/store.js')).progressStore();
+                  const hidden = await store.getMeta('hidden:vocab');
+                  const backup = await store.exportData(Date.now());
+                  const obsolete = { ...backup.progress[0], key: 'vocab:meaning:obsolete-backup-id', id: 'obsolete-backup-id' };
+                  const restored = await store.importData({ ...backup, progress: [obsolete] }, Date.now());
+                  return { hidden, restored, hiddenAfterImport: await store.getMeta('hidden:vocab'),
+                    count: (await store.records('vocab')).length };
+                }
+                """);
+        org.assertj.core.api.Assertions.assertThat((Map<?, ?>) result.get("hidden")).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(((Map<?, ?>) result.get("hidden")).get("keys")).isEqualTo(java.util.List.of());
+        org.assertj.core.api.Assertions.assertThat(((Number) ((Map<?, ?>) result.get("restored")).get("imported")).intValue()).isEqualTo(1);
+        org.assertj.core.api.Assertions.assertThat(result.get("hiddenAfterImport")).isNull();
+        org.assertj.core.api.Assertions.assertThat(((Number) result.get("count")).intValue()).isEqualTo(2);
+
+        page.reload();
+        assertThat(page.locator("[data-due='vocab']")).hasText("1 review due");
+        open("/vocab?level=N5");
+        assertThat(page.locator(".review-panel [role='status']")).hasText("1 review due now.");
+    }
+
+    @Test
     void requestsPersistentStorageOnce() {
         page.addInitScript("""
                 window.__persistCalls = 0;
@@ -265,7 +313,7 @@ class StudyProgressE2eTest {
             page.keyboard().press(String.valueOf(((Number) choices.get(0)).intValue()));
             page.locator("[data-role='next']").click();
         }
-        page.waitForFunction("async () => (await (await (await import('/js/learn/store.js')).progressStore()).records('kanji')).length === 2");
+        waitUntil("async () => (await (await (await import('/js/learn/store.js')).progressStore()).records('kanji')).length === 2");
         org.assertj.core.api.Assertions.assertThat(((Number) page.evaluate("() => window.__persistCalls")).intValue()).isEqualTo(1);
     }
 
@@ -326,6 +374,49 @@ class StudyProgressE2eTest {
         page.locator("#import-file").setInputFiles(new com.microsoft.playwright.options.FilePayload(
                 "notes.json", "application/json", "{\"hello\":1}".getBytes()));
         assertThat(page.locator(".data-status")).hasText("That file is not a Kaidoku progress backup. Nothing was changed.");
+    }
+
+    @Test
+    void resetWhileReadingABackupLeavesProgressEmpty() {
+        page.clock().install();
+        open("/kanji?level=N5");
+        assertThat(page.locator("#import-file")).hasCount(1);
+        String backup = (String) page.evaluate("""
+                async () => {
+                  const store = await (await import('/js/learn/store.js')).progressStore();
+                  await store.grade({ kind: 'kanji', track: 'reading', id: '日', level: 'N5' }, 'good', Date.now());
+                  const original = File.prototype.text;
+                  File.prototype.text = function () {
+                    window.__backupReadStarted = true;
+                    return new Promise(resolve => {
+                      window.__finishBackupRead = async () => resolve(await original.call(this));
+                    });
+                  };
+                  window.__restoreRefreshes = 0;
+                  window.addEventListener('popstate', () => window.__restoreRefreshes++);
+                  return JSON.stringify(await store.exportData(Date.now()));
+                }
+                """);
+        page.locator("#import-file").setInputFiles(new com.microsoft.playwright.options.FilePayload(
+                "backup.json", "application/json", backup.getBytes(StandardCharsets.UTF_8)));
+        page.waitForFunction("() => window.__backupReadStarted === true");
+
+        Page other = context.newPage();
+        other.navigate("http://localhost:" + port + "/grammar");
+        other.evaluate("async () => (await (await import('/js/learn/store.js')).progressStore()).reset()");
+        page.evaluate("() => window.__finishBackupRead()");
+
+        assertThat(page.locator(".data-status")).hasText("Progress was reset in another tab while the backup was loading. Nothing was restored; choose the file again.");
+        org.assertj.core.api.Assertions.assertThat(recordCount("kanji")).isZero();
+        page.clock().fastForward("00:02");
+        org.assertj.core.api.Assertions.assertThat(((Number) page.evaluate("() => window.__restoreRefreshes")).intValue()).isZero();
+        assertThat(page.locator(".data-status")).containsText("Nothing was restored");
+
+        page.evaluate("() => { delete File.prototype.text; }");
+        page.locator("#import-file").setInputFiles(new com.microsoft.playwright.options.FilePayload(
+                "backup.json", "application/json", backup.getBytes(StandardCharsets.UTF_8)));
+        assertThat(page.locator(".data-status")).containsText("Restored 1 record");
+        org.assertj.core.api.Assertions.assertThat(recordCount("kanji")).isEqualTo(1);
     }
 
     @Test

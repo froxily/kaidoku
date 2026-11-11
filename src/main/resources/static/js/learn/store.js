@@ -374,7 +374,7 @@ function createStore(backend, problem) {
         });
       });
     },
-    async importData(data, now) {
+    async importData(data, now, options = {}) {
       if (!plain(data) || data.format !== EXPORT_FORMAT || data.version !== EXPORT_VERSION) {
         throw new Error('Not a Kaidoku progress file');
       }
@@ -394,8 +394,8 @@ function createStore(backend, problem) {
         imported: DATA_TABLES.reduce((total, name) => total + incoming[name].length, 0),
         skipped: skipped - before
       };
-      return backend.run(DATA_TABLES, 'readwrite', transaction => {
-        readTables(transaction, DATA_TABLES, rows => {
+      return backend.run(TABLES, 'readwrite', transaction => {
+        const restore = () => readTables(transaction, DATA_TABLES, rows => {
           const current = Object.fromEntries(DATA_TABLES.map(name => [name, validRows(rows[name], VALIDATORS[name])]));
           for (const row of mergeRows(current.progress, incoming.progress, 'key', mergeProgress)) {
             transaction.put('progress', row);
@@ -404,8 +404,21 @@ function createStore(backend, problem) {
             transaction.put('sets', row);
           }
           saveSessions(transaction, current.sessions, mergeSessions(current.sessions, incoming.sessions));
+          transaction.delete('meta', 'hidden:kanji');
+          transaction.delete('meta', 'hidden:vocab');
           transaction.result(result);
         });
+        if (Number.isInteger(options.generation)) {
+          readGeneration(transaction, current => {
+            if (current !== options.generation) {
+              transaction.result(null);
+              return;
+            }
+            restore();
+          });
+        } else {
+          restore();
+        }
       });
     },
     reset() {
@@ -414,6 +427,8 @@ function createStore(backend, problem) {
           for (const name of DATA_TABLES) {
             transaction.clear(name);
           }
+          transaction.delete('meta', 'hidden:kanji');
+          transaction.delete('meta', 'hidden:vocab');
           transaction.put('meta', { key: 'generation', value: generation + 1 });
         });
       });

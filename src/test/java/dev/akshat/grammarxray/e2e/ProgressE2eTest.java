@@ -238,6 +238,7 @@ class ProgressE2eTest {
 
     @Test
     void resetInvalidatesOlderGenerations() {
+        page.navigate("http://localhost:" + port + "/about");
         List<?> results = (List<?>) page.evaluate("""
                 async () => {
                   const { openStore } = await import('/js/learn/store.js');
@@ -254,9 +255,15 @@ class ProgressE2eTest {
                     const first = await store.grade(item, 'good', now, { generation: g0 });
                     await store.updateSet('kanji', 'kanji-n5-1', 'N5', update, now, { generation: g0 });
                     await store.addSession(session, { generation: g0 });
+                    const backup = await store.exportData(now + 2);
+                    await store.setMeta('hidden:kanji', { keys: ['old-kanji'] });
+                    await store.setMeta('hidden:vocab', { keys: ['old-vocab'] });
                     await store.reset();
                     const g1 = await store.generation();
                     const cleared = [await store.records(), await store.sets(), await store.sessions()];
+                    const resetHidden = [await store.getMeta('hidden:kanji'), await store.getMeta('hidden:vocab')];
+                    await store.setMeta('hidden:kanji', { keys: ['keep-kanji'] });
+                    await store.setMeta('hidden:vocab', { keys: ['keep-vocab'] });
                     let updateCalled = false;
                     const staleGrade = await store.grade(item, 'good', now, { generation: g0 });
                     const staleSet = await store.updateSet('kanji', 'kanji-n5-1', 'N5', set => {
@@ -264,12 +271,15 @@ class ProgressE2eTest {
                       return update(set);
                     }, now, { generation: g0 });
                     const staleSession = await store.addSession(session, { generation: g0 });
+                    const staleImport = await store.importData(backup, now + 3, { generation: g0 });
+                    const staleHidden = [await store.getMeta('hidden:kanji'), await store.getMeta('hidden:vocab')];
                     const afterStale = [await store.records(), await store.sets(), await store.sessions()];
                     const freshGrade = await store.grade(item, 'good', now, { generation: g1 });
                     const freshSet = await store.updateSet('kanji', 'kanji-n5-1', 'N5', update, now, { generation: g1 });
                     const freshSession = await store.addSession(session, { generation: g1 });
                     const restored = [await store.records(), await store.sets(), await store.sessions()];
-                    await store.importData(await store.exportData(now + 2), now + 3);
+                    const freshImport = await store.importData(await store.exportData(now + 2), now + 3, { generation: g1 });
+                    const importedHidden = [await store.getMeta('hidden:kanji'), await store.getMeta('hidden:vocab')];
                     const afterImport = await store.generation();
                     const invalidGenerations = [];
                     for (const value of [null, -1, 1.5, '2']) {
@@ -278,7 +288,8 @@ class ProgressE2eTest {
                     }
                     outcomes.push({
                       persistent: store.persistent, g0, g1, first, cleared,
-                      staleGrade, staleSet, staleSession, updateCalled, afterStale,
+                      staleGrade, staleSet, staleSession, staleImport, resetHidden, staleHidden, freshImport, importedHidden,
+                      updateCalled, afterStale,
                       freshGrade, freshSet, freshSessionSaved: freshSession !== null, restored, afterImport, invalidGenerations
                     });
                   }
@@ -298,6 +309,12 @@ class ProgressE2eTest {
             assertThat(result.get("staleGrade")).isNull();
             assertThat(result.get("staleSet")).isNull();
             assertThat(result.get("staleSession")).isNull();
+            assertThat(result.get("staleImport")).isNull();
+            assertThat((List<?>) result.get("resetHidden")).containsOnlyNulls().hasSize(2);
+            assertThat(result.get("staleHidden")).isEqualTo(List.of(
+                    Map.of("keys", List.of("keep-kanji")), Map.of("keys", List.of("keep-vocab"))));
+            assertThat(number(((Map<?, ?>) result.get("freshImport")).get("imported"))).isEqualTo(3L);
+            assertThat((List<?>) result.get("importedHidden")).containsOnlyNulls().hasSize(2);
             assertThat(result.get("updateCalled")).isEqualTo(false);
             assertThat(result.get("afterStale")).isEqualTo(List.of(List.of(), List.of(), List.of()));
             assertThat(number(((Map<?, ?>) result.get("freshGrade")).get("reps"))).isEqualTo(1L);

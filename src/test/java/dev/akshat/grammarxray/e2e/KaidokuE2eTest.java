@@ -161,6 +161,23 @@ class KaidokuE2eTest {
     }
 
     @Test
+    void unreachableAnalyzerShowsOfflineNoteAndAllowsRetry() {
+        context.route("**/api/analyze", route -> route.abort());
+        page.locator("#sample").click();
+
+        org.assertj.core.api.Assertions.assertThat(page.evaluate("() => navigator.onLine")).isEqualTo(true);
+        assertThat(page.locator("#error")).containsText("Could not reach the server");
+        assertThat(page.locator("#offline-note")).isVisible();
+        assertThat(page.locator("#offline-note")).containsText("needs an internet connection");
+        assertThat(page.locator("#analyze")).isEnabled();
+
+        context.unroute("**/api/analyze");
+        page.locator("#analyze").click();
+        assertThat(page.locator("#output mark").first()).isVisible();
+        assertThat(page.locator("#offline-note")).isHidden();
+    }
+
+    @Test
     void showsOversizedTextError() {
         page.locator("#text").fill("a".repeat(10001));
         page.locator("#analyze").click();

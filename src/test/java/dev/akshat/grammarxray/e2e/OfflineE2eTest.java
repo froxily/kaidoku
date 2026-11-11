@@ -5,6 +5,7 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.Route;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,6 +17,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -71,15 +73,50 @@ class OfflineE2eTest {
         page.navigate("http://localhost:" + port + path);
     }
 
-    private void warmLearningPages() {
+    private void warmDashboard() {
         open("/");
         assertThat(page.locator(".module-card")).hasCount(3);
-        page.waitForFunction("() => navigator.serviceWorker.ready.then(() => true)");
-        if (Boolean.FALSE.equals(page.evaluate("() => navigator.serviceWorker.controller !== null"))) {
-            page.reload();
-        }
+        page.evaluate("() => navigator.serviceWorker.ready.then(() => true)");
         page.waitForFunction("() => navigator.serviceWorker.controller !== null");
+        waitUntil("""
+                async () => {
+                  const names = await caches.keys();
+                  const shell = await caches.open(names.find(name => name.startsWith('kaidoku-shell-')));
+                  const version = await shell.match('/__data-version');
+                  if (!version) return false;
+                  const cache = await caches.open('kaidoku-data-' + await version.text());
+                  const response = await cache.match('/learning/manifest.json');
+                  if (!response) return false;
+                  const manifest = await response.json();
+                  const paths = ['/learning/manifest.json', ...Object.keys(manifest.artifacts).map(name => '/learning/' + name),
+                    '/api/learning/summary', '/api/learning/kanji/lessons', '/api/learning/vocab/lessons'];
+                  return (await Promise.all(paths.map(path => cache.match(path)))).every(Boolean);
+                }
+                """);
+    }
 
+    private void waitUntil(String predicate, Object... arg) {
+        long deadline = System.currentTimeMillis() + 30_000;
+        while (!Boolean.TRUE.equals(arg.length == 0 ? page.evaluate(predicate) : page.evaluate(predicate, arg[0]))) {
+            if (System.currentTimeMillis() > deadline) {
+                throw new AssertionError("Timed out waiting for " + predicate);
+            }
+            page.waitForTimeout(100);
+        }
+    }
+
+    private String activeVersion() {
+        return (String) page.evaluate("""
+                async () => {
+                  const names = await caches.keys();
+                  const shell = await caches.open(names.find(name => name.startsWith('kaidoku-shell-')));
+                  return (await shell.match('/__data-version')).text();
+                }
+                """);
+    }
+
+    private void warmLearningPages() {
+        warmDashboard();
         open("/kanji?level=N5");
         assertThat(page.locator(".lesson-card").first()).isVisible();
         open("/vocab?level=N5");
@@ -95,12 +132,14 @@ class OfflineE2eTest {
 
     @Test
     void learningWorksOfflineAfterOneVisit() {
-        warmLearningPages();
+        warmDashboard();
         context.setOffline(true);
 
         open("/");
         assertThat(page.locator(".module-card")).hasCount(3);
         open("/kanji?level=N5");
+        assertThat(page.locator(".lesson-card").first()).isVisible();
+        open("/vocab?level=N5");
         assertThat(page.locator(".lesson-card").first()).isVisible();
         open("/vocab/library");
         page.locator("#library-search").fill("taberu");
@@ -113,6 +152,92 @@ class OfflineE2eTest {
         open("/kanji/quiz/kanji-n5-1/reading");
         assertThat(page.locator(".option")).hasCount(4);
         assertThat(page.locator("#quiz-prompt")).isVisible();
+    }
+
+    @Test
+    void switchesDataVersionsOnlyAfterTheCompleteSetIsCached() {
+        warmDashboard();
+        String oldVersion = activeVersion();
+        String newVersion = oldVersion + "-next";
+        String manifest = (String) page.evaluate("""
+                async version => {
+                  const manifest = await (await fetch('/learning/manifest.json')).json();
+                  return JSON.stringify({ ...manifest, dataset_version: version });
+                }
+                """, newVersion);
+        context.route("**/learning/manifest.json", route -> route.fulfill(new Route.FulfillOptions()
+                .setStatus(200).setContentType("application/json").setBody(manifest)));
+        AtomicReference<Route> pendingDownload = new AtomicReference<>();
+        context.route("**/learning/kanji.json", pendingDownload::set);
+
+        page.reload();
+        page.waitForCondition(() -> pendingDownload.get() != null);
+        org.assertj.core.api.Assertions.assertThat(activeVersion()).isEqualTo(oldVersion);
+        org.assertj.core.api.Assertions.assertThat(page.evaluate(
+                "async version => (await caches.keys()).includes('kaidoku-data-' + version)", oldVersion))
+                .isEqualTo(true);
+        org.assertj.core.api.Assertions.assertThat(page.evaluate(
+                "async () => (await (await fetch('/learning/manifest.json')).json()).dataset_version"))
+                .isEqualTo(oldVersion);
+
+        pendingDownload.get().abort();
+        waitUntil("async version => !(await caches.keys()).includes('kaidoku-data-' + version)", newVersion);
+        org.assertj.core.api.Assertions.assertThat(activeVersion()).isEqualTo(oldVersion);
+        context.unroute("**/learning/manifest.json");
+        context.unroute("**/learning/kanji.json");
+        context.setOffline(true);
+        open("/kanji?level=N5");
+        assertThat(page.locator(".lesson-card").first()).isVisible();
+
+        context.setOffline(false);
+        context.route("**/learning/manifest.json", route -> route.fulfill(new Route.FulfillOptions()
+                .setStatus(200).setContentType("application/json").setBody(manifest)));
+        open("/");
+        waitUntil("""
+                async versions => {
+                  const names = await caches.keys();
+                  if (names.includes('kaidoku-data-' + versions.old)) return false;
+                  const shell = await caches.open(names.find(name => name.startsWith('kaidoku-shell-')));
+                  return await (await shell.match('/__data-version')).text() === versions.next;
+                }
+                """, Map.of("old", oldVersion, "next", newVersion));
+        org.assertj.core.api.Assertions.assertThat(activeVersion()).isEqualTo(newVersion);
+        org.assertj.core.api.Assertions.assertThat(page.evaluate(
+                "async () => (await (await fetch('/learning/manifest.json')).json()).dataset_version"))
+                .isEqualTo(newVersion);
+        context.setOffline(true);
+        open("/kanji/lesson/kanji-n5-1");
+        assertThat(page.locator(".activity")).hasCount(3);
+        open("/vocab?level=N5");
+        assertThat(page.locator(".lesson-card").first()).isVisible();
+    }
+
+    @Test
+    void redirectedStylesheetDoesNotReplaceTheCachedCss() {
+        warmDashboard();
+        String cachedCss = (String) page.evaluate("""
+                async () => {
+                  const names = await caches.keys();
+                  const cache = await caches.open(names.find(name => name.startsWith('kaidoku-shell-')));
+                  return (await cache.match('/css/learn.css')).text();
+                }
+                """);
+        open("/kanji?level=N5");
+        context.route("**/css/learn.css", route -> route.fulfill(new Route.FulfillOptions()
+                .setStatus(302).setHeaders(Map.of("Location", "/about.html"))));
+        page.reload();
+        Map<?, ?> result = (Map<?, ?>) page.evaluate("""
+                async () => {
+                  const response = await fetch('/css/learn.css');
+                  const names = await caches.keys();
+                  const cache = await caches.open(names.find(name => name.startsWith('kaidoku-shell-')));
+                  return { redirected: response.redirected, type: response.headers.get('Content-Type'),
+                    cached: await (await cache.match('/css/learn.css')).text() };
+                }
+                """);
+        org.assertj.core.api.Assertions.assertThat(result.get("redirected")).isEqualTo(true);
+        org.assertj.core.api.Assertions.assertThat((String) result.get("type")).contains("text/html");
+        org.assertj.core.api.Assertions.assertThat(result.get("cached")).isEqualTo(cachedCss);
     }
 
     @Test

@@ -41,13 +41,15 @@ const PRECACHE = [
 const shellPaths = new Set(PRECACHE);
 let versionPromise = null;
 let manifestRequest = null;
+const preparations = new Map();
+let preparationQueue = Promise.resolve();
 
 function noStore(response) {
   return /(?:^|,)\s*no-store\s*(?:,|$)/i.test(response.headers.get('Cache-Control') ?? '');
 }
 
 function cacheable(response) {
-  return response.status === 200 && !noStore(response);
+  return response.status === 200 && !response.redirected && response.type !== 'opaqueredirect' && !noStore(response);
 }
 
 function currentVersion() {
@@ -81,10 +83,65 @@ async function networkFirst(request, cacheName, key = request, updateCache = tru
     }
     throw error;
   }
-  if (updateCache && (cacheName === SHELL_CACHE || cacheName === DATA_CACHE_PREFIX + await currentVersion())) {
+  if (updateCache) {
     await saveResponse(cacheName, key, response).catch(() => {});
   }
   return response;
+}
+
+async function prepare(manifestResponse) {
+  if (!cacheable(manifestResponse)) {
+    throw new Error('Manifest cannot be cached');
+  }
+  const { dataset_version: version, artifacts } = await manifestResponse.clone().json();
+  if (typeof version !== 'string' || !version.trim() || !artifacts || typeof artifacts !== 'object' || Array.isArray(artifacts)) {
+    throw new Error('Invalid learning manifest');
+  }
+  if (!preparations.has(version)) {
+    const preparation = preparationQueue.then(async () => {
+      if (version === await currentVersion()) {
+        return;
+      }
+      const cacheName = DATA_CACHE_PREFIX + version;
+      try {
+        const cache = await caches.open(cacheName);
+        const paths = [
+          ...Object.keys(artifacts).map(name => `/learning/${name}`),
+          '/api/learning/summary',
+          '/api/learning/kanji/lessons',
+          '/api/learning/vocab/lessons'
+        ];
+        const downloads = await Promise.allSettled(paths.map(async path => {
+          const response = await fetch(new Request(new URL(path, self.location.origin), { cache: 'reload' }));
+          if (!cacheable(response)) {
+            throw new Error(`Cannot cache ${path}`);
+          }
+          await cache.put(path, response);
+        }));
+        const failed = downloads.find(result => result.status === 'rejected');
+        if (failed) {
+          throw failed.reason;
+        }
+        await cache.put(MANIFEST_PATH, manifestResponse.clone());
+        const shell = await caches.open(SHELL_CACHE);
+        await shell.put(DATA_VERSION_KEY, new Response(version));
+        versionPromise = Promise.resolve(version);
+      } catch (error) {
+        await caches.delete(cacheName);
+        throw error;
+      }
+      await deleteOldDataCaches(cacheName).catch(() => {});
+    }).finally(() => preparations.delete(version));
+    preparations.set(version, preparation);
+    preparationQueue = preparation.catch(() => {});
+  }
+  return preparations.get(version);
+}
+
+async function cachedManifest() {
+  const version = await currentVersion();
+  const cache = version ? await caches.open(DATA_CACHE_PREFIX + version) : null;
+  return cache?.match(MANIFEST_PATH);
 }
 
 async function refreshManifest(request) {
@@ -92,37 +149,38 @@ async function refreshManifest(request) {
   try {
     response = await fetch(request);
   } catch (error) {
-    const version = await currentVersion();
-    const cache = version ? await caches.open(DATA_CACHE_PREFIX + version) : null;
-    const cached = await cache?.match(MANIFEST_PATH);
+    const cached = await cachedManifest();
     if (cached) {
-      return cached;
+      return { response: cached };
     }
     throw error;
   }
-  if (cacheable(response)) {
-    try {
-      const { dataset_version: version } = await response.clone().json();
-      if (typeof version === 'string' && version.trim()) {
-        const cacheName = DATA_CACHE_PREFIX + version;
-        const cache = await caches.open(cacheName);
-        await cache.put(MANIFEST_PATH, response.clone());
-        const shell = await caches.open(SHELL_CACHE);
-        await shell.put(DATA_VERSION_KEY, new Response(version));
-        versionPromise = Promise.resolve(version);
-        await deleteOldDataCaches(cacheName);
-      }
-    } catch {
-    }
+  if (!cacheable(response)) {
+    return { response };
   }
-  return response;
+  let next = null;
+  try {
+    next = (await response.clone().json()).dataset_version;
+  } catch {
+  }
+  const version = await currentVersion();
+  if (!version) {
+    await prepare(response.clone()).catch(() => {});
+    return { response };
+  }
+  if (next === version) {
+    return { response };
+  }
+  const preparation = prepare(response.clone()).catch(() => {});
+  return { response: await cachedManifest() ?? response, preparation };
 }
 
-function manifestNetworkFirst(request) {
+function manifestNetworkFirst(request, event) {
   manifestRequest ??= refreshManifest(request).finally(() => {
     manifestRequest = null;
   });
-  return manifestRequest.then(response => response.clone());
+  event?.waitUntil(manifestRequest.then(result => result.preparation).catch(() => {}));
+  return manifestRequest.then(result => result.response.clone());
 }
 
 async function currentDataCache() {
@@ -145,8 +203,8 @@ async function dataCacheFirst(request) {
     return cached;
   }
   const response = await fetch(request);
-  if (cacheName === DATA_CACHE_PREFIX + await currentVersion()) {
-    await saveResponse(cacheName, request, response).catch(() => {});
+  if (cache && cacheName === DATA_CACHE_PREFIX + await currentVersion() && cacheable(response)) {
+    await cache.put(request, response.clone()).catch(() => {});
   }
   return response;
 }
@@ -167,13 +225,19 @@ function navigationPage(path) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(SHELL_CACHE);
-    await cache.addAll(PRECACHE);
     await Promise.all(PRECACHE.map(async path => {
-      const response = await cache.match(path);
-      if (response && noStore(response)) {
-        await cache.delete(path);
+      const response = await fetch(new Request(new URL(path, self.location.origin), { cache: 'reload' }));
+      if (!response.ok) {
+        throw new Error(`Cannot fetch ${path}`);
+      }
+      if (cacheable(response)) {
+        await cache.put(path, response);
       }
     }));
+    if (!await currentVersion()) {
+      await fetch(new Request(new URL(MANIFEST_PATH, self.location.origin), { cache: 'reload' }))
+          .then(prepare).catch(() => {});
+    }
     await self.skipWaiting();
   })());
 });
@@ -196,7 +260,7 @@ self.addEventListener('fetch', event => {
     return;
   }
   if (url.pathname.startsWith('/api/learning/')) {
-    event.respondWith(currentDataCache().then(cacheName => networkFirst(request, cacheName)));
+    event.respondWith(dataCacheFirst(request));
   } else if (url.pathname.startsWith('/api/')) {
     return;
   } else if (request.mode === 'navigate') {
@@ -206,7 +270,7 @@ self.addEventListener('fetch', event => {
   } else if (shellPaths.has(url.pathname)) {
     event.respondWith(networkFirst(request, SHELL_CACHE, url.pathname));
   } else if (url.pathname === MANIFEST_PATH) {
-    event.respondWith(manifestNetworkFirst(request));
+    event.respondWith(manifestNetworkFirst(request, event));
   } else if (url.pathname.startsWith('/learning/')) {
     event.respondWith(dataCacheFirst(request));
   }

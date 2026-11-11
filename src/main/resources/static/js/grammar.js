@@ -52,8 +52,10 @@ async function analyze() {
       return;
     }
     Object.assign(state, { text, matches: body.matches, selected: null, analyzed: true });
+    $('offline-note').hidden = navigator.onLine;
     render();
   } catch {
+    $('offline-note').hidden = false;
     showError('Could not reach the server. The grammar analyzer needs an internet connection; kanji and vocabulary work offline.');
   } finally {
     $('analyze').disabled = !navigator.onLine;
