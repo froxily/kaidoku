@@ -137,6 +137,7 @@ class StudyProgressE2eTest {
         open(SET);
         answerAll(true);
         assertThat(page.locator(".score")).hasText("8 / 8");
+        waitUntil("async () => { const store = await (await import('/js/learn/store.js')).progressStore(); return (await store.sessions()).length === 1 && (await store.sets()).length === 1; }");
 
         open("/kanji/lesson/kanji-n5-1");
         page.reload();
