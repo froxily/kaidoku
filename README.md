@@ -23,7 +23,7 @@ Kaidoku has three parts:
 |---|---|
 | Grammar patterns | **341** (36 N5 · 118 N4 · 187 N3), covering every in-scope N5 and N4 point and all 62 N3 points of an openly licensed JLPT grammar checklist, with restrictions ([coverage](#coverage)) |
 | Learning data | **640** kanji, **2,963** words and **2,926** reading questions from [OpenJLPT](https://github.com/evanclan/OpenJLPT) (CC BY-SA 4.0), validated at startup ([details](#kanji-and-vocabulary)) |
-| Tests | **3,374** unit and integration tests + **72** browser tests, run in CI on every push to `main` |
+| Tests | **3,374** unit and integration tests + **78** browser tests, run in CI on every push to `main` |
 | Accuracy | **0.992 precision / 0.989 recall** on 655 regression sentences for the original 199 rules; a first run on a pre-registered held-out set for the 142 new rules scored 0.991 / 0.944 ([methodology](#evaluation)) |
 | Speed | about **24 ms** to analyze 10,000 characters of grammar-dense text ([details](#performance)) |
 | Stack | Java 21, Spring Boot 4.1, Kuromoji (IPADIC), vanilla JS (ES modules, no build step), IndexedDB, service worker, Docker, GitHub Actions, Playwright, axe-core |
@@ -95,6 +95,7 @@ All 62 N3 points have a rule, with restrictions for ambiguous forms: ～たも�
 - **Meaning checks are self-graded.** You type what you think the word or kanji means, then see every listed meaning and mark whether you had it. Multiple-choice meaning questions are deliberately not used: in the source data, several "verified" ones had two correct answers.
 - **Spaced review.** Reading and meaning are scheduled separately. A miss comes back after 10 minutes; a correct answer after 1 day, then after the previous interval × an ease factor (starting at 2.5, lowered by misses), up to 365 days. Reviews fall due at 04:00 local time on their day. Each reading or meaning track counts as learned after two correct answers in a row, including practice.
 - **Your data stays with you.** Progress lives only in the browser (IndexedDB), with backup to a file, restore (a merge that never replaces newer progress) and reset. There are no accounts and no analytics.
+- **Opening animation.** A four-second intro plays over the dashboard once per launch, then fades straight into it. Skip it with the button or Esc; with reduced motion it shows a still frame briefly. It needs no network and works offline.
 - **Offline.** After one online visit, the dashboard, both libraries, every set, quiz and review work without a connection. The grammar analyzer runs on the server, so it says plainly when it is offline.
 - **Search** accepts kanji, kana, romaji (including macrons such as ōkii) and English.
 
@@ -138,7 +139,7 @@ Run the tests:
 ./mvnw verify -Pe2e
 ```
 
-The second command runs the 72 browser tests on their own (the `e2e` profile selects only them). They use an installed Edge by default (`-De2e.browser.channel=chrome` for Chrome) and never download a browser. For a scripted walkthrough and how to record a demo GIF, see [docs/DEMO.md](docs/DEMO.md).
+The second command runs the 78 browser tests on their own (the `e2e` profile selects only them). They use an installed Edge by default (`-De2e.browser.channel=chrome` for Chrome) and never download a browser. For a scripted walkthrough and how to record a demo GIF, see [docs/DEMO.md](docs/DEMO.md).
 
 ## API
 
@@ -249,9 +250,9 @@ To add a rule: dump the tokens of its example sentences with `/api/tokens` first
 | `PatternMatcherPerformanceTest` | 1 | Twenty analyses of a text just under the 10,000-character limit within a time budget |
 | `LearningCatalogTest`, `LearningControllerTest` | 40 | Release validation (hashes, schema, counts, code-point links, ambiguous questions), study-set planning, learning API |
 | `SecurityHeadersTest`, `ServiceWorkerPrecacheTest` | 11 | Security headers on every route; every static file is in the offline precache |
-| `KaidokuE2eTest` (`-Pe2e`) | 8 | In a real browser: highlighting, cards, level filter, overlaps, hiding nested patterns, mobile layout, invalid input |
-| Learning, quiz, progress and offline E2E tests (`-Pe2e`) | 51 | Dashboard, search, study cards, quizzes, meaning checks, spaced review on a fast-forwarded clock, cross-tab reset, corrupt and blocked storage, backup and restore, touch input, offline use, the intro hook |
-| `AccessibilityE2eTest` (`-Pe2e`) | 5 | axe-core WCAG 2.2 AA checks on 16 screens in light and dark themes at 375 and 1280 px, no horizontal scrolling, visible keyboard focus |
+| `KaidokuE2eTest` (`-Pe2e`) | 9 | In a real browser: highlighting, cards, level filter, overlaps, hiding nested patterns, mobile layout, invalid input |
+| Learning, quiz, progress and offline E2E tests (`-Pe2e`) | 61 | Dashboard, search, study cards, quizzes, meaning checks, spaced review on a fast-forwarded clock, cross-tab reset, corrupt and blocked storage, backup and restore, touch input, offline use, the opening animation |
+| `AccessibilityE2eTest` (`-Pe2e`) | 8 | axe-core WCAG 2.2 AA checks on 16 screens in light and dark themes at 375 and 1280 px, no horizontal scrolling, visible keyboard focus |
 
 GitHub Actions runs three jobs on every push to `main` and every pull request: the test suite, the browser tests (in Chrome), and a Docker build that starts the container and checks it answers correctly as a non-root user.
 

@@ -72,6 +72,7 @@ class StudyProgressE2eTest {
     @BeforeEach
     void openContext() {
         context = browser.newContext(new Browser.NewContextOptions().setAcceptDownloads(true));
+        context.addInitScript("try { sessionStorage.setItem('kaidoku:intro-played', '1') } catch (e) {}");
         page = context.newPage();
     }
 
@@ -424,6 +425,7 @@ class StudyProgressE2eTest {
     void meaningCheckWorksByTouchOnAPhone() {
         context.close();
         context = browser.newContext(new Browser.NewContextOptions().setHasTouch(true).setIsMobile(true).setViewportSize(375, 812));
+        context.addInitScript("try { sessionStorage.setItem('kaidoku:intro-played', '1') } catch (e) {}");
         page = context.newPage();
         open("/kanji/quiz/kanji-n5-1/meaning");
         page.locator("#recall").fill("day");

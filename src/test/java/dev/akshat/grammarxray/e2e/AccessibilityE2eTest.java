@@ -116,6 +116,7 @@ class AccessibilityE2eTest {
     void keyboardFocusIsNotHiddenBehindTheTabBar(String path, int width, int scale, String target) {
         context = browser.newContext(new Browser.NewContextOptions()
                 .setViewportSize(width, 450).setDeviceScaleFactor(scale));
+        context.addInitScript("try { sessionStorage.setItem('kaidoku:intro-played', '1') } catch (e) {}");
         page = context.newPage();
         page.navigate("http://localhost:" + port + path);
         assertThat(page.locator(target)).isVisible();
@@ -153,6 +154,7 @@ class AccessibilityE2eTest {
     @org.junit.jupiter.api.Test
     void keyboardFocusIsDrawnAsAnUnclippedOutline() {
         context = browser.newContext(new Browser.NewContextOptions().setViewportSize(1280, 900));
+        context.addInitScript("try { sessionStorage.setItem('kaidoku:intro-played', '1') } catch (e) {}");
         page = context.newPage();
         page.navigate("http://localhost:" + port + "/");
         page.locator(".module-card").first().focus();
@@ -177,6 +179,7 @@ class AccessibilityE2eTest {
     void everyScreenPassesAutomatedWcagChecks(ColorScheme scheme, int width) {
         context = browser.newContext(new Browser.NewContextOptions()
                 .setColorScheme(scheme).setViewportSize(width, 900));
+        context.addInitScript("try { sessionStorage.setItem('kaidoku:intro-played', '1') } catch (e) {}");
         page = context.newPage();
         List<String> problems = new ArrayList<>();
         for (Screen screen : screens()) {

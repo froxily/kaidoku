@@ -1,3 +1,10 @@
+if (location.pathname !== '/' && location.pathname !== '/index.html') {
+  try {
+    sessionStorage.setItem('kaidoku:intro-played', '1');
+  } catch {
+  }
+}
+
 const MODES = ['system', 'light', 'dark'];
 const LABELS = { system: 'Theme: match system', light: 'Theme: light', dark: 'Theme: dark' };
 const root = document.documentElement;

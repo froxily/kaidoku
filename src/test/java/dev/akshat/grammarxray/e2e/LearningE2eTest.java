@@ -60,6 +60,7 @@ class LearningE2eTest {
     @BeforeEach
     void openContext() {
         context = browser.newContext();
+        context.addInitScript("try { sessionStorage.setItem('kaidoku:intro-played', '1') } catch (e) {}");
         page = context.newPage();
     }
 

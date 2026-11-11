@@ -1,0 +1,743 @@
+.ki-intro {
+
+  --ki-bg: #f5f3ef;
+  --ki-ink: #1b1a18;
+  --ki-ink-2: #55514a;
+  --ki-ink-3: #8b867d;
+  --ki-line: rgba(27, 26, 24, 0.14);
+  --ki-chip-bg: #fbfaf7;
+  --ki-chip-line: rgba(27, 26, 24, 0.12);
+  --ki-mark-bg: #1b1a18;
+  --ki-mark-fg: #ffffff;
+  --ki-mark-shadow: 0 1px 0 rgba(27, 26, 24, 0.04), 0 18px 40px -22px rgba(27, 26, 24, 0.45);
+  --ki-watermark: rgba(27, 26, 24, 0.036);
+  --ki-accent: #a3401f;
+  --ki-hl-tint: rgba(61, 79, 161, 0.11);
+  --ki-hl-line: #3d4fa1;
+  --ki-focus: #3d4fa1;
+
+
+  --ki-font-serif: 'Source Serif 4', 'Source Serif Pro', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --ki-font-sans: 'Noto Sans JP', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Segoe UI',
+    system-ui, sans-serif;
+  --ki-font-jp: 'Noto Sans JP', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+  --ki-font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, Consolas, monospace;
+
+
+  --ki-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ki-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ki-ease-exit: cubic-bezier(0.45, 0, 0.25, 1);
+
+
+  --ki-eyebrow: clamp(10px, 2.7vw, 12px);
+  --ki-sentence: clamp(1rem, 4.4vw, 1.5rem);
+  --ki-kanji: clamp(3.25rem, min(17vw, 10svh), 6rem);
+  --ki-reading: clamp(0.8125rem, 3.4vw, 1rem);
+  --ki-word: clamp(2.25rem, min(11vw, 6.5svh), 3.5rem);
+  --ki-gloss: clamp(0.875rem, 3.6vw, 1.0625rem);
+  --ki-mark: clamp(52px, min(14vw, 10svh), 96px);
+  --ki-wordmark: clamp(2rem, min(9vw, 7.5svh), 3.75rem);
+
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0)
+    env(safe-area-inset-left, 0);
+  background: var(--ki-bg);
+  color: var(--ki-ink);
+  font-family: var(--ki-font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  touch-action: none;
+  overscroll-behavior: contain;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  contain: layout paint style;
+  animation: ki-exit 900ms var(--ki-ease-exit) 3100ms both;
+}
+
+.ki-intro[data-theme='dark'] {
+  --ki-bg: #141412;
+  --ki-ink: #ece9e3;
+  --ki-ink-2: #b6b1a8;
+  --ki-ink-3: #7f7a71;
+  --ki-line: rgba(236, 233, 227, 0.14);
+  --ki-chip-bg: #1c1b19;
+  --ki-chip-line: rgba(236, 233, 227, 0.12);
+  --ki-mark-bg: #ece9e3;
+  --ki-mark-fg: #141412;
+  --ki-mark-shadow: 0 0 0 1px rgba(236, 233, 227, 0.06), 0 18px 40px -22px rgba(0, 0, 0, 0.8);
+  --ki-watermark: rgba(236, 233, 227, 0.032);
+  --ki-accent: #d0835f;
+  --ki-hl-tint: rgba(129, 146, 230, 0.16);
+  --ki-hl-line: #8f9df0;
+  --ki-focus: #8f9df0;
+}
+
+
+.ki-intro :where(*, *::before, *::after) {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+
+.ki-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ki-scene {
+  grid-area: 1 / 1;
+}
+
+
+.ki-a {
+  animation: ki-rise var(--ki-dur, 620ms) var(--ki-ease-out) var(--ki-delay, 0ms) both;
+}
+
+
+.ki-watermark {
+  position: absolute;
+  top: 50%;
+  right: 3vw;
+  writing-mode: vertical-rl;
+  height: 1em;
+  font-family: var(--ki-font-jp);
+  font-weight: 300;
+  font-size: min(46svh, 23vw);
+  line-height: 1;
+  color: var(--ki-watermark);
+  transform: translateY(-50%);
+  pointer-events: none;
+  animation: ki-watermark 3100ms linear both;
+}
+
+
+.ki-rule {
+  position: relative;
+  display: block;
+  width: min(220px, 46vw);
+  height: 1px;
+  background: var(--ki-ink);
+  opacity: 0.4;
+  transform-origin: 50% 50%;
+  animation:
+    ki-draw-x 470ms var(--ki-ease-out) 60ms both,
+    ki-fade-out 300ms var(--ki-ease) 560ms forwards;
+}
+
+.ki-rule::before,
+.ki-rule::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 1px;
+  height: 7px;
+  background: inherit;
+  animation: ki-fade-in 220ms var(--ki-ease) 380ms both;
+}
+
+.ki-rule::before {
+  left: 0;
+}
+
+.ki-rule::after {
+  right: 0;
+}
+
+
+.ki-specimens {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  row-gap: clamp(14px, 3svh, 36px);
+  width: min(440px, 86vw);
+  animation: ki-scene-out 380ms var(--ki-ease) 1700ms forwards;
+}
+
+.ki-spec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 2.2svh, 20px);
+  min-width: 0;
+  text-align: center;
+}
+
+.ki-spec-body {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.ki-eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9em;
+  font-family: var(--ki-font-sans);
+  font-size: var(--ki-eyebrow);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ki-ink-3);
+}
+
+.ki-num {
+  font-family: var(--ki-font-mono);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ki-accent);
+}
+
+.ki-divider {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--ki-line);
+  animation: ki-draw-x 520ms var(--ki-ease-out) var(--ki-delay) both;
+}
+
+.ki-divider--a {
+  --ki-delay: 700ms;
+}
+.ki-divider--b {
+  --ki-delay: 880ms;
+}
+
+.ki-spec--grammar .ki-eyebrow {
+  --ki-delay: 560ms;
+}
+.ki-spec--kanji .ki-eyebrow {
+  --ki-delay: 760ms;
+}
+.ki-spec--vocab .ki-eyebrow {
+  --ki-delay: 940ms;
+}
+
+
+.ki-sentence {
+  font-family: var(--ki-font-jp);
+  font-size: var(--ki-sentence);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--ki-ink);
+}
+
+.ki-ch {
+  display: inline-block;
+  animation: ki-char 440ms var(--ki-ease-out) calc(600ms + var(--i, 0) * 24ms) both;
+}
+
+.ki-hl {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.ki-hl::before {
+  content: '';
+  position: absolute;
+  inset: 0.12em -0.1em 0.02em;
+  z-index: -1;
+  border-radius: 3px;
+  background: var(--ki-hl-tint);
+  animation: ki-fade-in 420ms var(--ki-ease) 1120ms both;
+}
+
+.ki-hl::after {
+  content: '';
+  position: absolute;
+  right: -0.1em;
+  bottom: -0.02em;
+  left: -0.1em;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--ki-hl-line);
+  transform-origin: 0 50%;
+  animation: ki-draw-x 520ms var(--ki-ease-out) 1040ms both;
+}
+
+
+.ki-kanji {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 28px);
+}
+
+.ki-kanji-glyph {
+  display: block;
+  font-family: var(--ki-font-jp);
+  font-size: var(--ki-kanji);
+  font-weight: 400;
+  line-height: 1;
+  --ki-delay: 820ms;
+  --ki-dur: 700ms;
+}
+
+.ki-readings {
+  display: grid;
+  gap: 0.6em;
+  font-size: var(--ki-reading);
+  text-align: left;
+}
+
+.ki-reading {
+  display: flex;
+  align-items: center;
+  gap: 0.65em;
+  --ki-rise: 6px;
+}
+
+.ki-reading--on {
+  --ki-delay: 1000ms;
+}
+.ki-reading--kun {
+  --ki-delay: 1080ms;
+}
+
+.ki-chip {
+  display: grid;
+  place-items: center;
+  width: 1.85em;
+  height: 1.85em;
+  border: 1px solid var(--ki-chip-line);
+  border-radius: 6px;
+  background: var(--ki-chip-bg);
+  font-size: 0.78em;
+  line-height: 1;
+  color: var(--ki-ink-3);
+}
+
+.ki-reading dd {
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  color: var(--ki-ink-2);
+}
+
+
+.ki-vocab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.ki-word {
+  font-family: var(--ki-font-jp);
+  font-size: var(--ki-word);
+  font-weight: 400;
+  line-height: 1.25;
+  --ki-delay: 1000ms;
+  --ki-dur: 680ms;
+}
+
+.ki-word ruby {
+  ruby-position: over;
+  ruby-align: center;
+}
+
+.ki-word rt {
+  font-size: 0.32em;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ki-ink-3);
+  animation: ki-fade-in 420ms var(--ki-ease) 1200ms both;
+}
+
+.ki-gloss {
+  font-family: var(--ki-font-serif);
+  font-size: var(--ki-gloss);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--ki-ink-3);
+  --ki-delay: 1240ms;
+  --ki-rise: 6px;
+}
+
+
+.ki-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 88vw;
+  text-align: center;
+  animation: ki-drift 900ms var(--ki-ease-exit) 3100ms forwards;
+}
+
+.ki-mark {
+  display: grid;
+  place-items: center;
+  width: var(--ki-mark);
+  height: var(--ki-mark);
+  overflow: hidden;
+  border-radius: 23%;
+  background: var(--ki-mark-bg);
+  color: var(--ki-mark-fg);
+  box-shadow: var(--ki-mark-shadow);
+  --ki-delay: 1820ms;
+  --ki-dur: 760ms;
+  --ki-rise: 12px;
+}
+
+.ki-mark-glyph {
+  font-family: var(--ki-font-jp);
+  font-size: calc(var(--ki-mark) * 0.54);
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-0.02em);
+}
+
+.ki-mark-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ki-wordmark {
+  margin-top: clamp(16px, 2.8svh, 28px);
+  font-family: var(--ki-font-serif);
+  font-size: var(--ki-wordmark);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ki-ink);
+  --ki-delay: 1950ms;
+  --ki-dur: 720ms;
+}
+
+.ki-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: clamp(14px, 2.4svh, 22px);
+}
+
+.ki-meta-jp {
+  margin-right: -0.32em;
+  font-family: var(--ki-font-jp);
+  font-size: clamp(0.9375rem, 3.8vw, 1.125rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.32em;
+  color: var(--ki-ink-2);
+  --ki-delay: 2080ms;
+  --ki-rise: 6px;
+}
+
+.ki-meta-rule {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--ki-ink-3);
+  opacity: 0.6;
+  transform-origin: 0 50%;
+  animation: ki-draw-x 520ms var(--ki-ease-out) 2160ms both;
+}
+
+.ki-tagline {
+  font-family: var(--ki-font-sans);
+  font-size: var(--ki-eyebrow);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ki-ink-3);
+  --ki-delay: 2200ms;
+  --ki-rise: 6px;
+}
+
+
+.ki-skip {
+  position: absolute;
+  right: calc(env(safe-area-inset-right, 0px) + clamp(14px, 3vw, 32px));
+  bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(14px, 3svh, 32px));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  height: 36px;
+  padding: 0 14px 0 16px;
+  border: 1px solid var(--ki-line);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--ki-font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--ki-ink-3);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    color 160ms var(--ki-ease),
+    border-color 160ms var(--ki-ease),
+    background-color 160ms var(--ki-ease);
+  animation: ki-fade-in 500ms var(--ki-ease) 450ms both;
+}
+
+
+.ki-skip::before {
+  content: '';
+  position: absolute;
+  inset: -6px -4px;
+}
+
+.ki-skip svg {
+  width: 12px;
+  height: 12px;
+  flex: none;
+}
+
+.ki-skip:hover {
+  border-color: color-mix(in srgb, var(--ki-ink) 28%, transparent);
+  color: var(--ki-ink);
+}
+
+.ki-skip:active {
+  background: color-mix(in srgb, var(--ki-ink) 6%, transparent);
+}
+
+.ki-skip:focus-visible {
+  outline: 2px solid var(--ki-focus);
+  outline-offset: 3px;
+  color: var(--ki-ink);
+}
+
+
+@media (orientation: landscape) and (min-width: 560px) {
+  .ki-intro {
+    --ki-eyebrow: clamp(10px, min(0.85vw, 2.6svh), 12px);
+    --ki-sentence: clamp(0.95rem, min(1.55vw, 4.2svh), 1.4rem);
+    --ki-kanji: clamp(3rem, min(7vw, 17svh), 6.5rem);
+    --ki-reading: clamp(0.8125rem, min(1.05vw, 3.4svh), 1rem);
+    --ki-word: clamp(2rem, min(4vw, 10svh), 3.75rem);
+    --ki-gloss: clamp(0.875rem, min(1.15vw, 3.6svh), 1.0625rem);
+  }
+
+  .ki-specimens {
+    grid-template-columns: 1.2fr auto 1fr auto 0.9fr;
+    align-items: stretch;
+    justify-items: stretch;
+    column-gap: clamp(20px, 3.2vw, 56px);
+    width: min(1180px, 88vw);
+  }
+
+  .ki-spec {
+    padding-block: clamp(4px, 1svh, 12px);
+  }
+
+  .ki-divider {
+    width: 1px;
+    height: auto;
+    animation-name: ki-draw-y;
+  }
+
+  .ki-watermark {
+    right: 4vw;
+  }
+}
+
+
+@media (orientation: portrait) {
+  .ki-watermark {
+    top: auto;
+    right: -4vw;
+    bottom: 3svh;
+    font-size: min(38vw, 22svh);
+    transform: none;
+  }
+}
+
+
+@media (max-width: 520px) {
+  .ki-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ki-meta-rule {
+    width: 20px;
+    transform-origin: 50% 50%;
+  }
+}
+
+
+
+
+.ki-intro.ki-paused,
+.ki-intro.ki-paused *,
+.ki-intro.ki-paused *::before,
+.ki-intro.ki-paused *::after {
+  animation-play-state: paused !important;
+}
+
+
+.ki-intro.ki-reduced {
+  animation: ki-exit 400ms var(--ki-ease) 1500ms both;
+}
+
+.ki-intro.ki-reduced .ki-scene--open,
+.ki-intro.ki-reduced .ki-specimens {
+  display: none;
+}
+
+.ki-intro.ki-reduced .ki-brand,
+.ki-intro.ki-reduced .ki-brand *,
+.ki-intro.ki-reduced .ki-watermark,
+.ki-intro.ki-reduced .ki-skip {
+  animation: none;
+}
+
+
+.ki-intro.ki-leaving {
+  pointer-events: none;
+}
+
+.ki-intro.ki-leaving .ki-skip {
+  visibility: hidden;
+}
+
+
+.ki-intro.ki-skipping {
+  pointer-events: none;
+  animation: ki-fade-out 320ms var(--ki-ease-exit) forwards;
+}
+
+
+@keyframes ki-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--ki-rise, 10px), 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ki-char {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.22em, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ki-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes ki-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes ki-draw-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ki-draw-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes ki-scene-out {
+  to {
+    opacity: 0;
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes ki-drift {
+  to {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes ki-watermark {
+  0%,
+  10% {
+    opacity: 0;
+    animation-timing-function: var(--ki-ease);
+  }
+  40%,
+  56% {
+    opacity: 0.55;
+    animation-timing-function: var(--ki-ease);
+  }
+  86%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes ki-exit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+
+html.ki-intro-pending::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  animation: ki-guard-expire 1ms linear 6s forwards;
+}
+
+@keyframes ki-guard-expire {
+  to {
+    visibility: hidden;
+  }
+}
+
+.ki-intro,
+.ki-intro[data-theme='dark'] {
+  --ki-bg: var(--bg);
+}
+
+html.ki-intro-pending::before {
+  background: var(--bg);
+}

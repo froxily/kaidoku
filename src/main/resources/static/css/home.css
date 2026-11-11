@@ -266,34 +266,3 @@
     font-size: 7.5rem;
   }
 }
-
-.intro {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: grid;
-  place-items: center;
-  background: var(--bg);
-  opacity: 1;
-  transition: opacity var(--dur) var(--ease);
-}
-
-.intro.is-leaving {
-  opacity: 0;
-}
-
-.intro-media {
-  max-width: min(92vw, 960px);
-  max-height: 80dvh;
-  object-fit: contain;
-}
-
-.intro-skip {
-  position: absolute;
-  right: max(var(--space-5), env(safe-area-inset-right));
-  bottom: max(var(--space-5), env(safe-area-inset-bottom));
-}
-
-.intro-active {
-  overflow: hidden;
-}

@@ -59,6 +59,7 @@ class OfflineE2eTest {
     @BeforeEach
     void openContext() {
         context = browser.newContext();
+        context.addInitScript("try { sessionStorage.setItem('kaidoku:intro-played', '1') } catch (e) {}");
         page = context.newPage();
     }
 
@@ -128,6 +129,46 @@ class OfflineE2eTest {
         assertThat(page.locator(".activity")).hasCount(3);
         open("/kanji/quiz/kanji-n5-1/reading");
         assertThat(page.locator(".option")).hasCount(4);
+    }
+
+    @Test
+    void introPlaysOfflineOnANewLaunch() {
+        context.close();
+        context = browser.newContext();
+        context.addInitScript("""
+                new MutationObserver((records, observer) => {
+                  if (document.querySelector('.ki-intro')) {
+                    window.__introMountedAt = performance.now();
+                    observer.disconnect();
+                  }
+                }).observe(document, { childList: true, subtree: true });
+                window.addEventListener('kaidoku:intro-complete', e => {
+                  window.__introReason = e.detail.reason;
+                  window.__introAt = performance.now();
+                });
+                """);
+        page = context.newPage();
+        open("/");
+        page.locator(".ki-skip").click();
+        assertThat(page.locator(".ki-intro")).hasCount(0);
+        warmDashboard();
+        context.setOffline(true);
+
+        page = context.newPage();
+        open("/");
+        assertThat(page.locator(".ki-intro")).hasCount(1);
+        org.assertj.core.api.Assertions.assertThat(page.locator(".ki-intro").evaluate(
+                "el => { const s = getComputedStyle(el); return [s.position, s.zIndex, s.animationName, s.backgroundColor === getComputedStyle(document.body).backgroundColor]; }"))
+                .isEqualTo(List.of("fixed", "2147483647", "ki-exit", true));
+        waitUntil("() => window.__introReason === 'completed'");
+        org.assertj.core.api.Assertions.assertThat(((Number) page.evaluate("() => window.__introAt - window.__introMountedAt")).doubleValue())
+                .isBetween(3_900.0, 5_500.0);
+        assertThat(page.locator(".ki-intro")).hasCount(0);
+        assertThat(page.locator("html.ki-intro-pending, [inert]")).hasCount(0);
+        assertThat(page.locator(".module-card")).hasCount(3);
+        for (int i = 0; i < 3; i++) {
+            assertThat(page.locator(".module-card").nth(i)).isVisible();
+        }
     }
 
     @Test

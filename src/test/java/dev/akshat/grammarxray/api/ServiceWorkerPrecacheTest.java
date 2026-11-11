@@ -32,8 +32,7 @@ class ServiceWorkerPrecacheTest {
         try (var paths = Files.walk(STATIC_ROOT)) {
             expected = paths.filter(Files::isRegularFile)
                     .map(path -> "/" + STATIC_ROOT.relativize(path).toString().replace('\\', '/'))
-                    .filter(path -> !path.startsWith("/learning/") && !path.startsWith("/intro/")
-                            && !path.equals("/sw.js"))
+                    .filter(path -> !path.startsWith("/learning/") && !path.equals("/sw.js"))
                     .collect(Collectors.toCollection(TreeSet::new));
         }
         expected.add("/");

@@ -58,6 +58,7 @@ class ProgressE2eTest {
     @BeforeEach
     void openContext() {
         context = browser.newContext();
+        context.addInitScript("try { sessionStorage.setItem('kaidoku:intro-played', '1') } catch (e) {}");
         page = context.newPage();
         page.navigate("http://localhost:" + port + "/kanji");
         page.evaluate("""
