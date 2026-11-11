@@ -8,6 +8,9 @@
   <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111217" media="(prefers-color-scheme: dark)">
   <script src="/js/theme.js"></script>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/grammar.css">
@@ -54,6 +57,7 @@
         <label class="toggle"><input type="checkbox" id="outermost"> Hide nested patterns</label>
       </div>
       <p id="error" class="error" role="alert" hidden></p>
+      <p id="offline-note" role="status" class="notice" hidden>The grammar analyzer needs an internet connection. Kanji and vocabulary keep working offline.</p>
     </section>
 
     <div class="results">

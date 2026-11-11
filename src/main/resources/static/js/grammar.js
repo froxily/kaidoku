@@ -33,6 +33,10 @@ function visibleMatches() {
 const byLengthDesc = (a, b) => (b.end - b.start) - (a.end - a.start) || a.start - b.start;
 
 async function analyze() {
+  if (!navigator.onLine) {
+    updateConnection();
+    return;
+  }
   const text = $('text').value;
   showError(null);
   $('analyze').disabled = true;
@@ -50,9 +54,9 @@ async function analyze() {
     Object.assign(state, { text, matches: body.matches, selected: null, analyzed: true });
     render();
   } catch {
-    showError('Could not reach the server.');
+    showError('Could not reach the server. The grammar analyzer needs an internet connection; kanji and vocabulary work offline.');
   } finally {
-    $('analyze').disabled = false;
+    $('analyze').disabled = !navigator.onLine;
   }
 }
 
@@ -196,6 +200,17 @@ function updateCount() {
   $('count').textContent = `${length.toLocaleString()} / ${MAX_LENGTH.toLocaleString()}`;
   $('count').classList.toggle('over', length > MAX_LENGTH);
 }
+
+function updateConnection() {
+  const offline = !navigator.onLine;
+  $('offline-note').hidden = !offline;
+  $('analyze').disabled = offline;
+  $('sample').disabled = offline;
+}
+
+window.addEventListener('offline', updateConnection);
+window.addEventListener('online', updateConnection);
+updateConnection();
 
 $('analyze').addEventListener('click', analyze);
 $('sample').addEventListener('click', () => {

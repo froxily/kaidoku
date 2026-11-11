@@ -46,3 +46,10 @@ document.querySelectorAll('[data-theme-toggle]').forEach(button => button.addEve
 }));
 showMode(currentMode());
 markNav(document.body.dataset.section);
+
+if ('serviceWorker' in navigator && (location.protocol === 'https:'
+    || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(() => {});
+  }, { once: true });
+}

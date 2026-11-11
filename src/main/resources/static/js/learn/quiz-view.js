@@ -1,7 +1,7 @@
 import { h, icon, ICONS, jp } from './dom.js';
 import { dataset, LEVELS, lessons } from './data.js';
 import { kindName } from './format.js';
-import { describeWhen, dueEntries, loadProgress, nextDue } from './progress.js';
+import { describeWhen, dueEntries, loadProgress, nextDue, requestPersistence } from './progress.js';
 import { isCorrect, prepare, QUIZ_SIZE, readingQuestions, sample, score, shuffle } from './quiz.js';
 import { progressStore } from './store.js';
 import { crumb, notFoundView, readingRows, wordTitle } from './views.js';
@@ -9,6 +9,7 @@ import { crumb, notFoundView, readingRows, wordTitle } from './views.js';
 const MODE_NAMES = { reading: 'Reading quiz', meaning: 'Meaning check', review: 'Review' };
 const ICON_CROSS = 'M6 6l12 12M18 6L6 18';
 const REVIEW_SIZE = 20;
+let persistenceRequested = false;
 
 function itemLabel(kind, item) {
   return kind === 'kanji' ? item.character : item.word;
@@ -114,24 +115,57 @@ function runQuiz({ kind, mode, scope, pool, total, signal, scopeId }) {
     }
   });
 
-  function save(promise) {
-    const tracked = promise.catch(() => {
-      notice.textContent = 'Your answers could not be saved in this browser. You can keep studying, but progress will be lost on reload.';
-      notice.hidden = false;
+  function save(work) {
+    const activeRound = round;
+    const tracked = activeRound.saving.then(async () => {
+      if (activeRound.invalidated) {
+        return;
+      }
+      const store = await progressStore();
+      const generation = await activeRound.generationRequest;
+      const saved = await work(store, { generation });
+      if (saved === null) {
+        activeRound.invalidated = true;
+        if (activeRound === round) {
+          notice.textContent = 'Progress was reset in another tab, so this round is not being saved. Start a new round to save your answers.';
+          notice.hidden = false;
+        }
+      }
+      return saved;
+    }).catch(() => {
+      if (activeRound === round && !activeRound.invalidated) {
+        notice.textContent = 'Your answers could not be saved in this browser. You can keep studying, but progress will be lost on reload.';
+        notice.hidden = false;
+      }
     });
+    activeRound.saving = tracked;
     saving.push(tracked);
   }
 
   function grade(entry, correct) {
-    save(progressStore().then(store => store.grade(
-        { kind, track: entry.track, id: entry.item.id, level: entry.item.level }, correct ? 'good' : 'again', Date.now())));
+    const now = Date.now();
+    save(async (store, options) => {
+      const saved = await store.grade(
+          { kind, track: entry.track, id: entry.item.id, level: entry.item.level }, correct ? 'good' : 'again', now, options);
+      if (saved !== null && !persistenceRequested) {
+        persistenceRequested = true;
+        requestPersistence();
+      }
+      return saved;
+    });
   }
 
   function begin(entries) {
+    if (round?.invalidated) {
+      notice.textContent = '';
+      notice.hidden = true;
+    }
     round = {
       list: entries.map(entry => entry.question ? { ...entry, question: prepare(entry.question) } : { ...entry }),
-      index: 0, results: [], phase: 'ask', choice: null, typed: '', startedAt: Date.now()
+      index: 0, results: [], phase: 'ask', choice: null, typed: '', startedAt: Date.now(),
+      generationRequest: progressStore().then(store => store.generation()), saving: Promise.resolve(), invalidated: false
     };
+    round.generationRequest.catch(() => {});
     live.textContent = `Question 1 of ${round.list.length}`;
     show('#quiz-prompt');
   }
@@ -221,23 +255,26 @@ function runQuiz({ kind, mode, scope, pool, total, signal, scopeId }) {
     const startedAt = round.startedAt;
     const finishedAt = Date.now();
     const outcome = { correct: results.filter(result => result.correct).length, total: results.length, at: finishedAt };
-    save(progressStore().then(async store => {
-      await Promise.all(saving.slice(0, -1));
-      await store.addSession({
+    save(async (store, options) => {
+      const saved = await store.addSession({
         id: `${kind}-${startedAt}-${Math.random().toString(36).slice(2, 8)}`,
         kind, scope: scopeId ?? (scope.level ?? 'all').toLowerCase(), mode, startedAt: Math.min(startedAt, finishedAt), finishedAt,
         total: outcome.total, correct: outcome.correct,
         missed: results.filter(result => !result.correct).map(result => ({ id: result.entry.item.id, track: result.entry.track }))
-      });
+      }, options);
+      if (saved === null) {
+        return null;
+      }
       if (scope.setId && (mode === 'reading' || mode === 'meaning')) {
-        await store.updateSet(kind, scope.setId, scope.level, set => {
+        return store.updateSet(kind, scope.setId, scope.level, set => {
           const track = set[mode];
           const better = !track.best || outcome.correct / outcome.total > track.best.correct / track.best.total
               || (outcome.correct / outcome.total === track.best.correct / track.best.total);
           return { ...set, [mode]: { attempts: track.attempts + 1, last: outcome, best: better ? outcome : track.best } };
-        }, finishedAt);
+        }, finishedAt, options);
       }
-    }));
+      return saved;
+    });
   }
 
   function next() {

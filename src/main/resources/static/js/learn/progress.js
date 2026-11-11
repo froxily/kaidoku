@@ -1,8 +1,11 @@
+import { dataset } from './data.js';
+import { readingQuestions } from './quiz.js';
 import { isDue, mastery, recordKey } from './srs.js';
 import { progressStore } from './store.js';
 
 const VERSION_KEY = 'datasetVersion';
 let versionCheck = null;
+let persistenceRequest;
 
 export async function loadProgress(kind) {
   const store = await progressStore();
@@ -16,21 +19,73 @@ export async function loadProgress(kind) {
 
 export function checkContentVersion() {
   versionCheck ??= (async () => {
-    const store = await progressStore();
     try {
+      const store = await progressStore();
       const response = await fetch('/learning/manifest.json', { credentials: 'same-origin' });
       if (!response.ok) {
-        return { changed: false };
+        return { changed: false, current: null };
       }
       const current = (await response.json()).dataset_version;
+      if (typeof current !== 'string' || !current) {
+        return { changed: false, current: null };
+      }
       const saved = await store.getMeta(VERSION_KEY);
       await store.setMeta(VERSION_KEY, current);
-      return { changed: Boolean(saved) && saved !== current };
+      return { changed: Boolean(saved) && saved !== current, current };
     } catch {
-      return { changed: false };
+      return { changed: false, current: null };
     }
   })();
   return versionCheck;
+}
+
+export async function reconcile(kind, data, readingIds) {
+  const [store, version] = await Promise.all([progressStore(), checkContentVersion()]);
+  const records = await store.records(kind);
+  const hidden = {
+    datasetVersion: version.current,
+    keys: records.filter(record => !data.byId.has(record.id) || (record.track === 'reading' && !readingIds.has(record.id)))
+        .map(record => record.key)
+  };
+  await store.setMeta(`hidden:${kind}`, hidden);
+  return hidden;
+}
+
+export async function dashboardDueCount(kind, now) {
+  try {
+    let current = null;
+    try {
+      const response = await fetch('/learning/manifest.json', { credentials: 'same-origin' });
+      if (response.ok) {
+        current = (await response.json()).dataset_version;
+      }
+    } catch {
+    }
+    const store = await progressStore();
+    let hidden = await store.getMeta(`hidden:${kind}`);
+    if (typeof current !== 'string' || !current || hidden?.datasetVersion !== current || !Array.isArray(hidden.keys)) {
+      const data = await dataset(kind);
+      const questions = await readingQuestions(kind, data.items);
+      hidden = await reconcile(kind, data, new Set(questions.keys()));
+    }
+    const keys = new Set(hidden.keys);
+    return (await store.records(kind))
+        .filter(record => record.state !== 'new' && isDue(record, now) && !keys.has(record.key)).length;
+  } catch {
+    return 0;
+  }
+}
+
+export function requestPersistence() {
+  persistenceRequest ??= (async () => {
+    try {
+      const storage = globalThis.navigator?.storage;
+      if (typeof storage?.persisted === 'function' && typeof storage?.persist === 'function' && !await storage.persisted()) {
+        await storage.persist();
+      }
+    } catch {
+    }
+  })();
 }
 
 export function trackRecord(progress, kind, track, id) {

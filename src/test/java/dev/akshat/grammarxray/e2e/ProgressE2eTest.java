@@ -237,6 +237,81 @@ class ProgressE2eTest {
     }
 
     @Test
+    void resetInvalidatesOlderGenerations() {
+        List<?> results = (List<?>) page.evaluate("""
+                async () => {
+                  const { openStore } = await import('/js/learn/store.js');
+                  const outcomes = [];
+                  for (const store of [await openStore(), await openStore({ idb: undefined })]) {
+                    const now = 1800000000000;
+                    const item = { kind: 'kanji', track: 'reading', id: '日', level: 'N5' };
+                    const session = {
+                      id: 'round', kind: 'kanji', scope: 'kanji-n5-1', mode: 'reading',
+                      startedAt: now, finishedAt: now + 1, total: 1, correct: 1, missed: []
+                    };
+                    const update = set => ({ ...set, cardsCompletedAt: now });
+                    const g0 = await store.generation();
+                    const first = await store.grade(item, 'good', now, { generation: g0 });
+                    await store.updateSet('kanji', 'kanji-n5-1', 'N5', update, now, { generation: g0 });
+                    await store.addSession(session, { generation: g0 });
+                    await store.reset();
+                    const g1 = await store.generation();
+                    const cleared = [await store.records(), await store.sets(), await store.sessions()];
+                    let updateCalled = false;
+                    const staleGrade = await store.grade(item, 'good', now, { generation: g0 });
+                    const staleSet = await store.updateSet('kanji', 'kanji-n5-1', 'N5', set => {
+                      updateCalled = true;
+                      return update(set);
+                    }, now, { generation: g0 });
+                    const staleSession = await store.addSession(session, { generation: g0 });
+                    const afterStale = [await store.records(), await store.sets(), await store.sessions()];
+                    const freshGrade = await store.grade(item, 'good', now, { generation: g1 });
+                    const freshSet = await store.updateSet('kanji', 'kanji-n5-1', 'N5', update, now, { generation: g1 });
+                    const freshSession = await store.addSession(session, { generation: g1 });
+                    const restored = [await store.records(), await store.sets(), await store.sessions()];
+                    await store.importData(await store.exportData(now + 2), now + 3);
+                    const afterImport = await store.generation();
+                    const invalidGenerations = [];
+                    for (const value of [null, -1, 1.5, '2']) {
+                      await store.setMeta('generation', value);
+                      invalidGenerations.push(await store.generation());
+                    }
+                    outcomes.push({
+                      persistent: store.persistent, g0, g1, first, cleared,
+                      staleGrade, staleSet, staleSession, updateCalled, afterStale,
+                      freshGrade, freshSet, freshSessionSaved: freshSession !== null, restored, afterImport, invalidGenerations
+                    });
+                  }
+                  return outcomes;
+                }
+                """);
+
+        assertThat(results).hasSize(2);
+        assertThat(((Map<?, ?>) results.get(0)).get("persistent")).isEqualTo(true);
+        assertThat(((Map<?, ?>) results.get(1)).get("persistent")).isEqualTo(false);
+        for (Object value : results) {
+            Map<?, ?> result = (Map<?, ?>) value;
+            assertThat(number(result.get("g0"))).isZero();
+            assertThat(number(result.get("g1"))).isEqualTo(number(result.get("g0")) + 1);
+            assertThat(number(((Map<?, ?>) result.get("first")).get("reps"))).isEqualTo(1L);
+            assertThat(result.get("cleared")).isEqualTo(List.of(List.of(), List.of(), List.of()));
+            assertThat(result.get("staleGrade")).isNull();
+            assertThat(result.get("staleSet")).isNull();
+            assertThat(result.get("staleSession")).isNull();
+            assertThat(result.get("updateCalled")).isEqualTo(false);
+            assertThat(result.get("afterStale")).isEqualTo(List.of(List.of(), List.of(), List.of()));
+            assertThat(number(((Map<?, ?>) result.get("freshGrade")).get("reps"))).isEqualTo(1L);
+            assertThat(number(((Map<?, ?>) result.get("freshSet")).get("cardsCompletedAt"))).isEqualTo(1800000000000L);
+            assertThat(result.get("freshSessionSaved")).isEqualTo(true);
+            for (Object rows : (List<?>) result.get("restored")) {
+                assertThat((List<?>) rows).hasSize(1);
+            }
+            assertThat(number(result.get("afterImport"))).isEqualTo(number(result.get("g1")));
+            assertThat(result.get("invalidGenerations")).isEqualTo(List.of(0, 0, 0, 0));
+        }
+    }
+
+    @Test
     void corruptRecordsAreSkippedNotFatal() {
         Map<?, ?> result = (Map<?, ?>) page.evaluate("""
                 async () => {

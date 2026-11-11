@@ -1,14 +1,12 @@
 import { INTRO } from './intro-config.js';
 import { playIntro } from './intro.js';
-import { isDue } from './learn/srs.js';
-import { progressStore } from './learn/store.js';
+import { dashboardDueCount } from './learn/progress.js';
 
 playIntro(INTRO);
 
-const store = await progressStore();
 const now = Date.now();
 for (const kind of ['kanji', 'vocab']) {
-  const due = (await store.records(kind)).filter(record => record.state !== 'new' && isDue(record, now)).length;
+  const due = await dashboardDueCount(kind, now);
   const line = document.querySelector(`[data-due="${kind}"]`);
   if (line && due) {
     line.textContent = `${due} ${due === 1 ? 'review' : 'reviews'} due`;

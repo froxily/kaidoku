@@ -163,6 +163,113 @@ class StudyProgressE2eTest {
     }
 
     @Test
+    void studyAgainAfterAResetInAnotherTabSavesAgain() {
+        String cardsDone = "async () => ((await (await (await import('/js/learn/store.js')).progressStore()).sets('kanji'))[0]?.cardsCompletedAt ?? null) !== null";
+        open("/kanji/lesson/kanji-n5-1?card=10");
+        page.locator("[data-role='next']").click();
+        assertThat(page.locator("h1")).hasText("Cards complete");
+        page.waitForFunction(cardsDone);
+
+        Page other = context.newPage();
+        other.navigate("http://localhost:" + port + "/kanji?level=N5");
+        other.onceDialog(dialog -> dialog.accept());
+        other.locator("[data-role='reset']").click();
+        assertThat(other.locator(".data-status")).hasText("Progress cleared.");
+        org.assertj.core.api.Assertions.assertThat(page.evaluate(cardsDone)).isEqualTo(false);
+
+        page.getByText("Study again").click();
+        assertThat(page.locator(".lesson-counter")).hasText("1 / 10");
+        for (int i = 0; i < 10; i++) {
+            page.locator("[data-role='next']").click();
+        }
+        assertThat(page.locator("h1")).hasText("Cards complete");
+        page.waitForFunction(cardsDone);
+    }
+
+    @Test
+    void resetInAnotherTabStopsTheOlderRound() {
+        open(SET);
+        for (int i = 0; i < 3; i++) {
+            assertThat(page.locator(".option:not([aria-disabled])").first()).isVisible();
+            var choices = (java.util.List<?>) page.evaluate(ANSWER);
+            page.keyboard().press(String.valueOf(((Number) choices.get(0)).intValue()));
+            page.locator("[data-role='next']").click();
+        }
+        page.waitForFunction("async () => (await (await (await import('/js/learn/store.js')).progressStore()).records('kanji')).length === 3");
+
+        Page other = context.newPage();
+        other.navigate("http://localhost:" + port + "/kanji?level=N5");
+        other.onceDialog(dialog -> dialog.accept());
+        other.locator("[data-role='reset']").click();
+        assertThat(other.locator(".data-status")).hasText("Progress cleared.");
+
+        for (int i = 3; i < 8; i++) {
+            assertThat(page.locator(".option:not([aria-disabled])").first()).isVisible();
+            var choices = (java.util.List<?>) page.evaluate(ANSWER);
+            page.keyboard().press(String.valueOf(((Number) choices.get(0)).intValue()));
+            page.locator("[data-role='next']").click();
+        }
+        assertThat(page.locator(".save-notice")).containsText("reset in another tab");
+        assertThat(page.locator(".score")).hasText("8 / 8");
+
+        other.reload();
+        Object saved = other.evaluate("""
+                async () => {
+                  const store = await (await import('/js/learn/store.js')).progressStore();
+                  return [await store.records('kanji'), await store.sets('kanji'), await store.sessions('kanji')];
+                }
+                """);
+        org.assertj.core.api.Assertions.assertThat(saved)
+                .isEqualTo(java.util.List.of(java.util.List.of(), java.util.List.of(), java.util.List.of()));
+
+        page.getByText("Retry all").click();
+        answerAll(true);
+        page.waitForFunction("async () => (await (await (await import('/js/learn/store.js')).progressStore()).records('kanji')).length === 8");
+        assertThat(page.locator(".save-notice")).isHidden();
+    }
+
+    @Test
+    void dashboardIgnoresDueReviewsThatCannotBeTaken() {
+        page.clock().install();
+        open("/grammar");
+        page.evaluate("""
+                async () => {
+                  const store = await (await import('/js/learn/store.js')).progressStore();
+                  const now = Date.now();
+                  await store.grade({ kind: 'vocab', track: 'meaning', id: 'zzzzzzzzzz', level: 'N5' }, 'again', now);
+                  await store.grade({ kind: 'vocab', track: 'meaning', id: 'ada066edfd', level: 'N5' }, 'again', now);
+                }
+                """);
+        page.clock().fastForward("11:00");
+
+        open("/");
+        assertThat(page.locator("[data-due='vocab']")).hasText("1 review due");
+
+        open("/vocab?level=N5");
+        assertThat(page.locator(".review-panel [role='status']")).hasText("1 review due now.");
+    }
+
+    @Test
+    void requestsPersistentStorageOnce() {
+        page.addInitScript("""
+                window.__persistCalls = 0;
+                Object.defineProperties(navigator.storage, {
+                  persisted: { configurable: true, value: async () => false },
+                  persist: { configurable: true, value: async () => { window.__persistCalls++; return true; } }
+                });
+                """);
+        open(SET);
+        for (int i = 0; i < 2; i++) {
+            assertThat(page.locator(".option:not([aria-disabled])").first()).isVisible();
+            var choices = (java.util.List<?>) page.evaluate(ANSWER);
+            page.keyboard().press(String.valueOf(((Number) choices.get(0)).intValue()));
+            page.locator("[data-role='next']").click();
+        }
+        page.waitForFunction("async () => (await (await (await import('/js/learn/store.js')).progressStore()).records('kanji')).length === 2");
+        org.assertj.core.api.Assertions.assertThat(((Number) page.evaluate("() => window.__persistCalls")).intValue()).isEqualTo(1);
+    }
+
+    @Test
     void corruptRecordsAreIgnoredWithANotice() {
         open(SET);
         answerAll(true);

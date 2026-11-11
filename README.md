@@ -1,15 +1,19 @@
 # Kaidoku (解読)
 
-**Japanese Grammar Analysis Engine**
+**Japanese reading companion: grammar breakdown, kanji and vocabulary (JLPT N5–N3)**
 
 [![CI](https://github.com/froxily/kaidoku/actions/workflows/ci.yml/badge.svg)](https://github.com/froxily/kaidoku/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **Live demo: [kaidoku.lemonrock-d6e24592.malaysiawest.azurecontainerapps.io](https://kaidoku.lemonrock-d6e24592.malaysiawest.azurecontainerapps.io/)**. It runs on Azure Container Apps and scales to zero when idle, so the first visit after a quiet spell takes about 15 seconds to wake up.
 
-Paste any Japanese text, such as a news article, a manga page, a subtitle line or an email, and Kaidoku highlights the grammar patterns it recognises. Each one is colour-coded by JLPT level (N5–N3), and clicking a highlight explains the pattern.
+Kaidoku has three parts:
 
-*Kaidoku* (解読) is Japanese for "deciphering". It is a **rule-based Java 21 / Spring Boot service, not an LLM**. Kuromoji splits the text into morphemes, and a small matching engine runs 341 hand-written JSON grammar rules over the token stream. The same input always gives the same output, it works offline, and every rule is backed by tests.
+- **Grammar Pattern Breakdown.** Paste any Japanese text, such as a news article, a manga page, a subtitle line or an email, and Kaidoku highlights the grammar patterns it recognises. Each one is colour-coded by JLPT level (N5–N3), and clicking a highlight explains the pattern.
+- **Kanji Learning.** 640 N5–N3 kanji in study sets of ten, most common first, with study cards, reading quizzes, meaning checks and spaced review.
+- **Vocabulary Learning.** 2,963 N5–N3 words in study sets of about fifteen, with the same cards, quizzes and review.
+
+*Kaidoku* (解読) is Japanese for "deciphering". The grammar engine is a **rule-based Java 21 / Spring Boot service, not an LLM**. Kuromoji splits the text into morphemes, and a small matching engine runs 341 hand-written JSON grammar rules over the token stream. The same input always gives the same output, it needs no external service, and every rule is backed by tests. The kanji and vocabulary modules are an installable web app that keeps your progress in your own browser and works offline after the first visit.
 
 ![Kaidoku highlighting 13 grammar patterns in a Japanese paragraph, with the explanation card for ～ば～ほど open](docs/screenshot.png)
 
@@ -18,17 +22,20 @@ Paste any Japanese text, such as a news article, a manga page, a subtitle line o
 | | |
 |---|---|
 | Grammar patterns | **341** (36 N5 · 118 N4 · 187 N3), covering every in-scope N5 and N4 point and all 62 N3 points of an openly licensed JLPT grammar checklist, with restrictions ([coverage](#coverage)) |
-| Tests | **3,323** unit and integration tests + **8** browser tests, run in CI on every push to `main` |
+| Learning data | **640** kanji, **2,963** words and **2,926** reading questions from [OpenJLPT](https://github.com/evanclan/OpenJLPT) (CC BY-SA 4.0), validated at startup ([details](#kanji-and-vocabulary)) |
+| Tests | **3,374** unit and integration tests + **64** browser tests, run in CI on every push to `main` |
 | Accuracy | **0.992 precision / 0.989 recall** on 655 regression sentences for the original 199 rules; a first run on a pre-registered held-out set for the 142 new rules scored 0.991 / 0.944 ([methodology](#evaluation)) |
 | Speed | about **24 ms** to analyze 10,000 characters of grammar-dense text ([details](#performance)) |
-| Stack | Java 21, Spring Boot 4.1, Kuromoji (IPADIC), vanilla JS, Docker, GitHub Actions, Playwright |
+| Stack | Java 21, Spring Boot 4.1, Kuromoji (IPADIC), vanilla JS (ES modules, no build step), IndexedDB, service worker, Docker, GitHub Actions, Playwright, axe-core |
 
 ## Engineering highlights
 
 - **Data-driven rule engine.** Grammar lives in JSON, not code. The loader validates every rule at startup and refuses to start on unknown fields, malformed steps, missing examples or a bad cross-reference.
 - **NFA-style matcher.** Rules are indexed by their first token, and each match tracks the set of reachable token offsets, so optional steps, alternatives and bounded gaps never cause exponential backtracking.
 - **Example-driven testing.** Each rule ships with its own examples and near-misses, a reviewed snapshot catches any rule that starts matching another rule's sentences, and a separate evaluation set measures precision and recall.
-- **Production basics.** RFC 9457 error responses, input and body-size limits, a multi-stage Docker image that runs as a non-root user, and CI with a container smoke test.
+- **Fail-closed learning data.** The kanji and vocabulary release is checked at startup against its manifest's SHA-256 hashes, a strict schema, its declared counts, every kanji-to-word link (by Unicode code point) and every quiz question, which must have exactly one correct option, including for words written the same way but read differently.
+- **Local-first progress.** Answers are graded inside a single IndexedDB transaction, so parallel writes never lose an update; every stored record is validated on read and import, and an in-memory fallback keeps the app usable when storage is blocked.
+- **Production basics.** RFC 9457 error responses, input and body-size limits, a strict Content-Security-Policy, a multi-stage Docker image that runs as a non-root user, CI with a container smoke test, and an automated WCAG audit in the browser tests.
 
 ## Why
 
@@ -81,6 +88,18 @@ The checklist is the N5, N4 and N3 grammar lists of the Wikibooks [JLPT Guide](h
 
 All 62 N3 points have a rule, with restrictions for ambiguous forms: ～たものだ requires a recollection cue, ～に慣れる matches kanji 慣れる only, and kana かえって is restricted near destinations and motion verbs. See [Limitations](#limitations) for details. Other rules cover common N4 and N3 points the list leaves out, such as ～につれて, ～わけにはいかない, ～くせに and ～ばかりか.
 
+## Kanji and vocabulary
+
+- **Study sets.** Each level is split into fixed-size sets: 10 kanji, ordered by how common they are in newspapers, or about 15 words in dictionary order. A set has three activities: study cards, a reading quiz and a meaning check.
+- **Reading quizzes** use only the release's approved questions: four options, exactly one correct, shuffled each time. Words written only in kana, and words with more than one accepted reading, have no reading question.
+- **Meaning checks are self-graded.** You type what you think the word or kanji means, then see every listed meaning and mark whether you had it. Multiple-choice meaning questions are deliberately not used: in the source data, several "verified" ones had two correct answers.
+- **Spaced review.** Reading and meaning are scheduled separately. A miss comes back after 10 minutes; a correct answer after 1 day, then after the previous interval × an ease factor (starting at 2.5, lowered by misses), up to 365 days. Reviews fall due at 04:00 local time on their day. An item counts as learned after two successful reviews on different days.
+- **Your data stays with you.** Progress lives only in the browser (IndexedDB), with backup to a file, restore (a merge that never replaces newer progress) and reset. There are no accounts and no analytics.
+- **Offline.** After one online visit, the dashboard, both libraries, every set, quiz and review work without a connection. The grammar analyzer runs on the server, so it says plainly when it is offline.
+- **Search** accepts kanji, kana, romaji (including macrons such as ōkii) and English.
+
+No example sentences are shown yet: the source's example sentences are withheld until they have had an independent bilingual review.
+
 ## Quick start
 
 You need Java 21 and Git. On Windows, use `mvnw.cmd` instead of `./mvnw`.
@@ -97,7 +116,7 @@ cd kaidoku
 ./mvnw spring-boot:run
 ```
 
-Open http://localhost:8080 and click **Load example**. The port comes from the `PORT` environment variable and defaults to 8080.
+Open http://localhost:8080 and choose a module; on **Grammar**, click **Load example**. The port comes from the `PORT` environment variable and defaults to 8080.
 
 Or with Docker:
 
@@ -119,7 +138,7 @@ Run the tests:
 ./mvnw verify -Pe2e
 ```
 
-The second command runs the 8 browser tests on their own (the `e2e` profile selects only them). They use an installed Edge by default (`-De2e.browser.channel=chrome` for Chrome) and never download a browser. For a scripted walkthrough and how to record a demo GIF, see [docs/DEMO.md](docs/DEMO.md).
+The second command runs the 64 browser tests on their own (the `e2e` profile selects only them). They use an installed Edge by default (`-De2e.browser.channel=chrome` for Chrome) and never download a browser. For a scripted walkthrough and how to record a demo GIF, see [docs/DEMO.md](docs/DEMO.md).
 
 ## API
 
@@ -156,6 +175,9 @@ The token list is shortened here. `start` and `end` are UTF-16 offsets, so they 
 | `POST /api/analyze` | Tokens and grammar matches for a text |
 | `GET /api/patterns?level=N3` | The rules, without their matching steps; `level` is optional |
 | `GET /api/tokens?text=…` | Raw Kuromoji tokens, for writing rules |
+| `GET /api/learning/summary` | Counts per level, the dataset version and its attribution |
+| `GET /api/learning/{kanji\|vocab}/lessons?level=N5` | The study sets for a level, with their item ids |
+| `GET /learning/{kanji,vocab,links,questions}.json` | The validated release files themselves |
 
 Errors use RFC 9457 `application/problem+json`: **400** for blank text, more than 10,000 characters, malformed JSON or an unknown level, and **413** for a body over 64 KiB, which is rejected before the JSON is parsed.
 
@@ -225,7 +247,11 @@ To add a rule: dump the tokens of its example sentences with `/api/tokens` first
 | `EvaluationTest` | 3 | Accuracy on the evaluation set (below) |
 | `ExpansionEvaluationTest` | 3 | reports precision and recall of newly added rules on separate held-out sets (evaluation/heldout/), without a floor |
 | `PatternMatcherPerformanceTest` | 1 | Twenty analyses of a text just under the 10,000-character limit within a time budget |
+| `LearningCatalogTest`, `LearningControllerTest` | 40 | Release validation (hashes, schema, counts, code-point links, ambiguous questions), study-set planning, learning API |
+| `SecurityHeadersTest`, `ServiceWorkerPrecacheTest` | 11 | Security headers on every route; every static file is in the offline precache |
 | `KaidokuE2eTest` (`-Pe2e`) | 8 | In a real browser: highlighting, cards, level filter, overlaps, hiding nested patterns, mobile layout, invalid input |
+| Learning, quiz, progress and offline E2E tests (`-Pe2e`) | 51 | Dashboard, search, study cards, quizzes, meaning checks, spaced review on a fast-forwarded clock, cross-tab reset, corrupt and blocked storage, backup and restore, touch input, offline use, the intro hook |
+| `AccessibilityE2eTest` (`-Pe2e`) | 5 | axe-core WCAG 2.2 AA checks on 16 screens in light and dark themes at 375 and 1280 px, no horizontal scrolling, visible keyboard focus |
 
 GitHub Actions runs three jobs on every push to `main` and every pull request: the test suite, the browser tests (in Chrome), and a Docker build that starts the container and checks it answers correctly as a non-root user.
 
@@ -301,6 +327,8 @@ Without the two prefilters, the same 341 rules took over three times as long on 
 - **Some readings can't be told apart from tokens alone.** The card says so instead of guessing, but a few cases still produce false positives (see [Evaluation](#evaluation)). Some fused compounds use reviewed word lists, so unlisted words can be missed. Tokenization and ambiguity also cause misses, including 吹き出す and 見え方.
 - **Bare なきゃ / なくちゃ is only matched at the end of a sentence.** Mid-sentence, the same form usually means 'if (you) don't'.
 - **Inline furigana breaks tokenization.** Text copied with readings mixed in (気象庁きしょうちょう) confuses the tokenizer, so copy it without furigana.
+- **Learning data is as published.** Readings and meanings come straight from the pinned OpenJLPT release and have not been edited by a lexicographer. Kanji quizzes test on-readings only, because the release has no approved kun-reading questions.
+- **Progress is per browser.** Nothing syncs between devices; use backup and restore to move it. A browser may clear site data under storage pressure, so Kaidoku asks for persistent storage where the browser supports it.
 
 ## Roadmap
 
@@ -318,4 +346,6 @@ Without the two prefilters, the same 341 rules took over three times as long on 
 
 ## License
 
-[MIT](LICENSE) © 2026 Akshat. Kuromoji and its bundled IPADIC dictionary are distributed under their own licenses.
+The source code is [MIT](LICENSE) © 2026 Akshat.
+
+The kanji and vocabulary data in `src/main/resources/static/learning/` contains data from [OpenJLPT](https://github.com/evanclan/OpenJLPT) ([CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)), which uses JMdict and KANJIDIC2 (EDRDG), Jonathan Waller's JLPT lists, and Tatoeba. That data is a derived work shared under CC BY-SA 4.0, separately from the code. The JLPT publishes no official vocabulary or kanji lists, so the levels are community estimates. See [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES) and the in-app About page. Kuromoji and its bundled IPADIC dictionary are distributed under their own licences.

@@ -260,19 +260,45 @@ function createStore(backend, problem) {
     }
     return row.value ?? null;
   };
+  const readGeneration = (transaction, callback) => {
+    transaction.get('meta', 'generation', row => {
+      const value = metaValue(row, 'generation');
+      callback(count(value) ? value : 0);
+    });
+  };
+  const write = (name, options, work) => {
+    const generation = options.generation;
+    const guarded = Number.isInteger(generation);
+    return backend.run(guarded ? [name, 'meta'] : [name], 'readwrite', transaction => {
+      if (guarded) {
+        readGeneration(transaction, current => {
+          if (current !== generation) {
+            transaction.result(null);
+            return;
+          }
+          work(transaction);
+        });
+      } else {
+        work(transaction);
+      }
+    });
+  };
   return {
     persistent: backend.persistent,
     problem,
     get skipped() { return skipped; },
+    generation() {
+      return backend.run(['meta'], 'readonly', transaction => readGeneration(transaction, value => transaction.result(value)));
+    },
     records: kind => readKind('progress', kind),
     record(kind, track, id) {
       return backend.run(['progress'], 'readonly', transaction => {
         transaction.get('progress', recordKey(kind, track, id), row => transaction.result(validRecord(row)));
       });
     },
-    async grade(specification, grade, now) {
+    async grade(specification, grade, now, options = {}) {
       const initial = newRecord(specification, now);
-      return backend.run(['progress'], 'readwrite', transaction => {
+      return write('progress', options, transaction => {
         transaction.get('progress', initial.key, row => {
           const saved = schedule(validRecord(row) ?? initial, grade, now);
           transaction.put('progress', saved);
@@ -281,7 +307,7 @@ function createStore(backend, problem) {
       });
     },
     sets: kind => readKind('sets', kind),
-    async updateSet(kind, setId, level, update, now) {
+    async updateSet(kind, setId, level, update, now, options = {}) {
       const initial = {
         key: `${kind}:${setId}`, kind, setId, level, cardsCompletedAt: null,
         reading: { attempts: 0, last: null, best: null },
@@ -290,7 +316,7 @@ function createStore(backend, problem) {
       if (!validSet(initial) || typeof update !== 'function') {
         throw new Error('Invalid set record');
       }
-      return backend.run(['sets'], 'readwrite', transaction => {
+      return write('sets', options, transaction => {
         transaction.get('sets', initial.key, row => {
           const current = row === undefined ? initial : validRows([row], validSet)[0] ?? initial;
           const updated = update(structuredClone(current));
@@ -306,12 +332,12 @@ function createStore(backend, problem) {
         });
       });
     },
-    async addSession(session) {
+    async addSession(session, options = {}) {
       if (!validSession(session)) {
         throw new Error('Invalid session record');
       }
       const incoming = structuredClone(session);
-      return backend.run(['sessions'], 'readwrite', transaction => {
+      return write('sessions', options, transaction => {
         transaction.all('sessions', rows => {
           const current = validRows(rows, validSession);
           saveSessions(transaction, current, mergeSessions(current, [incoming]));
@@ -383,10 +409,13 @@ function createStore(backend, problem) {
       });
     },
     reset() {
-      return backend.run(DATA_TABLES, 'readwrite', transaction => {
-        for (const name of DATA_TABLES) {
-          transaction.clear(name);
-        }
+      return backend.run(TABLES, 'readwrite', transaction => {
+        readGeneration(transaction, generation => {
+          for (const name of DATA_TABLES) {
+            transaction.clear(name);
+          }
+          transaction.put('meta', { key: 'generation', value: generation + 1 });
+        });
       });
     }
   };

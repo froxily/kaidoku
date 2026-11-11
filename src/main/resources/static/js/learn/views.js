@@ -2,7 +2,7 @@ import { badge, h, icon, ICONS, jp } from './dom.js';
 import { dataset, LEVELS, lessons, links, search, toHiragana } from './data.js';
 import { count, isKanaOnly, itemNoun, kindName, posLabels } from './format.js';
 import { QUIZ_SIZE, readingQuestions } from './quiz.js';
-import { checkContentVersion, describeWhen, dueEntries, itemTracks, learnedCount, loadProgress, MASTERY_LABELS, nextDue, trackRecord } from './progress.js';
+import { checkContentVersion, describeWhen, dueEntries, itemTracks, learnedCount, loadProgress, MASTERY_LABELS, nextDue, reconcile, trackRecord } from './progress.js';
 import { mastery } from './srs.js';
 import { progressStore } from './store.js';
 
@@ -286,6 +286,7 @@ export async function homeView({ kind, query }) {
   rememberLevel(kind, level);
   const [data, plan, progress, version] = await Promise.all([dataset(kind), lessons(kind), loadProgress(kind), checkContentVersion()]);
   const readingIds = new Set((await readingQuestions(kind, data.items)).keys());
+  reconcile(kind, data, readingIds).catch(() => {});
   const levelLessons = plan.byLevel.get(level);
   const total = levelLessons.reduce((sum, lesson) => sum + lesson.itemIds.length, 0);
   const now = Date.now();
@@ -541,6 +542,8 @@ export async function lessonView({ kind, params, query, signal }) {
   }
   const items = lesson.itemIds.map(id => data.byId.get(id));
   const [questions, progress] = await Promise.all([readingQuestions(kind, items), loadProgress(kind)]);
+  let passGeneration = progress.store.generation();
+  passGeneration.catch(() => {});
   const questionCount = questions.size;
   let setRecord = progress.sets.get(lesson.id) ?? null;
   const setLearned = learnedCount(progress, kind, lesson.itemIds, new Set(questions.keys()));
@@ -574,6 +577,10 @@ export async function lessonView({ kind, params, query, signal }) {
     const role = document.activeElement?.dataset?.role;
     const before = phase();
     step = Math.max(-1, Math.min(to, items.length));
+    if (before !== 'card' && phase() === 'card') {
+      passGeneration = progressStore().then(store => store.generation());
+      passGeneration.catch(() => {});
+    }
     render();
     live.replaceChildren(...(phase() === 'card' ? [`${step + 1} of ${items.length}: `, jp('span', itemLabel(items[step]))] : []));
     const same = role && phase() === before ? content.querySelector(`[data-role="${role}"]`) : null;
@@ -653,12 +660,9 @@ export async function lessonView({ kind, params, query, signal }) {
   }
 
   function markCardsDone() {
-    if (setRecord?.cardsCompletedAt) {
-      return;
-    }
     const now = Date.now();
-    progressStore()
-        .then(store => store.updateSet(kind, lesson.id, lesson.level, set => ({ ...set, cardsCompletedAt: set.cardsCompletedAt ?? now }), now))
+    Promise.all([progressStore(), passGeneration])
+        .then(([store, generation]) => store.updateSet(kind, lesson.id, lesson.level, set => ({ ...set, cardsCompletedAt: set.cardsCompletedAt ?? now }), now, { generation }))
         .then(saved => { setRecord = saved; })
         .catch(() => {});
   }
